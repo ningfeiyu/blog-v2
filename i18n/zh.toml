@@ -1,0 +1,38 @@
+[whatIWorkWith]
+other = "我的工具栈"
+
+[experienceTitle]
+other = "经历"
+
+[voluntaryTitle]
+other = "志愿服务"
+
+[certificationsTitle]
+other = "证书"
+
+[honorsTitle]
+other = "荣誉奖项"
+
+[projectsTitle]
+other = "项目"
+
+[blogsTitle]
+other = "博客"
+
+[viewAll]
+other = "查看全部"
+
+[localTimeLabel]
+other = "当地时间："
+
+[menuTitle]
+other = "菜单"
+
+[learnMore]
+other = "了解更多"
+
+[builtUsing]
+other = "构建工具"
+
+[takeALookAtMy]
+other = "看看我的"

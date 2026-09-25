@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>{{ if .IsHome }}{{ .Site.Title }}{{ else }}{{ .Title }} · {{ .Site.Title }}{{ end }}</title>
+<meta name="description" content="{{ with .Description }}{{ . }}{{ else }}{{ .Site.Params.description }}{{ end }}">
+<link rel="stylesheet" href="{{ "css/style.css" | relURL }}">
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1><a href="{{ "/" | relURL }}">{{ .Site.Title }}</a></h1>
+    <p class="sub">{{ .Site.Params.description }}</p>
+    <span class="badge">⚡ 由 Cloudflare Tunnel 直达，无需公网 IP · Hugo 构建</span>
+  </header>
+  <main>
+  {{ block "main" . }}{{ end }}
+  </main>
+  <footer>
+    纯静态页面 · Hugo v0.166 构建 · 经 Tunnel 加密传输
+  </footer>
+</div>
+</body>
+</html>

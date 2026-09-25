@@ -1,0 +1,10 @@
+{{ define "main" }}
+  {{ $posts := where .Site.RegularPages "Section" "posts" }}
+  {{ range $posts.ByDate.Reverse }}
+  <article>
+    <h2><a href="{{ .RelPermalink }}">{{ .Title }}</a></h2>
+    <p class="meta">{{ .Date.Format "2006-01-02" }}{{ with .Params.tags }} · {{ delimit . "、" }}{{ end }}</p>
+    <p>{{ .Summary }}</p>
+  </article>
+  {{ end }}
+{{ end }}

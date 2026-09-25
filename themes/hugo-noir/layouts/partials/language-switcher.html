@@ -1,0 +1,19 @@
+{{/* Language switcher item list (shared by desktop + mobile menus).
+  Expects the current Page as context (pass `.`).
+  Ranges over hugo.Sites (project-level, v0.156+ API) so every project
+  language is listed; pages without a translation fall back to that
+  language's home page. */}}
+{{ $page := . }}
+{{ range hugo.Sites }}
+  {{ $lang := .Language }}
+  {{ $translation := "" }}
+  {{ $found := where $page.AllTranslations "Language.Lang" $lang.Lang }}
+  {{ if $found }}
+    {{ $translation = index $found 0 }}
+  {{ end }}
+  {{ $isCurrentLang := eq $lang.Lang $page.Language.Lang }}
+  <a href="{{ if $translation }}{{ $translation.Permalink }}{{ else }}{{ .Home.Permalink }}{{ end }}"
+     class="{{ if $isCurrentLang }}language-active{{ end }} text-text-secondary-light dark:text-text-secondary-dark hover:text-text-primary-light dark:hover:text-text-primary-dark transition-colors duration-300">
+    {{ $lang.Label }}
+  </a>
+{{ end }}

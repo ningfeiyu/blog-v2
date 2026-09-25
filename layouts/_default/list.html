@@ -1,0 +1,25 @@
+{{ define "main" }}
+<div class="w-full md:w-3/4 lg:w-1/2 mx-auto px-4 py-12">
+    <h1 class="text-4xl font-bold mb-8 text-text-primary-light dark:text-text-primary-dark">{{ .Title }}</h1>
+    <div class="space-y-6">
+        {{ range .Pages }}
+        <article class="border border-border-primary-light dark:border-border-primary-dark rounded-lg p-6 bg-bg-primary-light dark:bg-bg-secondary-dark">
+            <p class="text-sm text-text-secondary-light dark:text-text-secondary-dark mb-2">{{ .Date.Format "2006年1月2日" }}</p>
+            <h2 class="text-2xl font-semibold mb-2">
+                <a href="{{ .RelPermalink }}" class="text-text-primary-light dark:text-text-primary-dark hover:text-accent-light dark:hover:text-accent-dark transition-colors">{{ .Title }}</a>
+            </h2>
+            {{ if .Description }}
+            <p class="text-text-secondary-light dark:text-text-secondary-dark mb-3">{{ .Description }}</p>
+            {{ end }}
+            {{ if .Params.tags }}
+            <div class="flex flex-wrap gap-2">
+                {{ range .Params.tags }}
+                <span class="px-2 py-1 text-xs text-text-secondary-light dark:text-text-secondary-dark border border-border-primary-light dark:border-border-primary-dark rounded-md">{{ . }}</span>
+                {{ end }}
+            </div>
+            {{ end }}
+        </article>
+        {{ end }}
+    </div>
+</div>
+{{ end }}

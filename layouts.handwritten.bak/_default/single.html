@@ -1,0 +1,10 @@
+{{ define "main" }}
+<article class="post">
+  <h1 class="post-title">{{ .Title }}</h1>
+  <p class="meta">{{ .Date.Format "2006-01-02" }}{{ with .Params.tags }} · {{ delimit . "、" }}{{ end }}</p>
+  <div class="post-body">
+    {{ .Content }}
+  </div>
+  <p><a class="back" href="{{ "/" | relURL }}">← 返回首页</a></p>
+</article>
+{{ end }}

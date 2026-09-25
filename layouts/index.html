@@ -1,0 +1,42 @@
+{{ define "main" }}
+<div class="w-full md:w-4/5 lg:w-3/5 mx-auto px-6 py-12">
+    <!-- Hero -->
+    <section class="mb-16">
+        <div class="max-w-3xl mx-auto p-8 border border-border-primary-light dark:border-border-primary-dark rounded-lg bg-bg-primary-light dark:bg-bg-secondary-dark shadow-lg">
+            <h1 class="text-4xl font-bold mb-3 text-text-primary-light dark:text-text-primary-dark">{{ site.Title }}</h1>
+            <p class="text-xl text-text-secondary-light dark:text-text-secondary-dark">{{ site.Params.description }}</p>
+            <p class="mt-4 text-text-secondary-light dark:text-text-secondary-dark">
+                共 {{ len (where site.RegularPages "Section" "posts") }} 篇文章
+            </p>
+        </div>
+    </section>
+
+    <!-- Latest posts -->
+    <section class="mb-16">
+        <div class="flex items-baseline justify-between mb-8">
+            <h2 class="text-3xl font-bold text-text-primary-light dark:text-text-primary-dark">最新文章</h2>
+            <a href="{{ "/posts" | absURL }}" class="text-accent-light dark:text-accent-dark hover:text-text-primary-light dark:hover:text-text-primary-dark transition-colors">{{ T "viewAll" }} →</a>
+        </div>
+        <div class="space-y-8">
+            {{ range first 5 (where site.RegularPages "Section" "posts") }}
+            <article class="group border border-border-primary-light dark:border-border-primary-dark rounded-lg p-6 bg-bg-primary-light dark:bg-bg-secondary-dark hover:shadow-lg transition-shadow">
+                <p class="text-text-secondary-light dark:text-text-secondary-dark text-sm mb-2">{{ .Date.Format "2006年1月2日" }}</p>
+                <a href="{{ .RelPermalink }}" class="block">
+                    <h3 class="text-2xl font-semibold mb-2 text-text-primary-light dark:text-text-primary-dark group-hover:text-accent-light dark:group-hover:text-accent-dark transition-colors">{{ .Title }}</h3>
+                </a>
+                {{ if .Description }}
+                <p class="text-text-secondary-light dark:text-text-secondary-dark mb-3">{{ .Description }}</p>
+                {{ end }}
+                {{ if .Params.tags }}
+                <div class="flex flex-wrap gap-2">
+                    {{ range .Params.tags }}
+                    <span class="px-2 py-1 text-xs bg-bg-secondary-light dark:bg-bg-primary-dark text-text-secondary-light dark:text-text-secondary-dark border border-border-primary-light dark:border-border-primary-dark rounded-md">{{ . }}</span>
+                    {{ end }}
+                </div>
+                {{ end }}
+            </article>
+            {{ end }}
+        </div>
+    </section>
+</div>
+{{ end }}

@@ -1,0 +1,5 @@
+.DS_Store
+images/.DS_Store
+node_modules/
+exampleSite/.hugo_build.lock
+exampleSite/public/

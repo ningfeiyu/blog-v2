@@ -1,0 +1,25 @@
+baseURL: "https://blog.ning.indevs.in/"
+title: "老宁的试验田"
+languageCode: "zh-CN"
+defaultContentLanguage: "zh"
+theme: "hugo-noir"
+paginate: 10
+
+params:
+  author: "老宁"
+  description: "折腾笔记 · 媒体库 · 和一台很能扛的虚拟机"
+
+menu:
+  main:
+    - name: "首页"
+      pageRef: "/"
+      weight: 1
+    - name: "文章"
+      pageRef: "/posts"
+      weight: 2
+    - name: "标签"
+      pageRef: "/tags"
+      weight: 3
+
+taxonomies:
+  tag: tags

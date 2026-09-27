@@ -1,6 +1,7 @@
 ---
 title: "当认知被重塑：深度拆解认知行为疗法的底层逻辑与实战路径"
 date: 2026-09-27
+series: [身心重建系列]
 tags: ["认知行为疗法", "心理", "实战"]
 image: "/images/covers/cbt-deep-dive-practical-guide.jpg"
 ---

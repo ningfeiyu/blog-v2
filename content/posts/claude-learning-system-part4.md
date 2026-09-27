@@ -1,6 +1,7 @@
 ---
 title: "用 Claude 系统学任何技能（终）：为什么这套系统有效 + 完整串联指南"
 date: 2026-09-27
+series: [Claude 学习系统]
 tags: ["学习方法", "Claude", "认知科学"]
 image: "/images/covers/claude-learning-system-part4.jpg"
 ---

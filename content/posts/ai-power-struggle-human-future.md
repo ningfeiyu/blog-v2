@@ -5,7 +5,7 @@ date: 2026-06-13
 draft: false
 tags: ["AI军备竞赛", "地缘政治", "自主武器", "未来预测", "普通人策略"]
 categories: ["社会", "科技", "深度分析"]
-series: ["AI颠覆时代"]
+series: [AI颠覆时代]
 weight: 1
 showToc: true
 TocOpen: true

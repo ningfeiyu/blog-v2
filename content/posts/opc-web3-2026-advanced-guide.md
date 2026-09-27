@@ -6,7 +6,7 @@ author: "Ning"
 description: "2026年最新版。面向有自媒体和Web3基础的创作者，深度覆盖AI Agent链上协作、意图交易（ERC-7683）、模块化链上创业、RWA协议设计四大新范式，附完整实操路径与合规升级方案。"
 tags: ["Web3", "OPC", "一人公司", "AI Agent", "意图交易", "RWA", "模块化区块链", "2026"]
 categories: ["商业","Web3","进阶"]
-series: ["Web3商业实战"]
+series: [Web3商业实战]
 ---
 
 ![Web3 OPC 2026](/images/remote/ext-f5d105340bdd.jpg)

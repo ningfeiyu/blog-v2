@@ -1,6 +1,7 @@
 ---
 title: "用 Claude 系统学任何技能（下）：一页速记表 + 精选资源 + 费曼循环"
 date: 2026-09-27
+series: [Claude 学习系统]
 tags: ["学习方法", "Claude", "费曼学习法"]
 image: "/images/covers/claude-learning-system-part3.jpg"
 ---

@@ -5,7 +5,7 @@ draft: false
 description: "拆解卡巴特-津的'剥离宗教外壳+挂靠医学院+疯狂刷学术论文'的世俗化与制度化打法，与成功学的商业化路径形成鲜明对比。"
 categories: ["知识考古"]
 tags: ["伪科学谱系考古", "正念", "MBSR", "卡巴特-津", "哈佛医学院", "临床心理学"]
-series: "伪科学谱系考古"
+series: [伪科学谱系考古]
 showToc: true
 TocOpen: false
 weight: 4

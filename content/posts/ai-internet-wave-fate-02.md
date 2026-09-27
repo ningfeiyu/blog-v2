@@ -2,6 +2,7 @@
 title: AI 浪潮的算力基础与互联网的协议基础
 description: AI浪潮依赖算力指数增长（GPU/TPU大规模训练），互联网浪潮基于标准化协议（TCP/IP/HTTP/DNS）；价值捕获与生态开放性对比。
 date: '2026-06-02T10:30:00+08:00'
+series: [互联网浪潮五部曲]
 draft: false
 tags:
 - AI

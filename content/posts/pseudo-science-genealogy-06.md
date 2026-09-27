@@ -5,7 +5,7 @@ draft: false
 description: "从斯金纳箱到《原子习惯》，行为主义心理学如何经过畅销书压缩变成金句——畅销书化不等于伪科学化，但翻译失真不可忽视。"
 categories: ["知识考古"]
 tags: ["伪科学谱系考古", "行为主义", "斯金纳", "原子习惯", "习惯回路", "畅销书化"]
-series: "伪科学谱系考古"
+series: [伪科学谱系考古]
 showToc: true
 TocOpen: false
 weight: 6

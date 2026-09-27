@@ -5,7 +5,7 @@ draft: false
 description: "新思想运动的另一条分支——完全唯心的吸引力法则/显化学说，拒绝去神秘化、反而加倍押注量子物理学伪科学背书，导致其永远无法进入主流学界。"
 categories: ["知识考古"]
 tags: ["伪科学谱系考古", "显化", "吸引力法则", "《秘密》", "朗达·拜恩", "量子力学误读"]
-series: "伪科学谱系考古"
+series: [伪科学谱系考古]
 showToc: true
 TocOpen: false
 weight: 3

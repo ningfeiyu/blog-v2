@@ -12,7 +12,6 @@ tags:
 - Hermes
 categories:
 - 思考
-series:
 - AI时代个人重构指南
 weight: 5
 showToc: false

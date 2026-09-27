@@ -5,7 +5,7 @@ date: 2026-06-13
 draft: false
 tags: ["AI权力", "认知生产权", "普通人策略", "结构性分析", "未来预测"]
 categories: ["社会", "科技", "深度分析"]
-series: ["AI颠覆时代"]
+series: [AI颠覆时代]
 weight: 2
 showToc: true
 TocOpen: true

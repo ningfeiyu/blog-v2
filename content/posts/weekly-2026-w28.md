@@ -5,7 +5,7 @@ draft: false
 description: "读完 Daniel Warfield 的 Agent Harness 文章，对照 Hermes 现有架构，发现它本质上已经是 Harness 实现。改善 3 点：MEMORY.md 加核心 skill 索引、STATE.md 高信号搬家、项目级 AGENTS.md 落地。"
 tags: ["周记", "Hermes", "Agent Harness", "架构"]
 categories: ["周记"]
-series: ["周记"]
+series: [周记]
 showToc: true
 TocOpen: false
 ---

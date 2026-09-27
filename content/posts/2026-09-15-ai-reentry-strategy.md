@@ -12,7 +12,6 @@ tags:
 - 结构性优势
 categories:
 - 思考
-series:
 - AI时代个人重构指南
 weight: 6
 showToc: false

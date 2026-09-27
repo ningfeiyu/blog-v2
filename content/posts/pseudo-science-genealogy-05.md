@@ -5,7 +5,7 @@ draft: false
 description: "拆解契克森米哈赖的经验采样法(ESM)实验设计，教读者如何判断'有没有实验设计'这条硬核分界线，提供复用的鉴别方法。"
 categories: ["知识考古"]
 tags: ["伪科学谱系考古", "心流", "契克森米哈赖", "经验采样法", "实证心理学", "积极心理学"]
-series: "伪科学谱系考古"
+series: [伪科学谱系考古]
 showToc: true
 TocOpen: false
 weight: 5

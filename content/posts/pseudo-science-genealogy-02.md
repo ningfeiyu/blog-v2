@@ -5,7 +5,7 @@ draft: false
 description: "从新思想运动到拿破仑·希尔到戴尔·卡耐基，成功学如何通过去宗教化+去神秘化+借用商业案例背书的话术工程完成世俗化包装，但其玄学内核从未消失。"
 categories: ["知识考古"]
 tags: ["伪科学谱系考古", "卡耐基", "拿破仑·希尔", "新思想运动", "成功学", "去魅"]
-series: "伪科学谱系考古"
+series: [伪科学谱系考古]
 showToc: true
 TocOpen: false
 weight: 2

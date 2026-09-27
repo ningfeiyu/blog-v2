@@ -5,7 +5,7 @@ draft: false
 description: "考据欧美TikTok上的Manifestation Economy如何通过海外留学生、海外博主二传手，包装成高维能量/频率回流到小红书。全系列完结篇。"
 categories: ["知识考古"]
 tags: ["伪科学谱系考古", "显化", "New Age", "TikTok", "量子跃迁", "知识付费", "流量套利"]
-series: "伪科学谱系考古"
+series: [伪科学谱系考古]
 showToc: true
 TocOpen: false
 weight: 8

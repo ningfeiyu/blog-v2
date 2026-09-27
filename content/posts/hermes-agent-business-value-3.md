@@ -1,6 +1,7 @@
 ---
-title: "从工具到 engines：Hermes Agent 创造真实商业价值的 5 条实践路径（3）—— 中国大陆篇"
+title: "Hermes Agent 商业价值三部曲（下）：中国大陆特化版"
 date: 2026-06-08T10:00:00+08:00
+series: [Hermes 商业价值三部曲]
 draft: false
 author: "Ning"
 description: "针对中国大陆市场的特殊环境，5 个经过本土化适配的 Hermes Agent 落地场景及避坑指南。"

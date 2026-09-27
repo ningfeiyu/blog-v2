@@ -5,7 +5,7 @@ date: 2026-06-13
 draft: false
 tags: ["AI权力", "认知战争", "数字封建化", "普通人策略", "40-50岁"]
 categories: ["社会", "科技", "深度分析"]
-series: ["AI颠覆时代"]
+series: [AI颠覆时代]
 weight: 3
 showToc: true
 TocOpen: true

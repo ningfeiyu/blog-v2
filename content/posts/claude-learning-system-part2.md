@@ -1,6 +1,7 @@
 ---
 title: "用 Claude 系统学任何技能（中）：20 小时 80/20 法则 + 主动回忆测试"
 date: 2026-09-27
+series: [Claude 学习系统]
 tags: ["学习方法", "Claude", "AI学习"]
 image: "/images/covers/claude-learning-system-part2.jpg"
 ---

@@ -1,6 +1,7 @@
 ---
-title: "从工具到 engines：Hermes Agent 创造真实商业价值的 5 条实践路径"
+title: "Hermes Agent 商业价值三部曲（上）：5 条落地实践路径"
 date: 2026-06-08T08:00:00+08:00
+series: [Hermes 商业价值三部曲]
 draft: false
 author: "Ning"
 description: "不要再把 AI 当玩具。本文总结了利用 Hermes Agent 在潜客开发、内容研究、趋势侦察、市场预警和客户运营 5 个场景中创造真实收入的落地方法。"

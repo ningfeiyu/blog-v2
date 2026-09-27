@@ -11,7 +11,6 @@ tags:
 - 行动系统
 categories:
 - 思考
-series:
 - AI时代个人重构指南
 weight: 7
 showToc: true

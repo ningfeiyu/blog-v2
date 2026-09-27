@@ -6,7 +6,7 @@ author: "Ning"
 description: "面向有自媒体和Web3基础的创作者，系统讲解如何将一人公司升级为加密原生商业体。涵盖代币化经济、社区治理、DeFi现金流和合规框架。"
 tags: ["Web3", "OPC", "一人公司", "DAO", "DeFi", "自媒体", "加密创业"]
 categories: ["商业","Web3","进阶"]
-series: ["Web3商业实战"]
+series: [Web3商业实战]
 ---
 
 ![Web3 OPC](/images/remote/ext-6af496f99b81.jpg)

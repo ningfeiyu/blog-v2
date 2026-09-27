@@ -1,6 +1,7 @@
 ---
-title: "从工具到 engines：Hermes Agent 创造真实商业价值的 5 条实践路径（2）"
+title: "Hermes Agent 商业价值三部曲（中）：从能跑到规模化复用"
 date: 2026-06-08T09:00:00+08:00
+series: [Hermes 商业价值三部曲]
 draft: false
 author: "Ning"
 description: "第一篇讨论的 5 个场景如果你有在实践，这篇将告诉你如何把它们从'能用'升级到'规模化'——5 个可复制的放大路径。"

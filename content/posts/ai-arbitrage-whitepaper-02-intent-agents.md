@@ -1,6 +1,7 @@
 ---
 title: "2026 AI 驱动资产增值与套利白皮书系列（二）：链上意图与 AI 智能体"
 date: 2026-09-27
+series: [AI 套利白皮书系列]
 tags: ["AI套利", "白皮书", "智能体"]
 image: "/images/covers/ai-arbitrage-whitepaper-02-intent-agents.jpg"
 ---

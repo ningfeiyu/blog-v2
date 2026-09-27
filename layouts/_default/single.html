@@ -10,7 +10,10 @@
   <section class="page-section">
     {{- .Content -}}
   </section>
+  {{- partial "share-buttons.html" . -}}
   {{- partial "comments.html" . -}}
+  {{- partial "code-copy.html" . -}}
+  {{- partial "back-to-top.html" . -}}
 {{- end -}}
 
 {{- define "side" -}}

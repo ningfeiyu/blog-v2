@@ -5,7 +5,7 @@ draft: false
 description: "不是盲目辟谣，而是概念考古。拆解被中文互联网压扁的舶来概念——显化、成功学、正念、心流——还原它们各自的历史脉络、机构背书和证据强度。"
 categories: ["知识考古"]
 tags: ["伪科学谱系考古", "成功学", "显化", "正念", "思想史", "知识谱系"]
-series: "伪科学谱系考古"
+series: [伪科学谱系考古]
 showToc: true
 TocOpen: false
 weight: 1

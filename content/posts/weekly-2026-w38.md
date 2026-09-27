@@ -5,7 +5,7 @@ draft: false
 description: "这一周进行了三件大事：把 AI 的『iPhone 时刻』拆成可观测的指标、把观察者身份改写成操盘手身份、把『先造人再工具』的策略变成可部署代码。最重要的领悟是：分水岭不是一天，而是你早已在其中。"
 tags: ["周记", "AI时代", "个人重构", "结构性优势", "行动"]
 categories: ["周记"]
-series: ["周记"]
+series: [周记]
 showToc: true
 TocOpen: true
 image: "/images/covers/weekly-2026-w38.jpg"

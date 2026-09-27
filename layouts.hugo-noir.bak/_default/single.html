@@ -1,0 +1,25 @@
+{{ define "main" }}
+<div class="w-full md:w-3/4 lg:w-3/5 mx-auto px-4 py-12">
+    <div class="max-w-3xl mx-auto p-8 border border-border-primary-light dark:border-border-primary-dark rounded-2xl bg-bg-primary-light dark:bg-bg-secondary-dark">
+        <h1 class="text-4xl font-bold mb-4 text-text-primary-light dark:text-text-primary-dark">{{ .Title }}</h1>
+        {{ if eq .Section "posts" }}
+        <div class="flex flex-wrap items-center gap-4 mb-8 text-text-secondary-light dark:text-text-secondary-dark">
+            <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "2006年1月2日" }}</time>
+            {{ if .Params.tags }}
+            <div class="flex gap-2">
+                {{ range .Params.tags }}
+                <a href="{{ (printf "/tags/%s" (. | urlize)) | absURL }}" class="px-2 py-1 bg-bg-secondary-light dark:bg-bg-primary-dark rounded-md text-xs font-medium text-text-secondary-light dark:text-text-secondary-dark hover:text-accent-light dark:hover:text-accent-dark transition-colors">{{ . }}</a>
+                {{ end }}
+            </div>
+            {{ end }}
+        </div>
+        {{ end }}
+        <div class="prose dark:prose-invert max-w-none">
+            {{ .Content }}
+        </div>
+        {{ if eq .Section "posts" }}
+        {{ partial "giscus.html" . }}
+        {{ end }}
+    </div>
+</div>
+{{ end }}

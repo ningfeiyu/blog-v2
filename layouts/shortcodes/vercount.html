@@ -1,0 +1,11 @@
+{{- /* vercount shortcode — 显示一个 vercount 统计值（从主站 hugo-blog 仓库移植）。
+  用法：
+    {{< vercount "page_pv" >}}    单页 PV
+    {{< vercount "site_pv" >}}    站点总 PV
+    {{< vercount "site_uv" >}}    站点总 UV
+  需要 site.Params.vercount.enable = true 才会注入脚本。 */ -}}
+{{- if not site.Params.vercount.enable -}}
+{{- errorf "vercount shortcode requires [params.vercount] enable = true in hugo.yaml" -}}
+{{- end -}}
+{{- $id := printf "vercount_value_%s" (.Get 0) -}}
+<span id="{{ $id }}">加载中…</span>

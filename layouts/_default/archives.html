@@ -1,0 +1,25 @@
+{{- define "main" -}}
+  <div class="single-header">
+    <h1>{{ .Title }}</h1>
+  </div>
+  <section class="page-section">
+    {{- $posts := where site.RegularPages "Section" "posts" -}}
+    {{- range ($posts.GroupByDate "2006") -}}
+      <h2>{{ .Key }} 年</h2>
+      {{- range (.Pages.GroupByDate "2006-01") -}}
+        <h3 id="{{ .Key }}" style="scroll-margin-top:2rem;">{{ time.AsTime (printf "%s-01" .Key) | time.Format "2006年1月" }}</h3>
+        <ul>
+        {{- range .Pages.ByDate.Reverse -}}
+          <li><span class="dim">{{ .Date.Format "01-02" }}</span>&nbsp;&nbsp;<a href="{{ .RelPermalink }}">{{ .Title }}</a></li>
+        {{- end -}}
+        </ul>
+      {{- end -}}
+    {{- end -}}
+  </section>
+{{- end -}}
+
+{{- define "side" -}}
+  <aside id="side-pane">
+    {{- partial "side/home.html" . -}}
+  </aside>
+{{- end -}}

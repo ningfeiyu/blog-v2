@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="zh-CN" dir="ltr">
+<head>
+  <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>《2026 AI 驱动资产增值与套利白皮书》系列（一）：执行层已无套利，认知层仍有套利 | 老宁的试验田</title>
+<link rel="icon" href="/favicon.svg" sizes="any" type="image/svg+xml" /><meta property="og:url" content="https://blog.ning.indevs.in/posts/ai-arbitrage-whitepaper-01-landscape/">
+	<meta property="og:site_name" content="老宁的试验田">
+	<meta property="og:title" content="《2026 AI 驱动资产增值与套利白皮书》系列（一）：执行层已无套利，认知层仍有套利">
+	<meta property="og:description" content="当 ERC-7683 统一了跨链意图、当美股以代币形式 7×24 小时在链上流通、当 GPU 算力成为可分割的收益型资产，2026 年的套利竞争已从「拼脚本速度」演变为「拼 AI 智能体的认知深度与风控架构」。本文为白皮书系列开篇，拆解新格局下的三层非对称优势。">
+	<meta property="og:locale" content="zh_CN">
+	<meta property="og:type" content="article">
+		<meta property="article:section" content="posts">
+		<meta property="article:published_time" content="2026-08-29T13:30:00+08:00">
+		<meta property="article:modified_time" content="2026-08-29T13:30:00+08:00">
+		<meta property="article:tag" content="AI套利">
+		<meta property="article:tag" content="白皮书系列">
+		<meta property="article:tag" content="意图架构">
+		<meta property="article:tag" content="RWA">
+		<meta property="article:tag" content="DePIN">
+		<meta property="article:tag" content="非对称竞争">
+
+	<meta name="twitter:card" content="summary">
+	<meta name="twitter:title" content="《2026 AI 驱动资产增值与套利白皮书》系列（一）：执行层已无套利，认知层仍有套利">
+	<meta name="twitter:description" content="当 ERC-7683 统一了跨链意图、当美股以代币形式 7×24 小时在链上流通、当 GPU 算力成为可分割的收益型资产，2026 年的套利竞争已从「拼脚本速度」演变为「拼 AI 智能体的认知深度与风控架构」。本文为白皮书系列开篇，拆解新格局下的三层非对称优势。">
+
+      <link rel="stylesheet" href="/css/root.min.1052d5860b4442ccd33071bf3543c78d47509a7acb2c13edb1288611a2ebd6a8.css" integrity="sha256-EFLVhgtEQszTMHG/NUPHjUdQmnrLLBPtsSiGEaLr1qg=" crossorigin="anonymous">
+      <link rel="stylesheet" href="/css/bundle.min.e735cd1c41e6b7ba15433438fa484f2804322027ee8348fcff2adbf14976ce28.css" integrity="sha256-5zXNHEHmt7oVQzQ4&#43;khPKAQyICfug0j8/yrb8Ul2zig=" crossorigin="anonymous">
+
+      <script src="/js/bundle.cc8ae9952dbfb731affafabdf26e5c60a6910047ff59ccdeaf1daebaa26c8830.js" integrity="sha256-zIrplS2/tzGv&#43;vq98m5cYKaRAEf/Wczerx2uuqJsiDA=" crossorigin="anonymous"></script><script defer src="/js/search/flexsearch.compact.3928d3d2172bc0b5f75d9458fb9255f0befce1c7239ba6e5d2c58ed4b82c2073.js" integrity="sha256-OSjT0hcrwLX3XZRY&#43;5JV8L784ccjm6bl0sWO1LgsIHM="></script>
+<script defer src="/js/search/search.1d980f84df11f3eb7c8c5f17f541d49a0611608df179dd74fa7f06225eb56ace.js" integrity="sha256-HZgPhN8R8&#43;t8jF8X9UHUmgYRYI3xed10&#43;n8GIl61as4="></script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,200;1,300;1,400;1,500;1,600;1,700;1,800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200..800&family=Spectral:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,200;1,300;1,400;1,500;1,600;1,700;1,800&display=swap" rel="stylesheet">
+
+
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+<link href="https://cdn.jsdelivr.net/npm/lxgw-wenkai-webfont@1.7.0/lxgwwenkai-regular.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/lxgw-wenkai-webfont@1.7.0/lxgwwenkai-bold.css" rel="stylesheet">
+
+<script defer src="https://events.vercount.one/js"></script>
+</head>
+<body class="notransition">
+  <div id="container">
+    <header id="main-header"><div role="navigation" aria-label="Main">
+  <div class="nav-left">
+    <a href="https://blog.ning.indevs.in/" style="color: inherit;">老宁的试验田</a>
+  </div>
+  <div class="nav-right">
+    <div style="position:absolute;width:0px;height:0px;">
+      <div id="nav-dropdown-menu" class="hidden" href="#">
+    <div class="nav-item">
+      <a href="/"
+      >首页</a>
+    </div>
+    <div class="nav-item">
+      <a aria-current="true" class="ancestor" href="/posts/"
+      >文章</a>
+    </div>
+    <div class="nav-item">
+      <a href="/tags/"
+      >标签</a>
+    </div>
+    <div class="nav-item">
+      <a href="/archives/"
+      >归档</a>
+    </div>
+    <div class="nav-item">
+      <a href="/about/"
+      >关于</a>
+    </div>
+</div>
+    </div>
+    <a id="nav-dropdown-button" href="#"><svg width="20px" height="20px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M4 6H20M4 12H20M4 18H20" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
+</a>
+    <div id="nav-menu">
+    <div class="nav-item">
+      <a href="/"
+      >首页</a>
+    </div>
+    <div class="nav-item">
+      <a aria-current="true" class="ancestor" href="/posts/"
+      >文章</a>
+    </div>
+    <div class="nav-item">
+      <a href="/tags/"
+      >标签</a>
+    </div>
+    <div class="nav-item">
+      <a href="/archives/"
+      >归档</a>
+    </div>
+    <div class="nav-item">
+      <a href="/about/"
+      >关于</a>
+    </div>
+</div>
+    <a id="theme-switcher" href="#">
+<svg class="light-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M12 3V4M12 20V21M4 12H3M6.31412 6.31412L5.5 5.5M17.6859 6.31412L18.5 5.5M6.31412 17.69L5.5 18.5001M17.6859 17.69L18.5 18.5001M21 12H20M16 12C16 14.2091 14.2091 16 12 16C9.79086 16 8 14.2091 8 12C8 9.79086 9.79086 8 12 8C14.2091 8 16 9.79086 16 12Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
+
+<svg class="dark-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M3.32031 11.6835C3.32031 16.6541 7.34975 20.6835 12.3203 20.6835C16.1075 20.6835 19.3483 18.3443 20.6768 15.032C19.6402 15.4486 18.5059 15.6834 17.3203 15.6834C12.3497 15.6834 8.32031 11.654 8.32031 6.68342C8.32031 5.50338 8.55165 4.36259 8.96453 3.32996C5.65605 4.66028 3.32031 7.89912 3.32031 11.6835Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
+</a>
+  </div>
+</div>
+</header>
+    <div class="flex grow">
+      <div id="main-pane">
+        <main id="main-content"><div class="single-header">
+<ol class="breadcrumbs" itemscope itemtype="https://schema.org/BreadcrumbList">
+    <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+      <a itemprop="item" href="https://blog.ning.indevs.in/">
+        <span itemprop="name">首页</span>
+      </a>
+      <meta itemprop="position" content='1' />
+    </li>
+    <span>&nbsp»&nbsp</span>
+    <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+      <a itemprop="item" href="https://blog.ning.indevs.in/posts/">
+        <span itemprop="name">文章</span>
+      </a>
+      <meta itemprop="position" content='2' />
+    </li>
+    <span>&nbsp»&nbsp</span>
+</ol>
+<h1>《2026 AI 驱动资产增值与套利白皮书》系列（一）：执行层已无套利，认知层仍有套利</h1><time class="dim" datetime="2026-08-29T13:30:00&#43;08:00">2026年8月29日</time><div class="term-container"><div class="tag">
+        <a href="https://blog.ning.indevs.in/tags/ai%E5%A5%97%E5%88%A9/">#AI套利</a>
+      </div><div class="tag">
+        <a href="https://blog.ning.indevs.in/tags/%E7%99%BD%E7%9A%AE%E4%B9%A6%E7%B3%BB%E5%88%97/">#白皮书系列</a>
+      </div><div class="tag">
+        <a href="https://blog.ning.indevs.in/tags/%E6%84%8F%E5%9B%BE%E6%9E%B6%E6%9E%84/">#意图架构</a>
+      </div><div class="tag">
+        <a href="https://blog.ning.indevs.in/tags/rwa/">#RWA</a>
+      </div><div class="tag">
+        <a href="https://blog.ning.indevs.in/tags/depin/">#DePIN</a>
+      </div><div class="tag">
+        <a href="https://blog.ning.indevs.in/tags/%E9%9D%9E%E5%AF%B9%E7%A7%B0%E7%AB%9E%E4%BA%89/">#非对称竞争</a>
+      </div></ol></div>
+  <section class="page-section"><p><img src="/images/posts/ai-arbitrage-whitepaper-01-landscape.jpg" alt="AI 套利新格局"></p>
+<hr>
+<h2 id="开篇一场静悄悄的认知分层">开篇：一场静悄悄的认知分层</h2>
+<p>2026 年 8 月，如果你还在用 Python 脚本盯着三角套利、跨交易所搬砖、甚至闪电贷，那你已经输在了认知层面——不是因为这些玩法失效了，而是因为<strong>执行层的套利空间已被 Solver 巨头、MEV 机器人、意图协议彻底收割干净</strong>。</p>
+<p>真正的变化发生在更深层：</p>
+<ul>
+<li><strong>ERC-7683</strong> 让跨链意图成为通用语言，Across 协议 88% 的交易量、UniswapX 94% 的 gasless 交易量都跑在这个标准上。主流币对的 filler 价差仅 1–5 个基点，跨链稳定币转账中位结算时间约 12 秒。</li>
+<li><strong>代币化美股</strong>总市值破 10 亿美元，Ondo 与 xStocks 形成双寡头。美股每天只交易 6.5 小时，但代币化股票 7×24 小时交易，小盘代币常出现 3–6% 的 NAV 偏离。</li>
+<li><strong>DePIN GPU 网络</strong>从「代币补贴」转向「真实收入」：Aethir 2025 年收入 1.27 亿美元、io.net 年化链上收入约 2000 万美元、Akash GPU 利用率超 80%。H100 时租 Akash 1.33 美元 vs AWS 3.93 美元，去中心化网络便宜约 60%。</li>
+</ul>
+<p>这三个赛道的共同特征是：<strong>执行层已高度标准化、机构化，普通人拼不过 Solver 的延迟、拼不过做市商的库存、拼不过华尔街的合规通道。</strong> 但与此同时，<strong>认知层——即「理解结构性缝隙在哪里、为什么存在、如何用 AI Agent 去守住它」——反而因为 AI 而变得更可及、更有价值。</strong></p>
+<p>这正是本白皮书系列的核心命题：<strong>2026 年的套利竞争，已从「拼脚本速度」演变为「拼 AI 智能体的认知深度与风控架构」。</strong></p>
+<hr>
+<h2 id="一执行层为何已无套利">一、执行层为何已无套利？</h2>
+<h3 id="11-意图层的三层分工把普通人挡在门外">1.1 意图层的「三层分工」把普通人挡在门外</h3>
+<p>以 Across 为典型的意图架构，实现了三层分工：</p>
+<table>
+	<thead>
+			<tr>
+					<th>层级</th>
+					<th>角色</th>
+					<th>普通人能否参与</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td><strong>RFQ 层</strong></td>
+					<td>接收用户意图</td>
+					<td>✅ 可以发意图</td>
+			</tr>
+			<tr>
+					<td><strong>Relayer 网络</strong></td>
+					<td>用自有资金在目标链垫付，竞争性报价</td>
+					<td>❌ 需要深厚库存与极低延迟</td>
+			</tr>
+			<tr>
+					<td><strong>结算层</strong></td>
+					<td>UMA 乐观预言机批量验证（O(1) 成本）</td>
+					<td>❌ 协议层面，非个人可控</td>
+			</tr>
+	</tbody>
+</table>
+<p>Relayer 的利润来源之一是<strong>库存净额结算</strong>：在双向流量均衡的走廊上，净额结算比例可超过 8:1，即 8 美元用户流量只需 1 美元真实跨链移动。但当某条走廊<strong>单向失衡</strong>（如空投季资金集中涌向某新链）时，Relayer 库存耗尽，报价隐性费用会走阔——这正是散户的套利窗口，但前提是你得<strong>提前在失衡方向部署库存</strong>，而不是事后去抢单。</p>
+<h3 id="12-solver-经济学的剧变">1.2 Solver 经济学的剧变</h3>
+<p>CoW Protocol 的 CIP-74 改革（2025 年 12 月生效）将 Solver 奖励上限与协议收入挂钩并引入按量费用。实证显示：<strong>大额订单（10 万美元以上）的集中度显著上升（头部 Solver 份额 0.296→0.395），而小额订单市场反而去集中化。</strong></p>
+<p>这意味着：<strong>主流币对、大额流量 = 红海；长尾走廊、小额意图、新协议早期 = 蓝海。</strong> 普通人的 AI Agent 不需要比机构快，只需要比机构看得更广。</p>
+<h3 id="13-代币化股票的赎回壁垒把散户锁在二级市场">1.3 代币化股票的「赎回壁垒」把散户锁在二级市场</h3>
+<p>Backed 赎回需 3 个工作日 + 100 美元最低费 + 0.5% 费率 + 专业投资者 KYC；Ondo GM 赎回仅限机构。<strong>散户无法做「赎回套利」，只能在二级市场做基差模型。</strong> 但这反而创造了结构性机会：xStocks 在 Solana DEX 相对 Kraken CEX 长期存在溢价（TSLAx 案例中 DEX 溢价达 +4.06%），因赎回摩擦过高无法被打平。</p>
+<hr>
+<h2 id="二普通人的三层非对称优势">二、普通人的三层非对称优势</h2>
+<p>既然执行层没机会，那机会在哪？白皮书提炼了三层非对称优势：</p>
+<h3 id="21-广度优势机构-ai-盯着大额主流你用-ai-扫长尾">2.1 广度优势：机构 AI 盯着大额主流，你用 AI 扫长尾</h3>
+<p>2026 年每周都有新协议上线（新 DEX、新再质押、新 RWA 池），早期合约常存在<strong>定价函数缺陷</strong>——固定汇率兑换窗口、预言机更新延迟、费用曲线参数错误。传统脚本只能扫描已知模式，而非标准化机会需要<strong>理解合约语义</strong>。</p>
+<p>这就是 AI Agent 的「语义解析」能力大显身手的地方：订阅链上「合约创建」事件流 → LLM 通读合约源码 → 提取价格/汇率/费用函数 → 生成套利假设 → 分叉模拟验证 → 小额实战。</p>
+<p><strong>机构 AI 聚焦大额主流流量；长尾新协议（TVL &lt; 5000 万美元）的语义解析是算力覆盖的盲区。</strong> 你不需要比机构快，只需要比机构看得广。</p>
+<h3 id="22-摩擦容忍优势机构无法为-1-万美元级机会定制流程">2.2 摩擦容忍优势：机构无法为 1 万美元级机会定制流程</h3>
+<p>以代币化股票 DEX 溢价套利为例：单笔 $1,000，DEX 溢价 4%，滑点 0.5%，净利润 $30.49，收益率 3.05%。对机构来说，这点量级连 Gas 都不够分摊；但对个人，<strong>你的 AI Agent 可以 7×24 小时守着 2%+ 的 DEX 溢价窗口，每周捕获几次机会，年化下来就是实打实的现金流。</strong></p>
+<p>同理，跨链走廊失衡时的「逆向供给」套利、代币化国债 NAV 窗口套利（每日公布前 4 小时 5–50bps 偏离）、资金费率基差（空头方持续收取 5–20% 年化资金费），这些<strong>单笔小、频次高、需持续监控</strong>的机会，正是「一人公司 + AI Agent」的最佳猎场。</p>
+<h3 id="23-结构认知优势理解为什么不是套利比找到套利更值钱">2.3 结构认知优势：理解「为什么不是套利」比找到套利更值钱</h3>
+<p>白皮书里有几个经典的「高 APR 陷阱」识别案例：</p>
+<ul>
+<li><strong>xStocks CLMM 做市</strong>：表面 APR 诱人（MSTRx/USDC 池 48.65%），但扣除 LVR（损失对再平衡）后实测为<strong>净亏损</strong>：MSTRx 年化 -127.5%、TSLAx -66.8%、NVDAx -45.8%；仅低波动池（AAPLx +6.2%、QQQx +1.7%）勉强为正。</li>
+<li><strong>Ondo 代币是「全收益追踪器」</strong>：股息自动再投资，代币价格与股价的偏离是结构性的，不是套利信号。</li>
+<li><strong>io.net 的 IDE 机制</strong>：需求下降时自动增发的动态通胀会稀释质押收益——AI 需跟踪「可持续性比率」。</li>
+</ul>
+<p><strong>AI 放大了「提出正确问题」的价值，而非执行的速度。</strong> 理解这些深层机制的人，在 AI 时代反而更稀缺。</p>
+<hr>
+<h2 id="三白皮书系列的三大板块预告">三、白皮书系列的三大板块预告</h2>
+<p>本系列共三篇，对应白皮书的三大核心板块：</p>
+<table>
+	<thead>
+			<tr>
+					<th>篇次</th>
+					<th>标题</th>
+					<th>核心板块</th>
+					<th>你将获得</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td><strong>第 1 篇（本文）</strong></td>
+					<td>执行层已无套利，认知层仍有套利</td>
+					<td><strong>全景认知框架</strong></td>
+					<td>2026 套利地形图、三层非对称优势、避坑指南</td>
+			</tr>
+			<tr>
+					<td><strong>第 2 篇</strong></td>
+					<td>链上意图与 AI 智能体：在 Solver 盲区收割「路径差异」</td>
+					<td><strong>板块一：链上意图与智能体套利</strong></td>
+					<td>跨链走廊监控 Agent、新协议语义解析工作流、非标准化套利实操</td>
+			</tr>
+			<tr>
+					<td><strong>第 3 篇</strong></td>
+					<td>RWA 美股联动 + DePIN GPU：代币化资产的基差模型与算力收益</td>
+					<td><strong>板块二：RWA 与美股联动策略</strong><br><strong>板块三：生产力工具与风险控制</strong></td>
+					<td>CEX→DEX 溢价搬运、NAV 窗口套利、资金费率基差、GPU RWA 三层参与路径、四层熔断架构、三大主流 AI 交易机器人对比</td>
+			</tr>
+	</tbody>
+</table>
+<hr>
+<h2 id="四系列阅读指南">四、系列阅读指南</h2>
+<blockquote>
+<p><strong>⚠️ 风险声明</strong>：本系列基于白皮书策略研究内容改编，<strong>不构成投资建议</strong>。所有数据均标注来源与时效（检索时间：2026 年 8 月 26 日）。代币化股票赎回通道对散户关闭、DePIN 代币动态通胀模型可能稀释收益、意图层 Solver 集中化在极端行情下会导致报价恶化、AI Agent 幻觉与预言机攻击是真实且已发生过的损失来源。任何策略请先用虚拟盘/小额资金验证，单一策略敞口建议不超过总资产的 20%。</p>
+</blockquote>
+<h3 id="如何用好这个系列">如何用好这个系列</h3>
+<ol>
+<li><strong>第 1 篇建立认知框架</strong>——别急着跑代码，先搞懂「执行层 vs 认知层」的分野，这是后续一切策略的前提。</li>
+<li><strong>第 2 篇落地链上操作</strong>——给出可直接复现的 AI Agent 工作流（自然语言指令、监控逻辑、分叉验证步骤），无需写代码即可部署。</li>
+<li><strong>第 3 篇给出完整工具链与风控</strong>——三大主流 AI 交易机器人（xTheo、StratiFi、Gordon）横评、四层纵深熔断架构、审计闭环设计。</li>
+</ol>
+<h3 id="延伸阅读">延伸阅读</h3>
+<ul>
+<li><strong>白皮书全文</strong>（Notion 源）：[《2026 AI 驱动资产增值与套利白皮书》](/kb/notion/3c837db839f580ada2a6d311968342b6_《2026 AI 驱动资产增值与套利白皮书》.md)</li>
+<li><strong>5 个轻量级 AI 缝隙套利方案 · 全景拆解</strong>：[方案汇总](/kb/notion/3c837db839f58063ac9ef43565d38f7d_5 个轻量级 AI 缝隙套利方案 · 全景拆解.md)</li>
+<li><strong>3 个轻量级 AI 套利方案（2026-08-26 检验版）</strong>：[验证版](/kb/notion/3c837db839f5805db5d7c9477f4fa471_3 个轻量级 AI 套利方案（2026-08-26 检验版）.md)</li>
+</ul>
+<hr>
+<h2 id="结语">结语</h2>
+<p>2026 年的真相是残酷但清晰的：<strong>执行层已无套利（1–5bps 的价差属于 Solver 巨头），认知层仍有套利。</strong></p>
+<p>普通人的三层非对称优势——<strong>广度、摩擦容忍、结构认知</strong>——不是靠更快的脚本、更低的延迟、更大的资金获得的，而是靠<strong>用自然语言调度 AI Agent，在机构尚未定价的「结构性缝隙」中收割风险调整后的收益</strong>。</p>
+<p>下一篇，我们将深入「链上意图与 AI 智能体」板块，手把手教你部署一个能 7×24 小时监控数十条跨链走廊、自动识别失衡并生成执行计划的监控 Agent——<strong>全程自然语言，无需写一行 Solidity。</strong></p>
+<blockquote>
+<p><strong>延伸阅读</strong>：<a href="/posts/ai-arbitrage-whitepaper-02-intent-agents/">《2026 AI 驱动资产增值与套利白皮书》系列（二）：链上意图与 AI 智能体——在 Solver 盲区收割「路径差异」</a></p>
+</blockquote>
+</section><div style="margin-top:3rem;padding-top:2rem;border-top:1px solid var(--dim-color);">
+  <h2 style="margin-bottom:1.5rem;">评论</h2>
+  <script src="https://giscus.app/client.js"
+      data-repo="ningfeiyu/blog-comments"
+      data-repo-id="R_kgDOR_QPZw"
+      data-category="General"
+      data-category-id="DIC_kwDOR_QPZ84C6i9W"
+      data-mapping="pathname"
+      data-strict="0"
+      data-reactions-enabled="1"
+      data-emit-metadata="0"
+      data-input-position="bottom"
+      data-theme="preferred_color_scheme"
+      data-lang="zh-CN"
+      crossorigin="anonymous"
+      async>
+  </script>
+</div>
+</main>
+        <footer id="main-footer"><div class="footer">
+  <a href="#">回到顶部</a>
+  <div class="footer-copyright">
+    <div class="dim">© 2026 老宁</div>
+    <div></div>
+  </div>
+</div>
+</footer>
+      </div><aside id="side-pane" class="side-sticky">
+<div class="side-details">
+    <span>388 字</span>
+    <span>8 - 11 分钟阅读</span></div><h3>目录</h3><nav id="TableOfContents">
+  <ul>
+    <li><a href="#开篇一场静悄悄的认知分层">开篇：一场静悄悄的认知分层</a></li>
+    <li><a href="#一执行层为何已无套利">一、执行层为何已无套利？</a>
+      <ul>
+        <li><a href="#11-意图层的三层分工把普通人挡在门外">1.1 意图层的「三层分工」把普通人挡在门外</a></li>
+        <li><a href="#12-solver-经济学的剧变">1.2 Solver 经济学的剧变</a></li>
+        <li><a href="#13-代币化股票的赎回壁垒把散户锁在二级市场">1.3 代币化股票的「赎回壁垒」把散户锁在二级市场</a></li>
+      </ul>
+    </li>
+    <li><a href="#二普通人的三层非对称优势">二、普通人的三层非对称优势</a>
+      <ul>
+        <li><a href="#21-广度优势机构-ai-盯着大额主流你用-ai-扫长尾">2.1 广度优势：机构 AI 盯着大额主流，你用 AI 扫长尾</a></li>
+        <li><a href="#22-摩擦容忍优势机构无法为-1-万美元级机会定制流程">2.2 摩擦容忍优势：机构无法为 1 万美元级机会定制流程</a></li>
+        <li><a href="#23-结构认知优势理解为什么不是套利比找到套利更值钱">2.3 结构认知优势：理解「为什么不是套利」比找到套利更值钱</a></li>
+      </ul>
+    </li>
+    <li><a href="#三白皮书系列的三大板块预告">三、白皮书系列的三大板块预告</a></li>
+    <li><a href="#四系列阅读指南">四、系列阅读指南</a>
+      <ul>
+        <li><a href="#如何用好这个系列">如何用好这个系列</a></li>
+        <li><a href="#延伸阅读">延伸阅读</a></li>
+      </ul>
+    </li>
+    <li><a href="#结语">结语</a></li>
+  </ul>
+</nav><h3>相关文章</h3>
+    <ul><li><a href="/posts/opc-web3-2026-advanced-guide/">Web3 OPC 进阶指南 2026：AI Agent、意图交易与RWA时代的个人协议</a></li><li><a href="/posts/ai-hacker-arbitrage-2026-report/">2026年AI脚本套利深度报告：从预测市场到闪电贷，机器是怎么自动赚钱的</a></li></ul></aside></div>
+  </div>
+</body>
+</html>

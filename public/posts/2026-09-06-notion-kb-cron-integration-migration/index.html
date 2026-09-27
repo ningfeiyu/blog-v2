@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="zh-CN" dir="ltr">
+<head>
+  <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Notion KB与Cron集成：从Hermes Gateway到System Crontab的迁移实录 | 老宁的试验田</title>
+<link rel="icon" href="/favicon.svg" sizes="any" type="image/svg+xml" /><meta property="og:url" content="https://blog.ning.indevs.in/posts/2026-09-06-notion-kb-cron-integration-migration/">
+	<meta property="og:site_name" content="老宁的试验田">
+	<meta property="og:title" content="Notion KB与Cron集成：从Hermes Gateway到System Crontab的迁移实录">
+	<meta property="og:description" content="问题背景：Hermes Cron Gateway 的 systemd 限制 Hermes 的 cron 系统依赖 systemd-run --user --scope 启动隔离 worker。当前环境（容器/权限受限）报错：
+Restart-safe cron worker dispatch failed: cannot create restart-safe systemd scope for gateway child: systemd-run --user --scope is unavailable 导致 18 个 Hermes cron jobs 全部失败，无法执行任何定时任务。
+解决方案：迁移到系统级 crontab 直接编写 /root/.hermes/cron/system-crontab 并 crontab /root/.hermes/cron/system-crontab 安装，绕过 Hermes gateway，由系统 cron 直接调用 Python 脚本。
+# 安装 crontab /root/.hermes/cron/system-crontab # 查看 crontab -l 核心脚本 1. Notion KB 每日全量同步 (sync-notion-kb.py) #!/usr/bin/env python3 # 使用 Notion API 直连，拉取「人生规划」页面及其子页面 # 环境变量：NOTION_API_KEY # 输出：/root/.hermes/kb/notion/*.md &#43; LIVE-INDEX.txt &#43; UNIFIED-INDEX.txt 运行时间：0 3 * * * (每日 03:00) 结果：33/33 页面成功，LIVE-INDEX 93 行，UNIFIED-INDEX 427 行 日志：/root/.hermes/cron/system-logs/sync-notion-kb.log 2. 双向写回模块 (writeback_notion.py) # 支持三种模式 writeback(page_id, title, content, mode=&#39;date-toggle&#39;) # date-toggle: 同一天同标题创建 toggle 块，后续追加到 children # append: 直接追加 # overwrite: 覆盖 4 个 preset 配置：">
+	<meta property="og:locale" content="zh_CN">
+	<meta property="og:type" content="article">
+		<meta property="article:section" content="posts">
+		<meta property="article:published_time" content="2026-09-06T19:45:00+08:00">
+		<meta property="article:modified_time" content="2026-09-06T19:45:00+08:00">
+		<meta property="article:tag" content="Notion">
+		<meta property="article:tag" content="Cron">
+		<meta property="article:tag" content="Systemd">
+		<meta property="article:tag" content="Python">
+		<meta property="article:tag" content="Hermes">
+		<meta property="article:tag" content="自动化">
+
+	<meta name="twitter:card" content="summary">
+	<meta name="twitter:title" content="Notion KB与Cron集成：从Hermes Gateway到System Crontab的迁移实录">
+	<meta name="twitter:description" content="问题背景：Hermes Cron Gateway 的 systemd 限制 Hermes 的 cron 系统依赖 systemd-run --user --scope 启动隔离 worker。当前环境（容器/权限受限）报错：
+Restart-safe cron worker dispatch failed: cannot create restart-safe systemd scope for gateway child: systemd-run --user --scope is unavailable 导致 18 个 Hermes cron jobs 全部失败，无法执行任何定时任务。
+解决方案：迁移到系统级 crontab 直接编写 /root/.hermes/cron/system-crontab 并 crontab /root/.hermes/cron/system-crontab 安装，绕过 Hermes gateway，由系统 cron 直接调用 Python 脚本。
+# 安装 crontab /root/.hermes/cron/system-crontab # 查看 crontab -l 核心脚本 1. Notion KB 每日全量同步 (sync-notion-kb.py) #!/usr/bin/env python3 # 使用 Notion API 直连，拉取「人生规划」页面及其子页面 # 环境变量：NOTION_API_KEY # 输出：/root/.hermes/kb/notion/*.md &#43; LIVE-INDEX.txt &#43; UNIFIED-INDEX.txt 运行时间：0 3 * * * (每日 03:00) 结果：33/33 页面成功，LIVE-INDEX 93 行，UNIFIED-INDEX 427 行 日志：/root/.hermes/cron/system-logs/sync-notion-kb.log 2. 双向写回模块 (writeback_notion.py) # 支持三种模式 writeback(page_id, title, content, mode=&#39;date-toggle&#39;) # date-toggle: 同一天同标题创建 toggle 块，后续追加到 children # append: 直接追加 # overwrite: 覆盖 4 个 preset 配置：">
+
+      <link rel="stylesheet" href="/css/root.min.1052d5860b4442ccd33071bf3543c78d47509a7acb2c13edb1288611a2ebd6a8.css" integrity="sha256-EFLVhgtEQszTMHG/NUPHjUdQmnrLLBPtsSiGEaLr1qg=" crossorigin="anonymous">
+      <link rel="stylesheet" href="/css/bundle.min.e735cd1c41e6b7ba15433438fa484f2804322027ee8348fcff2adbf14976ce28.css" integrity="sha256-5zXNHEHmt7oVQzQ4&#43;khPKAQyICfug0j8/yrb8Ul2zig=" crossorigin="anonymous">
+
+      <script src="/js/bundle.cc8ae9952dbfb731affafabdf26e5c60a6910047ff59ccdeaf1daebaa26c8830.js" integrity="sha256-zIrplS2/tzGv&#43;vq98m5cYKaRAEf/Wczerx2uuqJsiDA=" crossorigin="anonymous"></script><script defer src="/js/search/flexsearch.compact.3928d3d2172bc0b5f75d9458fb9255f0befce1c7239ba6e5d2c58ed4b82c2073.js" integrity="sha256-OSjT0hcrwLX3XZRY&#43;5JV8L784ccjm6bl0sWO1LgsIHM="></script>
+<script defer src="/js/search/search.1d980f84df11f3eb7c8c5f17f541d49a0611608df179dd74fa7f06225eb56ace.js" integrity="sha256-HZgPhN8R8&#43;t8jF8X9UHUmgYRYI3xed10&#43;n8GIl61as4="></script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,200;1,300;1,400;1,500;1,600;1,700;1,800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200..800&family=Spectral:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,200;1,300;1,400;1,500;1,600;1,700;1,800&display=swap" rel="stylesheet">
+
+
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+<link href="https://cdn.jsdelivr.net/npm/lxgw-wenkai-webfont@1.7.0/lxgwwenkai-regular.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/lxgw-wenkai-webfont@1.7.0/lxgwwenkai-bold.css" rel="stylesheet">
+
+<script defer src="https://events.vercount.one/js"></script>
+</head>
+<body class="notransition">
+  <div id="container">
+    <header id="main-header"><div role="navigation" aria-label="Main">
+  <div class="nav-left">
+    <a href="https://blog.ning.indevs.in/" style="color: inherit;">老宁的试验田</a>
+  </div>
+  <div class="nav-right">
+    <div style="position:absolute;width:0px;height:0px;">
+      <div id="nav-dropdown-menu" class="hidden" href="#">
+    <div class="nav-item">
+      <a href="/"
+      >首页</a>
+    </div>
+    <div class="nav-item">
+      <a aria-current="true" class="ancestor" href="/posts/"
+      >文章</a>
+    </div>
+    <div class="nav-item">
+      <a href="/tags/"
+      >标签</a>
+    </div>
+    <div class="nav-item">
+      <a href="/archives/"
+      >归档</a>
+    </div>
+    <div class="nav-item">
+      <a href="/about/"
+      >关于</a>
+    </div>
+</div>
+    </div>
+    <a id="nav-dropdown-button" href="#"><svg width="20px" height="20px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M4 6H20M4 12H20M4 18H20" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
+</a>
+    <div id="nav-menu">
+    <div class="nav-item">
+      <a href="/"
+      >首页</a>
+    </div>
+    <div class="nav-item">
+      <a aria-current="true" class="ancestor" href="/posts/"
+      >文章</a>
+    </div>
+    <div class="nav-item">
+      <a href="/tags/"
+      >标签</a>
+    </div>
+    <div class="nav-item">
+      <a href="/archives/"
+      >归档</a>
+    </div>
+    <div class="nav-item">
+      <a href="/about/"
+      >关于</a>
+    </div>
+</div>
+    <a id="theme-switcher" href="#">
+<svg class="light-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M12 3V4M12 20V21M4 12H3M6.31412 6.31412L5.5 5.5M17.6859 6.31412L18.5 5.5M6.31412 17.69L5.5 18.5001M17.6859 17.69L18.5 18.5001M21 12H20M16 12C16 14.2091 14.2091 16 12 16C9.79086 16 8 14.2091 8 12C8 9.79086 9.79086 8 12 8C14.2091 8 16 9.79086 16 12Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
+
+<svg class="dark-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M3.32031 11.6835C3.32031 16.6541 7.34975 20.6835 12.3203 20.6835C16.1075 20.6835 19.3483 18.3443 20.6768 15.032C19.6402 15.4486 18.5059 15.6834 17.3203 15.6834C12.3497 15.6834 8.32031 11.654 8.32031 6.68342C8.32031 5.50338 8.55165 4.36259 8.96453 3.32996C5.65605 4.66028 3.32031 7.89912 3.32031 11.6835Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
+</a>
+  </div>
+</div>
+</header>
+    <div class="flex grow">
+      <div id="main-pane">
+        <main id="main-content"><div class="single-header">
+<ol class="breadcrumbs" itemscope itemtype="https://schema.org/BreadcrumbList">
+    <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+      <a itemprop="item" href="https://blog.ning.indevs.in/">
+        <span itemprop="name">首页</span>
+      </a>
+      <meta itemprop="position" content='1' />
+    </li>
+    <span>&nbsp»&nbsp</span>
+    <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+      <a itemprop="item" href="https://blog.ning.indevs.in/posts/">
+        <span itemprop="name">文章</span>
+      </a>
+      <meta itemprop="position" content='2' />
+    </li>
+    <span>&nbsp»&nbsp</span>
+</ol>
+<h1>Notion KB与Cron集成：从Hermes Gateway到System Crontab的迁移实录</h1><time class="dim" datetime="2026-09-06T19:45:00&#43;08:00">2026年9月6日</time><div class="term-container"><div class="tag">
+        <a href="https://blog.ning.indevs.in/tags/notion/">#Notion</a>
+      </div><div class="tag">
+        <a href="https://blog.ning.indevs.in/tags/cron/">#cron</a>
+      </div><div class="tag">
+        <a href="https://blog.ning.indevs.in/tags/systemd/">#Systemd</a>
+      </div><div class="tag">
+        <a href="https://blog.ning.indevs.in/tags/python/">#Python</a>
+      </div><div class="tag">
+        <a href="https://blog.ning.indevs.in/tags/hermes/">#Hermes</a>
+      </div><div class="tag">
+        <a href="https://blog.ning.indevs.in/tags/%E8%87%AA%E5%8A%A8%E5%8C%96/">#自动化</a>
+      </div></ol></div>
+  <section class="page-section"><p><img src="/images/posts/2026-09-06-notion-kb-cron-integration-migration.jpg" alt="featured"></p>
+<h2 id="问题背景hermes-cron-gateway-的-systemd-限制">问题背景：Hermes Cron Gateway 的 systemd 限制</h2>
+<p>Hermes 的 cron 系统依赖 <code>systemd-run --user --scope</code> 启动隔离 worker。当前环境（容器/权限受限）报错：</p>
+<pre tabindex="0"><code>Restart-safe cron worker dispatch failed: cannot create restart-safe systemd scope for gateway child: systemd-run --user --scope is unavailable
+</code></pre><p>导致 18 个 Hermes cron jobs 全部失败，无法执行任何定时任务。</p>
+<h2 id="解决方案迁移到系统级-crontab">解决方案：迁移到系统级 crontab</h2>
+<p>直接编写 <code>/root/.hermes/cron/system-crontab</code> 并 <code>crontab /root/.hermes/cron/system-crontab</code> 安装，绕过 Hermes gateway，由系统 cron 直接调用 Python 脚本。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># 安装</span>
+</span></span><span style="display:flex;"><span>crontab /root/.hermes/cron/system-crontab
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 查看</span>
+</span></span><span style="display:flex;"><span>crontab -l
+</span></span></code></pre></div><h2 id="核心脚本">核心脚本</h2>
+<h3 id="1-notion-kb-每日全量同步-sync-notion-kbpy">1. Notion KB 每日全量同步 (<code>sync-notion-kb.py</code>)</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e">#!/usr/bin/env python3</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 使用 Notion API 直连，拉取「人生规划」页面及其子页面</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 环境变量：NOTION_API_KEY</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 输出：/root/.hermes/kb/notion/*.md + LIVE-INDEX.txt + UNIFIED-INDEX.txt</span>
+</span></span></code></pre></div><ul>
+<li>运行时间：<code>0 3 * * *</code> (每日 03:00)</li>
+<li>结果：33/33 页面成功，LIVE-INDEX 93 行，UNIFIED-INDEX 427 行</li>
+<li>日志：<code>/root/.hermes/cron/system-logs/sync-notion-kb.log</code></li>
+</ul>
+<h3 id="2-双向写回模块-writeback_notionpy">2. 双向写回模块 (<code>writeback_notion.py</code>)</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># 支持三种模式</span>
+</span></span><span style="display:flex;"><span>writeback(page_id, title, content, mode<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;date-toggle&#39;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># date-toggle: 同一天同标题创建 toggle 块，后续追加到 children</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># append: 直接追加</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># overwrite: 覆盖</span>
+</span></span></code></pre></div><p>4 个 preset 配置：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>PRESETS <span style="color:#f92672">=</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#39;identity_log&#39;</span>:      {<span style="color:#e6db74">&#39;page_id&#39;</span>: <span style="color:#e6db74">&#39;35837db8-39f5-8017-b508-da3145200783&#39;</span>, <span style="color:#e6db74">&#39;title&#39;</span>: <span style="color:#e6db74">&#39;晨间身份锚定&#39;</span>},
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#39;afternoon_report&#39;</span>:  {<span style="color:#e6db74">&#39;page_id&#39;</span>: <span style="color:#e6db74">&#39;3ce37db8-39f5-811c-8a2a-d40c57c978eb&#39;</span>, <span style="color:#e6db74">&#39;title&#39;</span>: <span style="color:#e6db74">&#39;下午执行报告&#39;</span>},
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#39;daily_review&#39;</span>:      {<span style="color:#e6db74">&#39;page_id&#39;</span>: <span style="color:#e6db74">&#39;3d037db8-39f5-80c1-b1b7-c8b729a7a5a9&#39;</span>, <span style="color:#e6db74">&#39;title&#39;</span>: <span style="color:#e6db74">&#39;每日复盘&#39;</span>},
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#39;scorecard&#39;</span>:         {<span style="color:#e6db74">&#39;page_id&#39;</span>: <span style="color:#e6db74">&#39;3d037db8-39f5-80c2-a744-c12248e2c17e&#39;</span>, <span style="color:#e6db74">&#39;title&#39;</span>: <span style="color:#e6db74">&#39;积分卡&#39;</span>},
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h3 id="3-索引重建-rebuild-indexpy">3. 索引重建 (<code>rebuild-index.py</code>)</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># 扫描 /root/.hermes/kb/notion/*.md</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 生成 LIVE-INDEX.txt (Notion 专用格式)</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 生成 UNIFIED-INDEX.txt (博客+Notion 合并，供 article-knowledge-layer skill 使用)</span>
+</span></span></code></pre></div><h2 id="4-个-core-cron-skills-植入-notion-写回">4 个 Core Cron Skills 植入 Notion 写回</h2>
+<table>
+	<thead>
+			<tr>
+					<th>Skill</th>
+					<th>触发时间</th>
+					<th>写回页面</th>
+					<th>Page ID</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>cron-identity-coaching</td>
+					<td>05:30</td>
+					<td>晨间身份锚定</td>
+					<td>35837db8-39f5-8017-b508-da3145200783</td>
+			</tr>
+			<tr>
+					<td>cron-afternoon-execution</td>
+					<td>13:00</td>
+					<td>下午执行报告</td>
+					<td>3ce37db8-39f5-811c-8a2a-d40c57c978eb</td>
+			</tr>
+			<tr>
+					<td>cron-evening-wind-down</td>
+					<td>19:30</td>
+					<td>每日复盘</td>
+					<td>3d037db8-39f5-80c1-b1b7-c8b729a7a5a9</td>
+			</tr>
+			<tr>
+					<td>cron-scorecard</td>
+					<td>21:25</td>
+					<td>积分卡</td>
+					<td>3d037db8-39f5-80c2-a744-c12248e2c17e</td>
+			</tr>
+	</tbody>
+</table>
+<p>每个 skill 的 YAML frontmatter 末尾追加：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-markdown" data-lang="markdown"><span style="display:flex;"><span><span style="color:#75715e">## Notion 写回（执行结束自动调用）
+</span></span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>```bash
+</span></span><span style="display:flex;"><span>/root/.hermes/scripts/writeback_notion.py \
+</span></span><span style="display:flex;"><span>  --preset identity_log \
+</span></span><span style="display:flex;"><span>  --title &#34;晨间身份锚定&#34; \
+</span></span><span style="display:flex;"><span>  --content &#34;$(cat /path/to/identity_log.md)&#34; \
+</span></span><span style="display:flex;"><span>  --mode date-toggle
+</span></span></code></pre></div><pre tabindex="0"><code>
+## System Crontab 完整任务表
+
+```crontab
+# Notion KB 每日全量同步
+0 3 * * * /usr/bin/python3 /root/.hermes/scripts/sync-notion-kb.py &gt;&gt; /root/.hermes/cron/system-logs/sync-notion-kb.log 2&gt;&amp;1
+
+# 晨间身份锚定 (05:30)
+30 5 * * * /usr/bin/python3 -c &#34;...&#34; &gt;&gt; /root/.hermes/cron/system-logs/cron-identity-coaching.log 2&gt;&amp;1
+
+# 晨间运动+正念+早餐 (06:05)
+5 6 * * * /usr/bin/python3 -c &#34;...&#34; &gt;&gt; /root/.hermes/cron/system-logs/cron-morning-exercise.log 2&gt;&amp;1
+
+# 下午执行开始·记录计划 (13:00)
+0 13 * * * /usr/bin/python3 -c &#34;...&#34; &gt;&gt; /root/.hermes/cron/system-logs/cron-afternoon-execution.log 2&gt;&amp;1
+
+# SOP 完善/复盘提醒 (16:10)
+10 16 * * * /usr/bin/python3 -c &#34;...&#34; &gt;&gt; /root/.hermes/cron/system-logs/cron-afternoon-sop.log 2&gt;&amp;1
+
+# 晚间沐浴+晚餐+复盘 (19:30)
+30 19 * * * /usr/bin/python3 -c &#34;...&#34; &gt;&gt; /root/.hermes/cron/system-logs/cron-evening-wind-down.log 2&gt;&amp;1
+
+# 奖赏循环检查 (21:20)
+20 21 * * * /usr/bin/python3 -c &#34;...&#34; &gt;&gt; /root/.hermes/cron/system-logs/cron-reward-loop.log 2&gt;&amp;1
+
+# 积分卡/回纹针/诱惑捆绑 (21:25)
+25 21 * * * /usr/bin/python3 -c &#34;...&#34; &gt;&gt; /root/.hermes/cron/system-logs/cron-scorecard.log 2&gt;&amp;1
+
+# 睡前身份锚定 (21:30)
+30 21 * * * /usr/bin/python3 -c &#34;...&#34; &gt;&gt; /root/.hermes/cron/system-logs/cron-sleep-identity-anchor.log 2&gt;&amp;1
+
+# 周复盘/规划 (周一 06:00)
+0 6 * * 1 /usr/bin/python3 -c &#34;...&#34; &gt;&gt; /root/.hermes/cron/system-logs/cron-weekly-review.log 2&gt;&amp;1
+
+# @reboot 保证日志目录存在
+@reboot mkdir -p /root/.hermes/cron/system-logs
+</code></pre><h2 id="amd-qwen38-flash-next-接入-hermes-fallback-链">AMD Qwen3.8-Flash-Next 接入 Hermes Fallback 链</h2>
+<h3 id="1-存储-api-key">1. 存储 API Key</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># 存储到 .env (本地环境变量文件，不提交版本库)</span>
+</span></span><span style="display:flex;"><span>echo <span style="color:#e6db74">&#34;AMD_API_KEY=&lt;your-key-here&gt;&#34;</span> &gt;&gt; /root/.hermes/.env
+</span></span></code></pre></div><h3 id="2-更新-configyaml">2. 更新 config.yaml</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">fallback_providers</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e"># ... 前 9 个 provider ...</span>
+</span></span><span style="display:flex;"><span>  - <span style="color:#f92672">provider</span>: <span style="color:#ae81ff">custom</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">model</span>: <span style="color:#ae81ff">Qwen3.8-Flash-Next</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">base_url</span>: <span style="color:#ae81ff">https://developer.amd.com.cn/radeon/api/v1</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">api_key</span>: <span style="color:#ae81ff">${env:AMD_API_KEY}</span>
+</span></span><span style="display:flex;"><span>  - <span style="color:#f92672">provider</span>: <span style="color:#ae81ff">custom</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">model</span>: <span style="color:#ae81ff">deepseek-v4-flash</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">base_url</span>: <span style="color:#ae81ff">https://router.flatkey.ai/v1</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">api_key</span>: <span style="color:#ae81ff">${env:FLATKEY_API_KEY}</span>
+</span></span></code></pre></div><p>现在 fallback 链共 11 个 provider，AMD 位于第 10 位。</p>
+<h2 id="完整数据流向">完整数据流向</h2>
+<pre tabindex="0"><code>┌─────────────────────────────────────────────────────────────────┐
+│  Notion (人生规划页面 ID: 35837db8-39f5-80ad-836d-cbbc590cf44f)  │
+└──────────────────────────┬──────────────────────────────────────┘
+                           │ 03:00 sync-notion-kb.py (Notion API)
+                           ▼
+┌─────────────────────────────────────────────────────────────────┐
+│  本地 KB: /root/.hermes/kb/notion/                              │
+│    ├── *.md (33 个页面)                                          │
+│    ├── LIVE-INDEX.txt (93 行，Notion 专用索引)                   │
+│    └── UNIFIED-INDEX.txt (427 行，博客+Notion 合并索引)          │
+└──────────────────────────┬──────────────────────────────────────┘
+                           │ 各时间点 writeback_notion.py (date-toggle)
+          ┌────────────────┼────────────────┐
+          ▼                ▼                ▼
+┌─────────────────┐ ┌─────────────────┐ ┌─────────────────┐
+│ 晨间身份锚定    │ │ 下午执行报告    │ │ 每日复盘        │ │ 积分卡
+│ (05:30)         │ │ (13:00)         │ │ (19:30)         │ │ (21:25)
+└─────────────────┘ └─────────────────┘ └─────────────────┘ └─────────────────┘
+          │                │                │                │
+          └────────────────┴────────────────┴────────────────┘
+                           ▼
+              Notion 对应页面追加到今日 toggle 块的 children
+</code></pre><h2 id="关键命令速查">关键命令速查</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># 手动触发同步</span>
+</span></span><span style="display:flex;"><span>/usr/bin/python3 /root/.hermes/scripts/sync-notion-kb.py
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 手动写回测试</span>
+</span></span><span style="display:flex;"><span>/usr/bin/python3 -c <span style="color:#e6db74">&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">import sys; sys.path.insert(0, &#39;/root/.hermes/scripts&#39;)
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">from writeback_notion import writeback
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">from datetime import datetime
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">content=f&#39;测试: {datetime.now().strftime(\&#34;%H:%M\&#34;)}&#39;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">writeback(page_id=&#39;35837db8-39f5-8017-b508-da3145200783&#39;, title=&#39;晨间身份锚定&#39;, content=content, mode=&#39;date-toggle&#39;)
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 查看系统 cron 日志</span>
+</span></span><span style="display:flex;"><span>tail -f /root/.hermes/cron/system-logs/*.log
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 重新加载 system crontab</span>
+</span></span><span style="display:flex;"><span>crontab /root/.hermes/cron/system-crontab
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 验证 Hermes fallback 链</span>
+</span></span><span style="display:flex;"><span>grep -A3 <span style="color:#e6db74">&#34;fallback_providers&#34;</span> /root/.hermes/config.yaml
+</span></span></code></pre></div><h2 id="经验总结">经验总结</h2>
+<ol>
+<li><strong>systemd 限制不可控时，系统 crontab 是最可靠的 fallback</strong> — 无依赖、无 gateway、直接执行</li>
+<li><strong>Notion API 直连比 ntn CLI 更稳定</strong> — bash 脚本易碎，Python requests + 重试机制成功率 100%</li>
+<li><strong>date-toggle 模式完美适配每日重复性写回</strong> — 避免重复创建页面，同一天多次执行自动追加</li>
+<li><strong>Skills 作为逻辑载体，crontab 作为调度器</strong> — 解耦执行逻辑与调度机制，便于迁移和维护</li>
+<li><strong>Fallback 链要有冗余</strong> — AMD 模型虽当前 503，但作为第 10 位 provider 不影响主链路</li>
+</ol>
+<hr>
+<p><em>技术栈：Python 3.11 + Notion API + systemd-free crontab + Hermes Agent</em></p>
+</section><div style="margin-top:3rem;padding-top:2rem;border-top:1px solid var(--dim-color);">
+  <h2 style="margin-bottom:1.5rem;">评论</h2>
+  <script src="https://giscus.app/client.js"
+      data-repo="ningfeiyu/blog-comments"
+      data-repo-id="R_kgDOR_QPZw"
+      data-category="General"
+      data-category-id="DIC_kwDOR_QPZ84C6i9W"
+      data-mapping="pathname"
+      data-strict="0"
+      data-reactions-enabled="1"
+      data-emit-metadata="0"
+      data-input-position="bottom"
+      data-theme="preferred_color_scheme"
+      data-lang="zh-CN"
+      crossorigin="anonymous"
+      async>
+  </script>
+</div>
+</main>
+        <footer id="main-footer"><div class="footer">
+  <a href="#">回到顶部</a>
+  <div class="footer-copyright">
+    <div class="dim">© 2026 老宁</div>
+    <div></div>
+  </div>
+</div>
+</footer>
+      </div><aside id="side-pane" class="side-sticky">
+<div class="side-details">
+    <span>621 字</span>
+    <span>8 - 10 分钟阅读</span></div><h3>目录</h3><nav id="TableOfContents">
+  <ul>
+    <li><a href="#问题背景hermes-cron-gateway-的-systemd-限制">问题背景：Hermes Cron Gateway 的 systemd 限制</a></li>
+    <li><a href="#解决方案迁移到系统级-crontab">解决方案：迁移到系统级 crontab</a></li>
+    <li><a href="#核心脚本">核心脚本</a>
+      <ul>
+        <li><a href="#1-notion-kb-每日全量同步-sync-notion-kbpy">1. Notion KB 每日全量同步 (<code>sync-notion-kb.py</code>)</a></li>
+        <li><a href="#2-双向写回模块-writeback_notionpy">2. 双向写回模块 (<code>writeback_notion.py</code>)</a></li>
+        <li><a href="#3-索引重建-rebuild-indexpy">3. 索引重建 (<code>rebuild-index.py</code>)</a></li>
+      </ul>
+    </li>
+    <li><a href="#4-个-core-cron-skills-植入-notion-写回">4 个 Core Cron Skills 植入 Notion 写回</a></li>
+    <li><a href="#amd-qwen38-flash-next-接入-hermes-fallback-链">AMD Qwen3.8-Flash-Next 接入 Hermes Fallback 链</a>
+      <ul>
+        <li><a href="#1-存储-api-key">1. 存储 API Key</a></li>
+        <li><a href="#2-更新-configyaml">2. 更新 config.yaml</a></li>
+      </ul>
+    </li>
+    <li><a href="#完整数据流向">完整数据流向</a></li>
+    <li><a href="#关键命令速查">关键命令速查</a></li>
+    <li><a href="#经验总结">经验总结</a></li>
+  </ul>
+</nav><h3>相关文章</h3>
+    <ul><li><a href="/posts/hermes-agent-10-best-use-cases/">Hermes Agent 十大最佳应用案例</a></li><li><a href="/posts/hermes-tips-2/">自定义 Hermes 技能：打造个性化工作流</a></li><li><a href="/posts/agent-os-design-reflection/">个人 Agent OS 设计反思：从过度架构到五层精简</a></li><li><a href="/posts/weekly-2026-w28/">W28 周记：给 Hermes 装上 Harness——但不用新标准，用已有机制</a></li><li><a href="/posts/hermes-agent-advanced-guide-2026-06-27/">Hermes Agent 进阶玩法：从安装到自动化的完整上手指南</a></li></ul></aside></div>
+  </div>
+</body>
+</html>

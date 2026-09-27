@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+	<channel>
+		<title>本地优先 on 老宁的试验田</title>
+		<link>https://blog.ning.indevs.in/tags/%E6%9C%AC%E5%9C%B0%E4%BC%98%E5%85%88/</link>
+		<description>Recent content in 本地优先 on 老宁的试验田</description>
+		<generator>Hugo</generator>
+		<language>zh-CN</language>
+		
+		
+		
+		
+			<lastBuildDate>Sat, 27 Jun 2026 00:30:00 +0800</lastBuildDate>
+		
+			<atom:link href="https://blog.ning.indevs.in/tags/%E6%9C%AC%E5%9C%B0%E4%BC%98%E5%85%88/index.xml" rel="self" type="application/rss+xml" />
+			<item>
+				<title>Hermes Agent 进阶玩法：从安装到自动化的完整上手指南</title>
+				<link>https://blog.ning.indevs.in/posts/hermes-agent-advanced-guide-2026-06-27/</link>
+				<pubDate>Sat, 27 Jun 2026 00:30:00 +0800</pubDate>
+				<guid>https://blog.ning.indevs.in/posts/hermes-agent-advanced-guide-2026-06-27/</guid>
+				<description>&lt;p&gt;&lt;img src=&#34;https://blog.ning.indevs.in/images/posts/hermes-architecture.html&#34; alt=&#34;Hermes Agent Architecture&#34;&gt;&lt;/p&gt;&#xA;&lt;blockquote&gt;&#xA;&lt;p&gt;Hermes Agent 是一款&lt;strong&gt;本地优先、配置驱动、技能可插拔&lt;/strong&gt;的 AI Agent 框架。它把“模型网关 + 工具执行引擎 + 技能系统 + 持久化记忆”全部跑在你自己的机器上，配一个 YAML 就能把 Telegram、终端、浏览器、MCP 服务器、Cloudflare Workers 全串起来。这篇文章把新手最容易卡的配置、技能、工具、自动化四大块拆开讲，配一张全景架构图帮你建立心智模型。&lt;/p&gt;&#xA;&lt;/blockquote&gt;&#xA;&lt;h2 id=&#34;一核心心智模型五层架构&#34;&gt;一、核心心智模型：五层架构&lt;/h2&gt;&#xA;&lt;p&gt;打开文章顶部的架构图（或在浏览器打开 &lt;code&gt;/images/posts/hermes-architecture.html&lt;/code&gt;），你会看到五层：&lt;/p&gt;&#xA;&lt;table&gt;&#xA;&#x9;&lt;thead&gt;&#xA;&#x9;&#x9;&#x9;&lt;tr&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;th&gt;层级&lt;/th&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;th&gt;职责&lt;/th&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;th&gt;关键词&lt;/th&gt;&#xA;&#x9;&#x9;&#x9;&lt;/tr&gt;&#xA;&#x9;&lt;/thead&gt;&#xA;&#x9;&lt;tbody&gt;&#xA;&#x9;&#x9;&#x9;&lt;tr&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;&lt;strong&gt;UI Layer&lt;/strong&gt;&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;Telegram / Web UI / CLI&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;统一入口，同一会话多端同步&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&lt;/tr&gt;&#xA;&#x9;&#x9;&#x9;&lt;tr&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;&lt;strong&gt;Gateway &amp;amp; Routing&lt;/strong&gt;&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;模型路由、Fallback 链、Config/Profile/Session/Memory 管理&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;&lt;code&gt;config.yaml&lt;/code&gt; 是唯一真理来源&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&lt;/tr&gt;&#xA;&#x9;&#x9;&#x9;&lt;tr&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;&lt;strong&gt;Provider Layer&lt;/strong&gt;&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;NVIDIA / OpenRouter / Anthropic / Cloudflare AI / ZAI / Custom&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;统一 OpenAI 兼容接口，支持任意厂商&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&lt;/tr&gt;&#xA;&#x9;&#x9;&#x9;&lt;tr&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;&lt;strong&gt;Tool Engine&lt;/strong&gt;&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;Terminal / File / Browser / Web Search / Skills / MCP&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;全部本地执行，沙箱隔离，支持后台+通知&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&lt;/tr&gt;&#xA;&#x9;&#x9;&#x9;&lt;tr&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;&lt;strong&gt;Extensions&lt;/strong&gt;&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;Cron Jobs / Delegation / Platform Bridges / CF Workers / MCP Servers&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;定时、并行、跨平台、边缘计算&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&lt;/tr&gt;&#xA;&#x9;&lt;/tbody&gt;&#xA;&lt;/table&gt;&#xA;&lt;blockquote&gt;&#xA;&lt;p&gt;&lt;strong&gt;一句话心法&lt;/strong&gt;：&lt;code&gt;config.yaml&lt;/code&gt; 定义**“用什么模型、怎么路由、开什么工具、加什么技能”**，剩下的 Hermes 全自动帮你接线。&lt;/p&gt;</description>
+			</item>
+	</channel>
+</rss>

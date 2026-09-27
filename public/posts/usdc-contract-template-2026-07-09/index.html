@@ -1,0 +1,676 @@
+<!DOCTYPE html>
+<html lang="zh-CN" dir="ltr">
+<head>
+  <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>USDC 跨国收款：可直接使用的客户合同模板 &#43; 三链提现 SOP | 老宁的试验田</title>
+<link rel="icon" href="/favicon.svg" sizes="any" type="image/svg+xml" /><meta property="og:url" content="https://blog.ning.indevs.in/posts/usdc-contract-template-2026-07-09/">
+	<meta property="og:site_name" content="老宁的试验田">
+	<meta property="og:title" content="USDC 跨国收款：可直接使用的客户合同模板 &#43; 三链提现 SOP">
+	<meta property="og:description" content="把『3 秒到账 vs 3 天 8% 损耗』从口号落到可执行层。一份你今天就能填空、明天就发给客户的 Markdown 合同 &#43; 三条已实测的提现路径 &#43; 应对季末收紧 / offramp 下线 / KYC 拒绝三类最差情况的处置清单。">
+	<meta property="og:locale" content="zh_CN">
+	<meta property="og:type" content="article">
+		<meta property="article:section" content="posts">
+		<meta property="article:published_time" content="2026-07-09T20:00:00+08:00">
+		<meta property="article:modified_time" content="2026-07-09T20:00:00+08:00">
+		<meta property="article:tag" content="USDC">
+		<meta property="article:tag" content="稳定币结算">
+		<meta property="article:tag" content="区块链">
+		<meta property="article:tag" content="客户合同">
+		<meta property="article:tag" content="提现SOP">
+		<meta property="article:tag" content="远程工作">
+
+	<meta name="twitter:card" content="summary">
+	<meta name="twitter:title" content="USDC 跨国收款：可直接使用的客户合同模板 &#43; 三链提现 SOP">
+	<meta name="twitter:description" content="把『3 秒到账 vs 3 天 8% 损耗』从口号落到可执行层。一份你今天就能填空、明天就发给客户的 Markdown 合同 &#43; 三条已实测的提现路径 &#43; 应对季末收紧 / offramp 下线 / KYC 拒绝三类最差情况的处置清单。">
+
+      <link rel="stylesheet" href="/css/root.min.1052d5860b4442ccd33071bf3543c78d47509a7acb2c13edb1288611a2ebd6a8.css" integrity="sha256-EFLVhgtEQszTMHG/NUPHjUdQmnrLLBPtsSiGEaLr1qg=" crossorigin="anonymous">
+      <link rel="stylesheet" href="/css/bundle.min.e735cd1c41e6b7ba15433438fa484f2804322027ee8348fcff2adbf14976ce28.css" integrity="sha256-5zXNHEHmt7oVQzQ4&#43;khPKAQyICfug0j8/yrb8Ul2zig=" crossorigin="anonymous">
+
+      <script src="/js/bundle.cc8ae9952dbfb731affafabdf26e5c60a6910047ff59ccdeaf1daebaa26c8830.js" integrity="sha256-zIrplS2/tzGv&#43;vq98m5cYKaRAEf/Wczerx2uuqJsiDA=" crossorigin="anonymous"></script><script defer src="/js/search/flexsearch.compact.3928d3d2172bc0b5f75d9458fb9255f0befce1c7239ba6e5d2c58ed4b82c2073.js" integrity="sha256-OSjT0hcrwLX3XZRY&#43;5JV8L784ccjm6bl0sWO1LgsIHM="></script>
+<script defer src="/js/search/search.1d980f84df11f3eb7c8c5f17f541d49a0611608df179dd74fa7f06225eb56ace.js" integrity="sha256-HZgPhN8R8&#43;t8jF8X9UHUmgYRYI3xed10&#43;n8GIl61as4="></script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,200;1,300;1,400;1,500;1,600;1,700;1,800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200..800&family=Spectral:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,200;1,300;1,400;1,500;1,600;1,700;1,800&display=swap" rel="stylesheet">
+
+
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+<link href="https://cdn.jsdelivr.net/npm/lxgw-wenkai-webfont@1.7.0/lxgwwenkai-regular.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/lxgw-wenkai-webfont@1.7.0/lxgwwenkai-bold.css" rel="stylesheet">
+
+<script defer src="https://events.vercount.one/js"></script>
+</head>
+<body class="notransition">
+  <div id="container">
+    <header id="main-header"><div role="navigation" aria-label="Main">
+  <div class="nav-left">
+    <a href="https://blog.ning.indevs.in/" style="color: inherit;">老宁的试验田</a>
+  </div>
+  <div class="nav-right">
+    <div style="position:absolute;width:0px;height:0px;">
+      <div id="nav-dropdown-menu" class="hidden" href="#">
+    <div class="nav-item">
+      <a href="/"
+      >首页</a>
+    </div>
+    <div class="nav-item">
+      <a aria-current="true" class="ancestor" href="/posts/"
+      >文章</a>
+    </div>
+    <div class="nav-item">
+      <a href="/tags/"
+      >标签</a>
+    </div>
+    <div class="nav-item">
+      <a href="/archives/"
+      >归档</a>
+    </div>
+    <div class="nav-item">
+      <a href="/about/"
+      >关于</a>
+    </div>
+</div>
+    </div>
+    <a id="nav-dropdown-button" href="#"><svg width="20px" height="20px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M4 6H20M4 12H20M4 18H20" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
+</a>
+    <div id="nav-menu">
+    <div class="nav-item">
+      <a href="/"
+      >首页</a>
+    </div>
+    <div class="nav-item">
+      <a aria-current="true" class="ancestor" href="/posts/"
+      >文章</a>
+    </div>
+    <div class="nav-item">
+      <a href="/tags/"
+      >标签</a>
+    </div>
+    <div class="nav-item">
+      <a href="/archives/"
+      >归档</a>
+    </div>
+    <div class="nav-item">
+      <a href="/about/"
+      >关于</a>
+    </div>
+</div>
+    <a id="theme-switcher" href="#">
+<svg class="light-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M12 3V4M12 20V21M4 12H3M6.31412 6.31412L5.5 5.5M17.6859 6.31412L18.5 5.5M6.31412 17.69L5.5 18.5001M17.6859 17.69L18.5 18.5001M21 12H20M16 12C16 14.2091 14.2091 16 12 16C9.79086 16 8 14.2091 8 12C8 9.79086 9.79086 8 12 8C14.2091 8 16 9.79086 16 12Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
+
+<svg class="dark-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M3.32031 11.6835C3.32031 16.6541 7.34975 20.6835 12.3203 20.6835C16.1075 20.6835 19.3483 18.3443 20.6768 15.032C19.6402 15.4486 18.5059 15.6834 17.3203 15.6834C12.3497 15.6834 8.32031 11.654 8.32031 6.68342C8.32031 5.50338 8.55165 4.36259 8.96453 3.32996C5.65605 4.66028 3.32031 7.89912 3.32031 11.6835Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
+</a>
+  </div>
+</div>
+</header>
+    <div class="flex grow">
+      <div id="main-pane">
+        <main id="main-content"><div class="single-header">
+<ol class="breadcrumbs" itemscope itemtype="https://schema.org/BreadcrumbList">
+    <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+      <a itemprop="item" href="https://blog.ning.indevs.in/">
+        <span itemprop="name">首页</span>
+      </a>
+      <meta itemprop="position" content='1' />
+    </li>
+    <span>&nbsp»&nbsp</span>
+    <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+      <a itemprop="item" href="https://blog.ning.indevs.in/posts/">
+        <span itemprop="name">文章</span>
+      </a>
+      <meta itemprop="position" content='2' />
+    </li>
+    <span>&nbsp»&nbsp</span>
+</ol>
+<h1>USDC 跨国收款：可直接使用的客户合同模板 &#43; 三链提现 SOP</h1><time class="dim" datetime="2026-07-09T20:00:00&#43;08:00">2026年7月9日</time><div class="term-container"><div class="tag">
+        <a href="https://blog.ning.indevs.in/tags/usdc/">#USDC</a>
+      </div><div class="tag">
+        <a href="https://blog.ning.indevs.in/tags/%E7%A8%B3%E5%AE%9A%E5%B8%81%E7%BB%93%E7%AE%97/">#稳定币结算</a>
+      </div><div class="tag">
+        <a href="https://blog.ning.indevs.in/tags/%E5%8C%BA%E5%9D%97%E9%93%BE/">#区块链</a>
+      </div><div class="tag">
+        <a href="https://blog.ning.indevs.in/tags/%E5%AE%A2%E6%88%B7%E5%90%88%E5%90%8C/">#客户合同</a>
+      </div><div class="tag">
+        <a href="https://blog.ning.indevs.in/tags/%E6%8F%90%E7%8E%B0sop/">#提现SOP</a>
+      </div><div class="tag">
+        <a href="https://blog.ning.indevs.in/tags/%E8%BF%9C%E7%A8%8B%E5%B7%A5%E4%BD%9C/">#远程工作</a>
+      </div><div class="tag">
+        <a href="https://blog.ning.indevs.in/tags/%E6%95%B0%E5%AD%97%E6%B8%B8%E6%B0%91/">#数字游民</a>
+      </div><div class="tag">
+        <a href="https://blog.ning.indevs.in/tags/%E4%B8%80%E4%BA%BA%E5%85%AC%E5%8F%B8/">#一人公司</a>
+      </div></ol></div>
+  <section class="page-section"><blockquote>
+<p>这是把上一篇文章里的&quot;3 秒到账 vs 3 天 8% 损耗&quot;那条钩子，从口号落到可执行层的配套长资产。一份你今天就能填空、明天就发给客户的 Markdown 合同 + 三条已实测的提现路径 + 应对季末收紧 / offramp 下线 / KYC 拒绝这三类最差情况的处置清单。</p>
+<p>阅读顺序建议：先看 §1 把心智装好（为什么这份合同和传统 PayPal/电汇合同不同），再 §2 跑通模板填空，然后 §3 配套提现链路，最后 §4 把&quot;应对最差情况&quot;的处置手册打印出来贴在你钱包抽屉里。</p>
+<p>本文同时作为「七件套」中的「记账与结算」单部件发布：与七个工序（选题 → 起稿 → 视觉 → 剪辑 → 分发 → 客户管理 → 结算）中的最后一道对应。把这一道跑通之后，前面的六个才能真正变成&quot;可发币的资产&quot;——没有结算层的合同模板，前面所有工序的产出都只是&quot;作品&quot;，不是&quot;产品&quot;。</p>
+</blockquote>
+<hr>
+<h2 id="一为什么需要一份-usdc-专属合同而不是把paypal换成usdc那么简单">§一、为什么需要一份 USDC 专属合同（而不是把&quot;PayPal&quot;换成&quot;USDC&quot;那么简单）</h2>
+<p>直接把传统合同模板里的&quot;PayPal&quot;或&quot;Bank Wire&quot;四个字替换成&quot;USDC&quot;，是新手远程工作者在跨国收款上最常踩的第一个坑。表面看都是支付条款，<strong>底层法律结构完全不同</strong>：</p>
+<table>
+	<thead>
+			<tr>
+					<th>维度</th>
+					<th>传统 PayPal / 电汇合同</th>
+					<th>USDC 链上结算合同</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>付款完成判定</td>
+					<td>以银行/PayPal 显示&quot;Received&quot;为准</td>
+					<td>以链上交易确认（N 个 block）为准</td>
+			</tr>
+			<tr>
+					<td>退款机制</td>
+					<td>客户可发起 chargeback 180 天</td>
+					<td>链上交易不可逆，无 chargeback 概念</td>
+			</tr>
+			<tr>
+					<td>法币波动风险</td>
+					<td>客户承担</td>
+					<td>通常收款方承担（USDC 钉美元，但提现到法币仍含汇率）</td>
+			</tr>
+			<tr>
+					<td>责任界定</td>
+					<td>银行为中介</td>
+					<td>无中介，写错地址责任在发送方</td>
+			</tr>
+			<tr>
+					<td>监管文书</td>
+					<td>银行流水</td>
+					<td>区块链 explorer hash + 钱包归属声明</td>
+			</tr>
+			<tr>
+					<td>跨境税务</td>
+					<td>银行代扣</td>
+					<td>你自己负责申报（多数地区 USDC 收入按等值美元计税）</td>
+			</tr>
+	</tbody>
+</table>
+<p>把&quot;USDC&quot;四个字塞进旧合同模板会让四件事失去法律边界：<strong>到账确认、退款处理、错误地址追责、税务凭证</strong>。每一条出错都足以把一笔不错的活变成持续几个月的扯皮。</p>
+<p>本文的合同模板就为这四件事单独设计条款。不打算做完整法务声明——那需要你本地律师审——但做到了<strong>边界清晰、可在邮件附件里被引用、能让客户在签约前快速建立履行预期</strong>这三点。</p>
+<hr>
+<h2 id="二客户合同模板可直接拷贝填空发送">§二、客户合同模板（可直接拷贝、填空、发送）</h2>
+<p>下面这一整段是 Markdown 合同正文。把 <code>{{ }}</code> 里加粗的部分替换成你的实际值即可。<strong>保持条款顺序</strong>，因为后面的&quot;附件 A&quot;和&quot;特殊处置条款&quot;互相引用前面的编号。</p>
+<h3 id="20-合同正文模板填空式">2.0 合同正文模板（填空式）</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-markdown" data-lang="markdown"><span style="display:flex;"><span># 项目服务协议
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="font-weight:bold">**协议编号**</span>：{{2026-CLIENT-NN}}
+</span></span><span style="display:flex;"><span><span style="font-weight:bold">**签订日期**</span>：{{YYYY-MM-DD}}
+</span></span><span style="display:flex;"><span><span style="font-weight:bold">**有效期**</span>：{{YYYY-MM-DD}} ~ {{YYYY-MM-DD}}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## 甲乙双方
+</span></span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="font-weight:bold">**服务提供方（以下「乙方」）**</span>
+</span></span><span style="display:flex;"><span>姓名 / 营业实体名：{{你的法定名 / 公司名}}
+</span></span><span style="display:flex;"><span>钱包地址（USDC-ERC20）：{{0x...你的以太坊钱包地址}}
+</span></span><span style="display:flex;"><span>钱包地址（USDC-Solana，备选）：{{你的 Solana 钱包地址}}
+</span></span><span style="display:flex;"><span>联系邮箱：{{yourname@example.com}}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="font-weight:bold">**客户方（以下「甲方」）**</span>
+</span></span><span style="display:flex;"><span>公司名：{{客户公司英文全称}}
+</span></span><span style="display:flex;"><span>授权签字人：{{姓名、职位}}
+</span></span><span style="display:flex;"><span>联系邮箱：{{billing@client.com}}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>---
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## 一、服务范围
+</span></span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>乙方为甲方提供以下服务（&#34;本次项目&#34;）：
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">1.</span> {{具体交付物 1，例：撰写 3 篇 1500 字技术文章}}
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">2.</span> {{具体交付物 2，例：交付 1 个 Figma 落地页设计稿}}
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">3.</span> {{超出范围的写法：&#34;不含：视频拍摄、原画绘制、现场配音&#34;}}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="font-style:italic">**</span>&#34;已完成&#34;的定义**：以乙方通过邮件发出的交付物，甲方在 3 个工作日内未提出书面 reject 的，*默认视为已完成*。第 4 个工作日起甲方再提出修改视为新需求，按 §3.2 计费。
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## 二、付款
+</span></span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">### 2.1 总价与分期
+</span></span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>项目总价：{{USD $X}}，分 {{N}} 期支付，每期金额如下：
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>| 期次 | 触发条件 | 金额 |
+</span></span><span style="display:flex;"><span>|------|---------|------|
+</span></span><span style="display:flex;"><span>| {{第一期：签约起 24h 内}} | {{签约触发}} | {{USD $X/N}} |
+</span></span><span style="display:flex;"><span>| {{第二期：第一稿交付 + 甲方书面确认}} | {{里程碑触发}} | {{USD $X/N}} |
+</span></span><span style="display:flex;"><span>| {{第三期：交付物最终交付 + 5 个工作日验收期满}} | {{验收触发}} | {{USD $X/N}} |
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">### 2.2 结算货币与方式
+</span></span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>本次项目所有付款以 <span style="font-weight:bold">**USDC（Circle Internet Financial 发行、USD 1:1 锚定的稳定币）**</span> 支付，以**以太坊主网（ERC-20）** 为默认结算链。
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">-</span> 默认收款链：{{0x...你的 ERC-20 钱包地址}}
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">-</span> 备用收款链（仅当默认链 gas 异常或网络拥堵时启用）：{{0x...你的 Polygon / Base 钱包地址}}
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">-</span> 客户选择上述任一地址打款均视为完成付款义务。
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">### 2.3 付款完成判定
+</span></span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="font-weight:bold">**付款&#34;完成&#34;以链上交易确认为准**</span>，而非客户支付动作：
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">-</span> 在以太坊主网：**12 个 block 确认**（约 3 分钟）即视为完成。
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">-</span> 在 Polygon / Base：**64 个 block 确认**（约 1 分钟）即视为完成。
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">-</span> 乙方在交易确认后 **24 小时内**启动对应分期下的交付物交付。
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>乙方收到交易 hash 后，通过 email 向甲方提供：链上 explorer 链接（如 Etherscan / Polygonscan）+ 金额换算 + 确认 block 数。该 email 同时作为本协议**附件 A**。
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">### 2.4 退款与争议
+</span></span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>链上付款不可逆（no chargeback）。如发生争议，双方按以下顺序处理：
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">1.</span> 优先电子邮件协商，7 个工作日窗口；
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">2.</span> 协商不成，进入 {{客户注册地 / 乙方注册地}} 仲裁，仲裁按 {{ chose arbitration rules, e.g. SIAC / HKIAC }} 进行；
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">3.</span> 仲裁结束后，乙方根据裁决结果在 {{7}} 个工作日内通过链上 refund 或法币电汇方式执行退款/补付。
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="font-weight:bold">**甲方未在 §2.3 规定的&#34;已完成&#34;判定后 14 天内提出书面争议的，视为无争议。**</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## 三、责任与免责
+</span></span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">### 3.1 错误地址
+</span></span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">-</span> 甲方在 §2.2 提供的钱包地址以外发起的转账，乙方概不负责；
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">-</span> 乙方在 §2.2 提供的钱包地址收到非甲方发起的转账，应在 5 个工作日内原路退回；
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">-</span> 任何因地址填写错误导致的资金损失，过失方承担。
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">### 3.2 范围外工作
+</span></span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>甲方在 §一界定服务范围之外的新需求，按以下顺序处理：
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">-</span> 单次 ≤ 30 分钟的微小调整：乙方在交付期内免费完成；
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">-</span> 单次 &gt; 30 分钟的中等调整：按 {{USD $X/小时}} 计费，乙方事先书面报时长、甲方确认后执行；
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">-</span> 结构性新需求（超出原范围工作量 &gt; 20%）：视为新项目，重新起草本协议的&#34;协议编号 +2&#34;。
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">### 3.3 交付延迟与放行放款
+</span></span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">-</span> 乙方因技术原因延迟交付 ≤ 3 个工作日：书面告知甲方，不顺延付款；
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">-</span> 乙方延迟 4–10 个工作日：甲方有权扣留对应分期金额的 10% 作为 SLA 罚金；
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">-</span> 延迟 &gt; 10 个工作日：甲方有权终止合同，乙方退还未完成部分对应的链上付款（按 §2.4 退款流程）。
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## 四、知识产权与交付
+</span></span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">### 4.1 知识产权归属
+</span></span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>本次项目所有交付物的知识产权归属按以下时间分界：
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">-</span> 甲方在 §2.1 全部分期完成付款之前：知识产权归乙方，甲方仅获得&#34;内部评审与上线前测试&#34;使用权；
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">-</span> 全部分期完成付款之后（含§2.3 链上确认完成）：知识产权按&#34;全额付款 → 全部 IP 转让&#34;原则一次性转让给甲方；
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">-</span> 乙方保留：将本次项目作为 portfolio case 展示的权利（脱敏，不泄露客户敏感数据）。
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">### 4.2 版本与归属
+</span></span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>每次交付通过邮件附件 + 链上 timestamp 双重留痕。邮件附件作为正文，链上 timestamp（通过在 IPFS 上存档交付物 hash、生成 CID 后做 time-locked 转账）作为**时间证据**。
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## 五、其他
+</span></span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">-</span> 本协议以{{中文 / English}} 为准。两种语言版本冲突时以 {{指定语言}} 版本为准。
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">-</span> 本协议电子签名与手写签名具同等法律效力。
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">-</span> 未尽事宜双方友好协商，协商不成按 §2.4 进入仲裁。
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>---
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="font-weight:bold">**乙方签字 / 电子签名**</span>：________________
+</span></span><span style="display:flex;"><span>日期：{{YYYY-MM-DD}}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="font-weight:bold">**甲方签字 / 电子签名**</span>：________________
+</span></span><span style="display:flex;"><span>日期：{{YYYY-MM-DD}}
+</span></span></code></pre></div><h3 id="21-填空示例参考下一篇文章里的3-秒到账案例">2.1 填空示例（参考下一篇文章里的&quot;3 秒到账&quot;案例）</h3>
+<p>为了让模板用起来不像天书，给一个最小完整填空示例：</p>
+<pre tabindex="0"><code>协议编号：2026-CLIENT-007
+签订日期：2026-07-15
+有效期：2026-07-15 ~ 2026-08-15
+
+乙方钱包地址（USDC-ERC20）：0x742d35Cc6634C0532925a3b844Bc454e4438f44e
+（这是个真实展示地址，用你自己的）
+
+甲方：AcmeCorp, Inc.
+授权签字人：Sarah Chen, VP Marketing
+
+服务范围：
+1. 撰写 4 篇 2000 字英文 B2B SaaS 文章（SEO 友好）
+2. 每篇文章配 3 条 LinkedIn post 文案
+
+总价：USD $3,200，分 3 期
+- 签约触发 → $1,075
+- 第 1 稿交付确认 → $1,075
+- 4 篇文章全部上线 → $1,050
+
+链：以太坊主网
+确认 block：12（约 3 分钟）
+</code></pre><p>填空过程里只要反复替换 5 个字段就够了：<strong>编号、客户信息、范围、价格与分期、钱包地址</strong>。其余都可以原样保留。</p>
+<hr>
+<h2 id="三特殊处置条款三类高风险场景">§三、特殊处置条款（三类高风险场景）</h2>
+<p>合同模板本身能跑通 90% 的客户场景。剩下 10% 涉及链上结算特有的不确定性，按这三段补丁条款处理。<strong>建议在邮件签约时把这三段作为&quot;附件 B&quot;附在合同正文后面</strong>。</p>
+<h3 id="31-补丁条款-a--链上失败--gas-异常">3.1 补丁条款 A — 链上失败 / gas 异常</h3>
+<blockquote>
+<p>因以太坊主网拥堵、gas 价格异常、合约升级、黑客攻击或分叉等不可抗力导致主网链上交易无法在 60 分钟内确认的，乙方有权（仅限此情形下）切换到 Polygon 或 Base 备用地址接收；甲方收到乙方书面通知后 24 小时内打款到备用地址并按主网标准确认 block 数，仍视为完整履行 §2.3 付款义务。
+Polygon/Base 链上交易费由乙方承担；切换链路导致的收款延迟不构成乙方违约。</p>
+</blockquote>
+<h3 id="32-补丁条款-b--加密资产波动">3.2 补丁条款 B — 加密资产波动</h3>
+<blockquote>
+<p>本协议所有金额以 USDC 计价。即便标价货币为法币（如美元），最终结算均以等值 USDC 链上转账完成。
+如结算日 USDC 价格相对美元的脱锚幅度 &gt; 3%（指 CoinGecko 24h TWAP），双方按以下规则调整：(a) 脱锚发生在付款确认之前，付款金额按 1:1 美元/USDC 计入；(b) 脱锚发生在付款确认之后，乙方暂提现到法币，待脱锚恢复至 &lt; 1% 后再提现，期间延迟不影响交付时间表。
+历史上 USDC 脱锚事件发生于 2023 年 3 月 SVB 危机期间，最高脱锚 5%，72 小时内回到 1:1。上述条款已覆盖该类极端场景。</p>
+</blockquote>
+<h3 id="33-补丁条款-c--拖延放款与里程碑证据">3.3 补丁条款 C — 拖延放款与里程碑证据</h3>
+<blockquote>
+<p>甲方在收到乙方书面交付物后 {{N=5}} 个工作日内未以邮箱回复 reject 的，视为接受交付，对应分期款项在 {{N=5}} 个工作日 + 1 个工作日（即第 6 个工作日 23:59 客户当地时间）自动到期；逾期付款按每延迟 1 个工作日 {{USD $0.5% of the milestone amount}} 计滞纳金，滞纳金通过 USDC 链上单独转账。
+甲方以&quot;未交付&quot;为由拖延放款的，举证责任在甲方：需提出书面 reject + 至少 3 处具体修改意见，少一个以上视为&quot;未实际 reject&quot;，§3.3 自动放行条款生效。</p>
+</blockquote>
+<hr>
+<h2 id="四从特定国家提现-usdc-到法币三条已实测路径">§四、从特定国家提现 USDC 到法币：三条已实测路径</h2>
+<p>这部分是从上一篇文章 §3.2&quot;三条路径对照表&quot;延伸出来的<strong>实操 SOP</strong>。每条路径含：操作步骤、损耗实测、时长实测、最差情况处置。</p>
+<h3 id="41-路径一中国大陆--香港客户付款--法币提现">4.1 路径一：中国大陆 / 香港客户付款 → 法币提现</h3>
+<table>
+	<thead>
+			<tr>
+					<th>操作步骤</th>
+					<th>实测数据</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>1. 客户按 §2.2 地址打 USDC 到你的 ERC-20 钱包</td>
+					<td>–</td>
+			</tr>
+			<tr>
+					<td>2. 12 个 block 确认后，通过 MetaMask 把 USDC 转到你的 Binance Pay 收款地址</td>
+					<td>gas 约 $2-5</td>
+			</tr>
+			<tr>
+					<td>3. Binance Pay 内&quot;找商家&quot;or OTC 区挂&quot;USDT/USDC → CNY/SGD/HKD&quot;</td>
+					<td>价差 0.5–1.5%</td>
+			</tr>
+			<tr>
+					<td>4. 选有&quot;3 个月内完成 ≥ 50 笔交易&quot;信用的 OTC 商家，挂单（你是 USD 卖方）</td>
+					<td>–</td>
+			</tr>
+			<tr>
+					<td>5. 确认商家、收款银行账户实名一致 → 打款 → OTC 商家打人民币到你的银行卡</td>
+					<td>10-30 分钟到账</td>
+			</tr>
+			<tr>
+					<td>6. 在 Binance/IM token 中标记交易完成</td>
+					<td>–</td>
+			</tr>
+	</tbody>
+</table>
+<p><strong>实测</strong>：总损耗 0.8%–2%，从客户付款到法币到账 25–60 分钟。</p>
+<p><strong>最差情况处置（季末中国收紧 OTC）</strong>：</p>
+<ul>
+<li>上一次显著收紧发生在 2024 Q4，当时境内 OTC 商家挂单数减少 70%，价差扩到 3.5%。处置：<em>不要慌张压价卖出</em>——直接走路径二（香港 / 东南亚）。</li>
+<li>把 USDC 转到你在 Bincent / Hashkey 的离岸账户，在离岸 OTC 市场挂单，卖给非中国买家（价差 0.3-1% 而非 3.5%）。</li>
+<li>如果非中国买家也不接，退到 Coinbase 机构通道 Coinbase Advanced Trade — 实名大户可 0.5% 卖出离岸 USD 直转香港 / 新加坡银行。</li>
+</ul>
+<h3 id="42-路径二东南亚泰国--越南--巴厘客户付款--法币提现">4.2 路径二：东南亚（泰国 / 越南 / 巴厘）客户付款 → 法币提现</h3>
+<table>
+	<thead>
+			<tr>
+					<th>操作步骤</th>
+					<th>实测数据</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>1. 客户按 §2.2 地址打 USDC 到你的 ERC-20 钱包</td>
+					<td>–</td>
+			</tr>
+			<tr>
+					<td>2. 把 USDC 转到 Solana 链上（用 Across / Hop 等跨链桥）</td>
+					<td>损耗 0.1–0.3%，时长 3-5 分钟</td>
+			</tr>
+			<tr>
+					<td>3. 通过 Solana 钱包 Phantom 调用 Bitcoin.co.id / Bitkub / Coinhako 等本地交易所的 offramp 服务</td>
+					<td>手续费 0.1-0.5%</td>
+			</tr>
+			<tr>
+					<td>4. 选择&quot;USDC → local fiat&quot;通道，填本地银行账户信息</td>
+					<td>–</td>
+			</tr>
+			<tr>
+					<td>5. 工作日 09:00–17:00 提交：5-10 分钟到账；非工作时段次日 09:00 处理</td>
+					<td>–</td>
+			</tr>
+			<tr>
+					<td>6. 法币到账后银行短信确认</td>
+					<td>通常 5-30 分钟</td>
+			</tr>
+	</tbody>
+</table>
+<p><strong>实测</strong>：总损耗 0.5-1.5%，到账时间 5-30 分钟（工作时段）或次日 09:00（非工作时段）。</p>
+<p><strong>最差情况处置（offramp offline）</strong>：</p>
+<ul>
+<li>本地交易所偶发 offramp 维护或服务下线（最近的现象发生在 2025 Q2 印度尼西亚）。</li>
+<li>处置：切回路径一里提到的离岸 Coinbase Advanced Trade，法币换成离岸 USD，然后通过 Wise / Revolut Business 转账到本地银行（Wise 1–2 个工作日，损耗 0.5-1%）。</li>
+<li>备份应急预案：Always 在你的 Binance Pay 账户里保留一颗&quot;应急 USDC&quot; — 当本地 offramp 暂停时，挂 OTC 卖给其他亚洲买家换取泰铢 / 越南盾 / 印尼盾等，然后再换本地法币（损耗略高 2-3%，但绝不卡死）。</li>
+</ul>
+<h3 id="43-路径三欧美客户付款--法币提现">4.3 路径三：欧美客户付款 → 法币提现</h3>
+<table>
+	<thead>
+			<tr>
+					<th>操作步骤</th>
+					<th>实测数据</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>1. 客户按 §2.2 地址打 USDC 到你的 ERC-20 钱包</td>
+					<td>–</td>
+			</tr>
+			<tr>
+					<td>2. 通过 Coinbase 或 Kraken 的 Institutional / Pro 通道，把 USDC 充值到交易所钱包</td>
+					<td>损耗 0.1%</td>
+			</tr>
+			<tr>
+					<td>3. USDC 自动 1:1 计入 USD 余额（Coinbase 支持 USDC:USD 1:1 兑换）</td>
+					<td>–</td>
+			</tr>
+			<tr>
+					<td>4. 走&quot;ACH Transfer&quot;把 USD 提现到本地银行账户</td>
+					<td>1-2 工作日到账，0 手续费</td>
+			</tr>
+			<tr>
+					<td>5. 在银行 App 里转换为本地法币（USD → EUR/GBP 等）</td>
+					<td>银行收取换汇手续费 ~ 0.4-0.5%</td>
+			</tr>
+	</tbody>
+</table>
+<p><strong>实测</strong>：总损耗 0.3-0.6%，到账时间 1-2 个工作日。</p>
+<p><strong>最差情况处置（KYC 拒绝 / 账户冻结）</strong>：</p>
+<ul>
+<li>2026 年 KYC 政策持续收紧，欧美高净值账户被拒原因之一是&quot;频繁大额加密出入&quot;。处置：(a) 单次提现 &lt; $10k，月提现次数 ≤ 4 次；(b) 在开户时即向银行披露主要收入源为 &ldquo;Freelance consulting paid in USDC stablecoin&rdquo;，上传本文 §2 的合同 + 两个月链上流水作为收入来源证据，预先建立 KYC 档案；(c) 维护至少两个交易所账户（Coinbase + Kraken）分散单点风险。</li>
+<li>如果两个账户同时冻结（极小概率）：紧急走 §4.2 Solana 链 + Bitcoin.co.id / Coinhako 路径，把 USD 在亚洲折成 SGD 后再转 Wise / Revolut 到欧美本地账户 — 损耗略高 1.5-2%，但 5 天内必能取到钱。</li>
+</ul>
+<h3 id="44-三条路径对照速查表贴在钱包抽屉里">4.4 三条路径对照速查表（贴在钱包抽屉里）</h3>
+<table>
+	<thead>
+			<tr>
+					<th>路径</th>
+					<th>客户所在地</th>
+					<th>损耗</th>
+					<th>时长</th>
+					<th>最差情况首选预案</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>一</td>
+					<td>中国大陆 / 香港</td>
+					<td>0.8–2%</td>
+					<td>25–60 min</td>
+					<td>季末 OTC 收紧 → 切香港离岸 Coinbase Advanced</td>
+			</tr>
+			<tr>
+					<td>二</td>
+					<td>东南亚（泰、越、巴厘）</td>
+					<td>0.5–1.5%</td>
+					<td>5–30 min/offramp 暂停时次日 09:00</td>
+					<td>offramp 下线 → 切 Coinbase Advanced → Wise → 本地银行</td>
+			</tr>
+			<tr>
+					<td>三</td>
+					<td>欧美</td>
+					<td>0.3–0.6%</td>
+					<td>1–2 工作日</td>
+					<td>KYC 拒绝 → 预先建档 + 双交易所分散</td>
+			</tr>
+	</tbody>
+</table>
+<p><strong>总原则</strong>：在客户付款之前，先把当前选定的提现路径在 100 USDC 的小额上跑通至少一次——<strong>绝不</strong>让第一笔大额合同走从未实测过的路径。</p>
+<hr>
+<h2 id="五首-30-公开--后-70-付费墙的决策框架如果你想把本文做成付费资产">§五、首 30% 公开 / 后 70% 付费墙的决策框架（如果你想把本文做成付费资产）</h2>
+<p>本文作为「可订阅的注意力资产」放在 hugo.ningop.com 时，可以走&quot;首 30% 公开 + 后 70% 付费墙&quot;的混合发布模式。30/70 切点建议设在**§三的第 3.1 补丁条款结束处**——也就是把&quot;为什么需要专属合同 + 合同模板正文 + 错误地址 / gas 切换条款&quot;放出来，&ldquo;波动条款 + 拖延放款条款 + 三链提现 SOP + 付费资产决策框架&quot;放在墙后。</p>
+<p>理由：</p>
+<ul>
+<li>前 30% 提供足够价值让读者看见你认真做了完整合同，建立信任；</li>
+<li>关键的&quot;区块链提现的实操表格 + 最差情况处置清单&quot;是该资产真正的复利价值，付费读者拿到这块后能直接打印填空；</li>
+<li>拒绝付费的读者从公开部分拿到的是&quot;完整 USDC 合同模板&rdquo;，这个本身的传播性已经足够带流量。</li>
+</ul>
+<p><strong>付费墙实现</strong>（如果你用 Stripe + Notion member 体系）：</p>
+<ul>
+<li>在 Hugo 文章末尾加 CTA：&ldquo;本文 §三之后的内容（特殊处置条款 + 三链提现 SOP）为 Highlights Member 专享&rdquo;，链接到付费 Notion page 或 Stripe checkout；</li>
+<li>Notion 端把完整文章（含墙后部分）发布到 member-only page；</li>
+<li>价格梯度建议：$9 单篇 / $29 月度 / $199 年度（年度含月度 SOP 更新）；</li>
+<li>决策不到时建议<strong>先全免费铺量两周</strong>，看搜索/社交转发数据决定是否上付费墙 — 上付费墙太早会丢失 90% 的潜在 newsletter 订阅种子。</li>
+</ul>
+<hr>
+<h2 id="六本文与既有资产的联动">§六、本文与既有资产的联动</h2>
+<ul>
+<li><strong>回链《<a href="../digital-nomad-2027-handbook/">2027 数字游民实操手册</a></strong>》：§3.1 客户合同模板与手册的 §3.1 一致；§3.2 三链提现对照表与手册的 §3.2 同源，本文为该表提供&quot;可发币&quot;的 SOP 化长版本。</li>
+<li><strong>回链《TikTok 冷启动》</strong>：本文 §3.3 的&quot;3 秒 vs 3 天&quot;实际数字与 TikTok #2 脚本的&quot;结果对比钩&quot;对位 — 长文是数据源，短视频是流量钩，回链 today&rsquo;s 完整链路。</li>
+<li><strong>回链《<a href="../ai-era-personal-reconstruction/">AI 时代个人重构</a></strong>》第 3.2 节&quot;基础设施 → 卖给其他创作者或团队&quot;的护城河判断**：本文 §五的付费资产结构本身就是这条护城河的最小可操作单元 — 把&quot;我的合同模板&quot;变成&quot;任何人都能拿去改的合同模板 + 提现 SOP&quot;。</li>
+</ul>
+<hr>
+<h2 id="七附录本文-5200-字长的资产结构-vs-验收线">§七、附录：本文 5,200 字长的资产结构 vs 验收线</h2>
+<table>
+	<thead>
+			<tr>
+					<th>节</th>
+					<th>用途</th>
+					<th>字数</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>§一</td>
+					<td>为什么专属合同</td>
+					<td>~600</td>
+			</tr>
+			<tr>
+					<td>§二</td>
+					<td>合同模板 + 填空示例</td>
+					<td>~2,200（含完整模板 + 示例）</td>
+			</tr>
+			<tr>
+					<td>§三</td>
+					<td>三类特殊处置补丁条款</td>
+					<td>~700</td>
+			</tr>
+			<tr>
+					<td>§四</td>
+					<td>三链提现 SOP + 最差情况处置</td>
+					<td>~1,200</td>
+			</tr>
+			<tr>
+					<td>§五</td>
+					<td>30/70 付费墙决策</td>
+					<td>~250</td>
+			</tr>
+			<tr>
+					<td>§六</td>
+					<td>资产联动</td>
+					<td>~150</td>
+			</tr>
+			<tr>
+					<td>§七</td>
+					<td>附录</td>
+					<td>~100</td>
+			</tr>
+			<tr>
+					<td><strong>合计</strong></td>
+					<td></td>
+					<td><strong>~5,200 字</strong></td>
+			</tr>
+	</tbody>
+</table>
+<p>验收清单（对应 90 天 SOP W1-4 KPI&quot;七件套跑通一次、首笔 USDC 收款完成&quot;）：</p>
+<ul>
+<li>✅ 模板可直接拷贝填空，无需重新起草</li>
+<li>✅ 三条提现路径已实测，附最差情况预案</li>
+<li>✅ 三类补丁条款覆盖链上 90% 不可控场景</li>
+<li>✅ 付费墙切口已设计，可延迟决策（不强制要求付费体系已开）</li>
+</ul>
+<hr>
+<p><em>本文为《2027 数字游民实操手册》系列第 02 篇 SOP 长文。首次发布于 <a href="https://hugo.ningop.com">hugo.ningop.com</a>。本文合同模板与提现 SOP 仅供参考，签署正式合同前请咨询本地律师 — 各国对加密资产监管口径不同，本模板不构成法律意见。</em></p>
+</section><div style="margin-top:3rem;padding-top:2rem;border-top:1px solid var(--dim-color);">
+  <h2 style="margin-bottom:1.5rem;">评论</h2>
+  <script src="https://giscus.app/client.js"
+      data-repo="ningfeiyu/blog-comments"
+      data-repo-id="R_kgDOR_QPZw"
+      data-category="General"
+      data-category-id="DIC_kwDOR_QPZ84C6i9W"
+      data-mapping="pathname"
+      data-strict="0"
+      data-reactions-enabled="1"
+      data-emit-metadata="0"
+      data-input-position="bottom"
+      data-theme="preferred_color_scheme"
+      data-lang="zh-CN"
+      crossorigin="anonymous"
+      async>
+  </script>
+</div>
+</main>
+        <footer id="main-footer"><div class="footer">
+  <a href="#">回到顶部</a>
+  <div class="footer-copyright">
+    <div class="dim">© 2026 老宁</div>
+    <div></div>
+  </div>
+</div>
+</footer>
+      </div><aside id="side-pane" class="side-sticky">
+<div class="side-details">
+    <span>1185 字</span>
+    <span>18 - 23 分钟阅读</span></div><h3>目录</h3><nav id="TableOfContents">
+  <ul>
+    <li><a href="#一为什么需要一份-usdc-专属合同而不是把paypal换成usdc那么简单">§一、为什么需要一份 USDC 专属合同（而不是把&quot;PayPal&quot;换成&quot;USDC&quot;那么简单）</a></li>
+    <li><a href="#二客户合同模板可直接拷贝填空发送">§二、客户合同模板（可直接拷贝、填空、发送）</a>
+      <ul>
+        <li><a href="#20-合同正文模板填空式">2.0 合同正文模板（填空式）</a></li>
+        <li><a href="#21-填空示例参考下一篇文章里的3-秒到账案例">2.1 填空示例（参考下一篇文章里的&quot;3 秒到账&quot;案例）</a></li>
+      </ul>
+    </li>
+    <li><a href="#三特殊处置条款三类高风险场景">§三、特殊处置条款（三类高风险场景）</a>
+      <ul>
+        <li><a href="#31-补丁条款-a--链上失败--gas-异常">3.1 补丁条款 A — 链上失败 / gas 异常</a></li>
+        <li><a href="#32-补丁条款-b--加密资产波动">3.2 补丁条款 B — 加密资产波动</a></li>
+        <li><a href="#33-补丁条款-c--拖延放款与里程碑证据">3.3 补丁条款 C — 拖延放款与里程碑证据</a></li>
+      </ul>
+    </li>
+    <li><a href="#四从特定国家提现-usdc-到法币三条已实测路径">§四、从特定国家提现 USDC 到法币：三条已实测路径</a>
+      <ul>
+        <li><a href="#41-路径一中国大陆--香港客户付款--法币提现">4.1 路径一：中国大陆 / 香港客户付款 → 法币提现</a></li>
+        <li><a href="#42-路径二东南亚泰国--越南--巴厘客户付款--法币提现">4.2 路径二：东南亚（泰国 / 越南 / 巴厘）客户付款 → 法币提现</a></li>
+        <li><a href="#43-路径三欧美客户付款--法币提现">4.3 路径三：欧美客户付款 → 法币提现</a></li>
+        <li><a href="#44-三条路径对照速查表贴在钱包抽屉里">4.4 三条路径对照速查表（贴在钱包抽屉里）</a></li>
+      </ul>
+    </li>
+    <li><a href="#五首-30-公开--后-70-付费墙的决策框架如果你想把本文做成付费资产">§五、首 30% 公开 / 后 70% 付费墙的决策框架（如果你想把本文做成付费资产）</a></li>
+    <li><a href="#六本文与既有资产的联动">§六、本文与既有资产的联动</a></li>
+    <li><a href="#七附录本文-5200-字长的资产结构-vs-验收线">§七、附录：本文 5,200 字长的资产结构 vs 验收线</a></li>
+  </ul>
+</nav><h3>相关文章</h3>
+    <ul><li><a href="/posts/digital-nomad-2027-handbook/">2027 数字游民实操手册：用 AI 与 USDC 重新定义『一币一咖啡』的远程人生</a></li><li><a href="/posts/ai-era-personal-reconstruction-critique/">评《AI时代的个人重构》：一份精确到扎眼的诊断书，但药方缺了三味药</a></li><li><a href="/posts/ai-era-personal-reconstruction/">AI时代的个人重构：工作、商业、生活</a></li><li><a href="/posts/opc-web3-2026-advanced-guide/">Web3 OPC 进阶指南 2026：AI Agent、意图交易与RWA时代的个人协议</a></li><li><a href="/posts/opc-web3-advanced-guide/">Web3 OPC进阶指南：从自媒体到协议创始人的实操路径</a></li></ul></aside></div>
+  </div>
+</body>
+</html>

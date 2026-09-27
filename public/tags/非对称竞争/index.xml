@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+	<channel>
+		<title>非对称竞争 on 老宁的试验田</title>
+		<link>https://blog.ning.indevs.in/tags/%E9%9D%9E%E5%AF%B9%E7%A7%B0%E7%AB%9E%E4%BA%89/</link>
+		<description>Recent content in 非对称竞争 on 老宁的试验田</description>
+		<generator>Hugo</generator>
+		<language>zh-CN</language>
+		
+		
+		
+		
+			<lastBuildDate>Sat, 29 Aug 2026 13:30:00 +0800</lastBuildDate>
+		
+			<atom:link href="https://blog.ning.indevs.in/tags/%E9%9D%9E%E5%AF%B9%E7%A7%B0%E7%AB%9E%E4%BA%89/index.xml" rel="self" type="application/rss+xml" />
+			<item>
+				<title>《2026 AI 驱动资产增值与套利白皮书》系列（一）：执行层已无套利，认知层仍有套利</title>
+				<link>https://blog.ning.indevs.in/posts/ai-arbitrage-whitepaper-01-landscape/</link>
+				<pubDate>Sat, 29 Aug 2026 13:30:00 +0800</pubDate>
+				<guid>https://blog.ning.indevs.in/posts/ai-arbitrage-whitepaper-01-landscape/</guid>
+				<description>&lt;p&gt;&lt;img src=&#34;https://blog.ning.indevs.in/images/posts/ai-arbitrage-whitepaper-01-landscape.jpg&#34; alt=&#34;AI 套利新格局&#34;&gt;&lt;/p&gt;&#xA;&lt;hr&gt;&#xA;&lt;h2 id=&#34;开篇一场静悄悄的认知分层&#34;&gt;开篇：一场静悄悄的认知分层&lt;/h2&gt;&#xA;&lt;p&gt;2026 年 8 月，如果你还在用 Python 脚本盯着三角套利、跨交易所搬砖、甚至闪电贷，那你已经输在了认知层面——不是因为这些玩法失效了，而是因为&lt;strong&gt;执行层的套利空间已被 Solver 巨头、MEV 机器人、意图协议彻底收割干净&lt;/strong&gt;。&lt;/p&gt;&#xA;&lt;p&gt;真正的变化发生在更深层：&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;strong&gt;ERC-7683&lt;/strong&gt; 让跨链意图成为通用语言，Across 协议 88% 的交易量、UniswapX 94% 的 gasless 交易量都跑在这个标准上。主流币对的 filler 价差仅 1–5 个基点，跨链稳定币转账中位结算时间约 12 秒。&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;代币化美股&lt;/strong&gt;总市值破 10 亿美元，Ondo 与 xStocks 形成双寡头。美股每天只交易 6.5 小时，但代币化股票 7×24 小时交易，小盘代币常出现 3–6% 的 NAV 偏离。&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;DePIN GPU 网络&lt;/strong&gt;从「代币补贴」转向「真实收入」：Aethir 2025 年收入 1.27 亿美元、io.net 年化链上收入约 2000 万美元、Akash GPU 利用率超 80%。H100 时租 Akash 1.33 美元 vs AWS 3.93 美元，去中心化网络便宜约 60%。&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;这三个赛道的共同特征是：&lt;strong&gt;执行层已高度标准化、机构化，普通人拼不过 Solver 的延迟、拼不过做市商的库存、拼不过华尔街的合规通道。&lt;/strong&gt; 但与此同时，&lt;strong&gt;认知层——即「理解结构性缝隙在哪里、为什么存在、如何用 AI Agent 去守住它」——反而因为 AI 而变得更可及、更有价值。&lt;/strong&gt;&lt;/p&gt;</description>
+			</item>
+	</channel>
+</rss>

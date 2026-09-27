@@ -1,0 +1,871 @@
+<!DOCTYPE html>
+<html lang="zh-CN" dir="ltr">
+<head>
+  <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>顶级AI模型更新周期与迭代速度全景对比 | 老宁的试验田</title>
+<link rel="icon" href="/favicon.svg" sizes="any" type="image/svg+xml" /><meta property="og:url" content="https://blog.ning.indevs.in/posts/2025-06-12-ai-model-update-cycle/">
+	<meta property="og:site_name" content="老宁的试验田">
+	<meta property="og:title" content="顶级AI模型更新周期与迭代速度全景对比">
+	<meta property="og:description" content="全面梳理 OpenAI、Google、Anthropic 等闭源巨头与 Llama、DeepSeek、Qwen 等开源阵营的模型发布节奏与能力迭代轨迹。">
+	<meta property="og:locale" content="zh_CN">
+	<meta property="og:type" content="article">
+		<meta property="article:section" content="posts">
+		<meta property="article:published_time" content="2025-06-12T12:00:00+08:00">
+		<meta property="article:modified_time" content="2025-06-12T12:00:00+08:00">
+		<meta property="article:tag" content="AI">
+		<meta property="article:tag" content="大模型">
+		<meta property="article:tag" content="技术对比">
+		<meta property="article:tag" content="开源模型">
+		<meta property="article:tag" content="LLM">
+
+	<meta name="twitter:card" content="summary">
+	<meta name="twitter:title" content="顶级AI模型更新周期与迭代速度全景对比">
+	<meta name="twitter:description" content="全面梳理 OpenAI、Google、Anthropic 等闭源巨头与 Llama、DeepSeek、Qwen 等开源阵营的模型发布节奏与能力迭代轨迹。">
+
+      <link rel="stylesheet" href="/css/root.min.1052d5860b4442ccd33071bf3543c78d47509a7acb2c13edb1288611a2ebd6a8.css" integrity="sha256-EFLVhgtEQszTMHG/NUPHjUdQmnrLLBPtsSiGEaLr1qg=" crossorigin="anonymous">
+      <link rel="stylesheet" href="/css/bundle.min.e735cd1c41e6b7ba15433438fa484f2804322027ee8348fcff2adbf14976ce28.css" integrity="sha256-5zXNHEHmt7oVQzQ4&#43;khPKAQyICfug0j8/yrb8Ul2zig=" crossorigin="anonymous">
+
+      <script src="/js/bundle.cc8ae9952dbfb731affafabdf26e5c60a6910047ff59ccdeaf1daebaa26c8830.js" integrity="sha256-zIrplS2/tzGv&#43;vq98m5cYKaRAEf/Wczerx2uuqJsiDA=" crossorigin="anonymous"></script><script defer src="/js/search/flexsearch.compact.3928d3d2172bc0b5f75d9458fb9255f0befce1c7239ba6e5d2c58ed4b82c2073.js" integrity="sha256-OSjT0hcrwLX3XZRY&#43;5JV8L784ccjm6bl0sWO1LgsIHM="></script>
+<script defer src="/js/search/search.1d980f84df11f3eb7c8c5f17f541d49a0611608df179dd74fa7f06225eb56ace.js" integrity="sha256-HZgPhN8R8&#43;t8jF8X9UHUmgYRYI3xed10&#43;n8GIl61as4="></script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,200;1,300;1,400;1,500;1,600;1,700;1,800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200..800&family=Spectral:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,200;1,300;1,400;1,500;1,600;1,700;1,800&display=swap" rel="stylesheet">
+
+
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+<link href="https://cdn.jsdelivr.net/npm/lxgw-wenkai-webfont@1.7.0/lxgwwenkai-regular.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/lxgw-wenkai-webfont@1.7.0/lxgwwenkai-bold.css" rel="stylesheet">
+
+<script defer src="https://events.vercount.one/js"></script>
+</head>
+<body class="notransition">
+  <div id="container">
+    <header id="main-header"><div role="navigation" aria-label="Main">
+  <div class="nav-left">
+    <a href="https://blog.ning.indevs.in/" style="color: inherit;">老宁的试验田</a>
+  </div>
+  <div class="nav-right">
+    <div style="position:absolute;width:0px;height:0px;">
+      <div id="nav-dropdown-menu" class="hidden" href="#">
+    <div class="nav-item">
+      <a href="/"
+      >首页</a>
+    </div>
+    <div class="nav-item">
+      <a aria-current="true" class="ancestor" href="/posts/"
+      >文章</a>
+    </div>
+    <div class="nav-item">
+      <a href="/tags/"
+      >标签</a>
+    </div>
+    <div class="nav-item">
+      <a href="/archives/"
+      >归档</a>
+    </div>
+    <div class="nav-item">
+      <a href="/about/"
+      >关于</a>
+    </div>
+</div>
+    </div>
+    <a id="nav-dropdown-button" href="#"><svg width="20px" height="20px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M4 6H20M4 12H20M4 18H20" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
+</a>
+    <div id="nav-menu">
+    <div class="nav-item">
+      <a href="/"
+      >首页</a>
+    </div>
+    <div class="nav-item">
+      <a aria-current="true" class="ancestor" href="/posts/"
+      >文章</a>
+    </div>
+    <div class="nav-item">
+      <a href="/tags/"
+      >标签</a>
+    </div>
+    <div class="nav-item">
+      <a href="/archives/"
+      >归档</a>
+    </div>
+    <div class="nav-item">
+      <a href="/about/"
+      >关于</a>
+    </div>
+</div>
+    <a id="theme-switcher" href="#">
+<svg class="light-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M12 3V4M12 20V21M4 12H3M6.31412 6.31412L5.5 5.5M17.6859 6.31412L18.5 5.5M6.31412 17.69L5.5 18.5001M17.6859 17.69L18.5 18.5001M21 12H20M16 12C16 14.2091 14.2091 16 12 16C9.79086 16 8 14.2091 8 12C8 9.79086 9.79086 8 12 8C14.2091 8 16 9.79086 16 12Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
+
+<svg class="dark-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M3.32031 11.6835C3.32031 16.6541 7.34975 20.6835 12.3203 20.6835C16.1075 20.6835 19.3483 18.3443 20.6768 15.032C19.6402 15.4486 18.5059 15.6834 17.3203 15.6834C12.3497 15.6834 8.32031 11.654 8.32031 6.68342C8.32031 5.50338 8.55165 4.36259 8.96453 3.32996C5.65605 4.66028 3.32031 7.89912 3.32031 11.6835Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
+</a>
+  </div>
+</div>
+</header>
+    <div class="flex grow">
+      <div id="main-pane">
+        <main id="main-content"><div class="single-header">
+<ol class="breadcrumbs" itemscope itemtype="https://schema.org/BreadcrumbList">
+    <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+      <a itemprop="item" href="https://blog.ning.indevs.in/">
+        <span itemprop="name">首页</span>
+      </a>
+      <meta itemprop="position" content='1' />
+    </li>
+    <span>&nbsp»&nbsp</span>
+    <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+      <a itemprop="item" href="https://blog.ning.indevs.in/posts/">
+        <span itemprop="name">文章</span>
+      </a>
+      <meta itemprop="position" content='2' />
+    </li>
+    <span>&nbsp»&nbsp</span>
+</ol>
+<h1>顶级AI模型更新周期与迭代速度全景对比</h1><time class="dim" datetime="2025-06-12T12:00:00&#43;08:00">2025年6月12日</time><div class="term-container"><div class="tag">
+        <a href="https://blog.ning.indevs.in/tags/ai/">#AI</a>
+      </div><div class="tag">
+        <a href="https://blog.ning.indevs.in/tags/%E5%A4%A7%E6%A8%A1%E5%9E%8B/">#大模型</a>
+      </div><div class="tag">
+        <a href="https://blog.ning.indevs.in/tags/%E6%8A%80%E6%9C%AF%E5%AF%B9%E6%AF%94/">#技术对比</a>
+      </div><div class="tag">
+        <a href="https://blog.ning.indevs.in/tags/%E5%BC%80%E6%BA%90%E6%A8%A1%E5%9E%8B/">#开源模型</a>
+      </div><div class="tag">
+        <a href="https://blog.ning.indevs.in/tags/llm/">#LLM</a>
+      </div></ol></div>
+  <section class="page-section"><p><img src="/images/remote/ext-7f1225bf93b8.jpg" alt="AI Evolution"></p>
+<blockquote>
+<p>从 GPT-1 到 GPT-5，从 Llama 1 到 Llama 4，AI 大模型的迭代速度正在以月为单位加速。本文用数据与时间表，呈现一场看不见硝烟的军备竞赛。</p>
+</blockquote>
+<hr>
+<h2 id="一闭源巨头版本号背后的迭代逻辑">一、闭源巨头：版本号背后的迭代逻辑</h2>
+<h3 id="11-openai从年更到季度更">1.1 OpenAI：从年更到季度更</h3>
+<table>
+	<thead>
+			<tr>
+					<th style="text-align: left">版本</th>
+					<th style="text-align: left">发布时间</th>
+					<th style="text-align: left">间隔周期</th>
+					<th style="text-align: left">核心变化</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td style="text-align: left">GPT-1</td>
+					<td style="text-align: left">2018.06</td>
+					<td style="text-align: left">—</td>
+					<td style="text-align: left">Transformer 解码器，1.17 亿参数</td>
+			</tr>
+			<tr>
+					<td style="text-align: left">GPT-2</td>
+					<td style="text-align: left">2019.02</td>
+					<td style="text-align: left"><strong>8 个月</strong></td>
+					<td style="text-align: left">15 亿参数，生成能力质变</td>
+			</tr>
+			<tr>
+					<td style="text-align: left">GPT-3</td>
+					<td style="text-align: left">2020.06</td>
+					<td style="text-align: left"><strong>16 个月</strong></td>
+					<td style="text-align: left">1750 亿参数，涌现能力初现</td>
+			</tr>
+			<tr>
+					<td style="text-align: left">GPT-3.5</td>
+					<td style="text-align: left">2022.03</td>
+					<td style="text-align: left"><strong>21 个月</strong></td>
+					<td style="text-align: left">指令微调 + RLHF，ChatGPT 前身</td>
+			</tr>
+			<tr>
+					<td style="text-align: left">GPT-4</td>
+					<td style="text-align: left">2023.03</td>
+					<td style="text-align: left"><strong>12 个月</strong></td>
+					<td style="text-align: left">多模态，推理能力跃升</td>
+			</tr>
+			<tr>
+					<td style="text-align: left">GPT-4o</td>
+					<td style="text-align: left">2024.05</td>
+					<td style="text-align: left"><strong>14 个月</strong></td>
+					<td style="text-align: left">原生多模态，速度成本优化</td>
+			</tr>
+			<tr>
+					<td style="text-align: left">GPT-4.5</td>
+					<td style="text-align: left">2025.02</td>
+					<td style="text-align: left"><strong>9 个月</strong></td>
+					<td style="text-align: left">&ldquo;Orion&rdquo; 项目成果</td>
+			</tr>
+			<tr>
+					<td style="text-align: left">GPT-5</td>
+					<td style="text-align: left">2025.08</td>
+					<td style="text-align: left"><strong>6 个月</strong></td>
+					<td style="text-align: left">三组件架构，PhD 级能力</td>
+			</tr>
+	</tbody>
+</table>
+<p><strong>观察：</strong> OpenAI 的迭代周期从 2 年缩短到半年，<strong>速度提升了 4 倍</strong>。2023 年后进入&quot;季度更新&quot;模式。</p>
+<h3 id="12-google-gemini后发先追的加速度">1.2 Google Gemini：后发先追的加速度</h3>
+<table>
+	<thead>
+			<tr>
+					<th style="text-align: left">版本</th>
+					<th style="text-align: left">发布时间</th>
+					<th style="text-align: left">间隔</th>
+					<th style="text-align: left">关键特性</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td style="text-align: left">Gemini 1.0</td>
+					<td style="text-align: left">2023.12</td>
+					<td style="text-align: left">—</td>
+					<td style="text-align: left">三种规格：Ultra / Pro / Nano</td>
+			</tr>
+			<tr>
+					<td style="text-align: left">Gemini 1.5 Pro</td>
+					<td style="text-align: left">2024.02</td>
+					<td style="text-align: left"><strong>2 个月</strong></td>
+					<td style="text-align: left">1000 万 token 上下文</td>
+			</tr>
+			<tr>
+					<td style="text-align: left">Gemini 1.5 Flash</td>
+					<td style="text-align: left">2024.05</td>
+					<td style="text-align: left"><strong>3 个月</strong></td>
+					<td style="text-align: left">轻量高速</td>
+			</tr>
+			<tr>
+					<td style="text-align: left">Gemini 2.0 Flash</td>
+					<td style="text-align: left">2025.01</td>
+					<td style="text-align: left"><strong>8 个月</strong></td>
+					<td style="text-align: left">全面升级</td>
+			</tr>
+			<tr>
+					<td style="text-align: left">Gemini 2.5 Pro</td>
+					<td style="text-align: left">2025.03</td>
+					<td style="text-align: left"><strong>2 个月</strong></td>
+					<td style="text-align: left">登顶 LMArena</td>
+			</tr>
+			<tr>
+					<td style="text-align: left">Gemini 2.5 Flash</td>
+					<td style="text-align: left">2025.04</td>
+					<td style="text-align: left"><strong>1 个月</strong></td>
+					<td style="text-align: left">成本效率</td>
+			</tr>
+			<tr>
+					<td style="text-align: left">Gemini 3.0 Pro</td>
+					<td style="text-align: left">2025.11</td>
+					<td style="text-align: left"><strong>7 个月</strong></td>
+					<td style="text-align: left">新一代架构</td>
+			</tr>
+			<tr>
+					<td style="text-align: left">Gemini 3.5 Flash</td>
+					<td style="text-align: left">2026.05</td>
+					<td style="text-align: left"><strong>6 个月</strong></td>
+					<td style="text-align: left">最新迭代</td>
+			</tr>
+	</tbody>
+</table>
+<p><strong>观察：</strong> Google 采用<strong>小步快跑</strong>策略，2024-2025 年间平均每 2-3 个月发布一个新版本。</p>
+<h3 id="13-anthropic-claude稳健派的质量优先">1.3 Anthropic Claude：稳健派的质量优先</h3>
+<table>
+	<thead>
+			<tr>
+					<th style="text-align: left">版本</th>
+					<th style="text-align: left">发布时间</th>
+					<th style="text-align: left">间隔</th>
+					<th style="text-align: left">标志性提升</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td style="text-align: left">Claude 1</td>
+					<td style="text-align: left">2023.03</td>
+					<td style="text-align: left">—</td>
+					<td style="text-align: left">宪法 AI，安全优先</td>
+			</tr>
+			<tr>
+					<td style="text-align: left">Claude 2</td>
+					<td style="text-align: left">2023.07</td>
+					<td style="text-align: left"><strong>4 个月</strong></td>
+					<td style="text-align: left">公开可用，10 万 token</td>
+			</tr>
+			<tr>
+					<td style="text-align: left">Claude 2.1</td>
+					<td style="text-align: left">2023.11</td>
+					<td style="text-align: left"><strong>4 个月</strong></td>
+					<td style="text-align: left">20 万 token 上下文</td>
+			</tr>
+			<tr>
+					<td style="text-align: left">Claude 3 (Opus/Sonnet/Haiku)</td>
+					<td style="text-align: left">2024.03</td>
+					<td style="text-align: left"><strong>4 个月</strong></td>
+					<td style="text-align: left">三代同堂，多尺寸策略</td>
+			</tr>
+			<tr>
+					<td style="text-align: left">Claude 3.5 (Sonnet)</td>
+					<td style="text-align: left">2024.06</td>
+					<td style="text-align: left"><strong>3 个月</strong></td>
+					<td style="text-align: left">Artifacts 功能</td>
+			</tr>
+			<tr>
+					<td style="text-align: left">Claude 4 (Opus/Sonnet)</td>
+					<td style="text-align: left">2025.05</td>
+					<td style="text-align: left"><strong>11 个月</strong></td>
+					<td style="text-align: left">长推理能力</td>
+			</tr>
+			<tr>
+					<td style="text-align: left">Claude 4.5-4.8</td>
+					<td style="text-align: left">2025-2026</td>
+					<td style="text-align: left">频繁小更新</td>
+					<td style="text-align: left">持续优化</td>
+			</tr>
+	</tbody>
+</table>
+<p><strong>观察：</strong> Claude 的更新<strong>规律性最强</strong>，几乎每 4 个月一次大版本，体现 Anthropic 的审慎风格。</p>
+<hr>
+<h2 id="二开源阵营社区驱动的能力跃迁">二、开源阵营：社区驱动的能力跃迁</h2>
+<h3 id="21-meta-llama开源世界的标杆">2.1 Meta Llama：开源世界的标杆</h3>
+<table>
+	<thead>
+			<tr>
+					<th style="text-align: left">版本</th>
+					<th style="text-align: left">发布时间</th>
+					<th style="text-align: left">间隔</th>
+					<th style="text-align: left">参数规模</th>
+					<th style="text-align: left">训练数据</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td style="text-align: left">Llama 1</td>
+					<td style="text-align: left">2023.02</td>
+					<td style="text-align: left">—</td>
+					<td style="text-align: left">7B-65B</td>
+					<td style="text-align: left">1-1.4T tokens</td>
+			</tr>
+			<tr>
+					<td style="text-align: left">Llama 2</td>
+					<td style="text-align: left">2023.07</td>
+					<td style="text-align: left"><strong>5 个月</strong></td>
+					<td style="text-align: left">7B-70B</td>
+					<td style="text-align: left">2T tokens</td>
+			</tr>
+			<tr>
+					<td style="text-align: left">Llama 3</td>
+					<td style="text-align: left">2024.04</td>
+					<td style="text-align: left"><strong>9 个月</strong></td>
+					<td style="text-align: left">8B-70B</td>
+					<td style="text-align: left">~15T tokens</td>
+			</tr>
+			<tr>
+					<td style="text-align: left">Llama 3.1</td>
+					<td style="text-align: left">2024.07</td>
+					<td style="text-align: left"><strong>3 个月</strong></td>
+					<td style="text-align: left">8B-405B</td>
+					<td style="text-align: left">未公开</td>
+			</tr>
+			<tr>
+					<td style="text-align: left">Llama 4</td>
+					<td style="text-align: left">2025.04</td>
+					<td style="text-align: left"><strong>9 个月</strong></td>
+					<td style="text-align: left">17B(激活)-400B</td>
+					<td style="text-align: left">30T+ tokens</td>
+			</tr>
+	</tbody>
+</table>
+<p><strong>关键指标演进：</strong></p>
+<ul>
+<li>上下文长度：2K → 4K → 128K → <strong>10M (Llama 4 Scout)</strong></li>
+<li>训练成本：6,300 → 21,000 → 100,000 → <strong>440,000 petaFLOPS-day</strong></li>
+<li>商业化：仅限研究 → <strong>可商用</strong> → 多语言 + 多模态</li>
+</ul>
+<h3 id="22-deepseek颠覆者的效率奇迹">2.2 DeepSeek：颠覆者的效率奇迹</h3>
+<table>
+	<thead>
+			<tr>
+					<th style="text-align: left">里程碑</th>
+					<th style="text-align: left">时间</th>
+					<th style="text-align: left">核心特征</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td style="text-align: left">公司成立</td>
+					<td style="text-align: left">2023.07</td>
+					<td style="text-align: left">杭州深度求索，幻方量化背景</td>
+			</tr>
+			<tr>
+					<td style="text-align: left">DeepSeek-LLM / Coder</td>
+					<td style="text-align: left">2023.11</td>
+					<td style="text-align: left">首个系列模型</td>
+			</tr>
+			<tr>
+					<td style="text-align: left">DeepSeek-MoE</td>
+					<td style="text-align: left">2024.01</td>
+					<td style="text-align: left">稀疏专家架构探索</td>
+			</tr>
+			<tr>
+					<td style="text-align: left">DeepSeek-V2</td>
+					<td style="text-align: left">2024.05</td>
+					<td style="text-align: left">MoE + MLA 创新</td>
+			</tr>
+			<tr>
+					<td style="text-align: left">DeepSeek-V3</td>
+					<td style="text-align: left">2024.12</td>
+					<td style="text-align: left"><strong>671B 参数，训练成本仅 $6M</strong></td>
+			</tr>
+			<tr>
+					<td style="text-align: left">DeepSeek-R1</td>
+					<td style="text-align: left">2025.01</td>
+					<td style="text-align: left">推理模型，媲美 o1</td>
+			</tr>
+			<tr>
+					<td style="text-align: left">DeepSeek-V3.1</td>
+					<td style="text-align: left">2025.08</td>
+					<td style="text-align: left">混合架构</td>
+			</tr>
+			<tr>
+					<td style="text-align: left">DeepSeek-R1 0528</td>
+					<td style="text-align: left">2025.05</td>
+					<td style="text-align: left">R1 重大更新</td>
+			</tr>
+			<tr>
+					<td style="text-align: left">DeepSeek-V3.2</td>
+					<td style="text-align: left">2025.12</td>
+					<td style="text-align: left">稀疏注意力优化</td>
+			</tr>
+			<tr>
+					<td style="text-align: left">DeepSeek-V4</td>
+					<td style="text-align: left">2026.04</td>
+					<td style="text-align: left"><strong>1.6T 参数，1M 上下文</strong></td>
+			</tr>
+	</tbody>
+</table>
+<p><strong>震撼数据：</strong></p>
+<ul>
+<li>V3 训练成本仅 $6M，约为 GPT-4 的 <strong>1/16</strong></li>
+<li>使用计算资源约为 Llama 3.1 的 <strong>1/10</strong></li>
+<li>R1 发布当天引发英伟达股价暴跌 <strong>18%</strong>，市值蒸发 $6000 亿</li>
+</ul>
+<h3 id="23-qwen-通义千问阿里生态的全家桶">2.3 Qwen (通义千问)：阿里生态的全家桶</h3>
+<table>
+	<thead>
+			<tr>
+					<th style="text-align: left">版本</th>
+					<th style="text-align: left">时间</th>
+					<th style="text-align: left">规模</th>
+					<th style="text-align: left">亮点</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td style="text-align: left">Qwen 1</td>
+					<td style="text-align: left">2023.04 (beta); 09 (public)</td>
+					<td style="text-align: left">1.8B-72B</td>
+					<td style="text-align: left">阿里首代大模型</td>
+			</tr>
+			<tr>
+					<td style="text-align: left">Qwen2</td>
+					<td style="text-align: left">2024.06</td>
+					<td style="text-align: left">密集 + MoE</td>
+					<td style="text-align: left">开源权重 + 闭源 API 并行</td>
+			</tr>
+			<tr>
+					<td style="text-align: left">Qwen2.5 系列</td>
+					<td style="text-align: left">2024.09-11</td>
+					<td style="text-align: left">多尺寸</td>
+					<td style="text-align: left">代码、视觉、数学专版</td>
+			</tr>
+			<tr>
+					<td style="text-align: left">Qwen3</td>
+					<td style="text-align: left">2025.04</td>
+					<td style="text-align: left">0.6B-235B</td>
+					<td style="text-align: left"><strong>Apache 2.0 全开源</strong></td>
+			</tr>
+			<tr>
+					<td style="text-align: left">Qwen3.5</td>
+					<td style="text-align: left">2026.02</td>
+					<td style="text-align: left">开源权重</td>
+					<td style="text-align: left">持续迭代</td>
+			</tr>
+			<tr>
+					<td style="text-align: left">Qwen3.6</td>
+					<td style="text-align: left">2026.04</td>
+					<td style="text-align: left">35B-A3B</td>
+					<td style="text-align: left">速度成本优化</td>
+			</tr>
+	</tbody>
+</table>
+<p><strong>生态数据：</strong></p>
+<ul>
+<li>Hugging Face 上超过 <strong>20 万个</strong> Qwen 衍生模型</li>
+<li>Qwen3-VL-2B-Instruct 全球下载超 <strong>1800 万</strong></li>
+<li>2026 年 5 月，Qwen 应用用户达 <strong>2.34 亿</strong></li>
+</ul>
+<h3 id="24-mistral欧洲开源之星的起伏">2.4 Mistral：欧洲开源之星的起伏</h3>
+<table>
+	<thead>
+			<tr>
+					<th style="text-align: left">版本</th>
+					<th style="text-align: left">时间</th>
+					<th style="text-align: left">特点</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td style="text-align: left">Mistral 7B</td>
+					<td style="text-align: left">2023.09</td>
+					<td style="text-align: left">欧洲最强开源模型</td>
+			</tr>
+			<tr>
+					<td style="text-align: left">Mixtral 8x7B (MoE)</td>
+					<td style="text-align: left">2023.12</td>
+					<td style="text-align: left">首个开源 MoE，7B 激活</td>
+			</tr>
+			<tr>
+					<td style="text-align: left">Mixtral 8x22B</td>
+					<td style="text-align: left">2024</td>
+					<td style="text-align: left">更大规模</td>
+			</tr>
+			<tr>
+					<td style="text-align: left">Mistral Large / Small</td>
+					<td style="text-align: left">2024</td>
+					<td style="text-align: left">闭源商业模型</td>
+			</tr>
+			<tr>
+					<td style="text-align: left">Mistral Small 3.2</td>
+					<td style="text-align: left">2025</td>
+					<td style="text-align: left">持续迭代，但声量下降</td>
+			</tr>
+	</tbody>
+</table>
+<hr>
+<h2 id="三web-平台模型换代时间轴对比">三、Web 平台模型换代时间轴对比</h2>
+<p>以下表格对比三大主流聊天平台<strong>用户可感知</strong>的模型切换节奏：</p>
+<table>
+	<thead>
+			<tr>
+					<th style="text-align: left">时间节点</th>
+					<th style="text-align: left">ChatGPT (OpenAI)</th>
+					<th style="text-align: left">Gemini (Google)</th>
+					<th style="text-align: left">Claude (Anthropic)</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td style="text-align: left"><strong>2022.11</strong></td>
+					<td style="text-align: left">GPT-3.5 → ChatGPT 上线</td>
+					<td style="text-align: left">—</td>
+					<td style="text-align: left">—</td>
+			</tr>
+			<tr>
+					<td style="text-align: left"><strong>2023.03</strong></td>
+					<td style="text-align: left">GPT-4 上线</td>
+					<td style="text-align: left">Bard (LaMDA)</td>
+					<td style="text-align: left">Claude 1 上线</td>
+			</tr>
+			<tr>
+					<td style="text-align: left"><strong>2023.05</strong></td>
+					<td style="text-align: left">—</td>
+					<td style="text-align: left">Bard 换 Gemini Pro</td>
+					<td style="text-align: left">—</td>
+			</tr>
+			<tr>
+					<td style="text-align: left"><strong>2023.07</strong></td>
+					<td style="text-align: left">—</td>
+					<td style="text-align: left">—</td>
+					<td style="text-align: left">Claude 2 上线</td>
+			</tr>
+			<tr>
+					<td style="text-align: left"><strong>2023.11</strong></td>
+					<td style="text-align: left">GPT-4 Turbo</td>
+					<td style="text-align: left">Gemini 1.0</td>
+					<td style="text-align: left">Claude 2.1</td>
+			</tr>
+			<tr>
+					<td style="text-align: left"><strong>2024.03</strong></td>
+					<td style="text-align: left">—</td>
+					<td style="text-align: left">—</td>
+					<td style="text-align: left">Claude 3 三代同堂</td>
+			</tr>
+			<tr>
+					<td style="text-align: left"><strong>2024.05</strong></td>
+					<td style="text-align: left">GPT-4o 上线</td>
+					<td style="text-align: left">Gemini 1.5 Pro</td>
+					<td style="text-align: left">—</td>
+			</tr>
+			<tr>
+					<td style="text-align: left"><strong>2024.06</strong></td>
+					<td style="text-align: left">—</td>
+					<td style="text-align: left">—</td>
+					<td style="text-align: left">Claude 3.5 Sonnet</td>
+			</tr>
+			<tr>
+					<td style="text-align: left"><strong>2024.09</strong></td>
+					<td style="text-align: left">o1-preview / o1-mini</td>
+					<td style="text-align: left">Gemini 1.5 Flash-002</td>
+					<td style="text-align: left">—</td>
+			</tr>
+			<tr>
+					<td style="text-align: left"><strong>2025.01</strong></td>
+					<td style="text-align: left">—</td>
+					<td style="text-align: left">Gemini 2.0 Flash</td>
+					<td style="text-align: left">—</td>
+			</tr>
+			<tr>
+					<td style="text-align: left"><strong>2025.02</strong></td>
+					<td style="text-align: left">GPT-4.5 上线</td>
+					<td style="text-align: left">—</td>
+					<td style="text-align: left">—</td>
+			</tr>
+			<tr>
+					<td style="text-align: left"><strong>2025.03</strong></td>
+					<td style="text-align: left">—</td>
+					<td style="text-align: left">Gemini 2.5 Pro</td>
+					<td style="text-align: left">Claude 4 上线</td>
+			</tr>
+			<tr>
+					<td style="text-align: left"><strong>2025.05</strong></td>
+					<td style="text-align: left">—</td>
+					<td style="text-align: left">Gemini 2.5 Flash</td>
+					<td style="text-align: left">—</td>
+			</tr>
+			<tr>
+					<td style="text-align: left"><strong>2025.08</strong></td>
+					<td style="text-align: left"><strong>GPT-5 上线</strong></td>
+					<td style="text-align: left">—</td>
+					<td style="text-align: left">—</td>
+			</tr>
+			<tr>
+					<td style="text-align: left"><strong>2025.11</strong></td>
+					<td style="text-align: left">—</td>
+					<td style="text-align: left">Gemini 3.0 Pro</td>
+					<td style="text-align: left">—</td>
+			</tr>
+			<tr>
+					<td style="text-align: left"><strong>2026.02</strong></td>
+					<td style="text-align: left">—</td>
+					<td style="text-align: left">—</td>
+					<td style="text-align: left">Claude Fable 5 / Mythos</td>
+			</tr>
+			<tr>
+					<td style="text-align: left"><strong>2026.04</strong></td>
+					<td style="text-align: left">—</td>
+					<td style="text-align: left">—</td>
+					<td style="text-align: left">—</td>
+			</tr>
+			<tr>
+					<td style="text-align: left"><strong>2026.05</strong></td>
+					<td style="text-align: left">—</td>
+					<td style="text-align: left">Gemini 3.5 Flash</td>
+					<td style="text-align: left">—</td>
+			</tr>
+	</tbody>
+</table>
+<hr>
+<h2 id="四能力迭代数字背后的跃迁">四、能力迭代：数字背后的跃迁</h2>
+<h3 id="41-参数规模增长曲线">4.1 参数规模增长曲线</h3>
+<table>
+	<thead>
+			<tr>
+					<th style="text-align: left">模型家族</th>
+					<th style="text-align: left">初代</th>
+					<th style="text-align: left">当前最新</th>
+					<th style="text-align: left">增长倍数</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td style="text-align: left">GPT 系列</td>
+					<td style="text-align: left">1.17 亿 (GPT-1)</td>
+					<td style="text-align: left">GPT-5 (未公开，预估万亿级)</td>
+					<td style="text-align: left"><strong>&gt;1000×</strong></td>
+			</tr>
+			<tr>
+					<td style="text-align: left">Llama 系列</td>
+					<td style="text-align: left">65B (Llama 1)</td>
+					<td style="text-align: left">400B 总参 / 17B 激活 (Llama 4)</td>
+					<td style="text-align: left"><strong>6× 总参，MoE 效率更高</strong></td>
+			</tr>
+			<tr>
+					<td style="text-align: left">DeepSeek</td>
+					<td style="text-align: left">未公开 (Coder)</td>
+					<td style="text-align: left"><strong>1.6T</strong> (V4-Pro)</td>
+					<td style="text-align: left">指数级增长</td>
+			</tr>
+			<tr>
+					<td style="text-align: left">Qwen</td>
+					<td style="text-align: left">72B</td>
+					<td style="text-align: left"><strong>235B</strong> (Qwen3 MoE)</td>
+					<td style="text-align: left"><strong>3.3×</strong></td>
+			</tr>
+	</tbody>
+</table>
+<h3 id="42-上下文长度军备竞赛">4.2 上下文长度军备竞赛</h3>
+<table>
+	<thead>
+			<tr>
+					<th style="text-align: left">年份</th>
+					<th style="text-align: left">代表模型</th>
+					<th style="text-align: left">上下文长度</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td style="text-align: left">2022</td>
+					<td style="text-align: left">GPT-3</td>
+					<td style="text-align: left">2,048</td>
+			</tr>
+			<tr>
+					<td style="text-align: left">2023</td>
+					<td style="text-align: left">Claude 2.1</td>
+					<td style="text-align: left">200,000</td>
+			</tr>
+			<tr>
+					<td style="text-align: left">2024</td>
+					<td style="text-align: left">Gemini 1.5 Pro / Llama 3.1</td>
+					<td style="text-align: left">1,000,000 / 128,000</td>
+			</tr>
+			<tr>
+					<td style="text-align: left">2025</td>
+					<td style="text-align: left">Llama 4 Scout</td>
+					<td style="text-align: left"><strong>10,000,000</strong></td>
+			</tr>
+			<tr>
+					<td style="text-align: left">2026</td>
+					<td style="text-align: left">DeepSeek-V4</td>
+					<td style="text-align: left"><strong>1,000,000</strong></td>
+			</tr>
+	</tbody>
+</table>
+<h3 id="43-训练效率的革命">4.3 训练效率的革命</h3>
+<table>
+	<thead>
+			<tr>
+					<th style="text-align: left">模型</th>
+					<th style="text-align: left">训练成本 (估算)</th>
+					<th style="text-align: left">发布时间</th>
+					<th style="text-align: left">单位成本性能</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td style="text-align: left">GPT-4</td>
+					<td style="text-align: left">~$100M</td>
+					<td style="text-align: left">2023.03</td>
+					<td style="text-align: left">基准</td>
+			</tr>
+			<tr>
+					<td style="text-align: left">Llama 2</td>
+					<td style="text-align: left">~$14M</td>
+					<td style="text-align: left">2023.07</td>
+					<td style="text-align: left">提升 7×</td>
+			</tr>
+			<tr>
+					<td style="text-align: left">Llama 3</td>
+					<td style="text-align: left">已上升至几十亿级</td>
+					<td style="text-align: left">2024.04</td>
+					<td style="text-align: left">规模效应</td>
+			</tr>
+			<tr>
+					<td style="text-align: left">DeepSeek-V3</td>
+					<td style="text-align: left"><strong>$6M</strong></td>
+					<td style="text-align: left">2024.12</td>
+					<td style="text-align: left"><strong>提升 16×</strong></td>
+			</tr>
+			<tr>
+					<td style="text-align: left">DeepSeek-V4</td>
+					<td style="text-align: left">~$50M (估算)</td>
+					<td style="text-align: left">2026.04</td>
+					<td style="text-align: left">1.6T 参数效率</td>
+			</tr>
+	</tbody>
+</table>
+<hr>
+<h2 id="五趋势判断未来-12-个月会发生什么">五、趋势判断：未来 12 个月会发生什么？</h2>
+<ol>
+<li><strong>更新周期将进一步压缩至 1-2 个月</strong>：Google Gemini 已经示范了月度迭代的可行性</li>
+<li><strong>开源与闭源的性能鸿沟正在消失</strong>：DeepSeek-V4 在多项基准上已逼近 GPT-5</li>
+<li><strong>多模态成为标配</strong>：文本→图像→音频→视频的端到端模型将在 2026 年普及</li>
+<li><strong>长上下文成为新战场</strong>：1M 上下文将成为基础门槛，10M+ 开始实用化</li>
+<li><strong>推理能力的民主化</strong>：DeepSeek-R1 / QwQ 证明推理能力不再是闭源特权</li>
+</ol>
+<hr>
+<h2 id="延伸阅读">延伸阅读</h2>
+<ul>
+<li><a href="/posts/llm-top5-comparison-2026/">各大AI模型综合能力对比：2026年最新排名</a></li>
+<li><a href="/posts/ai-hacker-arbitrage-2026-report/">AI 时代的黑客套利与灰色产业链</a></li>
+<li><a href="/posts/global-demographic-trilemma-2026/">全球人口三角困境：中国、印度与世界</a></li>
+</ul>
+<hr>
+<blockquote>
+<p><strong>数据来源</strong>：OpenAI Help Center、Google Gemini Enterprise Platform、Anthropic API Docs、Meta AI Blog、DeepSeek API Docs、Alibaba Cloud Qwen、Wikipedia、各模型官方技术报告。统计截至 2026 年 5 月。</p>
+<p><em>本文中部分远期日期（2025 下半年后）基于公开 roadmap 与行业趋势推演，实际发布时间请以官方为准。</em></p>
+</blockquote>
+</section><div style="margin-top:3rem;padding-top:2rem;border-top:1px solid var(--dim-color);">
+  <h2 style="margin-bottom:1.5rem;">评论</h2>
+  <script src="https://giscus.app/client.js"
+      data-repo="ningfeiyu/blog-comments"
+      data-repo-id="R_kgDOR_QPZw"
+      data-category="General"
+      data-category-id="DIC_kwDOR_QPZ84C6i9W"
+      data-mapping="pathname"
+      data-strict="0"
+      data-reactions-enabled="1"
+      data-emit-metadata="0"
+      data-input-position="bottom"
+      data-theme="preferred_color_scheme"
+      data-lang="zh-CN"
+      crossorigin="anonymous"
+      async>
+  </script>
+</div>
+</main>
+        <footer id="main-footer"><div class="footer">
+  <a href="#">回到顶部</a>
+  <div class="footer-copyright">
+    <div class="dim">© 2026 老宁</div>
+    <div></div>
+  </div>
+</div>
+</footer>
+      </div><aside id="side-pane" class="side-sticky">
+<div class="side-details">
+    <span>722 字</span>
+    <span>8 - 10 分钟阅读</span></div><h3>目录</h3><nav id="TableOfContents">
+  <ul>
+    <li><a href="#一闭源巨头版本号背后的迭代逻辑">一、闭源巨头：版本号背后的迭代逻辑</a>
+      <ul>
+        <li><a href="#11-openai从年更到季度更">1.1 OpenAI：从年更到季度更</a></li>
+        <li><a href="#12-google-gemini后发先追的加速度">1.2 Google Gemini：后发先追的加速度</a></li>
+        <li><a href="#13-anthropic-claude稳健派的质量优先">1.3 Anthropic Claude：稳健派的质量优先</a></li>
+      </ul>
+    </li>
+    <li><a href="#二开源阵营社区驱动的能力跃迁">二、开源阵营：社区驱动的能力跃迁</a>
+      <ul>
+        <li><a href="#21-meta-llama开源世界的标杆">2.1 Meta Llama：开源世界的标杆</a></li>
+        <li><a href="#22-deepseek颠覆者的效率奇迹">2.2 DeepSeek：颠覆者的效率奇迹</a></li>
+        <li><a href="#23-qwen-通义千问阿里生态的全家桶">2.3 Qwen (通义千问)：阿里生态的全家桶</a></li>
+        <li><a href="#24-mistral欧洲开源之星的起伏">2.4 Mistral：欧洲开源之星的起伏</a></li>
+      </ul>
+    </li>
+    <li><a href="#三web-平台模型换代时间轴对比">三、Web 平台模型换代时间轴对比</a></li>
+    <li><a href="#四能力迭代数字背后的跃迁">四、能力迭代：数字背后的跃迁</a>
+      <ul>
+        <li><a href="#41-参数规模增长曲线">4.1 参数规模增长曲线</a></li>
+        <li><a href="#42-上下文长度军备竞赛">4.2 上下文长度军备竞赛</a></li>
+        <li><a href="#43-训练效率的革命">4.3 训练效率的革命</a></li>
+      </ul>
+    </li>
+    <li><a href="#五趋势判断未来-12-个月会发生什么">五、趋势判断：未来 12 个月会发生什么？</a></li>
+    <li><a href="#延伸阅读">延伸阅读</a></li>
+  </ul>
+</nav></aside></div>
+  </div>
+</body>
+</html>

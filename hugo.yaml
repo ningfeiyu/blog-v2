@@ -1,13 +1,47 @@
 baseURL: "https://blog.ning.indevs.in/"
 title: "老宁的试验田"
-languageCode: "zh-CN"
 defaultContentLanguage: "zh"
-theme: "hugo-noir"
+languages:
+  zh:
+    label: "中文"
+    locale: "zh-CN"
+    weight: 1
+theme: "rusty-typewriter"
 paginate: 10
 
+# 允许正文里的原始 HTML（img/div 等），否则 24 篇文章的配图对读者不可见
+markup:
+  goldmark:
+    renderer:
+      unsafe: true
+
+# rusty-typewriter 内置搜索需要 searchindex 输出
+outputFormats:
+  SearchIndex:
+    mediaType: application/json
+    baseName: searchindex
+    isPlainText: true
+    notAlternative: true
+mediaTypes:
+  application/json:
+    suffixes: [json]
+outputs:
+  home: [HTML, RSS, SearchIndex]
+
 params:
-  author: "老宁"
-  description: "折腾笔记 · 媒体库 · 和一台很能扛的虚拟机"
+  author:
+    name: "老宁"
+  description: "以智识筑巢，在数字荒原中打捞时代的余温。"
+  vercount:
+    enable: true
+    showPagePV: true
+  rtwt:
+    home:
+      countRecent: 10
+    side:
+      home:
+        taxonomies: ["tags"]
+        countTaxonomy: 5
 
 menu:
   main:
@@ -20,6 +54,12 @@ menu:
     - name: "标签"
       pageRef: "/tags"
       weight: 3
+    - name: "归档"
+      pageRef: "/archives"
+      weight: 4
+    - name: "关于"
+      pageRef: "/about"
+      weight: 5
 
 taxonomies:
   tag: tags

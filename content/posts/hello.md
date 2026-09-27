@@ -3,7 +3,10 @@ title: "第一篇：这个博客是怎么上线的"
 date: 2026-09-25T17:30:00+08:00
 tags: ["折腾"]
 description: "一行 Python 内置 HTTP 服务 + Cloudflare Tunnel + 一条 API 调用的 DNS 记录。"
+image: "/images/covers/hello.jpg"
 ---
+
+![第一篇：这个博客是怎么上线的](/images/covers/hello.jpg)
 
 整个链路只有三步：
 

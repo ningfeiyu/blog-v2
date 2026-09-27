@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" font-family="Arial, 'Microsoft YaHei', sans-serif">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0d1117"/>
+      <stop offset="0.55" stop-color="#131a2b"/>
+      <stop offset="1" stop-color="#1c1230"/>
+    </linearGradient>
+    <linearGradient id="line1" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#4f8cff"/>
+      <stop offset="0.5" stop-color="#a06bff"/>
+      <stop offset="1" stop-color="#ff6b9d"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <g opacity="0.13" stroke="#4f8cff" stroke-width="1" fill="none">
+    <circle cx="1020" cy="140" r="60"/><circle cx="1020" cy="140" r="110"/><circle cx="1020" cy="140" r="160"/><circle cx="1020" cy="140" r="210"/>
+  </g>
+  <g fill="#8b98b8" font-size="15" opacity="0.75">
+    <text x="90" y="96">1800s · 统计与档案</text>
+    <text x="390" y="96">1900s · 测评与规范</text>
+    <text x="690" y="96">2010s · 平台记录</text>
+    <text x="950" y="96">2020s · AI预测</text>
+  </g>
+  <line x1="90" y1="130" x2="1110" y2="130" stroke="url(#line1)" stroke-width="3"/>
+  <g fill="#a06bff">
+    <circle cx="150" cy="130" r="7"/><circle cx="450" cy="130" r="7"/><circle cx="750" cy="130" r="7"/><circle cx="1010" cy="130" r="7"/>
+  </g>
+  <text x="90" y="235" fill="#e8ecf6" font-size="52" font-weight="bold">知识 — 权力 — 自我</text>
+  <text x="90" y="300" fill="#aab6d0" font-size="30">现代社会如何塑造人</text>
+  <g font-size="22">
+    <rect x="90" y="350" width="300" height="52" rx="26" fill="#1b2540" stroke="#4f8cff" stroke-opacity="0.5"/>
+    <text x="240" y="383" fill="#7fb0ff" text-anchor="middle">"你必须服从我"</text>
+    <text x="410" y="383" fill="#6b7896" font-size="26">→</text>
+    <rect x="440" y="350" width="300" height="52" rx="26" fill="#241b40" stroke="#a06bff" stroke-opacity="0.5"/>
+    <text x="590" y="383" fill="#c39bff" text-anchor="middle">"你必须成为正确的人"</text>
+    <text x="760" y="383" fill="#6b7896" font-size="26">→</text>
+    <rect x="790" y="350" width="330" height="52" rx="26" fill="#401b30" stroke="#ff6b9d" stroke-opacity="0.5"/>
+    <text x="955" y="383" fill="#ff9bc0" text-anchor="middle">"你要主动成为更好的自己"</text>
+  </g>
+  <text x="90" y="478" fill="#8b98b8" font-size="21">从赫拉克利特到福柯，从性格决定命运到算法治理 · 三百年的思想史与一套认知免疫力</text>
+  <g font-size="18" fill="#5f6c8a">
+    <text x="90" y="560">福柯 · 治理术 · 规范化 · 知识审查七问 · AI时代的自我</text>
+  </g>
+  <text x="1110" y="560" fill="#a06bff" font-size="20" text-anchor="end" font-weight="bold">NFY · ningop.com</text>
+</svg>

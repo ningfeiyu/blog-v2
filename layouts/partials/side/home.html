@@ -1,0 +1,45 @@
+{{- partial "components/author_card.html" . -}}
+
+{{ partial "components/side_content.html" (dict "section" "home") }}
+
+{{- range $filter := site.Params.rtwt.side.home.taxonomies -}}
+  {{- with (index site.Taxonomies $filter) -}}
+    {{ $i18nTaxonomy := printf "taxonomies.%s" $filter }} 
+    <h3>{{- i18n $i18nTaxonomy | default $filter | title -}}</h3>
+    <ul class="taxonomy-list">
+    {{- $limit := site.Params.rtwt.side.home.countTaxonomy }}
+    {{/* 随机取几个 tag，每次构建换一批；旧的 $i 递减写法在此处不生效 */}}
+    {{- range first $limit (shuffle (sort . ".Count" "desc")) -}}
+      <li>
+    <a class="tag" href="{{- .Page.Permalink -}}">
+      #{{- .Page.Title | lower -}}&nbsp<span class="text-sm dim">{{ .Count }}</span>
+    </a>
+      </li>
+    {{- end -}}
+      {{- if (gt (len .) $limit) -}}
+      <li>
+        <a href="{{- absURL $filter -}}">{{- i18n "see_all" -}}</a>
+      </li>
+      {{- end -}}
+    </ul>
+  {{- end -}}
+{{- end -}}
+
+{{- $archivePosts := where site.RegularPages "Section" "posts" -}}
+{{- if $archivePosts -}}
+  <h3>{{- i18n "archives" | default "归档" -}}</h3>
+  {{- range ($archivePosts.GroupByDate "2006") -}}
+    <div class="dim" style="margin:.6rem 0 .2rem;">{{ .Key }} 年</div>
+    <ul class="taxonomy-list">
+    {{- range (.Pages.GroupByDate "2006-01") -}}
+      <li>
+        <a class="tag" href="{{- relURL "archives" -}}#{{ .Key -}}">
+          {{- time.AsTime (printf "%s-01" .Key) | time.Format "1月" -}}&nbsp<span class="text-sm dim">{{ len .Pages }} 篇</span>
+        </a>
+      </li>
+    {{- end -}}
+    </ul>
+  {{- end -}}
+{{- end -}}
+
+{{- partial "search_bar.html" -}}

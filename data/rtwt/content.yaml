@@ -1,0 +1,7 @@
+home:
+  image: 'favicon.ico'
+  greetings: ''
+  text: '以智识筑巢，在数字荒原中打捞时代的余温。'
+side:
+  home: []
+  single: []

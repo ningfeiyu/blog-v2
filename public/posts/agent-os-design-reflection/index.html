@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="zh-CN" dir="ltr">
+<head>
+  <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>个人 Agent OS 设计反思：从过度架构到五层精简 | 老宁的试验田</title>
+<link rel="icon" href="/favicon.svg" sizes="any" type="image/svg+xml" /><meta property="og:url" content="https://blog.ning.indevs.in/posts/agent-os-design-reflection/">
+	<meta property="og:site_name" content="老宁的试验田">
+	<meta property="og:title" content="个人 Agent OS 设计反思：从过度架构到五层精简">
+	<meta property="og:description" content="拆解 Agent OS v1.0 规范的三大设计陷阱——过度架构化、Markdown 当数据库、知识图谱过早——提出逻辑分层物理精简、双层存储、事实/观点分离、记忆预算、可观测性五个增量能力，最终抽象为五层架构。">
+	<meta property="og:locale" content="zh_CN">
+	<meta property="og:type" content="article">
+		<meta property="article:section" content="posts">
+		<meta property="article:published_time" content="2026-08-03T20:55:00+08:00">
+		<meta property="article:modified_time" content="2026-08-03T20:55:00+08:00">
+		<meta property="article:tag" content="Agent OS">
+		<meta property="article:tag" content="AI架构">
+		<meta property="article:tag" content="记忆系统">
+		<meta property="article:tag" content="知识管理">
+		<meta property="article:tag" content="Hermes">
+		<meta property="article:tag" content="深度思考">
+
+	<meta name="twitter:card" content="summary">
+	<meta name="twitter:title" content="个人 Agent OS 设计反思：从过度架构到五层精简">
+	<meta name="twitter:description" content="拆解 Agent OS v1.0 规范的三大设计陷阱——过度架构化、Markdown 当数据库、知识图谱过早——提出逻辑分层物理精简、双层存储、事实/观点分离、记忆预算、可观测性五个增量能力，最终抽象为五层架构。">
+
+      <link rel="stylesheet" href="/css/root.min.1052d5860b4442ccd33071bf3543c78d47509a7acb2c13edb1288611a2ebd6a8.css" integrity="sha256-EFLVhgtEQszTMHG/NUPHjUdQmnrLLBPtsSiGEaLr1qg=" crossorigin="anonymous">
+      <link rel="stylesheet" href="/css/bundle.min.e735cd1c41e6b7ba15433438fa484f2804322027ee8348fcff2adbf14976ce28.css" integrity="sha256-5zXNHEHmt7oVQzQ4&#43;khPKAQyICfug0j8/yrb8Ul2zig=" crossorigin="anonymous">
+
+      <script src="/js/bundle.cc8ae9952dbfb731affafabdf26e5c60a6910047ff59ccdeaf1daebaa26c8830.js" integrity="sha256-zIrplS2/tzGv&#43;vq98m5cYKaRAEf/Wczerx2uuqJsiDA=" crossorigin="anonymous"></script><script defer src="/js/search/flexsearch.compact.3928d3d2172bc0b5f75d9458fb9255f0befce1c7239ba6e5d2c58ed4b82c2073.js" integrity="sha256-OSjT0hcrwLX3XZRY&#43;5JV8L784ccjm6bl0sWO1LgsIHM="></script>
+<script defer src="/js/search/search.1d980f84df11f3eb7c8c5f17f541d49a0611608df179dd74fa7f06225eb56ace.js" integrity="sha256-HZgPhN8R8&#43;t8jF8X9UHUmgYRYI3xed10&#43;n8GIl61as4="></script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,200;1,300;1,400;1,500;1,600;1,700;1,800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200..800&family=Spectral:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,200;1,300;1,400;1,500;1,600;1,700;1,800&display=swap" rel="stylesheet">
+
+
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+<link href="https://cdn.jsdelivr.net/npm/lxgw-wenkai-webfont@1.7.0/lxgwwenkai-regular.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/lxgw-wenkai-webfont@1.7.0/lxgwwenkai-bold.css" rel="stylesheet">
+
+<script defer src="https://events.vercount.one/js"></script>
+</head>
+<body class="notransition">
+  <div id="container">
+    <header id="main-header"><div role="navigation" aria-label="Main">
+  <div class="nav-left">
+    <a href="https://blog.ning.indevs.in/" style="color: inherit;">老宁的试验田</a>
+  </div>
+  <div class="nav-right">
+    <div style="position:absolute;width:0px;height:0px;">
+      <div id="nav-dropdown-menu" class="hidden" href="#">
+    <div class="nav-item">
+      <a href="/"
+      >首页</a>
+    </div>
+    <div class="nav-item">
+      <a aria-current="true" class="ancestor" href="/posts/"
+      >文章</a>
+    </div>
+    <div class="nav-item">
+      <a href="/tags/"
+      >标签</a>
+    </div>
+    <div class="nav-item">
+      <a href="/archives/"
+      >归档</a>
+    </div>
+    <div class="nav-item">
+      <a href="/about/"
+      >关于</a>
+    </div>
+</div>
+    </div>
+    <a id="nav-dropdown-button" href="#"><svg width="20px" height="20px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M4 6H20M4 12H20M4 18H20" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
+</a>
+    <div id="nav-menu">
+    <div class="nav-item">
+      <a href="/"
+      >首页</a>
+    </div>
+    <div class="nav-item">
+      <a aria-current="true" class="ancestor" href="/posts/"
+      >文章</a>
+    </div>
+    <div class="nav-item">
+      <a href="/tags/"
+      >标签</a>
+    </div>
+    <div class="nav-item">
+      <a href="/archives/"
+      >归档</a>
+    </div>
+    <div class="nav-item">
+      <a href="/about/"
+      >关于</a>
+    </div>
+</div>
+    <a id="theme-switcher" href="#">
+<svg class="light-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M12 3V4M12 20V21M4 12H3M6.31412 6.31412L5.5 5.5M17.6859 6.31412L18.5 5.5M6.31412 17.69L5.5 18.5001M17.6859 17.69L18.5 18.5001M21 12H20M16 12C16 14.2091 14.2091 16 12 16C9.79086 16 8 14.2091 8 12C8 9.79086 9.79086 8 12 8C14.2091 8 16 9.79086 16 12Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
+
+<svg class="dark-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M3.32031 11.6835C3.32031 16.6541 7.34975 20.6835 12.3203 20.6835C16.1075 20.6835 19.3483 18.3443 20.6768 15.032C19.6402 15.4486 18.5059 15.6834 17.3203 15.6834C12.3497 15.6834 8.32031 11.654 8.32031 6.68342C8.32031 5.50338 8.55165 4.36259 8.96453 3.32996C5.65605 4.66028 3.32031 7.89912 3.32031 11.6835Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
+</a>
+  </div>
+</div>
+</header>
+    <div class="flex grow">
+      <div id="main-pane">
+        <main id="main-content"><div class="single-header">
+<ol class="breadcrumbs" itemscope itemtype="https://schema.org/BreadcrumbList">
+    <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+      <a itemprop="item" href="https://blog.ning.indevs.in/">
+        <span itemprop="name">首页</span>
+      </a>
+      <meta itemprop="position" content='1' />
+    </li>
+    <span>&nbsp»&nbsp</span>
+    <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+      <a itemprop="item" href="https://blog.ning.indevs.in/posts/">
+        <span itemprop="name">文章</span>
+      </a>
+      <meta itemprop="position" content='2' />
+    </li>
+    <span>&nbsp»&nbsp</span>
+</ol>
+<h1>个人 Agent OS 设计反思：从过度架构到五层精简</h1><time class="dim" datetime="2026-08-03T20:55:00&#43;08:00">2026年8月3日</time><div class="term-container"><div class="tag">
+        <a href="https://blog.ning.indevs.in/tags/agent-os/">#Agent OS</a>
+      </div><div class="tag">
+        <a href="https://blog.ning.indevs.in/tags/ai%E6%9E%B6%E6%9E%84/">#AI架构</a>
+      </div><div class="tag">
+        <a href="https://blog.ning.indevs.in/tags/%E8%AE%B0%E5%BF%86%E7%B3%BB%E7%BB%9F/">#记忆系统</a>
+      </div><div class="tag">
+        <a href="https://blog.ning.indevs.in/tags/%E7%9F%A5%E8%AF%86%E7%AE%A1%E7%90%86/">#知识管理</a>
+      </div><div class="tag">
+        <a href="https://blog.ning.indevs.in/tags/hermes/">#Hermes</a>
+      </div><div class="tag">
+        <a href="https://blog.ning.indevs.in/tags/%E6%B7%B1%E5%BA%A6%E6%80%9D%E8%80%83/">#深度思考</a>
+      </div></ol></div>
+  <section class="page-section"><p><img src="/images/posts/agent-os-design-reflection.jpg" alt="featured"></p>
+<hr>
+<h2 id="一起因一份漂亮的规范和它的三个陷阱">一、起因：一份漂亮的规范和它的三个陷阱</h2>
+<p>前几天，一份《Agent OS v1.0 — 完整系统规范》在圈子里流传。它设计了一个七层目录的 Personal AI Operating System：Identity、Knowledge、Working Memory、Episodic Memory、Decisions、Governance、Reflection，配合完整的写入 Pipeline（重要性评分→去重→冲突检测→Schema 验证→写入）和 Token 预算分配。</p>
+<p>这份规范非常漂亮——如果对象是企业级 AI 团队。但对于个人使用大模型+Agent 的创作者来说，它踩中了三个经典陷阱。</p>
+<hr>
+<h2 id="二陷阱一过度架构化">二、陷阱一：过度架构化</h2>
+<p>规范设计了 9 层目录：Identity、Knowledge、Working、Episodic、Decision、Scratch、Archive、Reflection、Governance。</p>
+<p>每一层都有对应的文件、模板、Pipeline。看起来很完整。但问题在于——<strong>Agent 会花越来越多时间管理知识，而不是使用知识。</strong></p>
+<h3 id="症状">症状</h3>
+<p>你创建了一个 <code>reflection/daily/</code> 目录，写了日反思模板。第一周你认真填了 7 天。第二周填了 3 天。第三周，Agent 开始提醒你「日反思已过期 4 天，是否补填？」你开始回避打开 Agent。</p>
+<p>这不是 Agent 的问题，是架构的问题。<strong>反思作为一种能力，不应该是一个需要维护的目录，而应该是 Pipeline 中的一个环节。</strong></p>
+<h3 id="修正方案逻辑分层物理精简">修正方案：逻辑分层，物理精简</h3>
+<pre tabindex="0"><code>之前（9个物理目录）          之后（5个逻辑层）
+
+identity/                    Identity
+knowledge/                   Knowledge
+working/                     Workspace（Working + Projects）
+episodic/                    History（Episodic + Decisions）
+decisions/                   Archive
+projects/
+scratch/
+archive/
+reflection/    → Pipeline 能力，不设目录
+governance/    → Pipeline 能力，不设目录
+</code></pre><p>Reflection、Validation、Governance 不是存储层，它们是<strong>贯穿整个系统的规则</strong>。就像你不需要一个叫「质检」的房间——质检是生产线上的一道工序，不是一个仓库。</p>
+<hr>
+<h2 id="三陷阱二把-markdown-当数据库">三、陷阱二：把 Markdown 当数据库</h2>
+<p>规范中所有知识都存为 Markdown 文件，检索方式是「扫描文件名 + 标签匹配 + 关键词搜索」。这在知识条目 &lt; 100 条时够用，但到 500 条以上就会遇到瓶颈——每次检索都要全量扫描文件系统，O(n) 复杂度，无法做向量语义搜索。</p>
+<h3 id="双层架构">双层架构</h3>
+<p>更可靠的模式是<strong>文本负责保存，数据库负责查询</strong>：</p>
+<pre tabindex="0"><code>Markdown（Source of Truth）         SQLite / LanceDB（Retrieval Index）
+─────────────────────────          ────────────────────────────────
+长期存储                            Metadata（ID/kind/tags/confidence）
+版本控制（Git）                     全文检索（FTS5）
+人类可读                            Embedding（语义相似度）
+人类可编辑                          关系查询（related/parent/children）
+                                   TTL 追踪
+                                   过滤排序
+</code></pre><p>写入流程：</p>
+<pre tabindex="0"><code>Markdown 写入 → Parser 提取 Metadata → 写入 Index
+</code></pre><p>查询流程：</p>
+<pre tabindex="0"><code>查询条件 → Index 检索 → 返回 ID 列表 → 按需读取 Markdown 正文
+</code></pre><p>这样 Markdown 文件做它擅长的事（存储、版本、可读），数据库做它擅长的事（索引、检索、过滤）。你不需要在 Markdown 上硬扛数据库的功能。</p>
+<h3 id="我的实际情况">我的实际情况</h3>
+<p>我自己用的 Hermes Agent 已经有了这个双层基础的雏形：<code>state.db</code>（111MB SQLite，含 FTS5 CJK bigram 全文索引，109 个 session）负责情节记忆检索。但知识层（MEMORY.md）仍然是纯文本全量注入——这意味着每条知识不管有没有用，每轮对话都要塞进上下文。</p>
+<p>MEMORY.md 有 2200 字硬上限。这不是检索，这是<strong>容量溢出截断</strong>。到 99% 时，每加一条就要删一条，像在 1 平米的房间里搬家具。</p>
+<hr>
+<h2 id="四陷阱三知识图谱过早">四、陷阱三：知识图谱过早</h2>
+<p>规范中设计了 <code>related</code>、<code>parent</code>、<code>children</code>、<code>references</code> 等关系字段，暗示需要维护知识图谱。</p>
+<p>很多人做 Agent 容易进入一个误区：「知识图谱一定更智能。」</p>
+<p>实际上，对于个人知识库，80% 的收益来自：</p>
+<ul>
+<li>高质量 Metadata（kind/source_type/verification/confidence）</li>
+<li>稳定 Retrieval（标签 + 全文 + 语义）</li>
+<li>良好的 Chunking（语义块 ≠ 文件）</li>
+<li>正确的 Ranking（相关度 + 可信度 + 时效性）</li>
+</ul>
+<p><strong>而不是复杂图谱。</strong></p>
+<p>知识规模达到几千甚至上万条时，再考虑自动生成图谱。一开始就手动维护复杂关系，结果是：你花在维护图谱上的时间比用知识的时间还多——这又回到了陷阱一。</p>
+<hr>
+<h2 id="五五个增量能力比增加目录更重要">五、五个增量能力：比增加目录更重要</h2>
+<p>与其继续增加目录，不如增加以下五个能力。</p>
+<h3 id="1-事实与观点分离">1. 事实与观点分离</h3>
+<p>很多长期 Agent 最大的问题不是遗忘，而是<strong>混淆</strong>。</p>
+<pre tabindex="0"><code>kind:
+  fact        — &#34;Rust 发布于 2015&#34;（可验证的客观事实）
+  opinion     — &#34;Rust 比 Go 更安全&#34;（观点/判断）
+  preference  — &#34;我更喜欢 Rust&#34;（用户偏好）
+  assumption  — &#34;假设用户有 Docker 环境&#34;（未验证的假设）
+  hypothesis  — &#34;OpenRouter 将成为主流&#34;（探索性推断）
+</code></pre><p>Agent 回答时根据 kind 调整置信度。<code>fact</code> 可以直接引用，<code>hypothesis</code> 必须标注「这是推测」。</p>
+<h3 id="2-来源可信度体系">2. 来源可信度体系</h3>
+<p>除了 confidence 数值，再拆一个来源维度：</p>
+<pre tabindex="0"><code>source_type:
+  official    — 官方文档/配置
+  personal   — 用户明确声明
+  web        — 网络信息
+  llm        — AI 推断生成
+  inferred   — 从行为推断（未确认）
+
+verification:
+  verified   — 已通过实测/用户确认
+  pending    — 待验证
+  disputed   — 存在矛盾
+</code></pre><p>这样可以避免把 AI 推测和官方文档放在同一层级。<code>source_type=llm</code> 的条目 <code>verification</code> 不能为 <code>verified</code>——哪怕它看起来很有道理。</p>
+<h3 id="3-语义分块chunk--文件">3. 语义分块（Chunk ≠ 文件）</h3>
+<p>RAG 最佳实践不是「一个 Markdown = 一个知识」，而是：</p>
+<pre tabindex="0"><code>一篇 3000 字文章 → 切成：
+  ├── 安装（chunk-001）
+  ├── 配置（chunk-002）
+  ├── API（chunk-003）
+  ├── 常见问题（chunk-004）
+  └── 性能优化（chunk-005）
+</code></pre><p>每个 Chunk 有独立 Metadata。这样 Top-K 检索更精准——你问「怎么安装」不会拉回「性能优化」的内容。</p>
+<h3 id="4-记忆预算memory-budget">4. 记忆预算（Memory Budget）</h3>
+<p>不是所有 Session 都需要读取所有层。</p>
+<pre tabindex="0"><code>Identity     → 始终加载（300 token）
+Workspace    → 按项目加载（500 token）
+Knowledge    → Top-K 注入（1500 token）
+History      → 最近 N 条（500 token）
+Archive      → 默认不加载（0 token）
+</code></pre><p>让 Prompt 大小<strong>可预测</strong>，而不是随着知识增长不断膨胀。你的上下文预算是固定的，知识条目数是增长的——如果不设预算，迟早撞墙。</p>
+<h3 id="5-可观测性observability">5. 可观测性（Observability）</h3>
+<p>Agent 用久了，你不知道为什么它选了这条知识、忽略了那条。建议记录 Memory Trace：</p>
+<pre tabindex="0"><code>Query: &#34;怎么部署博客&#34;
+  ↓ Retrieved: K04(blog deploy), K02(blog path), K11(blog style)
+  ↓ Rank: K04(0.95), K02(0.80), K11(0.60)
+  ↓ Injected: K04, K02（Top-2，预算1500 token）
+  ↓ Skipped: K11(相关度不足)
+  ↓ Reason: &#34;部署相关查询，排除风格偏好&#34;
+  ↓ Output: ...
+</code></pre><p>出了问题可以定位，而不是只能猜。这在知识量小的时候看起来多余，但到 50 条以上就会救命。</p>
+<hr>
+<h2 id="六五层抽象不是六个目录">六、五层抽象：不是六个目录</h2>
+<p>把整个 Agent OS 重新抽象为五层，不是六个目录：</p>
+<pre tabindex="0"><code>Interaction Layer     —— User / MCP / API / CLI
+       ↓
+Reasoning Layer       —— LLM / Planner / Tool Use
+       ↓
+Memory Layer          —— Identity / Knowledge / Workspace / History
+       ↓
+Governance Layer      —— Validation / Version / TTL / Conflict / Reflection
+       ↓
+Storage Layer         —— Markdown + Git + SQLite + Vector Index
+</code></pre><p>最大的区别是：<strong>Governance 不是一个目录，而是一套贯穿所有层的规则。</strong></p>
+<p>它不存数据，它<strong>定义数据的生命周期</strong>——写入时验证、存储时标注 TTL、读取时过滤过期、冲突时提示人工、定期时触发反思。Governance 是动词，不是名词。</p>
+<hr>
+<h2 id="七落地实践我自己的-memorymd-schema-化">七、落地实践：我自己的 MEMORY.md Schema 化</h2>
+<p>说完理论，我自己先把 MEMORY.md 做了 Schema 化改造。</p>
+<h3 id="之前自由文本">之前（自由文本）</h3>
+<pre tabindex="0"><code>Hugo blog发文路径必须 content/posts/（不是 blogs/），否则首页和 /posts/ 菜单看不到。
+§
+14 cron reminders (05:30-21:30 Beijing). deliver=origin,telegram...
+</code></pre><p>每条就是一段文字，没有元数据，没有类型，没有过期时间。全量注入每轮上下文。</p>
+<h3 id="之后schema-化">之后（Schema 化）</h3>
+<pre tabindex="0"><code>[K02|fact|official|verified|∞] Hugo 发文路径必须 content/posts/(不是 blogs/). 日期不超前.
+§
+[K06|fact|official|verified|180d] 14 cron提醒(05:30-21:30). deliver=origin,telegram双通道. 全含约束行. iLink 30s冷却.
+</code></pre><p>每条头部加 5 个字段：<code>[ID|kind|source_type|verification|ttl]</code></p>
+<ul>
+<li><code>K02</code> — 唯一 ID</li>
+<li><code>fact</code> — 事实（不是观点或假设）</li>
+<li><code>official</code> — 来自配置/系统行为</li>
+<li><code>verified</code> — 已实测确认</li>
+<li><code>∞</code> — 永不过期</li>
+</ul>
+<p>12 条知识从自由文本变成了结构化条目。虽然仍然是全量注入（因为条目数 &lt; 20，检索不划算），但每个条目都有了类型标签和过期日期。当某天知识量增长到 50 条以上时，可以快速按 kind/source_type/verification/ttl 过滤——而不用重新人工分类。</p>
+<h3 id="schema-规范文件">Schema 规范文件</h3>
+<p>同时写了一个 <code>MEMORY_SCHEMA.md</code>，定义了字段的取值范围、写入规则和记忆预算分配。这个文件不注入上下文，只在写入新条目时参考。</p>
+<hr>
+<h2 id="八优先级排序什么决定-agent-能不能活三年">八、优先级排序：什么决定 Agent 能不能活三年</h2>
+<p>如果按照长期可维护性排序，真正决定 Agent 能否运行三年以上的优先级是：</p>
+<ol>
+<li><strong>Memory 分层</strong> — 不分层，知识就会糊成一锅粥</li>
+<li><strong>Metadata 规范</strong> — 没有元数据，检索就是全量扫描</li>
+<li><strong>Retrieval Pipeline</strong> — 没有检索，上下文就会无限膨胀</li>
+<li><strong>Governance</strong>（版本、冲突、TTL）— 没有治理，知识就会腐烂</li>
+<li><strong>双存储</strong>（Markdown + Index）— 文本存、索引查，各司其职</li>
+<li><strong>Reflection</strong> — 没有反思，就不知道系统在退化</li>
+<li><strong>Knowledge Graph</strong> — 锦上添花，不是基础设施</li>
+</ol>
+<p><strong>知识图谱是锦上添花。真正让系统长期稳定的，是清晰的数据模型、可验证的写回流程、以及高效的检索与治理。</strong></p>
+<hr>
+<h2 id="九结语agent-os-不是架构图是生命周期">九、结语：Agent OS 不是架构图，是生命周期</h2>
+<p>Agent OS v1.0 规范的架构图很漂亮，但它最大的问题是——把一个<strong>动态的生命周期问题</strong>当成了<strong>静态的目录结构问题</strong>。</p>
+<p>知识不是放在哪个文件夹的问题，知识是「从哪来→什么类型→多可信→什么时候过期→谁验证的→怎么检索→怎么淘汰」的完整链路。</p>
+<p>目录结构只需要 5 个：Identity、Knowledge、Workspace、History、Archive。但贯穿这 5 个目录的生命周期管理——Schema、TTL、冲突检测、检索预算、可观测性——才是真正让 Agent OS 运行十年的基础设施。</p>
+<p><strong>最好的架构不是最完整的，而是最不会让你花时间维护它的。</strong></p>
+<hr>
+<h2 id="延伸阅读">延伸阅读</h2>
+<ul>
+<li><a href="/posts/no-world-war-climate-ai-tsunami/">无法世界大战：当环境崩溃与AI海啸同时降临</a></li>
+<li><a href="/posts/ai-era-personal-reconstruction/">AI 时代个人重构指南</a></li>
+<li><a href="/posts/three-tech-waves-god-view/">三次技术浪潮的同构模型：从蒸汽机到 AI 的上帝视角</a></li>
+</ul>
+</section><div style="margin-top:3rem;padding-top:2rem;border-top:1px solid var(--dim-color);">
+  <h2 style="margin-bottom:1.5rem;">评论</h2>
+  <script src="https://giscus.app/client.js"
+      data-repo="ningfeiyu/blog-comments"
+      data-repo-id="R_kgDOR_QPZw"
+      data-category="General"
+      data-category-id="DIC_kwDOR_QPZ84C6i9W"
+      data-mapping="pathname"
+      data-strict="0"
+      data-reactions-enabled="1"
+      data-emit-metadata="0"
+      data-input-position="bottom"
+      data-theme="preferred_color_scheme"
+      data-lang="zh-CN"
+      crossorigin="anonymous"
+      async>
+  </script>
+</div>
+</main>
+        <footer id="main-footer"><div class="footer">
+  <a href="#">回到顶部</a>
+  <div class="footer-copyright">
+    <div class="dim">© 2026 老宁</div>
+    <div></div>
+  </div>
+</div>
+</footer>
+      </div><aside id="side-pane" class="side-sticky">
+<div class="side-details">
+    <span>558 字</span>
+    <span>10 - 13 分钟阅读</span></div><h3>目录</h3><nav id="TableOfContents">
+  <ul>
+    <li><a href="#一起因一份漂亮的规范和它的三个陷阱">一、起因：一份漂亮的规范和它的三个陷阱</a></li>
+    <li><a href="#二陷阱一过度架构化">二、陷阱一：过度架构化</a>
+      <ul>
+        <li><a href="#症状">症状</a></li>
+        <li><a href="#修正方案逻辑分层物理精简">修正方案：逻辑分层，物理精简</a></li>
+      </ul>
+    </li>
+    <li><a href="#三陷阱二把-markdown-当数据库">三、陷阱二：把 Markdown 当数据库</a>
+      <ul>
+        <li><a href="#双层架构">双层架构</a></li>
+        <li><a href="#我的实际情况">我的实际情况</a></li>
+      </ul>
+    </li>
+    <li><a href="#四陷阱三知识图谱过早">四、陷阱三：知识图谱过早</a></li>
+    <li><a href="#五五个增量能力比增加目录更重要">五、五个增量能力：比增加目录更重要</a>
+      <ul>
+        <li><a href="#1-事实与观点分离">1. 事实与观点分离</a></li>
+        <li><a href="#2-来源可信度体系">2. 来源可信度体系</a></li>
+        <li><a href="#3-语义分块chunk--文件">3. 语义分块（Chunk ≠ 文件）</a></li>
+        <li><a href="#4-记忆预算memory-budget">4. 记忆预算（Memory Budget）</a></li>
+        <li><a href="#5-可观测性observability">5. 可观测性（Observability）</a></li>
+      </ul>
+    </li>
+    <li><a href="#六五层抽象不是六个目录">六、五层抽象：不是六个目录</a></li>
+    <li><a href="#七落地实践我自己的-memorymd-schema-化">七、落地实践：我自己的 MEMORY.md Schema 化</a>
+      <ul>
+        <li><a href="#之前自由文本">之前（自由文本）</a></li>
+        <li><a href="#之后schema-化">之后（Schema 化）</a></li>
+        <li><a href="#schema-规范文件">Schema 规范文件</a></li>
+      </ul>
+    </li>
+    <li><a href="#八优先级排序什么决定-agent-能不能活三年">八、优先级排序：什么决定 Agent 能不能活三年</a></li>
+    <li><a href="#九结语agent-os-不是架构图是生命周期">九、结语：Agent OS 不是架构图，是生命周期</a></li>
+    <li><a href="#延伸阅读">延伸阅读</a></li>
+  </ul>
+</nav><h3>相关文章</h3>
+    <ul><li><a href="/posts/hermes-tips-02-memory/">Hermes Agent 记忆系统详解：机器人进化闭环的5层实现</a></li><li><a href="/posts/no-world-war-climate-ai-tsunami/">无法世界大战：当环境崩溃与AI海啸同时降临</a></li><li><a href="/posts/weekly-2026-w28/">W28 周记：给 Hermes 装上 Harness——但不用新标准，用已有机制</a></li><li><a href="/posts/three-tech-waves-god-view/">上帝视角：计算机互联网→移动互联网→AI 三次浪潮的同构模型</a></li><li><a href="/posts/hermes-agent-10-best-use-cases/">Hermes Agent 十大最佳应用案例</a></li></ul></aside></div>
+  </div>
+</body>
+</html>

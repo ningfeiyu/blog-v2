@@ -3,7 +3,10 @@ title: "知识的通货膨胀：当“知道”没有成本，什么在升值？
 date: 2026-09-25T21:44:00+08:00
 tags: ["认知", "AI"]
 description: "人类历史上知识一直是稀缺品，稀缺支撑了它的权威。AI 让知识的生产成本趋近于零——当“知道”不再值钱，提问、验证、品味和信任开始升值。系列第五篇，为“知识—权力—自我”三部曲收束。"
+image: "/images/covers/knowledge-inflation.jpg"
 ---
+
+![知识的通货膨胀：当“知道”没有成本，什么在升值？](/images/covers/knowledge-inflation.jpg)
 
 这个系列的标题是"知识—权力—自我"。写到第五篇才发现：权力写了两篇（[第一篇](/posts/knowledge-power-self/)的治理术、[第四篇](/posts/who-allocates-ai/)的 AI 分配），自我写了一篇（[第三篇](/posts/self-management-invented/)的制造史），唯独"知识"本身，还没被正面解剖过。
 

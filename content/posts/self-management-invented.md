@@ -3,7 +3,10 @@ title: "“成为更好的自己”三百年：自我管理是如何被发明的
 date: 2026-09-25T21:33:00+08:00
 tags: ["思想史", "认知"]
 description: "从韦伯的新教伦理，到斯迈尔斯的自我奋斗，再到贝克的个体化与福柯晚年的自我技术——追溯“自我管理”这个观念本身的三百年制造史，并把前两篇收束成一条完整的线索。"
+image: "/images/covers/self-management-invented.jpg"
 ---
+
+![“成为更好的自己”三百年：自我管理是如何被发明的](/images/covers/self-management-invented.jpg)
 
 在[第一篇](/posts/knowledge-power-self/)里，我梳理了现代治理如何从"你必须服从"演变为"你应该主动成为更好的自己"；在[第二篇](/posts/missed-era-action-system/)里，我给了三环境复盘和行动系统。但有一个问题始终没被追问：
 

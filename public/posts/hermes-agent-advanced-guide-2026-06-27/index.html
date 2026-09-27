@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html lang="zh-CN" dir="ltr">
+<head>
+  <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Hermes Agent 进阶玩法：从安装到自动化的完整上手指南 | 老宁的试验田</title>
+<link rel="icon" href="/favicon.svg" sizes="any" type="image/svg+xml" /><meta property="og:url" content="https://blog.ning.indevs.in/posts/hermes-agent-advanced-guide-2026-06-27/">
+	<meta property="og:site_name" content="老宁的试验田">
+	<meta property="og:title" content="Hermes Agent 进阶玩法：从安装到自动化的完整上手指南">
+	<meta property="og:description" content="给刚安装 Hermes Agent 的新手：配置多模型路由、落地 Skills、跑通 Terminal/Browser/MCP 工具链、写 Cron 自动化、用 Subagents 并行任务。配架构图全景一张图看懂全链路。">
+	<meta property="og:locale" content="zh_CN">
+	<meta property="og:type" content="article">
+		<meta property="article:section" content="posts">
+		<meta property="article:published_time" content="2026-06-27T00:30:00+08:00">
+		<meta property="article:modified_time" content="2026-06-27T00:30:00+08:00">
+		<meta property="article:tag" content="Hermes Agent">
+		<meta property="article:tag" content="AI-Agent">
+		<meta property="article:tag" content="自动化">
+		<meta property="article:tag" content="MCP">
+		<meta property="article:tag" content="工具链">
+		<meta property="article:tag" content="本地优先">
+
+	<meta name="twitter:card" content="summary">
+	<meta name="twitter:title" content="Hermes Agent 进阶玩法：从安装到自动化的完整上手指南">
+	<meta name="twitter:description" content="给刚安装 Hermes Agent 的新手：配置多模型路由、落地 Skills、跑通 Terminal/Browser/MCP 工具链、写 Cron 自动化、用 Subagents 并行任务。配架构图全景一张图看懂全链路。">
+
+      <link rel="stylesheet" href="/css/root.min.1052d5860b4442ccd33071bf3543c78d47509a7acb2c13edb1288611a2ebd6a8.css" integrity="sha256-EFLVhgtEQszTMHG/NUPHjUdQmnrLLBPtsSiGEaLr1qg=" crossorigin="anonymous">
+      <link rel="stylesheet" href="/css/bundle.min.e735cd1c41e6b7ba15433438fa484f2804322027ee8348fcff2adbf14976ce28.css" integrity="sha256-5zXNHEHmt7oVQzQ4&#43;khPKAQyICfug0j8/yrb8Ul2zig=" crossorigin="anonymous">
+
+      <script src="/js/bundle.cc8ae9952dbfb731affafabdf26e5c60a6910047ff59ccdeaf1daebaa26c8830.js" integrity="sha256-zIrplS2/tzGv&#43;vq98m5cYKaRAEf/Wczerx2uuqJsiDA=" crossorigin="anonymous"></script><script defer src="/js/search/flexsearch.compact.3928d3d2172bc0b5f75d9458fb9255f0befce1c7239ba6e5d2c58ed4b82c2073.js" integrity="sha256-OSjT0hcrwLX3XZRY&#43;5JV8L784ccjm6bl0sWO1LgsIHM="></script>
+<script defer src="/js/search/search.1d980f84df11f3eb7c8c5f17f541d49a0611608df179dd74fa7f06225eb56ace.js" integrity="sha256-HZgPhN8R8&#43;t8jF8X9UHUmgYRYI3xed10&#43;n8GIl61as4="></script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,200;1,300;1,400;1,500;1,600;1,700;1,800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200..800&family=Spectral:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,200;1,300;1,400;1,500;1,600;1,700;1,800&display=swap" rel="stylesheet">
+
+
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+<link href="https://cdn.jsdelivr.net/npm/lxgw-wenkai-webfont@1.7.0/lxgwwenkai-regular.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/lxgw-wenkai-webfont@1.7.0/lxgwwenkai-bold.css" rel="stylesheet">
+
+<script defer src="https://events.vercount.one/js"></script>
+</head>
+<body class="notransition">
+  <div id="container">
+    <header id="main-header"><div role="navigation" aria-label="Main">
+  <div class="nav-left">
+    <a href="https://blog.ning.indevs.in/" style="color: inherit;">老宁的试验田</a>
+  </div>
+  <div class="nav-right">
+    <div style="position:absolute;width:0px;height:0px;">
+      <div id="nav-dropdown-menu" class="hidden" href="#">
+    <div class="nav-item">
+      <a href="/"
+      >首页</a>
+    </div>
+    <div class="nav-item">
+      <a aria-current="true" class="ancestor" href="/posts/"
+      >文章</a>
+    </div>
+    <div class="nav-item">
+      <a href="/tags/"
+      >标签</a>
+    </div>
+    <div class="nav-item">
+      <a href="/archives/"
+      >归档</a>
+    </div>
+    <div class="nav-item">
+      <a href="/about/"
+      >关于</a>
+    </div>
+</div>
+    </div>
+    <a id="nav-dropdown-button" href="#"><svg width="20px" height="20px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M4 6H20M4 12H20M4 18H20" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
+</a>
+    <div id="nav-menu">
+    <div class="nav-item">
+      <a href="/"
+      >首页</a>
+    </div>
+    <div class="nav-item">
+      <a aria-current="true" class="ancestor" href="/posts/"
+      >文章</a>
+    </div>
+    <div class="nav-item">
+      <a href="/tags/"
+      >标签</a>
+    </div>
+    <div class="nav-item">
+      <a href="/archives/"
+      >归档</a>
+    </div>
+    <div class="nav-item">
+      <a href="/about/"
+      >关于</a>
+    </div>
+</div>
+    <a id="theme-switcher" href="#">
+<svg class="light-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M12 3V4M12 20V21M4 12H3M6.31412 6.31412L5.5 5.5M17.6859 6.31412L18.5 5.5M6.31412 17.69L5.5 18.5001M17.6859 17.69L18.5 18.5001M21 12H20M16 12C16 14.2091 14.2091 16 12 16C9.79086 16 8 14.2091 8 12C8 9.79086 9.79086 8 12 8C14.2091 8 16 9.79086 16 12Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
+
+<svg class="dark-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M3.32031 11.6835C3.32031 16.6541 7.34975 20.6835 12.3203 20.6835C16.1075 20.6835 19.3483 18.3443 20.6768 15.032C19.6402 15.4486 18.5059 15.6834 17.3203 15.6834C12.3497 15.6834 8.32031 11.654 8.32031 6.68342C8.32031 5.50338 8.55165 4.36259 8.96453 3.32996C5.65605 4.66028 3.32031 7.89912 3.32031 11.6835Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
+</a>
+  </div>
+</div>
+</header>
+    <div class="flex grow">
+      <div id="main-pane">
+        <main id="main-content"><div class="single-header">
+<ol class="breadcrumbs" itemscope itemtype="https://schema.org/BreadcrumbList">
+    <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+      <a itemprop="item" href="https://blog.ning.indevs.in/">
+        <span itemprop="name">首页</span>
+      </a>
+      <meta itemprop="position" content='1' />
+    </li>
+    <span>&nbsp»&nbsp</span>
+    <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+      <a itemprop="item" href="https://blog.ning.indevs.in/posts/">
+        <span itemprop="name">文章</span>
+      </a>
+      <meta itemprop="position" content='2' />
+    </li>
+    <span>&nbsp»&nbsp</span>
+</ol>
+<h1>Hermes Agent 进阶玩法：从安装到自动化的完整上手指南</h1><time class="dim" datetime="2026-06-27T00:30:00&#43;08:00">2026年6月27日</time><div class="term-container"><div class="tag">
+        <a href="https://blog.ning.indevs.in/tags/hermes-agent/">#Hermes Agent</a>
+      </div><div class="tag">
+        <a href="https://blog.ning.indevs.in/tags/ai-agent/">#AI-Agent</a>
+      </div><div class="tag">
+        <a href="https://blog.ning.indevs.in/tags/%E8%87%AA%E5%8A%A8%E5%8C%96/">#自动化</a>
+      </div><div class="tag">
+        <a href="https://blog.ning.indevs.in/tags/mcp/">#MCP</a>
+      </div><div class="tag">
+        <a href="https://blog.ning.indevs.in/tags/%E5%B7%A5%E5%85%B7%E9%93%BE/">#工具链</a>
+      </div><div class="tag">
+        <a href="https://blog.ning.indevs.in/tags/%E6%9C%AC%E5%9C%B0%E4%BC%98%E5%85%88/">#本地优先</a>
+      </div></ol></div>
+  <section class="page-section"><p><img src="/images/posts/hermes-architecture.html" alt="Hermes Agent Architecture"></p>
+<blockquote>
+<p>Hermes Agent 是一款<strong>本地优先、配置驱动、技能可插拔</strong>的 AI Agent 框架。它把“模型网关 + 工具执行引擎 + 技能系统 + 持久化记忆”全部跑在你自己的机器上，配一个 YAML 就能把 Telegram、终端、浏览器、MCP 服务器、Cloudflare Workers 全串起来。这篇文章把新手最容易卡的配置、技能、工具、自动化四大块拆开讲，配一张全景架构图帮你建立心智模型。</p>
+</blockquote>
+<h2 id="一核心心智模型五层架构">一、核心心智模型：五层架构</h2>
+<p>打开文章顶部的架构图（或在浏览器打开 <code>/images/posts/hermes-architecture.html</code>），你会看到五层：</p>
+<table>
+	<thead>
+			<tr>
+					<th>层级</th>
+					<th>职责</th>
+					<th>关键词</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td><strong>UI Layer</strong></td>
+					<td>Telegram / Web UI / CLI</td>
+					<td>统一入口，同一会话多端同步</td>
+			</tr>
+			<tr>
+					<td><strong>Gateway &amp; Routing</strong></td>
+					<td>模型路由、Fallback 链、Config/Profile/Session/Memory 管理</td>
+					<td><code>config.yaml</code> 是唯一真理来源</td>
+			</tr>
+			<tr>
+					<td><strong>Provider Layer</strong></td>
+					<td>NVIDIA / OpenRouter / Anthropic / Cloudflare AI / ZAI / Custom</td>
+					<td>统一 OpenAI 兼容接口，支持任意厂商</td>
+			</tr>
+			<tr>
+					<td><strong>Tool Engine</strong></td>
+					<td>Terminal / File / Browser / Web Search / Skills / MCP</td>
+					<td>全部本地执行，沙箱隔离，支持后台+通知</td>
+			</tr>
+			<tr>
+					<td><strong>Extensions</strong></td>
+					<td>Cron Jobs / Delegation / Platform Bridges / CF Workers / MCP Servers</td>
+					<td>定时、并行、跨平台、边缘计算</td>
+			</tr>
+	</tbody>
+</table>
+<blockquote>
+<p><strong>一句话心法</strong>：<code>config.yaml</code> 定义**“用什么模型、怎么路由、开什么工具、加什么技能”**，剩下的 Hermes 全自动帮你接线。</p>
+</blockquote>
+<hr>
+<h2 id="二安装与首发配置5-分钟跑通">二、安装与首发配置（5 分钟跑通）</h2>
+<h3 id="1-一键安装">1. 一键安装</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>curl -fsSL https://hermes-agent.dev/install.sh | bash
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 或手动：下载对应平台的二进制，放入 PATH</span>
+</span></span></code></pre></div><p>安装后会在 <code>~/.hermes/</code> 生成：</p>
+<pre tabindex="0"><code>~/.hermes/
+├── config.yaml          # 主配置（必改）
+├── profiles/            # 多工作区隔离
+├── skills/              # 技能目录（drop-in 安装）
+├── plugins/             # 插件目录
+├── cron/                # 定时任务
+└── sessions.db          # SQLite + FTS5 全文检索
+</code></pre><h3 id="2-编辑-hermesconfigyaml--只改三处">2. 编辑 <code>~/.hermes/config.yaml</code> —— 只改三处</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">model</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">default</span>: <span style="color:#ae81ff">nvidia/nemotron-3-ultra-550b-a55b</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">provider</span>: <span style="color:#ae81ff">nvidia</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">base_url</span>: <span style="color:#ae81ff">https://integrate.api.nvidia.com/v1</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 关键：fallback 链（主模型挂了自动切）</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">fallback_providers</span>:
+</span></span><span style="display:flex;"><span>  - <span style="color:#f92672">provider</span>: <span style="color:#ae81ff">nvidia</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">model</span>: <span style="color:#ae81ff">nvidia/nemotron-3-ultra-550b-a55b</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">base_url</span>: <span style="color:#ae81ff">https://integrate.api.nvidia.com/v1</span>
+</span></span><span style="display:flex;"><span>  - <span style="color:#f92672">provider</span>: <span style="color:#ae81ff">openrouter</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">model</span>: <span style="color:#ae81ff">nvidia/nemotron-3-ultra-550b-a55b:free</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">base_url</span>: <span style="color:#ae81ff">https://openrouter.ai/api/v1</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">api_mode</span>: <span style="color:#ae81ff">chat_completions</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 关键：把常用工具集打开</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">toolsets</span>:
+</span></span><span style="display:flex;"><span>  - <span style="color:#ae81ff">hermes-cli</span>
+</span></span><span style="display:flex;"><span>  - <span style="color:#ae81ff">terminal</span>
+</span></span><span style="display:flex;"><span>  - <span style="color:#ae81ff">file</span>
+</span></span><span style="display:flex;"><span>  - <span style="color:#ae81ff">browser</span>
+</span></span><span style="display:flex;"><span>  - <span style="color:#ae81ff">web</span>
+</span></span><span style="display:flex;"><span>  - <span style="color:#ae81ff">skills</span>
+</span></span><span style="display:flex;"><span>  - <span style="color:#ae81ff">cronjob</span>
+</span></span><span style="display:flex;"><span>  - <span style="color:#ae81ff">delegation</span>
+</span></span></code></pre></div><h3 id="3-填-key环境变量优先不写进-yaml">3. 填 Key（环境变量优先，不写进 YAML）</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># ~/.bashrc 或 ~/.zshrc</span>
+</span></span><span style="display:flex;"><span>export NVIDIA_API_KEY<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;nvap...port OPENROUTER_API_KEY=&#34;</span>sk-o...port ANTHROPIC_API_KEY<span style="color:#f92672">=</span>***  <span style="color:#75715e"># 可选</span>
+</span></span><span style="display:flex;"><span>export CLOUDFLARE_API_TOKEN<span style="color:#f92672">=</span>***  <span style="color:#75715e"># 可选，用于 CF Workers 部署</span>
+</span></span><span style="display:flex;"><span>export ZAI_API_KEY<span style="color:#f92672">=</span>***                <span style="color:#75715e"># 可选</span>
+</span></span></code></pre></div><blockquote>
+<p><strong>安全提示</strong>：<code>config.yaml</code> 里只写 <code>base_url</code> 和 <code>model</code> 名，<strong>绝不写 key</strong>。Key 全靠环境变量注入，进程退出即失效。</p>
+</blockquote>
+<h3 id="4-验证跑通">4. 验证跑通</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>hermes chat <span style="color:#e6db74">&#34;你好，给我讲个笑话&#34;</span>   <span style="color:#75715e"># CLI 快测</span>
+</span></span><span style="display:flex;"><span>hermes tui                         <span style="color:#75715e"># 交互式 TUI（推荐日常用）</span>
+</span></span></code></pre></div><p>看到回复即成功。<code>hermes tui</code> 里敲 <code>/help</code> 能看到所有内置命令。</p>
+<hr>
+<h2 id="三技能系统把会的事变成可复用的包">三、技能系统：把“会的事”变成“可复用的包”</h2>
+<p>技能就是 <code>~/.hermes/skills/&lt;skill-name&gt;/SKILL.md</code> + 可选的 <code>references/</code> <code>templates/</code> <code>scripts/</code>。安装方式极简：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># 方式 1：手动建目录</span>
+</span></span><span style="display:flex;"><span>mkdir -p ~/.hermes/skills/my-skill/<span style="color:#f92672">{</span>references,templates,scripts<span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 写 SKILL.md，参考已有技能</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 方式 2：用技能管理命令（如果有）</span>
+</span></span><span style="display:flex;"><span>hermes skill install github:user/repo#skill-name
+</span></span></code></pre></div><h3 id="新手必装的-5-个官方技能">新手必装的 5 个官方技能</h3>
+<table>
+	<thead>
+			<tr>
+					<th>技能名</th>
+					<th>用途</th>
+					<th>典型场景</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td><code>hugo-blog</code></td>
+					<td>Hugo 博客全流程</td>
+					<td>写文章、配图、部署 CF Pages</td>
+			</tr>
+			<tr>
+					<td><code>architecture-diagram</code></td>
+					<td>生成暗黑风架构图</td>
+					<td>画系统图、云拓扑、数据流</td>
+			</tr>
+			<tr>
+					<td><code>native-mcp</code></td>
+					<td>原生 MCP 客户端</td>
+					<td>接入任意 MCP Server（stdio/HTTP）</td>
+			</tr>
+			<tr>
+					<td><code>delegation</code></td>
+					<td>子任务并行</td>
+					<td>大任务拆解给多个 Subagent 同时跑</td>
+			</tr>
+			<tr>
+					<td><code>cronjob</code></td>
+					<td>定时 Agent</td>
+					<td>每日早报、监控告警、定时部署</td>
+			</tr>
+	</tbody>
+</table>
+<blockquote>
+<p><strong>技能加载是按需的</strong>：对话里提到相关关键词，Hermes 会自动建议加载；也可手动 <code>skill_view(name=&quot;xxx&quot;)</code> 拉取。</p>
+</blockquote>
+<h3 id="自己写技能的最小模板">自己写技能的最小模板</h3>
+<pre tabindex="0"><code>~/.hermes/skills/我的技能/
+├── SKILL.md          # 必须：YAML frontmatter + markdown 说明
+├── references/       # 可选：参考文档、API 规范
+├── templates/        # 可选：代码/配置模板
+├── scripts/          # 可选：可执行脚本
+└── assets/           # 可选：图片、二进制
+</code></pre><p><code>SKILL.md</code> 头部示例：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span>---
+</span></span><span style="display:flex;"><span><span style="color:#f92672">name</span>: <span style="color:#ae81ff">my-skill</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">description</span>: <span style="color:#e6db74">&#34;一句话描述技能能做什么&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">version</span>: <span style="color:#ae81ff">1.0.0</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">author</span>: <span style="color:#ae81ff">Your Name</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">tags</span>: [<span style="color:#ae81ff">tag1, tag2]</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">metadata</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">hermes</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">triggers</span>: [<span style="color:#e6db74">&#34;关键词1&#34;</span>, <span style="color:#e6db74">&#34;关键词2&#34;</span>]  <span style="color:#75715e"># 对话触发自动加载</span>
+</span></span><span style="display:flex;"><span>---
+</span></span></code></pre></div><p>后面跟 Markdown 说明：<strong>触发条件、分步操作、避坑指南、验证步骤</strong>。写得越细，Agent 用得越准。</p>
+<hr>
+<h2 id="四工具链实战terminal--browser--file--mcp">四、工具链实战：Terminal / Browser / File / MCP</h2>
+<h3 id="1-terminal-tool--本地-shell-的完全控制权">1. Terminal Tool —— 本地 Shell 的完全控制权</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># 在 Agent 里（或通过 hermes chat 触发）</span>
+</span></span><span style="display:flex;"><span>terminal(command<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;cd /root/project &amp;&amp; npm run build&#34;</span>, timeout<span style="color:#f92672">=</span><span style="color:#ae81ff">300</span>)
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 后台长任务（编译、部署、测试）</span>
+</span></span><span style="display:flex;"><span>terminal(command<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;./long-build.sh&#34;</span>, background<span style="color:#f92672">=</span>true, notify_on_complete<span style="color:#f92672">=</span>true)
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 交互式 REPL（python、node、psql）</span>
+</span></span><span style="display:flex;"><span>terminal(command<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;python3&#34;</span>, pty<span style="color:#f92672">=</span>true)
+</span></span></code></pre></div><p><strong>新手必知三招</strong>：</p>
+<ul>
+<li><code>background=true + notify_on_complete=true</code> = 启动即忘，完成自动通知</li>
+<li><code>process(poll)</code> / <code>process(wait)</code> = 查后台进程输出</li>
+<li><code>pty=true</code> = 交互式 CLI（Claude Code、psql、python REPL）</li>
+</ul>
+<h3 id="2-file-tool--比-catgrepsed-更安全的文件操作">2. File Tool —— 比 <code>cat/grep/sed</code> 更安全的文件操作</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>read_file(path<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;~/project/main.py&#34;</span>, offset<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>, limit<span style="color:#f92672">=</span><span style="color:#ae81ff">50</span>)
+</span></span><span style="display:flex;"><span>write_file(path<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;~/project/new.py&#34;</span>, content<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;...&#34;</span>)
+</span></span><span style="display:flex;"><span>patch(path<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;~/project/main.py&#34;</span>, old_string<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;foo&#34;</span>, new_string<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;bar&#34;</span>)
+</span></span><span style="display:flex;"><span>search_files(pattern<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;TODO&#34;</span>, target<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;content&#34;</span>, file_glob<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;*.py&#34;</span>)
+</span></span></code></pre></div><blockquote>
+<p><strong>别再用 <code>sed/awk</code> 了</strong>——<code>patch</code> 模糊匹配、自动语法检查、不破坏缩进。</p>
+</blockquote>
+<h3 id="3-browser-tool--真浏览器自动化camofox--cdp">3. Browser Tool —— 真浏览器自动化（Camofox / CDP）</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># 导航、点击、提取、截图</span>
+</span></span><span style="display:flex;"><span>browser_navigate(url<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;https://example.com&#34;</span>)
+</span></span><span style="display:flex;"><span>browser_click(selector<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;button.submit&#34;</span>)
+</span></span><span style="display:flex;"><span>browser_extract(selector<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;.content&#34;</span>)
+</span></span><span style="display:flex;"><span>browser_screenshot(path<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;/tmp/page.png&#34;</span>)
+</span></span></code></pre></div><p><strong>避坑</strong>：私有页面要先登录，用 <code>browser_navigate</code> 进登录页，再手动或脚本填表单，Cookie 会在会话内保持。</p>
+<h3 id="4-原生-mcp-client--零配置接入-mcp-server">4. 原生 MCP Client —— 零配置接入 MCP Server</h3>
+<p>在 <code>config.yaml</code> 里直接声明：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">mcp</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">servers</span>:
+</span></span><span style="display:flex;"><span>    - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">github</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">command</span>: <span style="color:#ae81ff">npx</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">args</span>: [<span style="color:#e6db74">&#34;-y&#34;</span>, <span style="color:#e6db74">&#34;@modelcontextprotocol/server-github&#34;</span>]
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">env</span>:
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">GITHUB_PERSONAL_ACCESS_TOKEN</span>: <span style="color:#ae81ff">${GITHUB_TOKEN}</span>
+</span></span><span style="display:flex;"><span>    - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">filesystem</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">command</span>: <span style="color:#ae81ff">npx</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">args</span>: [<span style="color:#e6db74">&#34;-y&#34;</span>, <span style="color:#e6db74">&#34;@modelcontextprotocol/server-filesystem&#34;</span>, <span style="color:#e6db74">&#34;/root/workspace&#34;</span>]
+</span></span></code></pre></div><p>重启 Hermes，<code>mcp.github.list_repos</code>、<code>mcp.filesystem.read_file</code> 直接变成可用工具，<strong>无需额外进程管理</strong>。</p>
+<hr>
+<h2 id="五自动化进阶cron--delegation--subagents">五、自动化进阶：Cron + Delegation + Subagents</h2>
+<h3 id="1-cron-job定时跑-agent-任务">1. Cron Job：定时跑 Agent 任务</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># 创建一个每天早 8 点跑的“每日技术早报” Agent</span>
+</span></span><span style="display:flex;"><span>hermes cron create <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span>  --name <span style="color:#e6db74">&#34;daily-tech-brief&#34;</span> <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span>  --schedule <span style="color:#e6db74">&#34;0 8 * * *&#34;</span> <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span>  --prompt <span style="color:#e6db74">&#34;抓取 GitHub Trending + Hacker News 前 10，生成中文摘要发到 Telegram&#34;</span> <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span>  --skills <span style="color:#e6db74">&#34;web,github,telegram&#34;</span>
+</span></span></code></pre></div><p><strong>两种模式</strong>：</p>
+<ul>
+<li><code>no_agent=false</code>（默认）：完整 Agent 循环，能推理、调工具、写文件</li>
+<li><code>no_agent=true</code>：纯脚本模式，stdout 直接推送，适合监控告警、心跳检测</li>
+</ul>
+<h3 id="2-delegation--subagents大任务拆解并行跑">2. Delegation / Subagents：大任务拆解并行跑</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># 在主 Agent 里调用</span>
+</span></span><span style="display:flex;"><span>delegate_task(tasks<span style="color:#f92672">=</span>[
+</span></span><span style="display:flex;"><span>    {<span style="color:#e6db74">&#34;goal&#34;</span>: <span style="color:#e6db74">&#34;调研竞品 A 定价&#34;</span>, <span style="color:#e6db74">&#34;context&#34;</span>: <span style="color:#e6db74">&#34;...&#34;</span>, <span style="color:#e6db74">&#34;toolsets&#34;</span>: [<span style="color:#e6db74">&#34;web&#34;</span>]},
+</span></span><span style="display:flex;"><span>    {<span style="color:#e6db74">&#34;goal&#34;</span>: <span style="color:#e6db74">&#34;调研竞品 B 定价&#34;</span>, <span style="color:#e6db74">&#34;context&#34;</span>: <span style="color:#e6db74">&#34;...&#34;</span>, <span style="color:#e6db74">&#34;toolsets&#34;</span>: [<span style="color:#e6db74">&#34;web&#34;</span>]},
+</span></span><span style="display:flex;"><span>    {<span style="color:#e6db74">&#34;goal&#34;</span>: <span style="color:#e6db74">&#34;汇总对比表&#34;</span>, <span style="color:#e6db74">&#34;context&#34;</span>: <span style="color:#e6db74">&#34;前两个结果见上&#34;</span>, <span style="color:#e6db74">&#34;toolsets&#34;</span>: [<span style="color:#e6db74">&#34;file&#34;</span>]},
+</span></span><span style="display:flex;"><span>])
+</span></span></code></pre></div><ul>
+<li>每个 task 独立会话、独立终端、独立上下文</li>
+<li>并发上限默认 3（<code>delegation.max_concurrent_children</code>）</li>
+<li>结果以消息形式回传主会话，<strong>不污染主上下文</strong></li>
+</ul>
+<blockquote>
+<p><strong>适用场景</strong>：多源调研、多文件重构、多环境测试、并行部署。</p>
+</blockquote>
+<hr>
+<h2 id="六多-profile-隔离一个机器跑多个项目互不干扰">六、多 Profile 隔离：一个机器跑多个项目互不干扰</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># 创建新 profile</span>
+</span></span><span style="display:flex;"><span>hermes profile create work
+</span></span><span style="display:flex;"><span>hermes profile create personal
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 切换</span>
+</span></span><span style="display:flex;"><span>hermes profile use work
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 此时 ~/.hermes/profiles/work/ 下有独立的 skills、plugins、cron、memory</span>
+</span></span></code></pre></div><p><strong>典型用法</strong>：</p>
+<ul>
+<li><code>work</code>：公司项目，加内网 MCP、私有 GitHub、Jira 技能</li>
+<li><code>personal</code>：博客、副业、公开 API</li>
+<li><code>experiment</code>：乱跑实验，炸了删掉不心疼</li>
+</ul>
+<hr>
+<h2 id="七避坑速查表新手最常踩的-10-个坑">七、避坑速查表（新手最常踩的 10 个坑）</h2>
+<table>
+	<thead>
+			<tr>
+					<th>现象</th>
+					<th>原因</th>
+					<th>解决</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>模型返回 401/429</td>
+					<td>Key 没进环境变量、或配额用尽</td>
+					<td>`export XXX_API_KEY=*** 重启 shell</td>
+			</tr>
+			<tr>
+					<td>Fallback 不生效</td>
+					<td><code>fallback_providers</code> 缩进错、或缺 <code>api_mode</code></td>
+					<td>对照文档 YAML 缩进，补全字段</td>
+			</tr>
+			<tr>
+					<td>Terminal 卡住</td>
+					<td>长任务没加 <code>background=true</code></td>
+					<td>长任务必加后台+通知</td>
+			</tr>
+			<tr>
+					<td>Browser 登录态丢</td>
+					<td>会话隔离、或 Camofox 未持久化</td>
+					<td>同一 <code>browser</code> 会话内完成登录+操作</td>
+			</tr>
+			<tr>
+					<td>Skill 不自动加载</td>
+					<td><code>triggers</code> 关键词没写、或目录名不对</td>
+					<td>目录名 = skill name，<code>SKILL.md</code> 里写 triggers</td>
+			</tr>
+			<tr>
+					<td>Cron 不执行</td>
+					<td>时区不对、或 <code>no_agent</code> 模式脚本无输出</td>
+					<td>检查 <code>cronjob</code> 文档，加时区、保证有输出</td>
+			</tr>
+			<tr>
+					<td>Subagent 返回乱码</td>
+					<td>子任务没传 <code>context</code> 里的关键信息</td>
+					<td><code>context</code> 里塞完整：路径、报错、约束</td>
+			</tr>
+			<tr>
+					<td>Memory 爆满</td>
+					<td>存了太多临时事实</td>
+					<td>只存偏好、环境、纠偏；进度用 <code>session_search</code></td>
+			</tr>
+			<tr>
+					<td>MCP Server 连不上</td>
+					<td><code>command</code>/<code>args</code> 路径错、或缺 <code>npx -y</code></td>
+					<td>用绝对路径，参数数组逐项写</td>
+			</tr>
+			<tr>
+					<td>配置改了不生效</td>
+					<td>没重启 Hermes / TUI 缓存</td>
+					<td><code>hermes restart</code> 或重进 TUI</td>
+			</tr>
+	</tbody>
+</table>
+<hr>
+<h2 id="八从会用到会改把工作流沉淀为-skill">八、从“会用”到“会改”：把工作流沉淀为 Skill</h2>
+<p>当你重复做第三遍同样的操作时，<strong>立刻写成 Skill</strong>。模板：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-markdown" data-lang="markdown"><span style="display:flex;"><span># ~/.hermes/skills/我的工作流/SKILL.md
+</span></span><span style="display:flex;"><span>---
+</span></span><span style="display:flex;"><span>name: my-workflow
+</span></span><span style="display:flex;"><span>description: &#34;每次发版前：跑测试 → 构建 → 部署 CF Pages → 校验域名&#34;
+</span></span><span style="display:flex;"><span>triggers: [&#34;发版&#34;, &#34;部署&#34;, &#34;deploy&#34;]
+</span></span><span style="display:flex;"><span>---
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## 步骤
+</span></span></span><span style="display:flex;"><span><span style="color:#66d9ef">1.</span> <span style="color:#e6db74">`terminal: cd /root/project &amp;&amp; npm test`</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">2.</span> <span style="color:#e6db74">`terminal: hugo --gc --minify`</span> (background + notify)
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">3.</span> <span style="color:#e6db74">`terminal: wrangler pages deploy public/ --project-name=xxx`</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">4.</span> <span style="color:#e6db74">`web: curl https://xxx.pages.dev/health`</span> 校验
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## 避坑
+</span></span></span><span style="display:flex;"><span><span style="color:#66d9ef">-</span> Hugo 必须清理 <span style="color:#e6db74">`public/`</span> <span style="color:#e6db74">`resources/`</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">-</span> CF Pages 首次部署需在 Dashboard 绑自定义域
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">-</span> 部署后 30s 内可能 522，再试一次
+</span></span></code></pre></div><p>下次对话里说“帮我发版”，Hermes 就会自动加载这个 Skill、按步骤跑。</p>
+<hr>
+<h2 id="九资源速查">九、资源速查</h2>
+<table>
+	<thead>
+			<tr>
+					<th>资源</th>
+					<th>地址</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>官方文档</td>
+					<td><a href="https://hermes-agent.nousresearch.com/docs">https://hermes-agent.nousresearch.com/docs</a></td>
+			</tr>
+			<tr>
+					<td>GitHub</td>
+					<td><a href="https://github.com/NousResearch/hermes-agent">https://github.com/NousResearch/hermes-agent</a></td>
+			</tr>
+			<tr>
+					<td>技能市场（社区）</td>
+					<td><a href="https://github.com/hermes-skills/awesome">https://github.com/hermes-skills/awesome</a></td>
+			</tr>
+			<tr>
+					<td>架构图源码</td>
+					<td>本文顶部 <code>/images/posts/hermes-architecture.html</code></td>
+			</tr>
+			<tr>
+					<td>配置 Schema</td>
+					<td><code>~/.hermes/config.yaml</code> 顶部注释</td>
+			</tr>
+	</tbody>
+</table>
+<hr>
+<h2 id="十结语">十、结语</h2>
+<p>Hermes Agent 的核心哲学只有八个字：<strong>本地优先，配置驱动</strong>。</p>
+<ul>
+<li>没有 SaaS 绑定，数据不出机房</li>
+<li>没有魔法黑盒，<code>config.yaml</code> 全白盒</li>
+<li>没有 vendor lock-in，技能随时删、改、换</li>
+</ul>
+<p>新手建议路径：<strong>装好 → 改配置 → 装 5 个官方技能 → 跑通 Terminal/Browser/MCP → 写第一个 Cron → 把重复工作流做成私有 Skill</strong>。大概两三天，你就能把“手动操作”变成“自动化流水线”，真正把 Agent 当成<strong>可编程的队友</strong>而不是聊天机器人。</p>
+<p>下一步想试什么？直接在 Telegram 里喊一声，我陪你跑通。</p>
+</section><div style="margin-top:3rem;padding-top:2rem;border-top:1px solid var(--dim-color);">
+  <h2 style="margin-bottom:1.5rem;">评论</h2>
+  <script src="https://giscus.app/client.js"
+      data-repo="ningfeiyu/blog-comments"
+      data-repo-id="R_kgDOR_QPZw"
+      data-category="General"
+      data-category-id="DIC_kwDOR_QPZ84C6i9W"
+      data-mapping="pathname"
+      data-strict="0"
+      data-reactions-enabled="1"
+      data-emit-metadata="0"
+      data-input-position="bottom"
+      data-theme="preferred_color_scheme"
+      data-lang="zh-CN"
+      crossorigin="anonymous"
+      async>
+  </script>
+</div>
+</main>
+        <footer id="main-footer"><div class="footer">
+  <a href="#">回到顶部</a>
+  <div class="footer-copyright">
+    <div class="dim">© 2026 老宁</div>
+    <div></div>
+  </div>
+</div>
+</footer>
+      </div><aside id="side-pane" class="side-sticky">
+<div class="side-details">
+    <span>807 字</span>
+    <span>11 - 14 分钟阅读</span></div><h3>目录</h3><nav id="TableOfContents">
+  <ul>
+    <li><a href="#一核心心智模型五层架构">一、核心心智模型：五层架构</a></li>
+    <li><a href="#二安装与首发配置5-分钟跑通">二、安装与首发配置（5 分钟跑通）</a>
+      <ul>
+        <li><a href="#1-一键安装">1. 一键安装</a></li>
+        <li><a href="#2-编辑-hermesconfigyaml--只改三处">2. 编辑 <code>~/.hermes/config.yaml</code> —— 只改三处</a></li>
+        <li><a href="#3-填-key环境变量优先不写进-yaml">3. 填 Key（环境变量优先，不写进 YAML）</a></li>
+        <li><a href="#4-验证跑通">4. 验证跑通</a></li>
+      </ul>
+    </li>
+    <li><a href="#三技能系统把会的事变成可复用的包">三、技能系统：把“会的事”变成“可复用的包”</a>
+      <ul>
+        <li><a href="#新手必装的-5-个官方技能">新手必装的 5 个官方技能</a></li>
+        <li><a href="#自己写技能的最小模板">自己写技能的最小模板</a></li>
+      </ul>
+    </li>
+    <li><a href="#四工具链实战terminal--browser--file--mcp">四、工具链实战：Terminal / Browser / File / MCP</a>
+      <ul>
+        <li><a href="#1-terminal-tool--本地-shell-的完全控制权">1. Terminal Tool —— 本地 Shell 的完全控制权</a></li>
+        <li><a href="#2-file-tool--比-catgrepsed-更安全的文件操作">2. File Tool —— 比 <code>cat/grep/sed</code> 更安全的文件操作</a></li>
+        <li><a href="#3-browser-tool--真浏览器自动化camofox--cdp">3. Browser Tool —— 真浏览器自动化（Camofox / CDP）</a></li>
+        <li><a href="#4-原生-mcp-client--零配置接入-mcp-server">4. 原生 MCP Client —— 零配置接入 MCP Server</a></li>
+      </ul>
+    </li>
+    <li><a href="#五自动化进阶cron--delegation--subagents">五、自动化进阶：Cron + Delegation + Subagents</a>
+      <ul>
+        <li><a href="#1-cron-job定时跑-agent-任务">1. Cron Job：定时跑 Agent 任务</a></li>
+        <li><a href="#2-delegation--subagents大任务拆解并行跑">2. Delegation / Subagents：大任务拆解并行跑</a></li>
+      </ul>
+    </li>
+    <li><a href="#六多-profile-隔离一个机器跑多个项目互不干扰">六、多 Profile 隔离：一个机器跑多个项目互不干扰</a></li>
+    <li><a href="#七避坑速查表新手最常踩的-10-个坑">七、避坑速查表（新手最常踩的 10 个坑）</a></li>
+    <li><a href="#八从会用到会改把工作流沉淀为-skill">八、从“会用”到“会改”：把工作流沉淀为 Skill</a></li>
+    <li><a href="#九资源速查">九、资源速查</a></li>
+    <li><a href="#十结语">十、结语</a></li>
+  </ul>
+</nav><h3>相关文章</h3>
+    <ul><li><a href="/posts/opc-web3-2026-advanced-guide/">Web3 OPC 进阶指南 2026：AI Agent、意图交易与RWA时代的个人协议</a></li><li><a href="/posts/hermes-agent-10-best-use-cases/">Hermes Agent 十大最佳应用案例</a></li><li><a href="/posts/notion-mcp-vs-obsidian/">Notion MCP 主流玩法与 Obsidian 深度对比</a></li><li><a href="/posts/hermes-tips-2/">自定义 Hermes 技能：打造个性化工作流</a></li></ul></aside></div>
+  </div>
+</body>
+</html>

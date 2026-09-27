@@ -1,0 +1,105 @@
+/* 配色覆盖：贴着站标（藏青底 + 冰蓝）的蓝黑方案，影子主题同名文件 */
+
+:root {
+  --font-family-main: "Bricolage Grotesque", "LXGW WenKai", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+  --font-weight-main: 500;
+  --font-family-content: "Bricolage Grotesque", "LXGW WenKai", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", serif;
+  --font-weight-content: 500;
+  --font-family-summary: "Bricolage Grotesque", "LXGW WenKai", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", serif;
+  --font-weight-summary: 500;
+
+  --dim-color: #88888844;
+  --hover-dim-color: #fff;
+
+  --quote-text-color: #8fa8cc;
+  --code-background-color: #131c31;
+  --code-text-color: #d9e6f7;
+}
+
+:root[color-scheme^='light'] {
+  --body-text-color: #17233b;
+  --body-background-color: #e9eff9;
+
+  --primary-color: #2c5da8;
+  --selection-color: #b8cfee;
+
+  --dim-opacity: 65%;
+}
+
+:root[color-scheme^='dark'] {
+  --body-text-color: #d9e6f7;
+  --body-background-color: #000;
+
+  --primary-color: #4f86d1;
+  --selection-color: #1e3a5f;
+
+  --dim-opacity: 50%;
+}
+
+/* 首页文章摘要：主题包了 <small> 会被压到 0.83 倍，拉回与正文字号一致 */
+.flat-list-item small {
+  font-size: 1rem;
+}
+
+/* 两栏顶部对齐：主栏 padding-top 是 1rem，侧栏主题只给了 5px，拉齐。
+   注意：本站 root.css 在主题 bundle 之前加载，同优先级会被 bundle 覆盖，
+   所以这里用 body 前缀提一级优先级 */
+body aside#side-pane {
+  padding-top: 1rem;
+}
+
+/* 作者卡片：头像 + 社交图标 */
+.author-card {
+  text-align: center;
+  padding: 1rem 0 .5rem;
+}
+.author-avatar {
+  width: 88px;
+  height: 88px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid var(--dim-color);
+}
+.author-name {
+  font-size: 1.15rem;
+  margin: .6rem 0 .4rem;
+}
+.author-social {
+  display: flex;
+  gap: 1.1rem;
+  justify-content: center;
+}
+.author-social a {
+  color: var(--dim-color);
+}
+.author-social a:hover {
+  color: var(--primary-color);
+}
+.author-social svg {
+  width: 22px;
+  height: 22px;
+  display: block;
+}
+
+/* 首页横幅：整块矩形抽象图 */
+.hero-banner {
+  width: 100%;
+  height: 260px;
+  overflow: hidden;
+  border-radius: 12px;
+  margin-bottom: 1.5rem;
+}
+.hero-banner img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* 作者卡片座右铭 */
+.author-motto {
+  font-size: .85rem;
+  margin-top: .8rem;
+  line-height: 1.6;
+  padding: 0 .5rem;
+}

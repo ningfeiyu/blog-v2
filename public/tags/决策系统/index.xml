@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+	<channel>
+		<title>决策系统 on 老宁的试验田</title>
+		<link>https://blog.ning.indevs.in/tags/%E5%86%B3%E7%AD%96%E7%B3%BB%E7%BB%9F/</link>
+		<description>Recent content in 决策系统 on 老宁的试验田</description>
+		<generator>Hugo</generator>
+		<language>zh-CN</language>
+		
+		
+		
+		
+			<lastBuildDate>Mon, 06 Jul 2026 16:00:00 +0800</lastBuildDate>
+		
+			<atom:link href="https://blog.ning.indevs.in/tags/%E5%86%B3%E7%AD%96%E7%B3%BB%E7%BB%9F/index.xml" rel="self" type="application/rss+xml" />
+			<item>
+				<title>AI时代的个人重构：工作、商业、生活</title>
+				<link>https://blog.ning.indevs.in/posts/ai-era-personal-reconstruction/</link>
+				<pubDate>Mon, 06 Jul 2026 16:00:00 +0800</pubDate>
+				<guid>https://blog.ning.indevs.in/posts/ai-era-personal-reconstruction/</guid>
+				<description>&lt;p&gt;&lt;img src=&#34;https://blog.ning.indevs.in/images/posts/ai-reconstruct.jpg&#34; alt=&#34;featured&#34;&gt;&lt;/p&gt;&#xA;&lt;p&gt;这不是一份鸡汤清单，是一套结构性判断 + 可执行约束。核心命题：AI 没有让人&amp;quot;更高效地做原来的事&amp;quot;，而是重新划定了&amp;quot;人应该在哪个环节存在&amp;quot;的边界。想清楚这个边界在哪，比学任何工具都重要。&lt;/p&gt;&#xA;&lt;hr&gt;&#xA;&lt;h2 id=&#34;一底层范式从执行者到判断力接口&#34;&gt;一、底层范式：从&amp;quot;执行者&amp;quot;到&amp;quot;判断力+接口&amp;quot;&lt;/h2&gt;&#xA;&lt;p&gt;过去个人竞争力 = 专业技能存量 × 执行时间。现在这个公式在崩溃，因为执行环节被 AI 大量替代，而专业技能存量的半衰期在急剧缩短（尤其是可被语言化、可被模仿的那部分技能）。&lt;/p&gt;&#xA;&lt;p&gt;新的竞争力结构大致是三层：&lt;/p&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;&lt;strong&gt;判断层&lt;/strong&gt;：知道要做什么、不做什么、什么时候停。AI 不会告诉你这个，它只会把你已经决定要做的事做得更快。&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;接口层&lt;/strong&gt;：把模糊意图转译成 AI 能执行的具体任务，再把 AI 的输出转译回真实世界的价值（客户、用户、市场）。这是个人当前最值钱、最难被替代的部分。&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;执行层&lt;/strong&gt;：AI 主导，人退居校验和兜底。&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;p&gt;你现在的问题（以及大多数&amp;quot;个人 AI 创业者&amp;quot;的问题）不是执行力不够，是&lt;strong&gt;判断层投入不足、接口层过度精细化&lt;/strong&gt;——花太多时间在&amp;quot;把系统搭得更完美&amp;quot;，而不是&amp;quot;让系统先跑起来产生真实反馈&amp;quot;。这个模式在你过去的项目里反复出现，值得单独标记。&lt;/p&gt;&#xA;&lt;hr&gt;&#xA;&lt;h2 id=&#34;二工作维度重新定义你在做什么工作&#34;&gt;二、工作维度：重新定义&amp;quot;你在做什么工作&amp;quot;&lt;/h2&gt;&#xA;&lt;h3 id=&#34;21-停止用技能定义自己用决策权定义自己&#34;&gt;2.1 停止用&amp;quot;技能&amp;quot;定义自己，用&amp;quot;决策权&amp;quot;定义自己&lt;/h3&gt;&#xA;&lt;p&gt;问自己：在你的业务链条里，哪些决策必须你来做（因为涉及品味、风险承担、方向判断），哪些决策其实可以写成规则交给 agent？大部分人高估了前者、低估了后者。&lt;/p&gt;&#xA;&lt;h3 id=&#34;22-时间分配的反直觉调整&#34;&gt;2.2 时间分配的反直觉调整&lt;/h3&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;传统模式：80% 执行，20% 思考/决策&lt;/li&gt;&#xA;&lt;li&gt;AI 时代可持续模式：40% 判断（选题、方向、验证假设），20% 接口设计（prompt、pipeline、agent 角色分工），40% 校验与迭代（看结果、砍掉不work的）&lt;/li&gt;&#xA;&lt;li&gt;危险信号：如果你发现自己又在&amp;quot;优化 pipeline 本身&amp;quot;而不是&amp;quot;用 pipeline 产出内容/收入&amp;quot;，就是掉回旧模式了。&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h3 id=&#34;23-单人不等于单点而是编排者&#34;&gt;2.3 单人不等于单点，而是&amp;quot;编排者&amp;quot;&lt;/h3&gt;&#xA;&lt;p&gt;你已经在做这件事（planner/writer/deployer 角色分工），但可以往前推一步：把自己也当成系统里的一个&amp;quot;角色&amp;quot;，明确自己这个角色的输入输出接口是什么，而不是无差别地介入所有环节。&lt;/p&gt;&#xA;&lt;hr&gt;&#xA;&lt;h2 id=&#34;三商业维度一人公司的经济学重构&#34;&gt;三、商业维度：一人公司的经济学重构&lt;/h2&gt;&#xA;&lt;h3 id=&#34;31-边际成本结构变了但边际决策成本没变&#34;&gt;3.1 边际成本结构变了，但边际决策成本没变&lt;/h3&gt;&#xA;&lt;p&gt;AI 把内容生产、客服响应、代码编写的边际成本压到接近零，但&amp;quot;决定做什么&amp;quot;的边际成本没有降——这意味着&lt;strong&gt;选题/方向判断成了新的稀缺资源&lt;/strong&gt;，而不是产能。你的护城河应该建在这里，不是建在&amp;quot;我的 pipeline 比别人快&amp;quot;上（pipeline 优势会被追平）。&lt;/p&gt;&#xA;&lt;h3 id=&#34;32-一人公司的三种可持续变现结构&#34;&gt;3.2 一人公司的三种可持续变现结构&lt;/h3&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;&lt;strong&gt;内容/流量 → 广告或带货变现&lt;/strong&gt;：门槛低，但天花板低，且高度依赖平台算法，抗风险弱。&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;内容 → 付费订阅/情报产品&lt;/strong&gt;：你已经在规划的方向（Web3+宏观情报）。优势是复利性强，劣势是需要持续的判断力输出，不能靠 pipeline 自动化掉。&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;基础设施/工具 → 卖给其他创作者或团队&lt;/strong&gt;：把 Hermes 本身productize。优势是技术资产可复用，劣势是变成&amp;quot;工具公司&amp;quot;就要面对客户支持问题——这和你明确要规避的&amp;quot;高频客户沟通&amp;quot;模式冲突，需要想清楚。&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;h3 id=&#34;33-一人公司最大的风险不是没客户是没有停止清单&#34;&gt;3.3 一人公司最大的风险不是没客户，是没有&amp;quot;停止清单&amp;quot;&lt;/h3&gt;&#xA;&lt;p&gt;AI 让&amp;quot;再做一个功能/再接一个数据源/再优化一版&amp;quot;的成本变得很低，这反而会让人陷入无限迭代而不发布。给自己设置&lt;strong&gt;发布优先于完善&lt;/strong&gt;的硬约束，比如：每两周必须有一个可被外部看到的产出，不管内部觉得多&amp;quot;没做完&amp;quot;。&lt;/p&gt;</description>
+			</item>
+	</channel>
+</rss>

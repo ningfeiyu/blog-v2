@@ -1,0 +1,13 @@
+{{- if site.Params.rtwt.home.showBio -}}
+  <div class="hero-banner">
+    <img id="hero-img" src="/images/hero/hero-1.jpg" alt=""/>
+  </div>
+  <script>
+    (function () {
+      var total = 6;
+      var pick = 1 + Math.floor(Math.random() * total);
+      var el = document.getElementById('hero-img');
+      if (el) el.src = '/images/hero/hero-' + pick + '.jpg';
+    })();
+  </script>
+{{- end -}}

@@ -1,0 +1,33 @@
+# 站点头部 / 主题切换
+theme_light: 浅色主题
+theme_dark: 深色主题
+
+# 404
+not_found_title: 哎呀，页面找不到了！
+not_found_desc: 不是所有漫游者都迷了路，但这里确实没什么可翻的了
+not_found_home_link: 回首页
+
+# 页脚
+scroll_top: 回到顶部
+footer: ""
+
+# 首页
+featured_posts: 精选文章
+recent_posts: 最新文章
+
+# 搜索
+js_required: 需要启用 JavaScript 才能搜索
+search_loading: 加载中……
+search_placeholder: 搜点什么……
+
+# 首页侧栏
+see_all: 其他
+archives: 归档
+
+# 文章页
+breadcrumb_home: 首页
+details_words: 字
+details_read_time: 分钟阅读
+side_table_of_contents: 目录
+side_attachments: 附件
+side_related: 相关文章

@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0f1923"/>
+      <stop offset="100%" stop-color="#1f2937"/>
+    </linearGradient>
+    <linearGradient id="accentGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#2775ca"/>
+      <stop offset="100%" stop-color="#3b82f6"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="4" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  <rect width="1200" height="630" fill="url(#bgGrad)"/>
+  <rect x="0" y="0" width="1200" height="6" fill="url(#accentGrad)"/>
+  <rect x="0" y="624" width="1200" height="6" fill="url(#accentGrad)"/>
+  <circle cx="980" cy="120" r="80" fill="none" stroke="#2775ca" stroke-width="2" opacity="0.15"/>
+  <circle cx="980" cy="120" r="50" fill="none" stroke="#3b82f6" stroke-width="1.5" opacity="0.2"/>
+  <circle cx="160" cy="520" r="60" fill="none" stroke="#2775ca" stroke-width="2" opacity="0.1"/>
+  <g transform="translate(80, 180)">
+    <text x="0" y="0" font-family="'SF Pro Display', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="52" font-weight="800" fill="#ffffff" letter-spacing="-1">
+      <tspan x="0" dy="0">USDC 跨国收款</tspan>
+      <tspan x="0" dy="65">合同模板</tspan>
+    </text>
+  </g>
+  <text x="80" y="390" font-family="'SF Pro Display', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="22" font-weight="400" fill="#d1d5db" letter-spacing="0.5">
+    5 个字段填空，30 分钟签出
+  </text>
+  <line x1="80" y1="425" x2="280" y2="425" stroke="#2775ca" stroke-width="2"/>
+  <g transform="translate(80, 470)">
+    <rect x="0" y="0" width="180" height="44" rx="22" fill="#2775ca" opacity="0.92"/>
+    <text x="90" y="28" text-anchor="middle" font-family="'SF Mono', 'Courier New', monospace" font-size="14" fill="#ffffff" font-weight="600">
+      USDC
+    </text>
+    <text x="200" y="28" font-family="'SF Mono', 'Courier New', monospace" font-size="13" fill="#9ca3af">
+      ⟶ 3 秒到账
+    </text>
+  </g>
+  <g transform="translate(80, 530)">
+    <text x="0" y="0" font-family="'SF Mono', 'Courier New', monospace" font-size="12" fill="#6b7280">
+      三链提现 SOP · 季末收紧 · offramp 下线 · KYC 拒绝 — 全有处置预案
+    </text>
+  </g>
+  <g transform="translate(1020, 540)">
+    <text x="0" y="0" text-anchor="end" font-family="'SF Mono', 'Courier New', monospace" font-size="11" fill="#4b5563">
+      2026-07 · v1
+    </text>
+  </g>
+</svg>

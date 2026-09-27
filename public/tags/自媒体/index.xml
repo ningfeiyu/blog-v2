@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+	<channel>
+		<title>自媒体 on 老宁的试验田</title>
+		<link>https://blog.ning.indevs.in/tags/%E8%87%AA%E5%AA%92%E4%BD%93/</link>
+		<description>Recent content in 自媒体 on 老宁的试验田</description>
+		<generator>Hugo</generator>
+		<language>zh-CN</language>
+		
+		
+		
+		
+			<lastBuildDate>Sat, 13 Jun 2026 10:00:00 +0800</lastBuildDate>
+		
+			<atom:link href="https://blog.ning.indevs.in/tags/%E8%87%AA%E5%AA%92%E4%BD%93/index.xml" rel="self" type="application/rss+xml" />
+			<item>
+				<title>Web3 OPC进阶指南：从自媒体到协议创始人的实操路径</title>
+				<link>https://blog.ning.indevs.in/posts/opc-web3-advanced-guide/</link>
+				<pubDate>Sat, 13 Jun 2026 10:00:00 +0800</pubDate>
+				<guid>https://blog.ning.indevs.in/posts/opc-web3-advanced-guide/</guid>
+				<description>&lt;p&gt;&lt;img src=&#34;https://blog.ning.indevs.in/images/remote/ext-6af496f99b81.jpg&#34; alt=&#34;Web3 OPC&#34;&gt;&lt;/p&gt;&#xA;&lt;blockquote&gt;&#xA;&lt;p&gt;传统OPC卖的是时间和技能，Web3 OPC卖的是&lt;strong&gt;协议和所有权&lt;/strong&gt;。当你把「一人公司」升级为「一人协议」，收入结构会从「劳务换钱」跃迁为「治理代币 + 协议手续费 + 策展收益」的复合模型。&lt;/p&gt;&#xA;&lt;p&gt;这不是理论。2024年，一个名为 &lt;a href=&#34;https://lilac.fi&#34;&gt;Lilac&lt;/a&gt; 的DeFi策略工具，由创始人在巴厘岛的单人公寓开发，月收入峰值超过 $180,000——团队始终只有他一人。&lt;/p&gt;&#xA;&lt;/blockquote&gt;&#xA;&lt;hr&gt;&#xA;&lt;h2 id=&#34;一为什么web3让opc产生了质变&#34;&gt;一、为什么Web3让OPC产生了质变&lt;/h2&gt;&#xA;&lt;h3 id=&#34;11-传统opc-vs-web3-opc&#34;&gt;1.1 传统OPC vs Web3 OPC&lt;/h3&gt;&#xA;&lt;table&gt;&#xA;&#x9;&lt;thead&gt;&#xA;&#x9;&#x9;&#x9;&lt;tr&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;th&gt;维度&lt;/th&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;th&gt;传统一人公司&lt;/th&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;th&gt;Web3一人公司&lt;/th&gt;&#xA;&#x9;&#x9;&#x9;&lt;/tr&gt;&#xA;&#x9;&lt;/thead&gt;&#xA;&#x9;&lt;tbody&gt;&#xA;&#x9;&#x9;&#x9;&lt;tr&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;&lt;strong&gt;核心价值&lt;/strong&gt;&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;个人技能 × 时间&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;协议 × 社区 × 代币激励&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&lt;/tr&gt;&#xA;&#x9;&#x9;&#x9;&lt;tr&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;&lt;strong&gt;收入结构&lt;/strong&gt;&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;服务费、课程、咨询&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;交易手续费、质押收益、治理代币增值&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&lt;/tr&gt;&#xA;&#x9;&#x9;&#x9;&lt;tr&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;&lt;strong&gt;客户关系&lt;/strong&gt;&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;甲乙方，一次性交易&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;持币者社区，长期利益绑定&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&lt;/tr&gt;&#xA;&#x9;&#x9;&#x9;&lt;tr&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;&lt;strong&gt;增长杠杆&lt;/strong&gt;&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;内容流量、口碑转介绍&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;流动性挖矿、协议可组合性&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&lt;/tr&gt;&#xA;&#x9;&#x9;&#x9;&lt;tr&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;&lt;strong&gt;退出方式&lt;/strong&gt;&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;卖公司、IP授权&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;代币上市、协议被收购、国库资产&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&lt;/tr&gt;&#xA;&#x9;&lt;/tbody&gt;&#xA;&lt;/table&gt;&#xA;&lt;h3 id=&#34;12-web3-opc-的三重不对称优势&#34;&gt;1.2 Web3 OPC 的三重不对称优势&lt;/h3&gt;&#xA;&lt;p&gt;&lt;strong&gt;① 资本效率的跃迁&lt;/strong&gt;&lt;/p&gt;&#xA;&lt;p&gt;传统SaaS需要融资、烧市场、建团队。Web3协议可以通过「流动性引导拍卖」（LBA）或「公平启动」直接向社区筹集资金，&lt;strong&gt;一人团队也能启动千万美金级别的协议&lt;/strong&gt;。&lt;/p&gt;&#xA;&lt;p&gt;&lt;strong&gt;② 社区即员工&lt;/strong&gt;&lt;/p&gt;&#xA;&lt;p&gt;通过代币治理，你的早期用户会变成协议的「事实员工」：他们提供流动性、参与治理投票、主动推广协议——&lt;strong&gt;且不需要你交社保&lt;/strong&gt;。&lt;/p&gt;&#xA;&lt;p&gt;&lt;strong&gt;③ 可组合性复利&lt;/strong&gt;&lt;/p&gt;&#xA;&lt;p&gt;你的协议可以被其他协议集成。一个基础的DEX聚合器，一旦被钱包或前端集成，收入会呈指数级增长——&lt;strong&gt;这是传统OPC无法想象的网络效应&lt;/strong&gt;。&lt;/p&gt;&#xA;&lt;hr&gt;&#xA;&lt;h2 id=&#34;二web3-opc-的四种成熟模式&#34;&gt;二、Web3 OPC 的四种成熟模式&lt;/h2&gt;&#xA;&lt;h3 id=&#34;模式a内容策展--代币门控最适合自媒体转型&#34;&gt;模式A：内容策展 + 代币门控（最适合自媒体转型）&lt;/h3&gt;&#xA;&lt;p&gt;&lt;strong&gt;核心逻辑&lt;/strong&gt;：把高质量的Web3分析/研究内容，通过代币门控（Token-Gated Access）实现变现。&lt;/p&gt;&#xA;&lt;p&gt;&lt;strong&gt;实操路径&lt;/strong&gt;：&lt;/p&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;&lt;strong&gt;发行社区代币&lt;/strong&gt;（$XXX）：&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;使用 &lt;a href=&#34;https://mirror.xyz&#34;&gt;Mirror&lt;/a&gt; 或 &lt;a href=&#34;https://paragraph.xyz&#34;&gt;Paragraph&lt;/a&gt; 发行&lt;/li&gt;&#xA;&lt;li&gt;早期持有者享受独家研报、Discord私密频道、提前空投信息&lt;/li&gt;&#xA;&lt;li&gt;代币总量固定，早期支持者获得流动性溢价&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;&lt;strong&gt;建立策展矩阵&lt;/strong&gt;：&lt;/p&gt;</description>
+			</item>
+	</channel>
+</rss>

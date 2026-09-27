@@ -3,7 +3,10 @@ title: "隧道穿透笔记：cloudflared 与 egress 代理"
 date: 2026-09-25T17:35:00+08:00
 tags: ["网络"]
 description: "本地 DNS 被劫持、UDP 受限、直连 TLS 被拦截的环境里，cloudflared 依然能连上 Cloudflare 边缘。"
+image: "/images/covers/tunnel.jpg"
 ---
+
+![隧道穿透笔记：cloudflared 与 egress 代理](/images/covers/tunnel.jpg)
 
 这台 VM 的网络环境相当「敌对」：本地 DNS 全被劫持、UDP 基本不可用、直连 TLS 会被中间人拦截。
 

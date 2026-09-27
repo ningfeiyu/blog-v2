@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="zh-CN" dir="ltr">
+<head>
+  <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>用 Claude 系统学任何技能（上）：为什么随机提问没用，以及第一把钥匙——学习阶梯 | 老宁的试验田</title>
+<link rel="icon" href="/favicon.svg" sizes="any" type="image/svg+xml" /><meta property="og:url" content="https://blog.ning.indevs.in/posts/claude-learning-system-part1/">
+	<meta property="og:site_name" content="老宁的试验田">
+	<meta property="og:title" content="用 Claude 系统学任何技能（上）：为什么随机提问没用，以及第一把钥匙——学习阶梯">
+	<meta property="og:description" content="大多数人用 AI 学习只停留在“随机提问、随机答案”，却缺少结构、测试、压缩和反馈。本文从学习的四个缺失要素切入，给出第一个核心提示词——学习阶梯，把任何主题拆成 5 个清晰级别，让你永远知道自己在哪、下一步学什么。">
+	<meta property="og:locale" content="zh_CN">
+	<meta property="og:type" content="article">
+		<meta property="article:section" content="posts">
+		<meta property="article:published_time" content="2026-06-22T10:00:00+08:00">
+		<meta property="article:modified_time" content="2026-06-22T10:00:00+08:00">
+		<meta property="article:tag" content="AI学习">
+		<meta property="article:tag" content="提示词工程">
+		<meta property="article:tag" content="Claude">
+		<meta property="article:tag" content="学习方法">
+		<meta property="article:tag" content="认知科学">
+		<meta property="article:tag" content="自学">
+
+	<meta name="twitter:card" content="summary">
+	<meta name="twitter:title" content="用 Claude 系统学任何技能（上）：为什么随机提问没用，以及第一把钥匙——学习阶梯">
+	<meta name="twitter:description" content="大多数人用 AI 学习只停留在“随机提问、随机答案”，却缺少结构、测试、压缩和反馈。本文从学习的四个缺失要素切入，给出第一个核心提示词——学习阶梯，把任何主题拆成 5 个清晰级别，让你永远知道自己在哪、下一步学什么。">
+
+      <link rel="stylesheet" href="/css/root.min.1052d5860b4442ccd33071bf3543c78d47509a7acb2c13edb1288611a2ebd6a8.css" integrity="sha256-EFLVhgtEQszTMHG/NUPHjUdQmnrLLBPtsSiGEaLr1qg=" crossorigin="anonymous">
+      <link rel="stylesheet" href="/css/bundle.min.e735cd1c41e6b7ba15433438fa484f2804322027ee8348fcff2adbf14976ce28.css" integrity="sha256-5zXNHEHmt7oVQzQ4&#43;khPKAQyICfug0j8/yrb8Ul2zig=" crossorigin="anonymous">
+
+      <script src="/js/bundle.cc8ae9952dbfb731affafabdf26e5c60a6910047ff59ccdeaf1daebaa26c8830.js" integrity="sha256-zIrplS2/tzGv&#43;vq98m5cYKaRAEf/Wczerx2uuqJsiDA=" crossorigin="anonymous"></script><script defer src="/js/search/flexsearch.compact.3928d3d2172bc0b5f75d9458fb9255f0befce1c7239ba6e5d2c58ed4b82c2073.js" integrity="sha256-OSjT0hcrwLX3XZRY&#43;5JV8L784ccjm6bl0sWO1LgsIHM="></script>
+<script defer src="/js/search/search.1d980f84df11f3eb7c8c5f17f541d49a0611608df179dd74fa7f06225eb56ace.js" integrity="sha256-HZgPhN8R8&#43;t8jF8X9UHUmgYRYI3xed10&#43;n8GIl61as4="></script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,200;1,300;1,400;1,500;1,600;1,700;1,800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200..800&family=Spectral:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,200;1,300;1,400;1,500;1,600;1,700;1,800&display=swap" rel="stylesheet">
+
+
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+<link href="https://cdn.jsdelivr.net/npm/lxgw-wenkai-webfont@1.7.0/lxgwwenkai-regular.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/lxgw-wenkai-webfont@1.7.0/lxgwwenkai-bold.css" rel="stylesheet">
+
+<script defer src="https://events.vercount.one/js"></script>
+</head>
+<body class="notransition">
+  <div id="container">
+    <header id="main-header"><div role="navigation" aria-label="Main">
+  <div class="nav-left">
+    <a href="https://blog.ning.indevs.in/" style="color: inherit;">老宁的试验田</a>
+  </div>
+  <div class="nav-right">
+    <div style="position:absolute;width:0px;height:0px;">
+      <div id="nav-dropdown-menu" class="hidden" href="#">
+    <div class="nav-item">
+      <a href="/"
+      >首页</a>
+    </div>
+    <div class="nav-item">
+      <a aria-current="true" class="ancestor" href="/posts/"
+      >文章</a>
+    </div>
+    <div class="nav-item">
+      <a href="/tags/"
+      >标签</a>
+    </div>
+    <div class="nav-item">
+      <a href="/archives/"
+      >归档</a>
+    </div>
+    <div class="nav-item">
+      <a href="/about/"
+      >关于</a>
+    </div>
+</div>
+    </div>
+    <a id="nav-dropdown-button" href="#"><svg width="20px" height="20px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M4 6H20M4 12H20M4 18H20" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
+</a>
+    <div id="nav-menu">
+    <div class="nav-item">
+      <a href="/"
+      >首页</a>
+    </div>
+    <div class="nav-item">
+      <a aria-current="true" class="ancestor" href="/posts/"
+      >文章</a>
+    </div>
+    <div class="nav-item">
+      <a href="/tags/"
+      >标签</a>
+    </div>
+    <div class="nav-item">
+      <a href="/archives/"
+      >归档</a>
+    </div>
+    <div class="nav-item">
+      <a href="/about/"
+      >关于</a>
+    </div>
+</div>
+    <a id="theme-switcher" href="#">
+<svg class="light-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M12 3V4M12 20V21M4 12H3M6.31412 6.31412L5.5 5.5M17.6859 6.31412L18.5 5.5M6.31412 17.69L5.5 18.5001M17.6859 17.69L18.5 18.5001M21 12H20M16 12C16 14.2091 14.2091 16 12 16C9.79086 16 8 14.2091 8 12C8 9.79086 9.79086 8 12 8C14.2091 8 16 9.79086 16 12Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
+
+<svg class="dark-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M3.32031 11.6835C3.32031 16.6541 7.34975 20.6835 12.3203 20.6835C16.1075 20.6835 19.3483 18.3443 20.6768 15.032C19.6402 15.4486 18.5059 15.6834 17.3203 15.6834C12.3497 15.6834 8.32031 11.654 8.32031 6.68342C8.32031 5.50338 8.55165 4.36259 8.96453 3.32996C5.65605 4.66028 3.32031 7.89912 3.32031 11.6835Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
+</a>
+  </div>
+</div>
+</header>
+    <div class="flex grow">
+      <div id="main-pane">
+        <main id="main-content"><div class="single-header">
+<ol class="breadcrumbs" itemscope itemtype="https://schema.org/BreadcrumbList">
+    <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+      <a itemprop="item" href="https://blog.ning.indevs.in/">
+        <span itemprop="name">首页</span>
+      </a>
+      <meta itemprop="position" content='1' />
+    </li>
+    <span>&nbsp»&nbsp</span>
+    <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+      <a itemprop="item" href="https://blog.ning.indevs.in/posts/">
+        <span itemprop="name">文章</span>
+      </a>
+      <meta itemprop="position" content='2' />
+    </li>
+    <span>&nbsp»&nbsp</span>
+</ol>
+<h1>用 Claude 系统学任何技能（上）：为什么随机提问没用，以及第一把钥匙——学习阶梯</h1><time class="dim" datetime="2026-06-22T10:00:00&#43;08:00">2026年6月22日</time><div class="term-container"><div class="tag">
+        <a href="https://blog.ning.indevs.in/tags/ai%E5%AD%A6%E4%B9%A0/">#AI学习</a>
+      </div><div class="tag">
+        <a href="https://blog.ning.indevs.in/tags/%E6%8F%90%E7%A4%BA%E8%AF%8D%E5%B7%A5%E7%A8%8B/">#提示词工程</a>
+      </div><div class="tag">
+        <a href="https://blog.ning.indevs.in/tags/claude/">#Claude</a>
+      </div><div class="tag">
+        <a href="https://blog.ning.indevs.in/tags/%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95/">#学习方法</a>
+      </div><div class="tag">
+        <a href="https://blog.ning.indevs.in/tags/%E8%AE%A4%E7%9F%A5%E7%A7%91%E5%AD%A6/">#认知科学</a>
+      </div><div class="tag">
+        <a href="https://blog.ning.indevs.in/tags/%E8%87%AA%E5%AD%A6/">#自学</a>
+      </div></ol></div>
+  <section class="page-section"><p><img src="/images/remote/ext-27a2962ebead.jpg" alt="AI 学习的结构化路径：从随机提问到系统化掌握"></p>
+<blockquote>
+<p><strong>系列说明</strong>：这是「用 Claude 系统学任何技能」四部曲的第一篇。全系列共四篇，涵盖学习的四个核心缺失环节——路径、测试、压缩、反馈——以及把它们串联成系统的完整方法。</p>
+</blockquote>
+<hr>
+<h2 id="一为什么你的-ai-学习看着很有用过两天全忘了">一、为什么你的 AI 学习「看着很有用，过两天全忘了」</h2>
+<p>你一定有过这种经历：</p>
+<blockquote>
+<p>你问 Claude：「解释一下量子计算 / Rust 所有权 / Transformer 架构」。
+它给了一个条理清晰、例子丰富的回答。
+你看完觉得「我懂了」，甚至还收藏了。
+两周后，你在面试 / 实战 / 讨论中遇到相关问题，<strong>脑子一片空白</strong>。</p>
+</blockquote>
+<p><strong>这不是你的记忆力不好，也不是 Claude 解释得不够清楚。</strong></p>
+<p>问题在于：<strong>你把「获得答案」当成了「完成学习」。</strong></p>
+<hr>
+<h2 id="二真正的学习缺少的四样东西">二、真正的学习缺少的四样东西</h2>
+<p>认知科学和教学设计的研究一致指出：<strong>被动接收信息 ≠ 学习</strong>。真正的学习需要四个核心环节，而普通的 AI 对话通常全缺：</p>
+<table>
+	<thead>
+			<tr>
+					<th>核心环节</th>
+					<th>普通 AI 对话</th>
+					<th>真实学习需要</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td><strong>一条路径</strong></td>
+					<td>随机问答，跳跃式</td>
+					<td>知道按什么顺序学什么，清楚自己在哪、下一步是什么</td>
+			</tr>
+			<tr>
+					<td><strong>一次测试</strong></td>
+					<td>看完觉得懂了</td>
+					<td>主动回忆、暴露知识盲区、在真实场景前发现漏洞</td>
+			</tr>
+			<tr>
+					<td><strong>一份压缩</strong></td>
+					<td>全文保存/收藏</td>
+					<td>压缩成可在 5 分钟内复习的核心卡片，考前/会前/实战前速览</td>
+			</tr>
+			<tr>
+					<td><strong>一个反馈循环</strong></td>
+					<td>答错没人纠正</td>
+					<td>漏洞被立刻指出、只重讲遗漏部分、循环直到解释清晰</td>
+			</tr>
+	</tbody>
+</table>
+<p><strong>这四个缺口，正是普通人「用 AI 学了一堆却什么也没留下」的根本原因。</strong></p>
+<hr>
+<h2 id="三这套系统的整体架构">三、这套系统的整体架构</h2>
+<p>我们要构建的不是「更好的提示词」，而是一个 <strong>学习系统</strong>，包含 6 个提示词，对应 4 个核心环节 + 2 个辅助环节：</p>
+<pre tabindex="0"><code>┌─────────────────────────────────────────────────────────────┐
+│                    学习系统的 6 个阶段                        │
+├──────────────┬──────────────┬──────────────┬───────────────┤
+│  1. 学习阶梯  │  2. 20小时80/20 │  3. 主动回忆测试  │           │
+│  → 路径       │  → 路径(精简)   │  → 测试          │           │
+├──────────────┼──────────────┼──────────────┼───────────────┤
+│  4. 一页速记表 │  5. 精选资源    │  6. 费曼循环    │           │
+│  → 压缩       │  → 路径(资源)   │  → 反馈循环      │           │
+└──────────────┴──────────────┴──────────────┴───────────────┘
+</code></pre><p><strong>本文（第 1 部分）只讲前两个最基础的：为什么随机提问没用，以及第一把钥匙——「学习阶梯」。</strong></p>
+<hr>
+<h2 id="四为什么随机提问根本不管用">四、为什么随机提问根本不管用</h2>
+<h3 id="41-解释的幻觉">4.1 「解释的幻觉」</h3>
+<p>当你问「解释一下 Transformer」，Claude 给出一个清晰的解释。你读完，大脑产生了一种 <strong>「我懂了」的流畅感</strong>。</p>
+<p>认知心理学叫这 <strong>「解释的幻觉」</strong>——<strong>流畅度 ≠ 理解度</strong>。你只是跟着别人的思路走了一遍，自己并没有建立提取路径。</p>
+<h3 id="42-缺乏提取练习">4.2 缺乏「提取练习」</h3>
+<p>学习的核心不是「存进去」，而是「取出来」。随机提问从不要求你<strong>主动回忆</strong>、<strong>在无提示下复现</strong>、<strong>在新情境下迁移</strong>。没有提取，记忆痕迹就不巩固。</p>
+<h3 id="43-没有知识边界">4.3 没有「知识边界」</h3>
+<p>你不知道自己「哪里懂、哪里不懂」。随机提问只会给你正面例子，从不暴露你的盲区。考试、面试、真实项目中，<strong>正是那些盲区要你命</strong>。</p>
+<h3 id="44-碎片化知识无法组装">4.4 碎片化知识无法组装</h3>
+<p>随机问答得到的是<strong>孤立的知识点</strong>，没有结构连接。真实问题需要<strong>组装多个知识点</strong>——而组装能力只能在结构化学习中建立。</p>
+<hr>
+<h2 id="四第一把钥匙学习阶梯把任何主题拆成-5-个清晰级别">四、第一把钥匙：学习阶梯——把任何主题拆成 5 个清晰级别</h2>
+<h3 id="核心思想">核心思想</h3>
+<p><strong>「大多数人学习失败，是因为在基础还没牢固时就跳进了高级内容。」</strong></p>
+<p>这个提示词把任何主题拆成 <strong>5 个清晰的难度级别</strong>，每个级别都有：</p>
+<ul>
+<li>明确的「在这个阶段该懂什么」</li>
+<li>可观测的「掌握标样」</li>
+<li>可执行的「动手练习」</li>
+<li>可自检的「通过题」</li>
+</ul>
+<hr>
+<h3 id="完整提示词复制即用">完整提示词（复制即用）</h3>
+<pre tabindex="0"><code>我想一步一步学习 [主题]，不跳过重要的基础内容。
+
+请扮演一位专家教师和技能教练。将 [主题] 拆分为 5 个清晰的难度级别，从完全新手到自信实践者。
+
+对于每个级别，请包含：
+
+1. 级别名称
+2. 在这个阶段我应该理解什么
+3. 在这个级别上掌握的程度是什么样子
+4. 需要重点掌握的最重要概念或技能
+5. 证明我准备好前进一步的里程碑
+6. 一个动手练习或微型项目
+7. 学习者在当前级别常犯的错误
+8. 在进入下一级之前的一个简单自检问题
+
+请按如下方式构建级别：
+- 第 1 级：完全新手
+- 第 2 级：基本理解
+- 第 3 级：实际使用者
+- 第 4 级：问题解决者
+- 第 5 级：自信实践者
+
+保持解释实用、对新手友好，并聚焦于真正的进步。
+</code></pre><hr>
+<h3 id="实战演示用学习阶梯拆解rust-所有权机制">实战演示：用「学习阶梯」拆解「Rust 所有权机制」</h3>
+<p>把 <code>[主题]</code> 替换为 <code>Rust 所有权机制</code>，发给 Claude，你会得到类似这样的结构：</p>
+<hr>
+<h4 id="第-1-级完全新手">第 1 级：完全新手</h4>
+<table>
+	<thead>
+			<tr>
+					<th>项目</th>
+					<th>内容</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td><strong>该懂什么</strong></td>
+					<td>变量绑定、作用域、栈上数据的简单移动语义</td>
+			</tr>
+			<tr>
+					<td><strong>掌握标样</strong></td>
+					<td>能解释「为什么 <code>let y = x</code> 后 <code>x</code> 不能再用」</td>
+			</tr>
+			<tr>
+					<td><strong>核心概念</strong></td>
+					<td>所有权、移动、栈 vs 堆的直觉</td>
+			</tr>
+			<tr>
+					<td><strong>里程碑</strong></td>
+					<td>能写出不报错的 <code>let x = 5; let y = x;</code> 并解释为什么 <code>x</code> 失效</td>
+			</tr>
+			<tr>
+					<td><strong>动手练习</strong></td>
+					<td>写一个函数接收 <code>String</code> 参数，调用两次分别传同一个变量，观察编译报错</td>
+			</tr>
+			<tr>
+					<td><strong>常见错误</strong></td>
+					<td>以为 <code>let y = x</code> 是「复制」，没意识到是「移动」</td>
+			</tr>
+			<tr>
+					<td><strong>自检问题</strong></td>
+					<td><code>let a = String::from(&quot;hi&quot;); let b = a; println!(&quot;{}&quot;, a);</code> 这行会编译通过吗？为什么？</td>
+			</tr>
+	</tbody>
+</table>
+<hr>
+<h4 id="第-2-级基本理解">第 2 级：基本理解</h4>
+<table>
+	<thead>
+			<tr>
+					<th>项目</th>
+					<th>内容</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td><strong>该懂什么</strong></td>
+					<td>引用（<code>&amp;T</code>）、可变引用（<code>&amp;mut T</code>）、借用规则、生命周期的直觉</td>
+			</tr>
+			<tr>
+					<td><strong>掌握标样</strong></td>
+					<td>能写出正确借用的函数签名，解释「为什么同时只能有一个可变引用或多个不可变引用」</td>
+			</tr>
+			<tr>
+					<td><strong>核心概念</strong></td>
+					<td>借用检查器、编译期内存安全、数据竞争预防</td>
+			</tr>
+			<tr>
+					<td><strong>里程碑</strong></td>
+					<td>写一个函数接受 <code>&amp;String</code> 和 <code>&amp;mut String</code>，分别演示读取和修改</td>
+			</tr>
+			<tr>
+					<td><strong>动手练习</strong></td>
+					<td>实现一个简单的 <code>calculate_length(s: &amp;String) -&gt; usize</code> 并调用</td>
+			</tr>
+			<tr>
+					<td><strong>常见错误</strong></td>
+					<td>试图在同一作用域同时创建 <code>&amp;mut</code> 和 <code>&amp;</code>、忘记生命周期标注</td>
+			</tr>
+			<tr>
+					<td><strong>自检问题</strong></td>
+					<td>为什么这段代码编译不通过？<code>let mut s = String::new(); let r1 = &amp;s; let r2 = &amp;mut s;</code></td>
+			</tr>
+	</tbody>
+</table>
+<hr>
+<h4 id="第-3-级实际使用者">第 3 级：实际使用者</h4>
+<table>
+	<thead>
+			<tr>
+					<th>项目</th>
+					<th>内容</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td><strong>该懂什么</strong></td>
+					<td>结构体中的所有权、派生 trait、Option/Result 模式、错误传播</td>
+			</tr>
+			<tr>
+					<td><strong>掌握标样</strong></td>
+					<td>能设计包含所有权字段的结构体，正确处理 <code>Option&lt;String&gt;</code> 的取值与转移</td>
+			</tr>
+			<tr>
+					<td><strong>核心概念</strong></td>
+					<td>所有权在数据结构中的传递、模式匹配解构所有权</td>
+			</tr>
+			<tr>
+					<td><strong>里程碑</strong></td>
+					<td>实现一个简单的链表节点 <code>struct Node { value: i32, next: Option&lt;Box&lt;Node&gt;&gt; }</code></td>
+			</tr>
+			<tr>
+					<td><strong>动手练习</strong></td>
+					<td>写一个函数 <code>fn take_ownership(opt: Option&lt;String&gt;) -&gt; String</code> 安全取值</td>
+			</tr>
+			<tr>
+					<td><strong>常见错误</strong></td>
+					<td>试图 move 出 <code>Option</code> 内部的值而导致部分移动、滥用 <code>unwrap()</code></td>
+			</tr>
+			<tr>
+					<td><strong>自检问题</strong></td>
+					<td><code>let opt = Some(String::from(&quot;hi&quot;)); let s = opt.unwrap();</code> 之后 <code>opt</code> 还能用吗？</td>
+			</tr>
+	</tbody>
+</table>
+<hr>
+<h4 id="第-4-级问题解决者">第 4 级：问题解决者</h4>
+<table>
+	<thead>
+			<tr>
+					<th>项目</th>
+					<th>内容</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td><strong>该懂什么</strong></td>
+					<td>智能指针、<code>Rc</code>/<code>Arc</code>、<code>RefCell</code>/<code>Mutex</code>、内部可变性、循环引用与弱引用</td>
+			</tr>
+			<tr>
+					<td><strong>掌握标样</strong></td>
+					<td>能判断何时用 <code>Rc&lt;RefCell&lt;T&gt;&gt;</code> vs <code>Arc&lt;Mutex&lt;T&gt;&gt;</code>，能解释为什么 <code>Rc</code> 不能跨线程</td>
+			</tr>
+			<tr>
+					<td><strong>核心概念</strong></td>
+					<td>共享所有权、运行时借用检查、线程安全内部可变性</td>
+			</tr>
+			<tr>
+					<td><strong>里程碑</strong></td>
+					<td>实现一个简单的观察者模式：多个观察者共享同一个可变主题</td>
+			</tr>
+			<tr>
+					<td><strong>动手练习</strong></td>
+					<td>用 <code>Rc&lt;RefCell&lt;Vec&lt;u32&gt;&gt;&gt;</code> 实现一个可被多处修改的共享缓冲区</td>
+			</tr>
+			<tr>
+					<td><strong>常见错误</strong></td>
+					<td><code>Rc</code> 循环引用导致内存泄漏、单线程用 <code>Arc</code> 造成性能浪费</td>
+			</tr>
+			<tr>
+					<td><strong>自检问题</strong></td>
+					<td>为什么 <code>Rc&lt;RefCell&lt;T&gt;&gt;</code> 不能直接在线程间共享？需要什么替代？</td>
+			</tr>
+	</tbody>
+</table>
+<hr>
+<h4 id="第-5-级自信实践者">第 5 级：自信实践者</h4>
+<table>
+	<thead>
+			<tr>
+					<th>项目</th>
+					<th>内容</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td><strong>该懂什么</strong></td>
+					<td>Pin/Unpin、异步所有权、自引用结构体、FFI 边界所有权传递、零拷贝优化</td>
+			</tr>
+			<tr>
+					<td><strong>掌握标样</strong></td>
+					<td>能设计零拷贝解析器、实现自引用结构体、在 FFI 边界正确传递所有权</td>
+			</tr>
+			<tr>
+					<td><strong>核心概念</strong></td>
+					<td>内存布局控制、编译期/运行时所有权边界的精细控制</td>
+			</tr>
+			<tr>
+					<td><strong>里程碑</strong></td>
+					<td>实现一个零拷贝的 JSON 解析器核心片段，或一个自引用的异步状态机</td>
+			</tr>
+			<tr>
+					<td><strong>动手练习</strong></td>
+					<td>用 <code>pin-project-lite</code> 实现一个自引用的异步迭代器</td>
+			</tr>
+			<tr>
+					<td><strong>常见错误</strong></td>
+					<td>忘记 <code>Pin</code> 导致自引用结构体移动后悬垂指针、误解 <code>Unpin</code> 的含义</td>
+			</tr>
+			<tr>
+					<td><strong>自检问题</strong></td>
+					<td>为什么 <code>Box&lt;T&gt;</code> 实现了 <code>Unpin</code> 但 <code>Pin&lt;Box&lt;T&gt;&gt;</code> 仍能防止移动？</td>
+			</tr>
+	</tbody>
+</table>
+<hr>
+<h3 id="怎么用这份阶梯">怎么用这份阶梯</h3>
+<ol>
+<li><strong>先跑一遍自检题</strong> → 如果全对，直接跳到下一级</li>
+<li><strong>卡在哪一级</strong> → 就在这一级停住，做动手练习、补核心概念</li>
+<li><strong>每周复盘一次</strong> → 用自检题快速复盘，发现退步立刻补</li>
+</ol>
+<p><strong>这份阶梯不是给你「答案」，是给你「地图」和「检查点」。</strong></p>
+<hr>
+<h2 id="五本文小结">五、本文小结</h2>
+<table>
+	<thead>
+			<tr>
+					<th>要点</th>
+					<th>内容</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td><strong>核心痛点</strong></td>
+					<td>随机提问 = 获得答案 ≠ 完成学习</td>
+			</tr>
+			<tr>
+					<td><strong>学习缺失的四环</strong></td>
+					<td>路径、测试、压缩、反馈</td>
+			</tr>
+			<tr>
+					<td><strong>第一把钥匙</strong></td>
+					<td>学习阶梯：5 级从新手到实践者，每级有里程碑、练习、自检</td>
+			</tr>
+			<tr>
+					<td><strong>怎么用</strong></td>
+					<td>自检 → 卡住练 → 周复盘</td>
+			</tr>
+	</tbody>
+</table>
+<hr>
+<h2 id="六下一部分预告">六、下一部分预告</h2>
+<p><strong>第 2 部分</strong>将给出另外两把钥匙：</p>
+<ol>
+<li><strong>「20 小时 80/20 法则」</strong>：如何在任何主题中找到那 20% 的核心概念，拆成 10 次 × 2 小时的学习计划</li>
+<li><strong>「主动回忆测试 / 考我直到我崩溃」</strong>：让 Claude 变成严格考官，一次一问、逐级加难、精准找出知识漏洞</li>
+</ol>
+<blockquote>
+<p><strong>用法建议</strong>：先用「学习阶梯」跑一遍你正在学的主题，确定自己在第几级，再看第 2 部分的「20 小时计划」和「主动回忆测试」。</p>
+</blockquote>
+<hr>
+<blockquote>
+<p><strong>延伸阅读</strong></p>
+<ul>
+<li>《<a href="/posts/claude-learning-system-part2/">用 Claude 系统学任何技能（中）：20 小时 80/20 法则 + 主动回忆测试</a>》</li>
+<li>《<a href="/posts/claude-learning-system-part3/">用 Claude 系统学任何技能（下）：一页速记表 + 精选资源 + 费曼循环</a>》</li>
+<li>《<a href="/posts/claude-learning-system-part4/">用 Claude 系统学任何技能（终）：为什么这套系统有效 + 完整串联指南</a>》</li>
+</ul>
+</blockquote>
+</section><div style="margin-top:3rem;padding-top:2rem;border-top:1px solid var(--dim-color);">
+  <h2 style="margin-bottom:1.5rem;">评论</h2>
+  <script src="https://giscus.app/client.js"
+      data-repo="ningfeiyu/blog-comments"
+      data-repo-id="R_kgDOR_QPZw"
+      data-category="General"
+      data-category-id="DIC_kwDOR_QPZ84C6i9W"
+      data-mapping="pathname"
+      data-strict="0"
+      data-reactions-enabled="1"
+      data-emit-metadata="0"
+      data-input-position="bottom"
+      data-theme="preferred_color_scheme"
+      data-lang="zh-CN"
+      crossorigin="anonymous"
+      async>
+  </script>
+</div>
+</main>
+        <footer id="main-footer"><div class="footer">
+  <a href="#">回到顶部</a>
+  <div class="footer-copyright">
+    <div class="dim">© 2026 老宁</div>
+    <div></div>
+  </div>
+</div>
+</footer>
+      </div><aside id="side-pane" class="side-sticky">
+<div class="side-details">
+    <span>503 字</span>
+    <span>10 - 13 分钟阅读</span></div><h3>目录</h3><nav id="TableOfContents">
+  <ul>
+    <li><a href="#一为什么你的-ai-学习看着很有用过两天全忘了">一、为什么你的 AI 学习「看着很有用，过两天全忘了」</a></li>
+    <li><a href="#二真正的学习缺少的四样东西">二、真正的学习缺少的四样东西</a></li>
+    <li><a href="#三这套系统的整体架构">三、这套系统的整体架构</a></li>
+    <li><a href="#四为什么随机提问根本不管用">四、为什么随机提问根本不管用</a>
+      <ul>
+        <li><a href="#41-解释的幻觉">4.1 「解释的幻觉」</a></li>
+        <li><a href="#42-缺乏提取练习">4.2 缺乏「提取练习」</a></li>
+        <li><a href="#43-没有知识边界">4.3 没有「知识边界」</a></li>
+        <li><a href="#44-碎片化知识无法组装">4.4 碎片化知识无法组装</a></li>
+      </ul>
+    </li>
+    <li><a href="#四第一把钥匙学习阶梯把任何主题拆成-5-个清晰级别">四、第一把钥匙：学习阶梯——把任何主题拆成 5 个清晰级别</a>
+      <ul>
+        <li><a href="#核心思想">核心思想</a></li>
+        <li><a href="#完整提示词复制即用">完整提示词（复制即用）</a></li>
+        <li><a href="#实战演示用学习阶梯拆解rust-所有权机制">实战演示：用「学习阶梯」拆解「Rust 所有权机制」</a></li>
+        <li><a href="#怎么用这份阶梯">怎么用这份阶梯</a></li>
+      </ul>
+    </li>
+    <li><a href="#五本文小结">五、本文小结</a></li>
+    <li><a href="#六下一部分预告">六、下一部分预告</a></li>
+  </ul>
+</nav></aside></div>
+  </div>
+</body>
+</html>

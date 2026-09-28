@@ -1,548 +1,63 @@
-<!DOCTYPE html>
-<html lang="zh-CN" dir="ltr">
-<head>
-  <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Hermes 配置优化与模型路由日志（2026-08-27 至 2026-08-29） | 老宁的试验田</title>
-<link rel="icon" href="/favicon.svg" sizes="any" type="image/svg+xml" /><meta property="og:url" content="https://blog.ning.indevs.in/posts/2026-08-29-hermes-config-optimization-log/">
-	<meta property="og:site_name" content="老宁的试验田">
-	<meta property="og:title" content="Hermes 配置优化与模型路由日志（2026-08-27 至 2026-08-29）">
-	<meta property="og:description" content="📅 最近两天（2026-08-27 至 2026-08-29）Hermes 配置优化日志 🎯 目标 在长期 429 限流和模型配置不合理的情况下，重构 Hermes Agent 的模型分层策略，修复 fallback 链，并给 27 个 cron 任务按复杂度分配对应的 model tier。确保小任务不再调用大模型，降低成本并提高响应速度。
-🛠 关键问题（按严重程度排序） # 问题 影响 位置 1 NVIDIA API 持续 429 限流 导致所有 NVIDIA provider 任务失败/延迟，已持续 24h&#43; .env &#43; config.yaml 2 仅 1 个任务显式指定 model/provider 26 个任务依赖 fallback 链，链路不健全 jobs.json 3 Gemini 模型名错误 gemini-1.5-flash 在 v1beta 不存在 → 404 错误 config.yaml fallback_providers 4 Discord 已卸载但残留配置 旧任务 origin.platform: weixin，已卸载 mautrix/weixin .env &#43; jobs.json 5 无显式 fallback key NVIDIA_FALLBACK_API_KEY 未在环境变量中，fallback 断裂 .env &#43; config.yaml ✅ 已完成的修复 1. 配置文件重构 (/root/.hermes/config.yaml) 新增 四层模型路由：">
-	<meta property="og:locale" content="zh_CN">
-	<meta property="og:type" content="article">
-		<meta property="article:section" content="posts">
-		<meta property="article:published_time" content="2026-08-29T03:57:16+08:00">
-		<meta property="article:modified_time" content="2026-08-29T03:57:16+08:00">
-		<meta property="article:tag" content="Hermes">
-		<meta property="article:tag" content="Cron">
-		<meta property="article:tag" content="Model-Tiers">
-		<meta property="article:tag" content="Nvidia">
-		<meta property="article:tag" content="Fallback">
-		<meta property="article:tag" content="Groq">
-
-	<meta name="twitter:card" content="summary">
-	<meta name="twitter:title" content="Hermes 配置优化与模型路由日志（2026-08-27 至 2026-08-29）">
-	<meta name="twitter:description" content="📅 最近两天（2026-08-27 至 2026-08-29）Hermes 配置优化日志 🎯 目标 在长期 429 限流和模型配置不合理的情况下，重构 Hermes Agent 的模型分层策略，修复 fallback 链，并给 27 个 cron 任务按复杂度分配对应的 model tier。确保小任务不再调用大模型，降低成本并提高响应速度。
-🛠 关键问题（按严重程度排序） # 问题 影响 位置 1 NVIDIA API 持续 429 限流 导致所有 NVIDIA provider 任务失败/延迟，已持续 24h&#43; .env &#43; config.yaml 2 仅 1 个任务显式指定 model/provider 26 个任务依赖 fallback 链，链路不健全 jobs.json 3 Gemini 模型名错误 gemini-1.5-flash 在 v1beta 不存在 → 404 错误 config.yaml fallback_providers 4 Discord 已卸载但残留配置 旧任务 origin.platform: weixin，已卸载 mautrix/weixin .env &#43; jobs.json 5 无显式 fallback key NVIDIA_FALLBACK_API_KEY 未在环境变量中，fallback 断裂 .env &#43; config.yaml ✅ 已完成的修复 1. 配置文件重构 (/root/.hermes/config.yaml) 新增 四层模型路由：">
-<meta property="og:image" content="https://blog.ning.indevs.in/images/covers/2026-08-29-hermes-config-optimization-log.jpg" />
-<meta name="twitter:image" content="https://blog.ning.indevs.in/images/covers/2026-08-29-hermes-config-optimization-log.jpg" />
-      <link rel="stylesheet" href="/css/root.min.1052d5860b4442ccd33071bf3543c78d47509a7acb2c13edb1288611a2ebd6a8.css" integrity="sha256-EFLVhgtEQszTMHG/NUPHjUdQmnrLLBPtsSiGEaLr1qg=" crossorigin="anonymous">
-      <link rel="stylesheet" href="/css/bundle.min.e735cd1c41e6b7ba15433438fa484f2804322027ee8348fcff2adbf14976ce28.css" integrity="sha256-5zXNHEHmt7oVQzQ4&#43;khPKAQyICfug0j8/yrb8Ul2zig=" crossorigin="anonymous">
-
-      <script src="/js/bundle.cc8ae9952dbfb731affafabdf26e5c60a6910047ff59ccdeaf1daebaa26c8830.js" integrity="sha256-zIrplS2/tzGv&#43;vq98m5cYKaRAEf/Wczerx2uuqJsiDA=" crossorigin="anonymous"></script><script defer src="/js/search/flexsearch.compact.3928d3d2172bc0b5f75d9458fb9255f0befce1c7239ba6e5d2c58ed4b82c2073.js" integrity="sha256-OSjT0hcrwLX3XZRY&#43;5JV8L784ccjm6bl0sWO1LgsIHM="></script>
-<script defer src="/js/search/search.1d980f84df11f3eb7c8c5f17f541d49a0611608df179dd74fa7f06225eb56ace.js" integrity="sha256-HZgPhN8R8&#43;t8jF8X9UHUmgYRYI3xed10&#43;n8GIl61as4="></script>
-
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,200;1,300;1,400;1,500;1,600;1,700;1,800&display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200..800&family=Spectral:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,200;1,300;1,400;1,500;1,600;1,700;1,800&display=swap" rel="stylesheet">
-
-
-<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
-<link href="https://cdn.jsdelivr.net/npm/lxgw-wenkai-webfont@1.7.0/lxgwwenkai-regular.css" rel="stylesheet">
-<link href="https://cdn.jsdelivr.net/npm/lxgw-wenkai-webfont@1.7.0/lxgwwenkai-bold.css" rel="stylesheet">
-
-<script defer src="https://events.vercount.one/js"></script>
-</head>
-<body class="notransition">
-  <div id="container">
-    <header id="main-header"><div role="navigation" aria-label="Main">
-  <div class="nav-left">
-    <a href="https://blog.ning.indevs.in/" style="color: inherit;">老宁的试验田</a>
-  </div>
-  <div class="nav-right">
-    <div style="position:absolute;width:0px;height:0px;">
-      <div id="nav-dropdown-menu" class="hidden" href="#">
-    <div class="nav-item">
-      <a href="/"
-      >首页</a>
-    </div>
-    <div class="nav-item">
-      <a aria-current="true" class="ancestor" href="/posts/"
-      >文章</a>
-    </div>
-    <div class="nav-item">
-      <a href="/tags/"
-      >标签</a>
-    </div>
-    <div class="nav-item">
-      <a href="/archives/"
-      >归档</a>
-    </div>
-    <div class="nav-item">
-      <a href="/about/"
-      >关于</a>
-    </div>
-</div>
-    </div>
-    <a id="nav-dropdown-button" href="#"><svg width="20px" height="20px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-<path d="M4 6H20M4 12H20M4 18H20" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-</svg>
-</a>
-    <div id="nav-menu">
-    <div class="nav-item">
-      <a href="/"
-      >首页</a>
-    </div>
-    <div class="nav-item">
-      <a aria-current="true" class="ancestor" href="/posts/"
-      >文章</a>
-    </div>
-    <div class="nav-item">
-      <a href="/tags/"
-      >标签</a>
-    </div>
-    <div class="nav-item">
-      <a href="/archives/"
-      >归档</a>
-    </div>
-    <div class="nav-item">
-      <a href="/about/"
-      >关于</a>
-    </div>
-</div>
-    <a id="theme-switcher" href="#">
-<svg class="light-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-<path d="M12 3V4M12 20V21M4 12H3M6.31412 6.31412L5.5 5.5M17.6859 6.31412L18.5 5.5M6.31412 17.69L5.5 18.5001M17.6859 17.69L18.5 18.5001M21 12H20M16 12C16 14.2091 14.2091 16 12 16C9.79086 16 8 14.2091 8 12C8 9.79086 9.79086 8 12 8C14.2091 8 16 9.79086 16 12Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-</svg>
-
-<svg class="dark-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-<path d="M3.32031 11.6835C3.32031 16.6541 7.34975 20.6835 12.3203 20.6835C16.1075 20.6835 19.3483 18.3443 20.6768 15.032C19.6402 15.4486 18.5059 15.6834 17.3203 15.6834C12.3497 15.6834 8.32031 11.654 8.32031 6.68342C8.32031 5.50338 8.55165 4.36259 8.96453 3.32996C5.65605 4.66028 3.32031 7.89912 3.32031 11.6835Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-</svg>
-</a>
-  </div>
-</div>
-</header>
-    <div class="flex grow">
-      <div id="main-pane">
-        <main id="main-content"><div class="single-header">
-<ol class="breadcrumbs" itemscope itemtype="https://schema.org/BreadcrumbList">
-    <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
-      <a itemprop="item" href="https://blog.ning.indevs.in/">
-        <span itemprop="name">首页</span>
-      </a>
-      <meta itemprop="position" content='1' />
-    </li>
-    <span>&nbsp»&nbsp</span>
-    <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
-      <a itemprop="item" href="https://blog.ning.indevs.in/posts/">
-        <span itemprop="name">文章</span>
-      </a>
-      <meta itemprop="position" content='2' />
-    </li>
-    <span>&nbsp»&nbsp</span>
-</ol>
-<h1>Hermes 配置优化与模型路由日志（2026-08-27 至 2026-08-29）</h1><time class="dim" datetime="2026-08-29T03:57:16&#43;08:00">2026年8月29日</time><div class="term-container"><div class="tag">
-        <a href="https://blog.ning.indevs.in/tags/hermes/">#Hermes</a>
-      </div><div class="tag">
-        <a href="https://blog.ning.indevs.in/tags/cron/">#cron</a>
-      </div><div class="tag">
-        <a href="https://blog.ning.indevs.in/tags/model-tiers/">#model-tiers</a>
-      </div><div class="tag">
-        <a href="https://blog.ning.indevs.in/tags/nvidia/">#nvidia</a>
-      </div><div class="tag">
-        <a href="https://blog.ning.indevs.in/tags/fallback/">#fallback</a>
-      </div><div class="tag">
-        <a href="https://blog.ning.indevs.in/tags/groq/">#groq</a>
-      </div><div class="tag">
-        <a href="https://blog.ning.indevs.in/tags/gemini/">#gemini</a>
-      </div><div class="tag">
-        <a href="https://blog.ning.indevs.in/tags/openrouter/">#openrouter</a>
-      </div><div class="tag">
-        <a href="https://blog.ning.indevs.in/tags/cohere/">#cohere</a>
-      </div></ol></div>
-  <section class="page-section"><p><img src="/images/covers/2026-08-29-hermes-config-optimization-log.jpg" alt="Hermes 配置优化与模型路由日志（2026-08-27 至 2026-08-29）"></p>
-<h2 id="-最近两天2026-08-27-至-2026-08-29hermes-配置优化日志">📅 最近两天（2026-08-27 至 2026-08-29）Hermes 配置优化日志</h2>
-<h3 id="-目标">🎯 目标</h3>
-<p>在长期 429 限流和模型配置不合理的情况下，重构 Hermes Agent 的模型分层策略，修复 fallback 链，并给 27 个 cron 任务按复杂度分配对应的 model tier。确保小任务不再调用大模型，降低成本并提高响应速度。</p>
-<hr>
-<h2 id="-关键问题按严重程度排序">🛠 关键问题（按严重程度排序）</h2>
-<table>
-	<thead>
-			<tr>
-					<th>#</th>
-					<th>问题</th>
-					<th>影响</th>
-					<th>位置</th>
-			</tr>
-	</thead>
-	<tbody>
-			<tr>
-					<td><strong>1</strong></td>
-					<td><strong>NVIDIA API 持续 429 限流</strong></td>
-					<td>导致所有 NVIDIA provider 任务失败/延迟，已持续 24h+</td>
-					<td><code>.env</code> + <code>config.yaml</code></td>
-			</tr>
-			<tr>
-					<td><strong>2</strong></td>
-					<td><strong>仅 1 个任务显式指定 model/provider</strong></td>
-					<td>26 个任务依赖 fallback 链，链路不健全</td>
-					<td><code>jobs.json</code></td>
-			</tr>
-			<tr>
-					<td><strong>3</strong></td>
-					<td><strong>Gemini 模型名错误</strong></td>
-					<td><code>gemini-1.5-flash</code> 在 v1beta 不存在 → 404 错误</td>
-					<td><code>config.yaml</code> <code>fallback_providers</code></td>
-			</tr>
-			<tr>
-					<td><strong>4</strong></td>
-					<td><strong>Discord 已卸载但残留配置</strong></td>
-					<td>旧任务 <code>origin.platform: weixin</code>，已卸载 mautrix/weixin</td>
-					<td><code>.env</code> + <code>jobs.json</code></td>
-			</tr>
-			<tr>
-					<td><strong>5</strong></td>
-					<td><strong>无显式 fallback key</strong></td>
-					<td><code>NVIDIA_FALLBACK_API_KEY</code> 未在环境变量中，fallback 断裂</td>
-					<td><code>.env</code> + <code>config.yaml</code></td>
-			</tr>
-	</tbody>
-</table>
-<hr>
-<h2 id="-已完成的修复">✅ 已完成的修复</h2>
-<h3 id="1-配置文件重构-roothermesconfigyaml">1. 配置文件重构 (<code>/root/.hermes/config.yaml</code>)</h3>
-<p>新增 <strong>四层模型路由</strong>：</p>
-<table>
-	<thead>
-			<tr>
-					<th>Tier</th>
-					<th>适用场景</th>
-					<th>代表模型</th>
-			</tr>
-	</thead>
-	<tbody>
-			<tr>
-					<td><strong>ultra_light</strong></td>
-					<td>分类、提取、简单判断、格式化</td>
-					<td>Groq <code>llama-3.1-8b-instant</code>, Gemini <code>gemini-3.7-flash</code>, OpenRouter <code>meta-llama/llama-3.1-8b-instruct:free</code></td>
-			</tr>
-			<tr>
-					<td><strong>light</strong></td>
-					<td>结构化输出、简单推理、Prompt 执行</td>
-					<td>Groq <code>llama-3.3-70b-versatile</code>, GMI <code>nvidia/NVIDIA-Nemotron-3.5-Lightning-30B-A3B-BF16</code>, OpenRouter <code>google/gemma-2-9b-it:free</code></td>
-			</tr>
-			<tr>
-					<td><strong>medium</strong></td>
-					<td>复杂推理、代码、长文本</td>
-					<td>NVIDIA <code>nvidia/nemotron-3-ultra-550b-a55b</code> (fallback key), Cohere <code>command-a-plus</code>, OpenRouter <code>nvidia/nemotron-3.5-lightning:free</code></td>
-			</tr>
-			<tr>
-					<td><strong>heavy</strong></td>
-					<td>深度推理、创意写作、复杂规划</td>
-					<td>Kimi-K3 (<code>moonshotai/kimi-k3</code> 主 key), Nemotron-Ultra (fallback)</td>
-			</tr>
-	</tbody>
-</table>
-<h3 id="2-fallback-链重排">2. Fallback 链重排</h3>
-<p><strong>之前</strong>：Groq → Gemini(404) → GLM(欠费) → NVIDIA fallback → KiloCode</p>
-<p><strong>之后</strong>：Groq → <strong>Cohere Command A+</strong> → <strong>Gemini 3.7 Flash</strong> → <strong>OpenRouter</strong> <code>nvidia/nemotron-3.5-lightning:free</code> → NVIDIA fallback → KiloCode → GMI</p>
-<p>关键修复：</p>
-<ul>
-<li><strong>Gemini</strong> 从 <code>gemini-1.5-flash</code> → <code>gemini-3.7-flash</code> ✅</li>
-<li><strong>OpenRouter</strong> 模型从 <code>qwen/qwen-2.5-72b-instruct:free</code> → <code>nvidia/nemotron-3.5-lightning:free</code> ✅</li>
-<li><strong>新增</strong> Cohere <code>command-a-plus</code> 作为第 2 位 fallback ✅</li>
-<li><strong>移除</strong> GLM（余额不足） ✅</li>
-</ul>
-<h3 id="3-环境变量补全">3. 环境变量补全</h3>
-<ul>
-<li><strong><code>/root/.hermes/.env</code></strong> 新增 <code>COHERE_API_KEY=&lt;已脱敏&gt;</code> ✅</li>
-<li><strong>systemd service</strong> <code>/etc/systemd/system/hermes-gateway.service</code> 新增 <code>EnvironmentFile=/root/.hermes/.env</code> ✅</li>
-<li>重启系统后 gateway 进程正常加载所有 12 个 key ✅</li>
-</ul>
-<h3 id="4-cron-任务模型分配-roothermescronjobsjson">4. Cron 任务模型分配 (<code>/root/.hermes/cron/jobs.json</code>)</h3>
-<p>给 27 个任务按复杂度分配 <code>model</code> + <code>provider</code> + <code>base_url</code>：</p>
-<table>
-	<thead>
-			<tr>
-					<th>Tier</th>
-					<th>任务数</th>
-					<th>代表任务</th>
-			</tr>
-	</thead>
-	<tbody>
-			<tr>
-					<td><strong>ultra_light</strong></td>
-					<td>19 个</td>
-					<td>晨间例行、午间缓冲、社交脱敏、情绪急救、积分卡、内在小孩等</td>
-			</tr>
-			<tr>
-					<td><strong>light</strong></td>
-					<td>6 个</td>
-					<td>早间核心深度工作、下午执行与 SOP、晚间淋浴复盘、情绪急救两次、未寄出的信</td>
-			</tr>
-			<tr>
-					<td><strong>medium</strong></td>
-					<td>2 个</td>
-					<td>每日财经热点推送、社交脱敏（周三次）</td>
-			</tr>
-			<tr>
-					<td><strong>heavy</strong></td>
-					<td>1 个</td>
-					<td>（保持默认 Kimi-K3，极少数深度任务）</td>
-			</tr>
-	</tbody>
-</table>
-<p>所有任务 <code>deliver</code> 统一改为 <code>telegram</code>，<code>origin.platform weixin</code> → <code>telegram</code>。</p>
-<h3 id="5-discord-清理">5. Discord 清理</h3>
-<ul>
-<li><code>.env</code> 中删除所有 <code>DISCORD_*</code> 变量 ✅</li>
-<li><code>config.yaml</code> 中移除 Discord 相关配置 ✅</li>
-<li>现仅保留 Telegram 单一消息平台 ✅</li>
-</ul>
-<h3 id="6-systemd-服务修复">6. systemd 服务修复</h3>
-<ul>
-<li>在 <code>/etc/systemd/system/hermes-gateway.service</code> 添加 <code>EnvironmentFile=/root/.hermes/.env</code> ✅</li>
-<li><code>systemctl daemon-reload</code> ✅</li>
-<li>gateway 当前 <code>Active: active (running)</code> ✅</li>
-</ul>
-<hr>
-<h2 id="-配置变更概览">📊 配置变更概览</h2>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#75715e"># config.yaml 关键片段</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#f92672">model_tiers</span>:
-</span></span><span style="display:flex;"><span>  <span style="color:#f92672">ultra_light</span>:
-</span></span><span style="display:flex;"><span>    - <span style="color:#f92672">provider</span>: <span style="color:#ae81ff">groq</span>
-</span></span><span style="display:flex;"><span>      <span style="color:#f92672">model</span>: <span style="color:#ae81ff">llama-3.1-8b-instant</span>
-</span></span><span style="display:flex;"><span>    - <span style="color:#f92672">provider</span>: <span style="color:#ae81ff">gemini</span>
-</span></span><span style="display:flex;"><span>      <span style="color:#f92672">model</span>: <span style="color:#ae81ff">gemini-3.7-flash          </span> <span style="color:#75715e"># 修复前：gemini-1.5-flash (404)</span>
-</span></span><span style="display:flex;"><span>    - <span style="color:#f92672">provider</span>: <span style="color:#ae81ff">openrouter</span>
-</span></span><span style="display:flex;"><span>      <span style="color:#f92672">model</span>: <span style="color:#ae81ff">meta-llama/llama-3.1-8b-instruct:free</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>  <span style="color:#f92672">light</span>:
-</span></span><span style="display:flex;"><span>    - <span style="color:#f92672">provider</span>: <span style="color:#ae81ff">groq</span>
-</span></span><span style="display:flex;"><span>      <span style="color:#f92672">model</span>: <span style="color:#ae81ff">llama-3.3-70b-versatile</span>
-</span></span><span style="display:flex;"><span>    - <span style="color:#f92672">provider</span>: <span style="color:#ae81ff">gmi</span>
-</span></span><span style="display:flex;"><span>      <span style="color:#f92672">model</span>: <span style="color:#ae81ff">nvidia/NVIDIA-Nemotron-3.5-Lightning-30B-A3B-BF16</span>
-</span></span><span style="display:flex;"><span>    - <span style="color:#f92672">provider</span>: <span style="color:#ae81ff">openrouter</span>
-</span></span><span style="display:flex;"><span>      <span style="color:#f92672">model</span>: <span style="color:#ae81ff">google/gemma-2-9b-it:free</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>  <span style="color:#f92672">medium</span>:
-</span></span><span style="display:flex;"><span>    - <span style="color:#f92672">provider</span>: <span style="color:#ae81ff">nvidia</span>
-</span></span><span style="display:flex;"><span>      <span style="color:#f92672">model</span>: <span style="color:#ae81ff">nvidia/nemotron-3-ultra-550b-a55b    </span> <span style="color:#75715e"># fallback key</span>
-</span></span><span style="display:flex;"><span>    - <span style="color:#f92672">provider</span>: <span style="color:#ae81ff">cohere</span>
-</span></span><span style="display:flex;"><span>      <span style="color:#f92672">model</span>: <span style="color:#ae81ff">command-a-plus                      </span> <span style="color:#75715e"># 新增</span>
-</span></span><span style="display:flex;"><span>    - <span style="color:#f92672">provider</span>: <span style="color:#ae81ff">openrouter</span>
-</span></span><span style="display:flex;"><span>      <span style="color:#f92672">model</span>: <span style="color:#ae81ff">nvidia/nemotron-3.5-lightning:free</span> <span style="color:#75715e"># 替换自 qwen-2.5-72b</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>  <span style="color:#f92672">heavy</span>:
-</span></span><span style="display:flex;"><span>    - <span style="color:#f92672">provider</span>: <span style="color:#ae81ff">nvidia</span>
-</span></span><span style="display:flex;"><span>      <span style="color:#f92672">model</span>: <span style="color:#ae81ff">moonshotai/kimi-k3                 </span> <span style="color:#75715e"># 主 key</span>
-</span></span><span style="display:flex;"><span>    - <span style="color:#f92672">provider</span>: <span style="color:#ae81ff">nvidia</span>
-</span></span><span style="display:flex;"><span>      <span style="color:#f92672">model</span>: <span style="color:#ae81ff">nvidia/nemotron-3-ultra-550b-a55b  </span> <span style="color:#75715e"># fallback</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#f92672">fallback_providers</span>:
-</span></span><span style="display:flex;"><span>  - <span style="color:#f92672">provider</span>: <span style="color:#ae81ff">groq</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#f92672">model</span>: <span style="color:#ae81ff">llama-3.3-70b-versatile</span>
-</span></span><span style="display:flex;"><span>  - <span style="color:#f92672">provider</span>: <span style="color:#ae81ff">cohere              </span> <span style="color:#75715e"># 新增</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#f92672">model</span>: <span style="color:#ae81ff">command-a-plus</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#f92672">base_url</span>: <span style="color:#ae81ff">https://api.cohere.com/v2</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#f92672">api_key</span>: <span style="color:#ae81ff">${env:COHERE_API_KEY}</span>
-</span></span><span style="display:flex;"><span>  - <span style="color:#f92672">provider</span>: <span style="color:#ae81ff">gemini</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#f92672">model</span>: <span style="color:#ae81ff">gemini-3.7-flash       </span> <span style="color:#75715e"># 修复前：gemini-1.5-flash</span>
-</span></span><span style="display:flex;"><span>  - <span style="color:#f92672">provider</span>: <span style="color:#ae81ff">openrouter</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#f92672">model</span>: <span style="color:#ae81ff">nvidia/nemotron-3.5-lightning:free </span> <span style="color:#75715e"># 替换自 qwen/qwen-2.5-72b-instruct:free</span>
-</span></span><span style="display:flex;"><span>  - <span style="color:#f92672">provider</span>: <span style="color:#ae81ff">nvidia</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#f92672">model</span>: <span style="color:#ae81ff">nvidia/nemotron-3-ultra-550b-a55b</span>
-</span></span><span style="display:flex;"><span>  - <span style="color:#f92672">provider</span>: <span style="color:#ae81ff">kilocode</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#f92672">model</span>: <span style="color:#ae81ff">nvidia/nemotron-3-ultra-550b-a55b:free</span>
-</span></span><span style="display:flex;"><span>  - <span style="color:#f92672">provider</span>: <span style="color:#ae81ff">gmi</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#f92672">model</span>: <span style="color:#ae81ff">nvidia/NVIDIA-Nemotron-3.5-Lightning-30B-A3B-BF16</span>
-</span></span></code></pre></div><hr>
-<h2 id="-时间线">📅 时间线</h2>
-<table>
-	<thead>
-			<tr>
-					<th>时间</th>
-					<th>事件</th>
-			</tr>
-	</thead>
-	<tbody>
-			<tr>
-					<td><strong>2026-08-27</strong></td>
-					<td>发现 NVIDIA 429 持续报错，开始审计配置</td>
-			</tr>
-			<tr>
-					<td><strong>2026-08-28</strong></td>
-					<td>系统自动重启 gateway 15 次（429 触发 Restart=always），识别出配置缺陷</td>
-			</tr>
-			<tr>
-					<td><strong>2026-08-29 03:00</strong></td>
-					<td>source <code>.env</code> 确认 12 个 key 均在进程环境中</td>
-			</tr>
-			<tr>
-					<td><strong>2026-08-29 03:10</strong></td>
-					<td>修复 <code>config.yaml</code>：Gemini模型名、Fallback顺序、添加Cohere</td>
-			</tr>
-			<tr>
-					<td><strong>2026-08-29 03:30</strong></td>
-					<td>更新 <code>jobs.json</code>：给 27 个任务分配 model tier</td>
-			</tr>
-			<tr>
-					<td><strong>2026-08-29 03:40</strong></td>
-					<td>向 <code>.env</code> 添加 <code>COHERE_API_KEY</code></td>
-			</tr>
-			<tr>
-					<td><strong>2026-08-29 03:50</strong></td>
-					<td>修复 systemd <code>EnvironmentFile</code>，重启 gateway</td>
-			</tr>
-			<tr>
-					<td><strong>2026-08-29 04:00</strong></td>
-					<td>验证所有 27 个 cron 任务 model/provider/deliver 字段</td>
-			</tr>
-			<tr>
-					<td><strong>2026-08-29 04:10</strong></td>
-					<td>撰写本博客文章</td>
-			</tr>
-	</tbody>
-</table>
-<hr>
-<h2 id="-下一步计划">🔄 下一步计划</h2>
-<ol>
-<li><strong>在宿主机执行</strong> <code>sudo systemctl restart hermes-gateway</code> 让新配置完全生效</li>
-<li><strong>观察 24h 内</strong> fallback 是否正常工作（Groq → Cohere → Gemini → OpenRouter → NVIDIA fallback）</li>
-<li><strong>给剩余任务</strong> 检查是否需要显式 <code>model_snapshot</code> 字段</li>
-<li><strong>考虑给博客文章</strong> 打 <code>series: Hermes 配置重构 2026</code> 标签，并在首页展开“延伸阅读”链接</li>
-<li><strong>定期检查</strong> <code>jobs.json</code> 中是否有新增任务需要分配 tier</li>
-</ol>
-<hr>
-<h2 id="-关键经验">💡 关键经验</h2>
-<table>
-	<thead>
-			<tr>
-					<th>类别</th>
-					<th>经验</th>
-			</tr>
-	</thead>
-	<tbody>
-			<tr>
-					<td><strong>模型分层</strong></td>
-					<td>按任务复杂度路由，小任务用小模型，大幅降低 429 概率</td>
-			</tr>
-			<tr>
-					<td><strong>Fallback 链</strong></td>
-					<td>不要全靠大模型，优先放免费/快的（Groq, OpenRouter），其次才是付费/大模型</td>
-			</tr>
-			<tr>
-					<td><strong>环境变量</strong></td>
-					<td>systemd 必须显式 <code>EnvironmentFile=~/.hermes/.env</code>，CLI <code>source .env</code> 只是临时生效</td>
-			</tr>
-			<tr>
-					<td><strong>任务绑定</strong></td>
-					<td>cron job 显式指定 <code>model</code> + <code>provider</code> + <code>base_url</code>，避免全靠默认 fallback</td>
-			</tr>
-			<tr>
-					<td><strong>平台精简</strong></td>
-					<td>卸载不使用的平台（Discord, Weixin），减少残留配置和投递错误</td>
-			</tr>
-			<tr>
-					<td><strong>日志记录</strong></td>
-					<td>关键配置变更及时记录到知识库/博客，便于复盘和跨-session 传递</td>
-			</tr>
-	</tbody>
-</table>
-<hr>
-<p><em>本日志由 Hermes Agent 自动生成，涵盖 2026-08-27 至 2026-08-29 的配置优化全过程。</em></p>
-</section><div class="share-buttons" style="margin:20px 0;padding:15px 0;border-top:1px solid #eee;border-bottom:1px solid #eee;">
-  <span style="margin-right:10px;">分享：</span>
-  <a href="https://twitter.com/intent/tweet?url=https%3a%2f%2fblog.ning.indevs.in%2fposts%2f2026-08-29-hermes-config-optimization-log%2f&text=Hermes%20%e9%85%8d%e7%bd%ae%e4%bc%98%e5%8c%96%e4%b8%8e%e6%a8%a1%e5%9e%8b%e8%b7%af%e7%94%b1%e6%97%a5%e5%bf%97%ef%bc%882026-08-27%20%e8%87%b3%202026-08-29%ef%bc%89" target="_blank" rel="noopener" style="margin-right:12px;">X</a>
-  <a href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fblog.ning.indevs.in%2fposts%2f2026-08-29-hermes-config-optimization-log%2f" target="_blank" rel="noopener" style="margin-right:12px;">Facebook</a>
-  <a href="https://www.linkedin.com/sharing/share-offsite/?url=https%3a%2f%2fblog.ning.indevs.in%2fposts%2f2026-08-29-hermes-config-optimization-log%2f" target="_blank" rel="noopener" style="margin-right:12px;">LinkedIn</a>
-  <a href="https://t.me/share/url?url=https%3a%2f%2fblog.ning.indevs.in%2fposts%2f2026-08-29-hermes-config-optimization-log%2f&text=Hermes%20%e9%85%8d%e7%bd%ae%e4%bc%98%e5%8c%96%e4%b8%8e%e6%a8%a1%e5%9e%8b%e8%b7%af%e7%94%b1%e6%97%a5%e5%bf%97%ef%bc%882026-08-27%20%e8%87%b3%202026-08-29%ef%bc%89" target="_blank" rel="noopener">Telegram</a>
-</div>
-<div style="margin-top:3rem;padding-top:2rem;border-top:1px solid var(--dim-color);">
-  <h2 style="margin-bottom:1.5rem;">评论</h2>
-  <script src="https://giscus.app/client.js"
-      data-repo="ningfeiyu/blog-comments"
-      data-repo-id="R_kgDOR_QPZw"
-      data-category="General"
-      data-category-id="DIC_kwDOR_QPZ84C6i9W"
-      data-mapping="pathname"
-      data-strict="0"
-      data-reactions-enabled="1"
-      data-emit-metadata="0"
-      data-input-position="bottom"
-      data-theme="preferred_color_scheme"
-      data-lang="zh-CN"
-      crossorigin="anonymous"
-      async>
-  </script>
-</div>
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-  document.querySelectorAll('pre > code').forEach(function(code) {
-    var pre = code.parentElement;
-    if (pre.querySelector('.copy-btn')) return;
-    var btn = document.createElement('button');
-    btn.className = 'copy-btn';
-    btn.textContent = '复制';
-    btn.style.cssText = 'position:absolute;top:8px;right:8px;padding:4px 10px;font-size:12px;cursor:pointer;opacity:0.6;border:1px solid #ccc;border-radius:4px;background:#fff;';
-    pre.style.position = 'relative';
-    btn.addEventListener('click', function() {
-      navigator.clipboard.writeText(code.innerText).then(function() {
-        btn.textContent = '已复制';
-        setTimeout(function(){ btn.textContent = '复制'; }, 1500);
-      });
-    });
-    pre.appendChild(btn);
-  });
-});
-</script>
-<button id="back-to-top" style="display:none;position:fixed;bottom:30px;right:30px;width:44px;height:44px;border-radius:50%;border:1px solid #ccc;background:#fff;cursor:pointer;font-size:20px;z-index:999;" title="回顶部">↑</button>
-<script>
-(function() {
-  var btn = document.getElementById('back-to-top');
-  window.addEventListener('scroll', function() {
-    btn.style.display = window.scrollY > 300 ? 'block' : 'none';
-  });
-  btn.addEventListener('click', function() {
-    window.scrollTo({top: 0, behavior: 'smooth'});
-  });
-})();
-</script>
-</main>
-        <footer id="main-footer"><div class="footer">
-  <a href="#">回到顶部</a>
-  <div class="footer-copyright">
-    <div class="dim">© 2026 老宁</div>
-    <div></div>
-  </div>
-</div>
-</footer>
-      </div><aside id="side-pane" class="side-sticky">
-<div class="side-details">
-    <span>546 字</span>
-    <span>7 - 9 分钟阅读</span><div class="side-details-taxonomy">
-        <small>
-          series:
-          <span class="details-taxonomy"><a href="https://blog.ning.indevs.in/series/hermes-%E9%85%8D%E7%BD%AE%E9%87%8D%E6%9E%84-2026">Hermes 配置重构 2026</a></span></small>
-      </div></div><h3>目录</h3><nav id="TableOfContents">
-  <ul>
-    <li><a href="#-最近两天2026-08-27-至-2026-08-29hermes-配置优化日志">📅 最近两天（2026-08-27 至 2026-08-29）Hermes 配置优化日志</a>
-      <ul>
-        <li><a href="#-目标">🎯 目标</a></li>
-      </ul>
-    </li>
-    <li><a href="#-关键问题按严重程度排序">🛠 关键问题（按严重程度排序）</a></li>
-    <li><a href="#-已完成的修复">✅ 已完成的修复</a>
-      <ul>
-        <li><a href="#1-配置文件重构-roothermesconfigyaml">1. 配置文件重构 (<code>/root/.hermes/config.yaml</code>)</a></li>
-        <li><a href="#2-fallback-链重排">2. Fallback 链重排</a></li>
-        <li><a href="#3-环境变量补全">3. 环境变量补全</a></li>
-        <li><a href="#4-cron-任务模型分配-roothermescronjobsjson">4. Cron 任务模型分配 (<code>/root/.hermes/cron/jobs.json</code>)</a></li>
-        <li><a href="#5-discord-清理">5. Discord 清理</a></li>
-        <li><a href="#6-systemd-服务修复">6. systemd 服务修复</a></li>
-      </ul>
-    </li>
-    <li><a href="#-配置变更概览">📊 配置变更概览</a></li>
-    <li><a href="#-时间线">📅 时间线</a></li>
-    <li><a href="#-下一步计划">🔄 下一步计划</a></li>
-    <li><a href="#-关键经验">💡 关键经验</a></li>
-  </ul>
-</nav><h3>相关文章</h3>
-    <ul><li><a href="/posts/hermes-skill-guide/">Hermes Agent Skill 完全指南：从入门到自定义</a></li></ul></aside></div>
-  </div>
-</body>
-</html>
+<!doctype html><html lang=zh-CN dir=ltr><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><title>Hermes 配置优化与模型路由日志（2026-08-27 至 2026-08-29） | 老宁的试验田</title><link rel=icon href=/favicon.svg sizes=any type=image/svg+xml><meta property="og:url" content="https://blog.ning.indevs.in/posts/2026-08-29-hermes-config-optimization-log/"><meta property="og:site_name" content="老宁的试验田"><meta property="og:title" content="Hermes 配置优化与模型路由日志（2026-08-27 至 2026-08-29）"><meta property="og:description" content="📅 最近两天（2026-08-27 至 2026-08-29）Hermes 配置优化日志 🎯 目标 在长期 429 限流和模型配置不合理的情况下，重构 Hermes Agent 的模型分层策略，修复 fallback 链，并给 27 个 cron 任务按复杂度分配对应的 model tier。确保小任务不再调用大模型，降低成本并提高响应速度。
+🛠 关键问题（按严重程度排序） # 问题 影响 位置 1 NVIDIA API 持续 429 限流 导致所有 NVIDIA provider 任务失败/延迟，已持续 24h+ .env + config.yaml 2 仅 1 个任务显式指定 model/provider 26 个任务依赖 fallback 链，链路不健全 jobs.json 3 Gemini 模型名错误 gemini-1.5-flash 在 v1beta 不存在 → 404 错误 config.yaml fallback_providers 4 Discord 已卸载但残留配置 旧任务 origin.platform: weixin，已卸载 mautrix/weixin .env + jobs.json 5 无显式 fallback key NVIDIA_FALLBACK_API_KEY 未在环境变量中，fallback 断裂 .env + config.yaml ✅ 已完成的修复 1. 配置文件重构 (/root/.hermes/config.yaml) 新增 四层模型路由："><meta property="og:locale" content="zh_CN"><meta property="og:type" content="article"><meta property="article:section" content="posts"><meta property="article:published_time" content="2026-08-29T03:57:16+08:00"><meta property="article:modified_time" content="2026-08-29T03:57:16+08:00"><meta property="article:tag" content="Hermes"><meta property="article:tag" content="Cron"><meta property="article:tag" content="Model-Tiers"><meta property="article:tag" content="Nvidia"><meta property="article:tag" content="Fallback"><meta property="article:tag" content="Groq"><meta name=twitter:card content="summary"><meta name=twitter:title content="Hermes 配置优化与模型路由日志（2026-08-27 至 2026-08-29）"><meta name=twitter:description content="📅 最近两天（2026-08-27 至 2026-08-29）Hermes 配置优化日志 🎯 目标 在长期 429 限流和模型配置不合理的情况下，重构 Hermes Agent 的模型分层策略，修复 fallback 链，并给 27 个 cron 任务按复杂度分配对应的 model tier。确保小任务不再调用大模型，降低成本并提高响应速度。
+🛠 关键问题（按严重程度排序） # 问题 影响 位置 1 NVIDIA API 持续 429 限流 导致所有 NVIDIA provider 任务失败/延迟，已持续 24h+ .env + config.yaml 2 仅 1 个任务显式指定 model/provider 26 个任务依赖 fallback 链，链路不健全 jobs.json 3 Gemini 模型名错误 gemini-1.5-flash 在 v1beta 不存在 → 404 错误 config.yaml fallback_providers 4 Discord 已卸载但残留配置 旧任务 origin.platform: weixin，已卸载 mautrix/weixin .env + jobs.json 5 无显式 fallback key NVIDIA_FALLBACK_API_KEY 未在环境变量中，fallback 断裂 .env + config.yaml ✅ 已完成的修复 1. 配置文件重构 (/root/.hermes/config.yaml) 新增 四层模型路由："><meta property="og:image" content="https://blog.ning.indevs.in/images/covers/2026-08-29-hermes-config-optimization-log.jpg"><meta name=twitter:image content="https://blog.ning.indevs.in/images/covers/2026-08-29-hermes-config-optimization-log.jpg"><link rel=stylesheet href=/css/root.min.1052d5860b4442ccd33071bf3543c78d47509a7acb2c13edb1288611a2ebd6a8.css integrity="sha256-EFLVhgtEQszTMHG/NUPHjUdQmnrLLBPtsSiGEaLr1qg=" crossorigin=anonymous><link rel=stylesheet href=/css/bundle.min.e735cd1c41e6b7ba15433438fa484f2804322027ee8348fcff2adbf14976ce28.css integrity="sha256-5zXNHEHmt7oVQzQ4+khPKAQyICfug0j8/yrb8Ul2zig=" crossorigin=anonymous><script src=/js/bundle.cc8ae9952dbfb731affafabdf26e5c60a6910047ff59ccdeaf1daebaa26c8830.js integrity="sha256-zIrplS2/tzGv+vq98m5cYKaRAEf/Wczerx2uuqJsiDA=" crossorigin=anonymous></script><script defer src=/js/search/flexsearch.compact.3928d3d2172bc0b5f75d9458fb9255f0befce1c7239ba6e5d2c58ed4b82c2073.js integrity="sha256-OSjT0hcrwLX3XZRY+5JV8L784ccjm6bl0sWO1LgsIHM="></script><script defer src=/js/search/search.1d980f84df11f3eb7c8c5f17f541d49a0611608df179dd74fa7f06225eb56ace.js integrity="sha256-HZgPhN8R8+t8jF8X9UHUmgYRYI3xed10+n8GIl61as4="></script><link rel=preconnect href=https://fonts.googleapis.com><link rel=preconnect href=https://fonts.gstatic.com crossorigin><link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,200;1,300;1,400;1,500;1,600;1,700;1,800&display=swap" rel=stylesheet><link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200..800&family=Spectral:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,200;1,300;1,400;1,500;1,600;1,700;1,800&display=swap" rel=stylesheet><link rel=preconnect href=https://cdn.jsdelivr.net crossorigin><link href=https://cdn.jsdelivr.net/npm/lxgw-wenkai-webfont@1.7.0/lxgwwenkai-regular.css rel=stylesheet><link href=https://cdn.jsdelivr.net/npm/lxgw-wenkai-webfont@1.7.0/lxgwwenkai-bold.css rel=stylesheet><script defer src=https://events.vercount.one/js></script></head><body class=notransition><div id=container><header id=main-header><div role=navigation aria-label=Main><div class=nav-left><a href=https://blog.ning.indevs.in/ style=color:inherit>老宁的试验田</a></div><div class=nav-right><div style=position:absolute;width:0;height:0><div id=nav-dropdown-menu class=hidden href=#><div class=nav-item><a href=/>首页</a></div><div class=nav-item><a aria-current=true class=ancestor href=/posts/>文章</a></div><div class=nav-item><a href=/tags/>标签</a></div><div class=nav-item><a href=/archives/>归档</a></div><div class=nav-item><a href=/about/>关于</a></div></div></div><a id=nav-dropdown-button href=#><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M4 6H20M4 12H20M4 18H20" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a><div id=nav-menu><div class=nav-item><a href=/>首页</a></div><div class=nav-item><a aria-current=true class=ancestor href=/posts/>文章</a></div><div class=nav-item><a href=/tags/>标签</a></div><div class=nav-item><a href=/archives/>归档</a></div><div class=nav-item><a href=/about/>关于</a></div></div><a id=theme-switcher href=#><svg class="light-icon" viewBox="0 0 24 24" fill="none"><path d="M12 3V4m0 16v1M4 12H3M6.31412 6.31412 5.5 5.5m12.1859.81412L18.5 5.5M6.31412 17.69 5.5 18.5001M17.6859 17.69 18.5 18.5001M21 12H20m-4 0c0 2.2091-1.7909 4-4 4-2.20914.0-4-1.7909-4-4 0-2.20914 1.79086-4 4-4 2.2091.0 4 1.79086 4 4z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+<svg class="dark-icon" viewBox="0 0 24 24" fill="none"><path d="M3.32031 11.6835c0 4.9706 4.02944 9 8.99999 9 3.7872.0 7.028-2.3392 8.3565-5.6515C19.6402 15.4486 18.5059 15.6834 17.3203 15.6834c-4.9706.0-8.99999-4.0294-8.99999-8.99998C8.32031 5.50338 8.55165 4.36259 8.96453 3.32996 5.65605 4.66028 3.32031 7.89912 3.32031 11.6835z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a></div></div></header><div class="flex grow"><div id=main-pane><main id=main-content><div class=single-header><ol class=breadcrumbs itemscope itemtype=https://schema.org/BreadcrumbList><li itemprop=itemListElement itemscope itemtype=https://schema.org/ListItem><a itemprop=item href=https://blog.ning.indevs.in/><span itemprop=name>首页</span>
+</a><meta itemprop=position content='1'></li><span>&nbsp»&nbsp</span><li itemprop=itemListElement itemscope itemtype=https://schema.org/ListItem><a itemprop=item href=https://blog.ning.indevs.in/posts/><span itemprop=name>文章</span>
+</a><meta itemprop=position content='2'></li><span>&nbsp»&nbsp</span></ol><h1>Hermes 配置优化与模型路由日志（2026-08-27 至 2026-08-29）</h1><time class=dim datetime=2026-08-29T03:57:16+08:00>2026年8月29日</time><div class=term-container><div class=tag><a href=https://blog.ning.indevs.in/tags/hermes/>#Hermes</a></div><div class=tag><a href=https://blog.ning.indevs.in/tags/cron/>#cron</a></div><div class=tag><a href=https://blog.ning.indevs.in/tags/model-tiers/>#model-tiers</a></div><div class=tag><a href=https://blog.ning.indevs.in/tags/nvidia/>#nvidia</a></div><div class=tag><a href=https://blog.ning.indevs.in/tags/fallback/>#fallback</a></div><div class=tag><a href=https://blog.ning.indevs.in/tags/groq/>#groq</a></div><div class=tag><a href=https://blog.ning.indevs.in/tags/gemini/>#gemini</a></div><div class=tag><a href=https://blog.ning.indevs.in/tags/openrouter/>#openrouter</a></div><div class=tag><a href=https://blog.ning.indevs.in/tags/cohere/>#cohere</a></div></ol></div><section class=page-section><p><img src=/images/covers/2026-08-29-hermes-config-optimization-log.jpg alt="Hermes 配置优化与模型路由日志（2026-08-27 至 2026-08-29）"></p><h2 id=-最近两天2026-08-27-至-2026-08-29hermes-配置优化日志>📅 最近两天（2026-08-27 至 2026-08-29）Hermes 配置优化日志</h2><h3 id=-目标>🎯 目标</h3><p>在长期 429 限流和模型配置不合理的情况下，重构 Hermes Agent 的模型分层策略，修复 fallback 链，并给 27 个 cron 任务按复杂度分配对应的 model tier。确保小任务不再调用大模型，降低成本并提高响应速度。</p><hr><h2 id=-关键问题按严重程度排序>🛠 关键问题（按严重程度排序）</h2><table><thead><tr><th>#</th><th>问题</th><th>影响</th><th>位置</th></tr></thead><tbody><tr><td><strong>1</strong></td><td><strong>NVIDIA API 持续 429 限流</strong></td><td>导致所有 NVIDIA provider 任务失败/延迟，已持续 24h+</td><td><code>.env</code> + <code>config.yaml</code></td></tr><tr><td><strong>2</strong></td><td><strong>仅 1 个任务显式指定 model/provider</strong></td><td>26 个任务依赖 fallback 链，链路不健全</td><td><code>jobs.json</code></td></tr><tr><td><strong>3</strong></td><td><strong>Gemini 模型名错误</strong></td><td><code>gemini-1.5-flash</code> 在 v1beta 不存在 → 404 错误</td><td><code>config.yaml</code> <code>fallback_providers</code></td></tr><tr><td><strong>4</strong></td><td><strong>Discord 已卸载但残留配置</strong></td><td>旧任务 <code>origin.platform: weixin</code>，已卸载 mautrix/weixin</td><td><code>.env</code> + <code>jobs.json</code></td></tr><tr><td><strong>5</strong></td><td><strong>无显式 fallback key</strong></td><td><code>NVIDIA_FALLBACK_API_KEY</code> 未在环境变量中，fallback 断裂</td><td><code>.env</code> + <code>config.yaml</code></td></tr></tbody></table><hr><h2 id=-已完成的修复>✅ 已完成的修复</h2><h3 id=1-配置文件重构-roothermesconfigyaml>1. 配置文件重构 (<code>/root/.hermes/config.yaml</code>)</h3><p>新增 <strong>四层模型路由</strong>：</p><table><thead><tr><th>Tier</th><th>适用场景</th><th>代表模型</th></tr></thead><tbody><tr><td><strong>ultra_light</strong></td><td>分类、提取、简单判断、格式化</td><td>Groq <code>llama-3.1-8b-instant</code>, Gemini <code>gemini-3.7-flash</code>, OpenRouter <code>meta-llama/llama-3.1-8b-instruct:free</code></td></tr><tr><td><strong>light</strong></td><td>结构化输出、简单推理、Prompt 执行</td><td>Groq <code>llama-3.3-70b-versatile</code>, GMI <code>nvidia/NVIDIA-Nemotron-3.5-Lightning-30B-A3B-BF16</code>, OpenRouter <code>google/gemma-2-9b-it:free</code></td></tr><tr><td><strong>medium</strong></td><td>复杂推理、代码、长文本</td><td>NVIDIA <code>nvidia/nemotron-3-ultra-550b-a55b</code> (fallback key), Cohere <code>command-a-plus</code>, OpenRouter <code>nvidia/nemotron-3.5-lightning:free</code></td></tr><tr><td><strong>heavy</strong></td><td>深度推理、创意写作、复杂规划</td><td>Kimi-K3 (<code>moonshotai/kimi-k3</code> 主 key), Nemotron-Ultra (fallback)</td></tr></tbody></table><h3 id=2-fallback-链重排>2. Fallback 链重排</h3><p><strong>之前</strong>：Groq → Gemini(404) → GLM(欠费) → NVIDIA fallback → KiloCode</p><p><strong>之后</strong>：Groq → <strong>Cohere Command A+</strong> → <strong>Gemini 3.7 Flash</strong> → <strong>OpenRouter</strong> <code>nvidia/nemotron-3.5-lightning:free</code> → NVIDIA fallback → KiloCode → GMI</p><p>关键修复：</p><ul><li><strong>Gemini</strong> 从 <code>gemini-1.5-flash</code> → <code>gemini-3.7-flash</code> ✅</li><li><strong>OpenRouter</strong> 模型从 <code>qwen/qwen-2.5-72b-instruct:free</code> → <code>nvidia/nemotron-3.5-lightning:free</code> ✅</li><li><strong>新增</strong> Cohere <code>command-a-plus</code> 作为第 2 位 fallback ✅</li><li><strong>移除</strong> GLM（余额不足） ✅</li></ul><h3 id=3-环境变量补全>3. 环境变量补全</h3><ul><li><strong><code>/root/.hermes/.env</code></strong> 新增 <code>COHERE_API_KEY=&lt;已脱敏></code> ✅</li><li><strong>systemd service</strong> <code>/etc/systemd/system/hermes-gateway.service</code> 新增 <code>EnvironmentFile=/root/.hermes/.env</code> ✅</li><li>重启系统后 gateway 进程正常加载所有 12 个 key ✅</li></ul><h3 id=4-cron-任务模型分配-roothermescronjobsjson>4. Cron 任务模型分配 (<code>/root/.hermes/cron/jobs.json</code>)</h3><p>给 27 个任务按复杂度分配 <code>model</code> + <code>provider</code> + <code>base_url</code>：</p><table><thead><tr><th>Tier</th><th>任务数</th><th>代表任务</th></tr></thead><tbody><tr><td><strong>ultra_light</strong></td><td>19 个</td><td>晨间例行、午间缓冲、社交脱敏、情绪急救、积分卡、内在小孩等</td></tr><tr><td><strong>light</strong></td><td>6 个</td><td>早间核心深度工作、下午执行与 SOP、晚间淋浴复盘、情绪急救两次、未寄出的信</td></tr><tr><td><strong>medium</strong></td><td>2 个</td><td>每日财经热点推送、社交脱敏（周三次）</td></tr><tr><td><strong>heavy</strong></td><td>1 个</td><td>（保持默认 Kimi-K3，极少数深度任务）</td></tr></tbody></table><p>所有任务 <code>deliver</code> 统一改为 <code>telegram</code>，<code>origin.platform weixin</code> → <code>telegram</code>。</p><h3 id=5-discord-清理>5. Discord 清理</h3><ul><li><code>.env</code> 中删除所有 <code>DISCORD_*</code> 变量 ✅</li><li><code>config.yaml</code> 中移除 Discord 相关配置 ✅</li><li>现仅保留 Telegram 单一消息平台 ✅</li></ul><h3 id=6-systemd-服务修复>6. systemd 服务修复</h3><ul><li>在 <code>/etc/systemd/system/hermes-gateway.service</code> 添加 <code>EnvironmentFile=/root/.hermes/.env</code> ✅</li><li><code>systemctl daemon-reload</code> ✅</li><li>gateway 当前 <code>Active: active (running)</code> ✅</li></ul><hr><h2 id=-配置变更概览>📊 配置变更概览</h2><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-yaml data-lang=yaml><span style=display:flex><span><span style=color:#75715e># config.yaml 关键片段</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#f92672>model_tiers</span>:
+</span></span><span style=display:flex><span>  <span style=color:#f92672>ultra_light</span>:
+</span></span><span style=display:flex><span>    - <span style=color:#f92672>provider</span>: <span style=color:#ae81ff>groq</span>
+</span></span><span style=display:flex><span>      <span style=color:#f92672>model</span>: <span style=color:#ae81ff>llama-3.1-8b-instant</span>
+</span></span><span style=display:flex><span>    - <span style=color:#f92672>provider</span>: <span style=color:#ae81ff>gemini</span>
+</span></span><span style=display:flex><span>      <span style=color:#f92672>model</span>: <span style=color:#ae81ff>gemini-3.7-flash          </span> <span style=color:#75715e># 修复前：gemini-1.5-flash (404)</span>
+</span></span><span style=display:flex><span>    - <span style=color:#f92672>provider</span>: <span style=color:#ae81ff>openrouter</span>
+</span></span><span style=display:flex><span>      <span style=color:#f92672>model</span>: <span style=color:#ae81ff>meta-llama/llama-3.1-8b-instruct:free</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>  <span style=color:#f92672>light</span>:
+</span></span><span style=display:flex><span>    - <span style=color:#f92672>provider</span>: <span style=color:#ae81ff>groq</span>
+</span></span><span style=display:flex><span>      <span style=color:#f92672>model</span>: <span style=color:#ae81ff>llama-3.3-70b-versatile</span>
+</span></span><span style=display:flex><span>    - <span style=color:#f92672>provider</span>: <span style=color:#ae81ff>gmi</span>
+</span></span><span style=display:flex><span>      <span style=color:#f92672>model</span>: <span style=color:#ae81ff>nvidia/NVIDIA-Nemotron-3.5-Lightning-30B-A3B-BF16</span>
+</span></span><span style=display:flex><span>    - <span style=color:#f92672>provider</span>: <span style=color:#ae81ff>openrouter</span>
+</span></span><span style=display:flex><span>      <span style=color:#f92672>model</span>: <span style=color:#ae81ff>google/gemma-2-9b-it:free</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>  <span style=color:#f92672>medium</span>:
+</span></span><span style=display:flex><span>    - <span style=color:#f92672>provider</span>: <span style=color:#ae81ff>nvidia</span>
+</span></span><span style=display:flex><span>      <span style=color:#f92672>model</span>: <span style=color:#ae81ff>nvidia/nemotron-3-ultra-550b-a55b    </span> <span style=color:#75715e># fallback key</span>
+</span></span><span style=display:flex><span>    - <span style=color:#f92672>provider</span>: <span style=color:#ae81ff>cohere</span>
+</span></span><span style=display:flex><span>      <span style=color:#f92672>model</span>: <span style=color:#ae81ff>command-a-plus                      </span> <span style=color:#75715e># 新增</span>
+</span></span><span style=display:flex><span>    - <span style=color:#f92672>provider</span>: <span style=color:#ae81ff>openrouter</span>
+</span></span><span style=display:flex><span>      <span style=color:#f92672>model</span>: <span style=color:#ae81ff>nvidia/nemotron-3.5-lightning:free</span> <span style=color:#75715e># 替换自 qwen-2.5-72b</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>  <span style=color:#f92672>heavy</span>:
+</span></span><span style=display:flex><span>    - <span style=color:#f92672>provider</span>: <span style=color:#ae81ff>nvidia</span>
+</span></span><span style=display:flex><span>      <span style=color:#f92672>model</span>: <span style=color:#ae81ff>moonshotai/kimi-k3                 </span> <span style=color:#75715e># 主 key</span>
+</span></span><span style=display:flex><span>    - <span style=color:#f92672>provider</span>: <span style=color:#ae81ff>nvidia</span>
+</span></span><span style=display:flex><span>      <span style=color:#f92672>model</span>: <span style=color:#ae81ff>nvidia/nemotron-3-ultra-550b-a55b  </span> <span style=color:#75715e># fallback</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#f92672>fallback_providers</span>:
+</span></span><span style=display:flex><span>  - <span style=color:#f92672>provider</span>: <span style=color:#ae81ff>groq</span>
+</span></span><span style=display:flex><span>    <span style=color:#f92672>model</span>: <span style=color:#ae81ff>llama-3.3-70b-versatile</span>
+</span></span><span style=display:flex><span>  - <span style=color:#f92672>provider</span>: <span style=color:#ae81ff>cohere              </span> <span style=color:#75715e># 新增</span>
+</span></span><span style=display:flex><span>    <span style=color:#f92672>model</span>: <span style=color:#ae81ff>command-a-plus</span>
+</span></span><span style=display:flex><span>    <span style=color:#f92672>base_url</span>: <span style=color:#ae81ff>https://api.cohere.com/v2</span>
+</span></span><span style=display:flex><span>    <span style=color:#f92672>api_key</span>: <span style=color:#ae81ff>${env:COHERE_API_KEY}</span>
+</span></span><span style=display:flex><span>  - <span style=color:#f92672>provider</span>: <span style=color:#ae81ff>gemini</span>
+</span></span><span style=display:flex><span>    <span style=color:#f92672>model</span>: <span style=color:#ae81ff>gemini-3.7-flash       </span> <span style=color:#75715e># 修复前：gemini-1.5-flash</span>
+</span></span><span style=display:flex><span>  - <span style=color:#f92672>provider</span>: <span style=color:#ae81ff>openrouter</span>
+</span></span><span style=display:flex><span>    <span style=color:#f92672>model</span>: <span style=color:#ae81ff>nvidia/nemotron-3.5-lightning:free </span> <span style=color:#75715e># 替换自 qwen/qwen-2.5-72b-instruct:free</span>
+</span></span><span style=display:flex><span>  - <span style=color:#f92672>provider</span>: <span style=color:#ae81ff>nvidia</span>
+</span></span><span style=display:flex><span>    <span style=color:#f92672>model</span>: <span style=color:#ae81ff>nvidia/nemotron-3-ultra-550b-a55b</span>
+</span></span><span style=display:flex><span>  - <span style=color:#f92672>provider</span>: <span style=color:#ae81ff>kilocode</span>
+</span></span><span style=display:flex><span>    <span style=color:#f92672>model</span>: <span style=color:#ae81ff>nvidia/nemotron-3-ultra-550b-a55b:free</span>
+</span></span><span style=display:flex><span>  - <span style=color:#f92672>provider</span>: <span style=color:#ae81ff>gmi</span>
+</span></span><span style=display:flex><span>    <span style=color:#f92672>model</span>: <span style=color:#ae81ff>nvidia/NVIDIA-Nemotron-3.5-Lightning-30B-A3B-BF16</span>
+</span></span></code></pre></div><hr><h2 id=-时间线>📅 时间线</h2><table><thead><tr><th>时间</th><th>事件</th></tr></thead><tbody><tr><td><strong>2026-08-27</strong></td><td>发现 NVIDIA 429 持续报错，开始审计配置</td></tr><tr><td><strong>2026-08-28</strong></td><td>系统自动重启 gateway 15 次（429 触发 Restart=always），识别出配置缺陷</td></tr><tr><td><strong>2026-08-29 03:00</strong></td><td>source <code>.env</code> 确认 12 个 key 均在进程环境中</td></tr><tr><td><strong>2026-08-29 03:10</strong></td><td>修复 <code>config.yaml</code>：Gemini模型名、Fallback顺序、添加Cohere</td></tr><tr><td><strong>2026-08-29 03:30</strong></td><td>更新 <code>jobs.json</code>：给 27 个任务分配 model tier</td></tr><tr><td><strong>2026-08-29 03:40</strong></td><td>向 <code>.env</code> 添加 <code>COHERE_API_KEY</code></td></tr><tr><td><strong>2026-08-29 03:50</strong></td><td>修复 systemd <code>EnvironmentFile</code>，重启 gateway</td></tr><tr><td><strong>2026-08-29 04:00</strong></td><td>验证所有 27 个 cron 任务 model/provider/deliver 字段</td></tr><tr><td><strong>2026-08-29 04:10</strong></td><td>撰写本博客文章</td></tr></tbody></table><hr><h2 id=-下一步计划>🔄 下一步计划</h2><ol><li><strong>在宿主机执行</strong> <code>sudo systemctl restart hermes-gateway</code> 让新配置完全生效</li><li><strong>观察 24h 内</strong> fallback 是否正常工作（Groq → Cohere → Gemini → OpenRouter → NVIDIA fallback）</li><li><strong>给剩余任务</strong> 检查是否需要显式 <code>model_snapshot</code> 字段</li><li><strong>考虑给博客文章</strong> 打 <code>series: Hermes 配置重构 2026</code> 标签，并在首页展开“延伸阅读”链接</li><li><strong>定期检查</strong> <code>jobs.json</code> 中是否有新增任务需要分配 tier</li></ol><hr><h2 id=-关键经验>💡 关键经验</h2><table><thead><tr><th>类别</th><th>经验</th></tr></thead><tbody><tr><td><strong>模型分层</strong></td><td>按任务复杂度路由，小任务用小模型，大幅降低 429 概率</td></tr><tr><td><strong>Fallback 链</strong></td><td>不要全靠大模型，优先放免费/快的（Groq, OpenRouter），其次才是付费/大模型</td></tr><tr><td><strong>环境变量</strong></td><td>systemd 必须显式 <code>EnvironmentFile=~/.hermes/.env</code>，CLI <code>source .env</code> 只是临时生效</td></tr><tr><td><strong>任务绑定</strong></td><td>cron job 显式指定 <code>model</code> + <code>provider</code> + <code>base_url</code>，避免全靠默认 fallback</td></tr><tr><td><strong>平台精简</strong></td><td>卸载不使用的平台（Discord, Weixin），减少残留配置和投递错误</td></tr><tr><td><strong>日志记录</strong></td><td>关键配置变更及时记录到知识库/博客，便于复盘和跨-session 传递</td></tr></tbody></table><hr><p><em>本日志由 Hermes Agent 自动生成，涵盖 2026-08-27 至 2026-08-29 的配置优化全过程。</em></p></section><div class=share-buttons style="margin:20px 0;padding:15px 0;border-top:1px solid #eee;border-bottom:1px solid #eee"><span style=margin-right:10px>分享：</span>
+<a href="https://twitter.com/intent/tweet?url=https%3a%2f%2fblog.ning.indevs.in%2fposts%2f2026-08-29-hermes-config-optimization-log%2f&text=Hermes%20%e9%85%8d%e7%bd%ae%e4%bc%98%e5%8c%96%e4%b8%8e%e6%a8%a1%e5%9e%8b%e8%b7%af%e7%94%b1%e6%97%a5%e5%bf%97%ef%bc%882026-08-27%20%e8%87%b3%202026-08-29%ef%bc%89" target=_blank rel=noopener style=margin-right:12px>X</a>
+<a href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fblog.ning.indevs.in%2fposts%2f2026-08-29-hermes-config-optimization-log%2f" target=_blank rel=noopener style=margin-right:12px>Facebook</a>
+<a href="https://www.linkedin.com/sharing/share-offsite/?url=https%3a%2f%2fblog.ning.indevs.in%2fposts%2f2026-08-29-hermes-config-optimization-log%2f" target=_blank rel=noopener style=margin-right:12px>LinkedIn</a>
+<a href="https://t.me/share/url?url=https%3a%2f%2fblog.ning.indevs.in%2fposts%2f2026-08-29-hermes-config-optimization-log%2f&text=Hermes%20%e9%85%8d%e7%bd%ae%e4%bc%98%e5%8c%96%e4%b8%8e%e6%a8%a1%e5%9e%8b%e8%b7%af%e7%94%b1%e6%97%a5%e5%bf%97%ef%bc%882026-08-27%20%e8%87%b3%202026-08-29%ef%bc%89" target=_blank rel=noopener>Telegram</a></div><div style="margin-top:3rem;padding-top:2rem;border-top:1px solid var(--dim-color)"><h2 style=margin-bottom:1.5rem>评论</h2><script src=https://giscus.app/client.js data-repo=ningfeiyu/blog-comments data-repo-id=R_kgDOR_QPZw data-category=General data-category-id=DIC_kwDOR_QPZ84C6i9W data-mapping=pathname data-strict=0 data-reactions-enabled=1 data-emit-metadata=0 data-input-position=bottom data-theme=preferred_color_scheme data-lang=zh-CN crossorigin=anonymous async></script></div><script>document.addEventListener("DOMContentLoaded",function(){document.querySelectorAll("pre > code").forEach(function(e){var t,n=e.parentElement;if(n.querySelector(".copy-btn"))return;t=document.createElement("button"),t.className="copy-btn",t.textContent="复制",t.style.cssText="position:absolute;top:8px;right:8px;padding:4px 10px;font-size:12px;cursor:pointer;opacity:0.6;border:1px solid #ccc;border-radius:4px;background:#fff;",n.style.position="relative",t.addEventListener("click",function(){navigator.clipboard.writeText(e.innerText).then(function(){t.textContent="已复制",setTimeout(function(){t.textContent="复制"},1500)})}),n.appendChild(t)})})</script><button id=back-to-top style="display:none;position:fixed;bottom:30px;right:30px;width:44px;height:44px;border-radius:50%;border:1px solid #ccc;background:#fff;cursor:pointer;font-size:20px;z-index:999" title=回顶部>↑</button>
+<script>(function(){var e=document.getElementById("back-to-top");window.addEventListener("scroll",function(){e.style.display=window.scrollY>300?"block":"none"}),e.addEventListener("click",function(){window.scrollTo({top:0,behavior:"smooth"})})})()</script></main><footer id=main-footer><div class=footer><a href=#>回到顶部</a><div class=footer-copyright><div class=dim>© 2026 老宁</div><div></div></div></div></footer></div><aside id=side-pane class=side-sticky><div class=side-details><span>546 字</span>
+<span>7 - 9 分钟阅读</span><div class=side-details-taxonomy><small>series:
+<span class=details-taxonomy><a href=https://blog.ning.indevs.in/series/hermes-%E9%85%8D%E7%BD%AE%E9%87%8D%E6%9E%84-2026>Hermes 配置重构 2026</a></span></small></div></div><h3>目录</h3><nav id=TableOfContents><ul><li><a href=#-最近两天2026-08-27-至-2026-08-29hermes-配置优化日志>📅 最近两天（2026-08-27 至 2026-08-29）Hermes 配置优化日志</a><ul><li><a href=#-目标>🎯 目标</a></li></ul></li><li><a href=#-关键问题按严重程度排序>🛠 关键问题（按严重程度排序）</a></li><li><a href=#-已完成的修复>✅ 已完成的修复</a><ul><li><a href=#1-配置文件重构-roothermesconfigyaml>1. 配置文件重构 (<code>/root/.hermes/config.yaml</code>)</a></li><li><a href=#2-fallback-链重排>2. Fallback 链重排</a></li><li><a href=#3-环境变量补全>3. 环境变量补全</a></li><li><a href=#4-cron-任务模型分配-roothermescronjobsjson>4. Cron 任务模型分配 (<code>/root/.hermes/cron/jobs.json</code>)</a></li><li><a href=#5-discord-清理>5. Discord 清理</a></li><li><a href=#6-systemd-服务修复>6. systemd 服务修复</a></li></ul></li><li><a href=#-配置变更概览>📊 配置变更概览</a></li><li><a href=#-时间线>📅 时间线</a></li><li><a href=#-下一步计划>🔄 下一步计划</a></li><li><a href=#-关键经验>💡 关键经验</a></li></ul></nav><h3>相关文章</h3><ul><li><a href=/posts/hermes-skill-guide/>Hermes Agent Skill 完全指南：从入门到自定义</a></li></ul></aside></div></div></body></html>

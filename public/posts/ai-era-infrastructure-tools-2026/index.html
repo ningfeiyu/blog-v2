@@ -1,88 +1,478 @@
-<!doctype html><html lang=zh-CN dir=ltr><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><title>2020 年代 AI 开发者必备：20 款免费基础设施工具全景图谱 | 老宁的试验田</title><link rel=icon href=/favicon.svg sizes=any type=image/svg+xml><meta property="og:url" content="https://blog.ning.indevs.in/posts/ai-era-infrastructure-tools-2026/"><meta property="og:site_name" content="老宁的试验田"><meta property="og:title" content="2020 年代 AI 开发者必备：20 款免费基础设施工具全景图谱"><meta property="og:description" content="深度解析2020年代AI开发者最值得关注的20款免费基础设施工具，从AI Gateway、LLM路由到模型聚合，全面覆盖生产环境必备环节。"><meta property="og:locale" content="zh_CN"><meta property="og:type" content="article"><meta property="article:section" content="posts"><meta property="article:published_time" content="2026-06-06T23:30:00+08:00"><meta property="article:modified_time" content="2026-06-06T23:30:00+08:00"><meta property="article:tag" content="AI Gateway"><meta property="article:tag" content="LLM"><meta property="article:tag" content="基础设施"><meta property="article:tag" content="开源"><meta property="article:tag" content="免费工具"><meta property="article:tag" content="模型路由"><meta name=twitter:card content="summary"><meta name=twitter:title content="2020 年代 AI 开发者必备：20 款免费基础设施工具全景图谱"><meta name=twitter:description content="深度解析2020年代AI开发者最值得关注的20款免费基础设施工具，从AI Gateway、LLM路由到模型聚合，全面覆盖生产环境必备环节。"><link rel=stylesheet href=/css/root.min.1052d5860b4442ccd33071bf3543c78d47509a7acb2c13edb1288611a2ebd6a8.css integrity="sha256-EFLVhgtEQszTMHG/NUPHjUdQmnrLLBPtsSiGEaLr1qg=" crossorigin=anonymous><link rel=stylesheet href=/css/bundle.min.e735cd1c41e6b7ba15433438fa484f2804322027ee8348fcff2adbf14976ce28.css integrity="sha256-5zXNHEHmt7oVQzQ4+khPKAQyICfug0j8/yrb8Ul2zig=" crossorigin=anonymous><script src=/js/bundle.cc8ae9952dbfb731affafabdf26e5c60a6910047ff59ccdeaf1daebaa26c8830.js integrity="sha256-zIrplS2/tzGv+vq98m5cYKaRAEf/Wczerx2uuqJsiDA=" crossorigin=anonymous></script><script defer src=/js/search/flexsearch.compact.3928d3d2172bc0b5f75d9458fb9255f0befce1c7239ba6e5d2c58ed4b82c2073.js integrity="sha256-OSjT0hcrwLX3XZRY+5JV8L784ccjm6bl0sWO1LgsIHM="></script><script defer src=/js/search/search.1d980f84df11f3eb7c8c5f17f541d49a0611608df179dd74fa7f06225eb56ace.js integrity="sha256-HZgPhN8R8+t8jF8X9UHUmgYRYI3xed10+n8GIl61as4="></script><link rel=preconnect href=https://fonts.googleapis.com><link rel=preconnect href=https://fonts.gstatic.com crossorigin><link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,200;1,300;1,400;1,500;1,600;1,700;1,800&display=swap" rel=stylesheet><link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200..800&family=Spectral:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,200;1,300;1,400;1,500;1,600;1,700;1,800&display=swap" rel=stylesheet><link rel=preconnect href=https://cdn.jsdelivr.net crossorigin><link href=https://cdn.jsdelivr.net/npm/lxgw-wenkai-webfont@1.7.0/lxgwwenkai-regular.css rel=stylesheet><link href=https://cdn.jsdelivr.net/npm/lxgw-wenkai-webfont@1.7.0/lxgwwenkai-bold.css rel=stylesheet><script defer src=https://events.vercount.one/js></script></head><body class=notransition><div id=container><header id=main-header><div role=navigation aria-label=Main><div class=nav-left><a href=https://blog.ning.indevs.in/ style=color:inherit>老宁的试验田</a></div><div class=nav-right><div style=position:absolute;width:0;height:0><div id=nav-dropdown-menu class=hidden href=#><div class=nav-item><a href=/>首页</a></div><div class=nav-item><a aria-current=true class=ancestor href=/posts/>文章</a></div><div class=nav-item><a href=/tags/>标签</a></div><div class=nav-item><a href=/archives/>归档</a></div><div class=nav-item><a href=/about/>关于</a></div></div></div><a id=nav-dropdown-button href=#><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M4 6H20M4 12H20M4 18H20" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a><div id=nav-menu><div class=nav-item><a href=/>首页</a></div><div class=nav-item><a aria-current=true class=ancestor href=/posts/>文章</a></div><div class=nav-item><a href=/tags/>标签</a></div><div class=nav-item><a href=/archives/>归档</a></div><div class=nav-item><a href=/about/>关于</a></div></div><a id=theme-switcher href=#><svg class="light-icon" viewBox="0 0 24 24" fill="none"><path d="M12 3V4m0 16v1M4 12H3M6.31412 6.31412 5.5 5.5m12.1859.81412L18.5 5.5M6.31412 17.69 5.5 18.5001M17.6859 17.69 18.5 18.5001M21 12H20m-4 0c0 2.2091-1.7909 4-4 4-2.20914.0-4-1.7909-4-4 0-2.20914 1.79086-4 4-4 2.2091.0 4 1.79086 4 4z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-<svg class="dark-icon" viewBox="0 0 24 24" fill="none"><path d="M3.32031 11.6835c0 4.9706 4.02944 9 8.99999 9 3.7872.0 7.028-2.3392 8.3565-5.6515C19.6402 15.4486 18.5059 15.6834 17.3203 15.6834c-4.9706.0-8.99999-4.0294-8.99999-8.99998C8.32031 5.50338 8.55165 4.36259 8.96453 3.32996 5.65605 4.66028 3.32031 7.89912 3.32031 11.6835z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a></div></div></header><div class="flex grow"><div id=main-pane><main id=main-content><div class=single-header><ol class=breadcrumbs itemscope itemtype=https://schema.org/BreadcrumbList><li itemprop=itemListElement itemscope itemtype=https://schema.org/ListItem><a itemprop=item href=https://blog.ning.indevs.in/><span itemprop=name>首页</span>
-</a><meta itemprop=position content='1'></li><span>&nbsp»&nbsp</span><li itemprop=itemListElement itemscope itemtype=https://schema.org/ListItem><a itemprop=item href=https://blog.ning.indevs.in/posts/><span itemprop=name>文章</span>
-</a><meta itemprop=position content='2'></li><span>&nbsp»&nbsp</span></ol><h1>2020 年代 AI 开发者必备：20 款免费基础设施工具全景图谱</h1><time class=dim datetime=2026-06-06T23:30:00+08:00>2026年6月6日</time><div class=term-container><div class=tag><a href=https://blog.ning.indevs.in/tags/ai-gateway/>#AI Gateway</a></div><div class=tag><a href=https://blog.ning.indevs.in/tags/llm/>#LLM</a></div><div class=tag><a href=https://blog.ning.indevs.in/tags/%E5%9F%BA%E7%A1%80%E8%AE%BE%E6%96%BD/>#基础设施</a></div><div class=tag><a href=https://blog.ning.indevs.in/tags/%E5%BC%80%E6%BA%90/>#开源</a></div><div class=tag><a href=https://blog.ning.indevs.in/tags/%E5%85%8D%E8%B4%B9%E5%B7%A5%E5%85%B7/>#免费工具</a></div><div class=tag><a href=https://blog.ning.indevs.in/tags/%E6%A8%A1%E5%9E%8B%E8%B7%AF%E7%94%B1/>#模型路由</a></div><div class=tag><a href=https://blog.ning.indevs.in/tags/api%E7%AE%A1%E7%90%86/>#API管理</a></div><div class=tag><a href=https://blog.ning.indevs.in/tags/2020%E5%B9%B4%E4%BB%A3/>#2020年代</a></div></ol></div><section class=page-section><p><img src=/images/remote/ext-2c9198c7a5fe.jpg alt="AI Infrastructure Tools"></p><blockquote><p><em>&ldquo;AI 应用的上层建筑是 Prompt，经济基础是 Gateway。没有稳固的 Gateway 层，再精美的 RAG 和 Agent 都是沙上建塔。&rdquo;</em></p></blockquote><h2 id=一为什么-ai-gateway-是-2026-年的必选项>一、为什么 AI Gateway 是 2026 年的必选项</h2><p>2023-2025 年的 AI 开发经历了三个阶段：</p><ol><li><strong>Demo 时代</strong>（2023）：调用 OpenAI API，跑通就是胜利</li><li><strong>RAG 时代</strong>（2024）：向量数据库、检索增强，拼的是数据质量</li><li><strong>工程时代</strong>（2025-2026）：多模型切换、成本控制、安全合规、可观测性</li></ol><p><strong>AI Gateway 是工程时代的基石。</strong></p><p>没有 Gateway 的典型痛点：</p><ul><li>单点故障：OpenAI 挂了，整个应用死</li><li>成本失控：没有 token 监控，月底账单暴雷</li><li>安全黑盒：不知道用户输入了什么，AI 回了什么</li><li>无法切换：从 GPT-4 迁到 Claude，代码重写一遍</li></ul><hr><h2 id=二ai-gateway-四大金刚>二、AI Gateway 四大金刚</h2><h3 id=1-litellm--推荐指数>1. <strong>LiteLLM</strong> | 推荐指数：🌟🌟🌟🌟🌟</h3><p>开源 LLM 代理的事实标准。统一 100+ 模型接口，一行代码切换。</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-python data-lang=python><span style=display:flex><span><span style=color:#f92672>import</span> litellm
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e># 调用 GPT-4</span>
-</span></span><span style=display:flex><span>response <span style=color:#f92672>=</span> litellm<span style=color:#f92672>.</span>completion(model<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;gpt-4&#34;</span>, messages<span style=color:#f92672>=</span>[<span style=color:#f92672>...</span>])
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e># 切换到 Claude（只改一行）</span>
-</span></span><span style=display:flex><span>response <span style=color:#f92672>=</span> litellm<span style=color:#f92672>.</span>completion(model<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;claude-3-5-sonnet&#34;</span>, messages<span style=color:#f92672>=</span>[<span style=color:#f92672>...</span>])
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e># 换本地 Ollama 模型（同样一行）</span>
-</span></span><span style=display:flex><span>response <span style=color:#f92672>=</span> litellm<span style=color:#f92672>.</span>completion(model<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;ollama/llama3&#34;</span>, messages<span style=color:#f92672>=</span>[<span style=color:#f92672>...</span>])
+<!DOCTYPE html>
+<html lang="zh-CN" dir="ltr">
+<head>
+  <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>2020 年代 AI 开发者必备：20 款免费基础设施工具全景图谱 | 老宁的试验田</title>
+<link rel="icon" href="/favicon.svg" sizes="any" type="image/svg+xml" /><meta property="og:url" content="https://blog.ning.indevs.in/posts/ai-era-infrastructure-tools-2026/">
+	<meta property="og:site_name" content="老宁的试验田">
+	<meta property="og:title" content="2020 年代 AI 开发者必备：20 款免费基础设施工具全景图谱">
+	<meta property="og:description" content="深度解析2020年代AI开发者最值得关注的20款免费基础设施工具，从AI Gateway、LLM路由到模型聚合，全面覆盖生产环境必备环节。">
+	<meta property="og:locale" content="zh_CN">
+	<meta property="og:type" content="article">
+		<meta property="article:section" content="posts">
+		<meta property="article:published_time" content="2026-06-06T23:30:00+08:00">
+		<meta property="article:modified_time" content="2026-06-06T23:30:00+08:00">
+		<meta property="article:tag" content="AI Gateway">
+		<meta property="article:tag" content="LLM">
+		<meta property="article:tag" content="基础设施">
+		<meta property="article:tag" content="开源">
+		<meta property="article:tag" content="免费工具">
+		<meta property="article:tag" content="模型路由">
+
+	<meta name="twitter:card" content="summary">
+	<meta name="twitter:title" content="2020 年代 AI 开发者必备：20 款免费基础设施工具全景图谱">
+	<meta name="twitter:description" content="深度解析2020年代AI开发者最值得关注的20款免费基础设施工具，从AI Gateway、LLM路由到模型聚合，全面覆盖生产环境必备环节。">
+
+      <link rel="stylesheet" href="/css/root.min.1052d5860b4442ccd33071bf3543c78d47509a7acb2c13edb1288611a2ebd6a8.css" integrity="sha256-EFLVhgtEQszTMHG/NUPHjUdQmnrLLBPtsSiGEaLr1qg=" crossorigin="anonymous">
+      <link rel="stylesheet" href="/css/bundle.min.e735cd1c41e6b7ba15433438fa484f2804322027ee8348fcff2adbf14976ce28.css" integrity="sha256-5zXNHEHmt7oVQzQ4&#43;khPKAQyICfug0j8/yrb8Ul2zig=" crossorigin="anonymous">
+
+      <script src="/js/bundle.cc8ae9952dbfb731affafabdf26e5c60a6910047ff59ccdeaf1daebaa26c8830.js" integrity="sha256-zIrplS2/tzGv&#43;vq98m5cYKaRAEf/Wczerx2uuqJsiDA=" crossorigin="anonymous"></script><script defer src="/js/search/flexsearch.compact.3928d3d2172bc0b5f75d9458fb9255f0befce1c7239ba6e5d2c58ed4b82c2073.js" integrity="sha256-OSjT0hcrwLX3XZRY&#43;5JV8L784ccjm6bl0sWO1LgsIHM="></script>
+<script defer src="/js/search/search.1d980f84df11f3eb7c8c5f17f541d49a0611608df179dd74fa7f06225eb56ace.js" integrity="sha256-HZgPhN8R8&#43;t8jF8X9UHUmgYRYI3xed10&#43;n8GIl61as4="></script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,200;1,300;1,400;1,500;1,600;1,700;1,800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200..800&family=Spectral:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,200;1,300;1,400;1,500;1,600;1,700;1,800&display=swap" rel="stylesheet">
+
+
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+<link href="https://cdn.jsdelivr.net/npm/lxgw-wenkai-webfont@1.7.0/lxgwwenkai-regular.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/lxgw-wenkai-webfont@1.7.0/lxgwwenkai-bold.css" rel="stylesheet">
+
+<script defer src="https://events.vercount.one/js"></script>
+</head>
+<body class="notransition">
+  <div id="container">
+    <header id="main-header"><div role="navigation" aria-label="Main">
+  <div class="nav-left">
+    <a href="https://blog.ning.indevs.in/" style="color: inherit;">老宁的试验田</a>
+  </div>
+  <div class="nav-right">
+    <div style="position:absolute;width:0px;height:0px;">
+      <div id="nav-dropdown-menu" class="hidden" href="#">
+    <div class="nav-item">
+      <a href="/"
+      >首页</a>
+    </div>
+    <div class="nav-item">
+      <a aria-current="true" class="ancestor" href="/posts/"
+      >文章</a>
+    </div>
+    <div class="nav-item">
+      <a href="/tags/"
+      >标签</a>
+    </div>
+    <div class="nav-item">
+      <a href="/archives/"
+      >归档</a>
+    </div>
+    <div class="nav-item">
+      <a href="/about/"
+      >关于</a>
+    </div>
+</div>
+    </div>
+    <a id="nav-dropdown-button" href="#"><svg width="20px" height="20px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M4 6H20M4 12H20M4 18H20" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
+</a>
+    <div id="nav-menu">
+    <div class="nav-item">
+      <a href="/"
+      >首页</a>
+    </div>
+    <div class="nav-item">
+      <a aria-current="true" class="ancestor" href="/posts/"
+      >文章</a>
+    </div>
+    <div class="nav-item">
+      <a href="/tags/"
+      >标签</a>
+    </div>
+    <div class="nav-item">
+      <a href="/archives/"
+      >归档</a>
+    </div>
+    <div class="nav-item">
+      <a href="/about/"
+      >关于</a>
+    </div>
+</div>
+    <a id="theme-switcher" href="#">
+<svg class="light-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M12 3V4M12 20V21M4 12H3M6.31412 6.31412L5.5 5.5M17.6859 6.31412L18.5 5.5M6.31412 17.69L5.5 18.5001M17.6859 17.69L18.5 18.5001M21 12H20M16 12C16 14.2091 14.2091 16 12 16C9.79086 16 8 14.2091 8 12C8 9.79086 9.79086 8 12 8C14.2091 8 16 9.79086 16 12Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
+
+<svg class="dark-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M3.32031 11.6835C3.32031 16.6541 7.34975 20.6835 12.3203 20.6835C16.1075 20.6835 19.3483 18.3443 20.6768 15.032C19.6402 15.4486 18.5059 15.6834 17.3203 15.6834C12.3497 15.6834 8.32031 11.654 8.32031 6.68342C8.32031 5.50338 8.55165 4.36259 8.96453 3.32996C5.65605 4.66028 3.32031 7.89912 3.32031 11.6835Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
+</a>
+  </div>
+</div>
+</header>
+    <div class="flex grow">
+      <div id="main-pane">
+        <main id="main-content"><div class="single-header">
+<ol class="breadcrumbs" itemscope itemtype="https://schema.org/BreadcrumbList">
+    <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+      <a itemprop="item" href="https://blog.ning.indevs.in/">
+        <span itemprop="name">首页</span>
+      </a>
+      <meta itemprop="position" content='1' />
+    </li>
+    <span>&nbsp»&nbsp</span>
+    <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+      <a itemprop="item" href="https://blog.ning.indevs.in/posts/">
+        <span itemprop="name">文章</span>
+      </a>
+      <meta itemprop="position" content='2' />
+    </li>
+    <span>&nbsp»&nbsp</span>
+</ol>
+<h1>2020 年代 AI 开发者必备：20 款免费基础设施工具全景图谱</h1><time class="dim" datetime="2026-06-06T23:30:00&#43;08:00">2026年6月6日</time><div class="term-container"><div class="tag">
+        <a href="https://blog.ning.indevs.in/tags/ai-gateway/">#AI Gateway</a>
+      </div><div class="tag">
+        <a href="https://blog.ning.indevs.in/tags/llm/">#LLM</a>
+      </div><div class="tag">
+        <a href="https://blog.ning.indevs.in/tags/%E5%9F%BA%E7%A1%80%E8%AE%BE%E6%96%BD/">#基础设施</a>
+      </div><div class="tag">
+        <a href="https://blog.ning.indevs.in/tags/%E5%BC%80%E6%BA%90/">#开源</a>
+      </div><div class="tag">
+        <a href="https://blog.ning.indevs.in/tags/%E5%85%8D%E8%B4%B9%E5%B7%A5%E5%85%B7/">#免费工具</a>
+      </div><div class="tag">
+        <a href="https://blog.ning.indevs.in/tags/%E6%A8%A1%E5%9E%8B%E8%B7%AF%E7%94%B1/">#模型路由</a>
+      </div><div class="tag">
+        <a href="https://blog.ning.indevs.in/tags/api%E7%AE%A1%E7%90%86/">#API管理</a>
+      </div><div class="tag">
+        <a href="https://blog.ning.indevs.in/tags/2020%E5%B9%B4%E4%BB%A3/">#2020年代</a>
+      </div></ol></div>
+  <section class="page-section"><p><img src="/images/remote/ext-2c9198c7a5fe.jpg" alt="AI Infrastructure Tools"></p>
+<blockquote>
+<p><em>&ldquo;AI 应用的上层建筑是 Prompt，经济基础是 Gateway。没有稳固的 Gateway 层，再精美的 RAG 和 Agent 都是沙上建塔。&rdquo;</em></p>
+</blockquote>
+<h2 id="一为什么-ai-gateway-是-2026-年的必选项">一、为什么 AI Gateway 是 2026 年的必选项</h2>
+<p>2023-2025 年的 AI 开发经历了三个阶段：</p>
+<ol>
+<li><strong>Demo 时代</strong>（2023）：调用 OpenAI API，跑通就是胜利</li>
+<li><strong>RAG 时代</strong>（2024）：向量数据库、检索增强，拼的是数据质量</li>
+<li><strong>工程时代</strong>（2025-2026）：多模型切换、成本控制、安全合规、可观测性</li>
+</ol>
+<p><strong>AI Gateway 是工程时代的基石。</strong></p>
+<p>没有 Gateway 的典型痛点：</p>
+<ul>
+<li>单点故障：OpenAI 挂了，整个应用死</li>
+<li>成本失控：没有 token 监控，月底账单暴雷</li>
+<li>安全黑盒：不知道用户输入了什么，AI 回了什么</li>
+<li>无法切换：从 GPT-4 迁到 Claude，代码重写一遍</li>
+</ul>
+<hr>
+<h2 id="二ai-gateway-四大金刚">二、AI Gateway 四大金刚</h2>
+<h3 id="1-litellm--推荐指数">1. <strong>LiteLLM</strong> | 推荐指数：🌟🌟🌟🌟🌟</h3>
+<p>开源 LLM 代理的事实标准。统一 100+ 模型接口，一行代码切换。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">import</span> litellm
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 调用 GPT-4</span>
+</span></span><span style="display:flex;"><span>response <span style="color:#f92672">=</span> litellm<span style="color:#f92672">.</span>completion(model<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;gpt-4&#34;</span>, messages<span style="color:#f92672">=</span>[<span style="color:#f92672">...</span>])
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 切换到 Claude（只改一行）</span>
+</span></span><span style="display:flex;"><span>response <span style="color:#f92672">=</span> litellm<span style="color:#f92672">.</span>completion(model<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;claude-3-5-sonnet&#34;</span>, messages<span style="color:#f92672">=</span>[<span style="color:#f92672">...</span>])
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 换本地 Ollama 模型（同样一行）</span>
+</span></span><span style="display:flex;"><span>response <span style="color:#f92672">=</span> litellm<span style="color:#f92672">.</span>completion(model<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;ollama/llama3&#34;</span>, messages<span style="color:#f92672">=</span>[<span style="color:#f92672">...</span>])
 </span></span></code></pre></div><p><strong>免费点</strong>：开源核心完全免费
 <strong>杀手锏</strong>：Fallback 链、请求记录、虚拟 Key 管理
-<strong>官网</strong>：<a href=https://litellm.ai>litellm.ai</a></p><hr><h3 id=2-helicone--推荐指数>2. <strong>Helicone</strong> | 推荐指数：🌟🌟🌟🌟</h3><p>LLM 可观测性第一选择。一行代码接入，零侵入。</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-python data-lang=python><span style=display:flex><span><span style=color:#75715e># 只改 base_url，其余代码完全不变</span>
-</span></span><span style=display:flex><span>openai<span style=color:#f92672>.</span>api_base <span style=color:#f92672>=</span> <span style=color:#e6db74>&#34;https://oai.helicone.ai/v1&#34;</span>
+<strong>官网</strong>：<a href="https://litellm.ai">litellm.ai</a></p>
+<hr>
+<h3 id="2-helicone--推荐指数">2. <strong>Helicone</strong> | 推荐指数：🌟🌟🌟🌟</h3>
+<p>LLM 可观测性第一选择。一行代码接入，零侵入。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># 只改 base_url，其余代码完全不变</span>
+</span></span><span style="display:flex;"><span>openai<span style="color:#f92672">.</span>api_base <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;https://oai.helicone.ai/v1&#34;</span>
 </span></span></code></pre></div><p><strong>免费点</strong>：每月 10万 请求
 <strong>杀手锏</strong>：Request/Response 完整记录、Cost 分析、Prompt 版本管理
-<strong>官网</strong>：<a href=https://helicone.ai>helicone.ai</a></p><hr><h3 id=3-cloudflare-ai-gateway--推荐指数>3. <strong>Cloudflare AI Gateway</strong> | 推荐指数：🌟🌟🌟🌟🌟</h3><p>边缘 AI 推理网关。全球 300+ 节点，推理延迟 &lt; 50ms。</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span>curl https://gateway.ai.cloudflare.com/v1/$ACCOUNT_ID/$GATEWAY/openai/chat/completions <span style=color:#ae81ff>\
-</span></span></span><span style=display:flex><span>  -H <span style=color:#e6db74>&#34;Authorization: Bearer </span>$API_KEY<span style=color:#e6db74>&#34;</span> <span style=color:#ae81ff>\
-</span></span></span><span style=display:flex><span>  -d <span style=color:#e6db74>&#39;{&#34;model&#34;: &#34;gpt-4&#34;, &#34;messages&#34;: [...]}&#39;</span>
+<strong>官网</strong>：<a href="https://helicone.ai">helicone.ai</a></p>
+<hr>
+<h3 id="3-cloudflare-ai-gateway--推荐指数">3. <strong>Cloudflare AI Gateway</strong> | 推荐指数：🌟🌟🌟🌟🌟</h3>
+<p>边缘 AI 推理网关。全球 300+ 节点，推理延迟 &lt; 50ms。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>curl https://gateway.ai.cloudflare.com/v1/$ACCOUNT_ID/$GATEWAY/openai/chat/completions <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span>  -H <span style="color:#e6db74">&#34;Authorization: Bearer </span>$API_KEY<span style="color:#e6db74">&#34;</span> <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span>  -d <span style="color:#e6db74">&#39;{&#34;model&#34;: &#34;gpt-4&#34;, &#34;messages&#34;: [...]}&#39;</span>
 </span></span></code></pre></div><p><strong>免费点</strong>：Workers 免费额度内
 <strong>杀手锏</strong>：边缘缓存、语义缓存、流式响应优化
-<strong>官网</strong>：<a href=https://developers.cloudflare.com/ai-gateway>developers.cloudflare.com/ai-gateway</a></p><hr><h3 id=4-portkey-ai--推荐指数>4. <strong>Portkey AI</strong> | 推荐指数：🌟🌟🌟🌟</h3><p>LLM 生产化网关。Guardrails 内容安全、语义缓存、Fallback。</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-python data-lang=python><span style=display:flex><span><span style=color:#f92672>import</span> portkey_ai
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>client <span style=color:#f92672>=</span> portkey_ai<span style=color:#f92672>.</span>Portkey(
-</span></span><span style=display:flex><span>    api_key<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;PORTKEY_API_KEY&#34;</span>,
-</span></span><span style=display:flex><span>    virtual_key<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;OPENAI_VIRTUAL_KEY&#34;</span>
-</span></span><span style=display:flex><span>)
+<strong>官网</strong>：<a href="https://developers.cloudflare.com/ai-gateway">developers.cloudflare.com/ai-gateway</a></p>
+<hr>
+<h3 id="4-portkey-ai--推荐指数">4. <strong>Portkey AI</strong> | 推荐指数：🌟🌟🌟🌟</h3>
+<p>LLM 生产化网关。Guardrails 内容安全、语义缓存、Fallback。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">import</span> portkey_ai
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>client <span style="color:#f92672">=</span> portkey_ai<span style="color:#f92672">.</span>Portkey(
+</span></span><span style="display:flex;"><span>    api_key<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;PORTKEY_API_KEY&#34;</span>,
+</span></span><span style="display:flex;"><span>    virtual_key<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;OPENAI_VIRTUAL_KEY&#34;</span>
+</span></span><span style="display:flex;"><span>)
 </span></span></code></pre></div><p><strong>免费点</strong>：每月 1万 请求
 <strong>杀手锏</strong>：输入/输出安全过滤、多模型 Fallback、Prompt A/B 测试
-<strong>官网</strong>：<a href=https://portkey.ai>portkey.ai</a></p><hr><h2 id=三模型路由与聚合>三、模型路由与聚合</h2><h3 id=5-openrouter--推荐指数>5. <strong>OpenRouter</strong> | 推荐指数：🌟🌟🌟🌟🌟</h3><p>LLM 路由市场。200+ 模型，统一接口，自动选最优路径。</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-python data-lang=python><span style=display:flex><span><span style=color:#f92672>from</span> openai <span style=color:#f92672>import</span> OpenAI
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>client <span style=color:#f92672>=</span> OpenAI(
-</span></span><span style=display:flex><span>    base_url<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;https://openrouter.ai/api/v1&#34;</span>,
-</span></span><span style=display:flex><span>    api_key<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;$OPENROUTER_API_KEY&#34;</span>
-</span></span><span style=display:flex><span>)
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e># 自动路由到 cheapest/fastest/best</span>
-</span></span><span style=display:flex><span>client<span style=color:#f92672>.</span>chat<span style=color:#f92672>.</span>completions<span style=color:#f92672>.</span>create(model<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;openrouter/auto&#34;</span>, messages<span style=color:#f92672>=</span>[<span style=color:#f92672>...</span>])
+<strong>官网</strong>：<a href="https://portkey.ai">portkey.ai</a></p>
+<hr>
+<h2 id="三模型路由与聚合">三、模型路由与聚合</h2>
+<h3 id="5-openrouter--推荐指数">5. <strong>OpenRouter</strong> | 推荐指数：🌟🌟🌟🌟🌟</h3>
+<p>LLM 路由市场。200+ 模型，统一接口，自动选最优路径。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">from</span> openai <span style="color:#f92672">import</span> OpenAI
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>client <span style="color:#f92672">=</span> OpenAI(
+</span></span><span style="display:flex;"><span>    base_url<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;https://openrouter.ai/api/v1&#34;</span>,
+</span></span><span style="display:flex;"><span>    api_key<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;$OPENROUTER_API_KEY&#34;</span>
+</span></span><span style="display:flex;"><span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 自动路由到 cheapest/fastest/best</span>
+</span></span><span style="display:flex;"><span>client<span style="color:#f92672">.</span>chat<span style="color:#f92672">.</span>completions<span style="color:#f92672">.</span>create(model<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;openrouter/auto&#34;</span>, messages<span style="color:#f92672">=</span>[<span style="color:#f92672">...</span>])
 </span></span></code></pre></div><p><strong>免费点</strong>：大量模型有免费层
 <strong>杀手锏</strong>：按价格/质量/延迟排序，自由选择
-<strong>官网</strong>：<a href=https://openrouter.ai>openrouter.ai</a></p><hr><h3 id=6-one-api--推荐指数>6. <strong>One API</strong> | 推荐指数：🌟🌟🌟🌟</h3><p>国产 LLM 聚合神器。把国内各家大模型转成 OpenAI 格式。</p><p><strong>免费点</strong>：开源免费
+<strong>官网</strong>：<a href="https://openrouter.ai">openrouter.ai</a></p>
+<hr>
+<h3 id="6-one-api--推荐指数">6. <strong>One API</strong> | 推荐指数：🌟🌟🌟🌟</h3>
+<p>国产 LLM 聚合神器。把国内各家大模型转成 OpenAI 格式。</p>
+<p><strong>免费点</strong>：开源免费
 <strong>杀手锏</strong>：通义千问、文心一言、智谱等全部统一
-<strong>GitHub</strong>：<code>songquanpeng/one-api</code></p><hr><h2 id=四前端-ai-开发套件>四、前端 AI 开发套件</h2><h3 id=7-vercel-ai-sdk--推荐指数>7. <strong>Vercel AI SDK</strong> | 推荐指数：🌟🌟🌟🌟🌟</h3><p>前端友好的 AI 开发套件。流式 UI 的最佳实践。</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-tsx data-lang=tsx><span style=display:flex><span><span style=color:#66d9ef>import</span> { <span style=color:#a6e22e>useChat</span> } <span style=color:#66d9ef>from</span> <span style=color:#e6db74>&#39;ai/react&#39;</span>
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#66d9ef>function</span> <span style=color:#a6e22e>Chat() {</span>
-</span></span><span style=display:flex><span>  <span style=color:#66d9ef>const</span> { <span style=color:#a6e22e>messages</span>, <span style=color:#a6e22e>input</span>, <span style=color:#a6e22e>handleInputChange</span>, <span style=color:#a6e22e>handleSubmit</span> } <span style=color:#f92672>=</span> <span style=color:#a6e22e>useChat</span>()
-</span></span><span style=display:flex><span>  <span style=color:#66d9ef>return</span> (
-</span></span><span style=display:flex><span>    &lt;<span style=color:#f92672>form</span> <span style=color:#a6e22e>onSubmit</span><span style=color:#f92672>=</span>{<span style=color:#a6e22e>handleSubmit</span>}&gt;
-</span></span><span style=display:flex><span>      {<span style=color:#a6e22e>messages</span>.<span style=color:#a6e22e>map</span>(<span style=color:#a6e22e>m</span> <span style=color:#f92672>=&gt;</span> &lt;<span style=color:#f92672>div</span> <span style=color:#a6e22e>key</span><span style=color:#f92672>=</span>{<span style=color:#a6e22e>m</span>.<span style=color:#a6e22e>id</span>}&gt;{<span style=color:#a6e22e>m</span>.<span style=color:#a6e22e>content</span>}&lt;/<span style=color:#f92672>div</span>&gt;)}
-</span></span><span style=display:flex><span>      &lt;<span style=color:#f92672>input</span> <span style=color:#a6e22e>value</span><span style=color:#f92672>=</span>{<span style=color:#a6e22e>input</span>} <span style=color:#a6e22e>onChange</span><span style=color:#f92672>=</span>{<span style=color:#a6e22e>handleInputChange</span>} /&gt;
-</span></span><span style=display:flex><span>    &lt;/<span style=color:#f92672>form</span>&gt;
-</span></span><span style=display:flex><span>  )
-</span></span><span style=display:flex><span>}
+<strong>GitHub</strong>：<code>songquanpeng/one-api</code></p>
+<hr>
+<h2 id="四前端-ai-开发套件">四、前端 AI 开发套件</h2>
+<h3 id="7-vercel-ai-sdk--推荐指数">7. <strong>Vercel AI SDK</strong> | 推荐指数：🌟🌟🌟🌟🌟</h3>
+<p>前端友好的 AI 开发套件。流式 UI 的最佳实践。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-tsx" data-lang="tsx"><span style="display:flex;"><span><span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">useChat</span> } <span style="color:#66d9ef">from</span> <span style="color:#e6db74">&#39;ai/react&#39;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">function</span> <span style="color:#a6e22e">Chat() {</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">const</span> { <span style="color:#a6e22e">messages</span>, <span style="color:#a6e22e">input</span>, <span style="color:#a6e22e">handleInputChange</span>, <span style="color:#a6e22e">handleSubmit</span> } <span style="color:#f92672">=</span> <span style="color:#a6e22e">useChat</span>()
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">return</span> (
+</span></span><span style="display:flex;"><span>    &lt;<span style="color:#f92672">form</span> <span style="color:#a6e22e">onSubmit</span><span style="color:#f92672">=</span>{<span style="color:#a6e22e">handleSubmit</span>}&gt;
+</span></span><span style="display:flex;"><span>      {<span style="color:#a6e22e">messages</span>.<span style="color:#a6e22e">map</span>(<span style="color:#a6e22e">m</span> <span style="color:#f92672">=&gt;</span> &lt;<span style="color:#f92672">div</span> <span style="color:#a6e22e">key</span><span style="color:#f92672">=</span>{<span style="color:#a6e22e">m</span>.<span style="color:#a6e22e">id</span>}&gt;{<span style="color:#a6e22e">m</span>.<span style="color:#a6e22e">content</span>}&lt;/<span style="color:#f92672">div</span>&gt;)}
+</span></span><span style="display:flex;"><span>      &lt;<span style="color:#f92672">input</span> <span style="color:#a6e22e">value</span><span style="color:#f92672">=</span>{<span style="color:#a6e22e">input</span>} <span style="color:#a6e22e">onChange</span><span style="color:#f92672">=</span>{<span style="color:#a6e22e">handleInputChange</span>} /&gt;
+</span></span><span style="display:flex;"><span>    &lt;/<span style="color:#f92672">form</span>&gt;
+</span></span><span style="display:flex;"><span>  )
+</span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div><p><strong>免费点</strong>：完全开源
 <strong>杀手锏</strong>：<code>useChat()</code> 一键流式、<code>streamText()</code> 文本生成、Tool calling
-<strong>官网</strong>：<a href=https://sdk.vercel.ai>sdk.vercel.ai</a></p><hr><h2 id=五可观测性与追踪>五、可观测性与追踪</h2><h3 id=8-langfuse--推荐指数>8. <strong>Langfuse</strong> | 推荐指数：🌟🌟🌟🌟🌟</h3><p>开源 LLM 可观测性平台。自托管，数据可控。</p><p><strong>免费点</strong>：开源版完全免费
+<strong>官网</strong>：<a href="https://sdk.vercel.ai">sdk.vercel.ai</a></p>
+<hr>
+<h2 id="五可观测性与追踪">五、可观测性与追踪</h2>
+<h3 id="8-langfuse--推荐指数">8. <strong>Langfuse</strong> | 推荐指数：🌟🌟🌟🌟🌟</h3>
+<p>开源 LLM 可观测性平台。自托管，数据可控。</p>
+<p><strong>免费点</strong>：开源版完全免费
 <strong>杀手锏</strong>：Trace 链路追踪、Cost 分析、评估打分、Prompt 版本
-<strong>官网</strong>：<a href=https://langfuse.com>langfuse.com</a></p><hr><h3 id=9-langsmith--推荐指数>9. <strong>LangSmith</strong> | 推荐指数：🌟🌟🌟🌟</h3><p>LangChain 官方追踪平台。</p><p><strong>免费点</strong>：每月 10万 trace
+<strong>官网</strong>：<a href="https://langfuse.com">langfuse.com</a></p>
+<hr>
+<h3 id="9-langsmith--推荐指数">9. <strong>LangSmith</strong> | 推荐指数：🌟🌟🌟🌟</h3>
+<p>LangChain 官方追踪平台。</p>
+<p><strong>免费点</strong>：每月 10万 trace
 <strong>杀手锏</strong>：与 LangChain 深度集成
-<strong>官网</strong>：<a href=https://smith.langchain.com>smith.langchain.com</a></p><hr><h3 id=10-braintrust--推荐指数>10. <strong>Braintrust</strong> | 推荐指数：🌟🌟🌟🌟</h3><p>AI 应用评估平台。</p><p><strong>免费点</strong>：generous free tier
+<strong>官网</strong>：<a href="https://smith.langchain.com">smith.langchain.com</a></p>
+<hr>
+<h3 id="10-braintrust--推荐指数">10. <strong>Braintrust</strong> | 推荐指数：🌟🌟🌟🌟</h3>
+<p>AI 应用评估平台。</p>
+<p><strong>免费点</strong>：generous free tier
 <strong>杀手锏</strong>：Evals 评估体系、回归测试、A/B 对比
-<strong>官网</strong>：<a href=https://braintrust.dev>braintrust.dev</a></p><hr><h2 id=六向量数据库与检索>六、向量数据库与检索</h2><h3 id=11-pinecone--推荐指数>11. <strong>Pinecone</strong> | 推荐指数：🌟🌟🌟🌟</h3><p>托管向量数据库。</p><p><strong>免费点</strong>：每月 10万 向量操作
+<strong>官网</strong>：<a href="https://braintrust.dev">braintrust.dev</a></p>
+<hr>
+<h2 id="六向量数据库与检索">六、向量数据库与检索</h2>
+<h3 id="11-pinecone--推荐指数">11. <strong>Pinecone</strong> | 推荐指数：🌟🌟🌟🌟</h3>
+<p>托管向量数据库。</p>
+<p><strong>免费点</strong>：每月 10万 向量操作
 <strong>杀手锏</strong>：零运维，毫秒级检索
-<strong>官网</strong>：<a href=https://pinecone.io>pinecone.io</a></p><hr><h3 id=12-weaviate--推荐指数>12. <strong>Weaviate</strong> | 推荐指数：🌟🌟🌟🌟🌟</h3><p>开源向量搜索引擎。</p><p><strong>免费点</strong>：完全开源
+<strong>官网</strong>：<a href="https://pinecone.io">pinecone.io</a></p>
+<hr>
+<h3 id="12-weaviate--推荐指数">12. <strong>Weaviate</strong> | 推荐指数：🌟🌟🌟🌟🌟</h3>
+<p>开源向量搜索引擎。</p>
+<p><strong>免费点</strong>：完全开源
 <strong>杀手锏</strong>：GraphQL 接口、混合检索（向量+关键词）
-<strong>官网</strong>：<a href=https://weaviate.io>weaviate.io</a></p><hr><h3 id=13-chroma--推荐指数>13. <strong>Chroma</strong> | 推荐指数：🌟🌟🌟🌟</h3><p>轻量级本地向量数据库。</p><p><strong>免费点</strong>：完全开源
+<strong>官网</strong>：<a href="https://weaviate.io">weaviate.io</a></p>
+<hr>
+<h3 id="13-chroma--推荐指数">13. <strong>Chroma</strong> | 推荐指数：🌟🌟🌟🌟</h3>
+<p>轻量级本地向量数据库。</p>
+<p><strong>免费点</strong>：完全开源
 <strong>杀手锏</strong>：<code>pip install chromadb</code>，5 分钟上手
-<strong>官网</strong>：<a href=https://trychroma.com>trychroma.com</a></p><hr><h2 id=七模型部署与推理>七、模型部署与推理</h2><h3 id=14-hugging-face--推荐指数>14. <strong>Hugging Face</strong> | 推荐指数：🌟🌟🌟🌟🌟</h3><p>AI 模型 GitHub。30万+ 开源模型。</p><p><strong>免费点</strong>：模型下载、Spaces、Inference API 全部免费
+<strong>官网</strong>：<a href="https://trychroma.com">trychroma.com</a></p>
+<hr>
+<h2 id="七模型部署与推理">七、模型部署与推理</h2>
+<h3 id="14-hugging-face--推荐指数">14. <strong>Hugging Face</strong> | 推荐指数：🌟🌟🌟🌟🌟</h3>
+<p>AI 模型 GitHub。30万+ 开源模型。</p>
+<p><strong>免费点</strong>：模型下载、Spaces、Inference API 全部免费
 <strong>杀手锏</strong>：一键部署推理端点
-<strong>官网</strong>：<a href=https://huggingface.co>huggingface.co</a></p><hr><h3 id=15-modal--推荐指数>15. <strong>Modal</strong> | 推荐指数：🌟🌟🌟🌟🌟</h3><p>GPU 推理部署平台。</p><p><strong>免费点</strong>：每月 $30 额度
+<strong>官网</strong>：<a href="https://huggingface.co">huggingface.co</a></p>
+<hr>
+<h3 id="15-modal--推荐指数">15. <strong>Modal</strong> | 推荐指数：🌟🌟🌟🌟🌟</h3>
+<p>GPU 推理部署平台。</p>
+<p><strong>免费点</strong>：每月 $30 额度
 <strong>杀手锏</strong>：秒级 GPU 容器启动，按秒计费
-<strong>官网</strong>：<a href=https://modal.com>modal.com</a></p><hr><h3 id=16-ollama--推荐指数>16. <strong>Ollama</strong> | 推荐指数：🌟🌟🌟🌟🌟</h3><p>本地 LLM 运行神器。</p><p><strong>免费点</strong>：完全免费
+<strong>官网</strong>：<a href="https://modal.com">modal.com</a></p>
+<hr>
+<h3 id="16-ollama--推荐指数">16. <strong>Ollama</strong> | 推荐指数：🌟🌟🌟🌟🌟</h3>
+<p>本地 LLM 运行神器。</p>
+<p><strong>免费点</strong>：完全免费
 <strong>杀手锏</strong>：<code>ollama run llama3</code>，一行命令运行本地模型
-<strong>官网</strong>：<a href=https://ollama.com>ollama.com</a></p><hr><h2 id=八ai-编排与框架>八、AI 编排与框架</h2><h3 id=17-langchain--推荐指数>17. <strong>LangChain</strong> | 推荐指数：🌟🌟🌟🌟</h3><p>LLM 应用开发框架。</p><p><strong>免费点</strong>：完全开源
+<strong>官网</strong>：<a href="https://ollama.com">ollama.com</a></p>
+<hr>
+<h2 id="八ai-编排与框架">八、AI 编排与框架</h2>
+<h3 id="17-langchain--推荐指数">17. <strong>LangChain</strong> | 推荐指数：🌟🌟🌟🌟</h3>
+<p>LLM 应用开发框架。</p>
+<p><strong>免费点</strong>：完全开源
 <strong>杀手锏</strong>：链式调用、工具集成、记忆管理
-<strong>官网</strong>：<a href=https://langchain.com>langchain.com</a></p><hr><h3 id=18-llamaindex--推荐指数>18. <strong>LlamaIndex</strong> | 推荐指数：🌟🌟🌟🌟</h3><p>RAG 框架首选。</p><p><strong>免费点</strong>：完全开源
+<strong>官网</strong>：<a href="https://langchain.com">langchain.com</a></p>
+<hr>
+<h3 id="18-llamaindex--推荐指数">18. <strong>LlamaIndex</strong> | 推荐指数：🌟🌟🌟🌟</h3>
+<p>RAG 框架首选。</p>
+<p><strong>免费点</strong>：完全开源
 <strong>杀手锏</strong>：数据索引、检索、后处理全套 RAG 流程
-<strong>官网</strong>：<a href=https://llamaindex.ai>llamaindex.ai</a></p><hr><h2 id=九生产力工具>九、生产力工具</h2><h3 id=19-cursor--推荐指数>19. <strong>Cursor</strong> | 推荐指数：🌟🌟🌟🌟🌟</h3><p>AI 原生 IDE。</p><p><strong>免费点</strong>：个人免费，无限 AI 补齐
+<strong>官网</strong>：<a href="https://llamaindex.ai">llamaindex.ai</a></p>
+<hr>
+<h2 id="九生产力工具">九、生产力工具</h2>
+<h3 id="19-cursor--推荐指数">19. <strong>Cursor</strong> | 推荐指数：🌟🌟🌟🌟🌟</h3>
+<p>AI 原生 IDE。</p>
+<p><strong>免费点</strong>：个人免费，无限 AI 补齐
 <strong>杀手锏</strong>：Ctrl+K 生成代码、Ctrl+L AI 对话
-<strong>官网</strong>：<a href=https://cursor.com>cursor.com</a></p><hr><h3 id=20-warp--推荐指数>20. <strong>Warp</strong> | 推荐指数：🌟🌟🌟🌟</h3><p>AI 终端。</p><p><strong>免费点</strong>：个人免费
+<strong>官网</strong>：<a href="https://cursor.com">cursor.com</a></p>
+<hr>
+<h3 id="20-warp--推荐指数">20. <strong>Warp</strong> | 推荐指数：🌟🌟🌟🌟</h3>
+<p>AI 终端。</p>
+<p><strong>免费点</strong>：个人免费
 <strong>杀手锏</strong>：自然语言转命令、AI 解释报错
-<strong>官网</strong>：<a href=https://warp.dev>warp.dev</a></p><hr><h2 id=十工具全景速查表>十、工具全景速查表</h2><table><thead><tr><th>类别</th><th>工具</th><th>核心作用</th><th>免费层</th></tr></thead><tbody><tr><td><strong>AI Gateway</strong></td><td>LiteLLM</td><td>100+模型统一接口</td><td>⭐⭐⭐⭐⭐ 开源免费</td></tr><tr><td><strong>AI Gateway</strong></td><td>Helicone</td><td>LLM 可观测性</td><td>⭐⭐⭐⭐ 10万请求/月</td></tr><tr><td><strong>AI Gateway</strong></td><td>Cloudflare AI</td><td>边缘推理网关</td><td>⭐⭐⭐⭐⭐ Workers免费额</td></tr><tr><td><strong>AI Gateway</strong></td><td>Portkey</td><td>生产化网关</td><td>⭐⭐⭐⭐ 1万请求/月</td></tr><tr><td><strong>模型路由</strong></td><td>OpenRouter</td><td>200+模型自动路由</td><td>⭐⭐⭐⭐⭐ 有免费层</td></tr><tr><td><strong>模型路由</strong></td><td>One API</td><td>国产模型统一</td><td>⭐⭐⭐⭐⭐ 开源免费</td></tr><tr><td><strong>前端套件</strong></td><td>Vercel AI SDK</td><td>流式UI开发</td><td>⭐⭐⭐⭐⭐ 开源免费</td></tr><tr><td><strong>可观测性</strong></td><td>Langfuse</td><td>Trace追踪/评估</td><td>⭐⭐⭐⭐⭐ 开源免费</td></tr><tr><td><strong>可观测性</strong></td><td>LangSmith</td><td>LangChain追踪</td><td>⭐⭐⭐⭐ 10万trace</td></tr><tr><td><strong>可观测性</strong></td><td>Braintrust</td><td>AI质量评估</td><td>⭐⭐⭐⭐ 有免费层</td></tr><tr><td><strong>向量DB</strong></td><td>Pinecone</td><td>托管向量检索</td><td>⭐⭐⭐⭐ 10万操作/月</td></tr><tr><td><strong>向量DB</strong></td><td>Weaviate</td><td>开源向量引擎</td><td>⭐⭐⭐⭐⭐ 开源免费</td></tr><tr><td><strong>向量DB</strong></td><td>Chroma</td><td>轻量本地向量</td><td>⭐⭐⭐⭐⭐ 开源免费</td></tr><tr><td><strong>模型部署</strong></td><td>Hugging Face</td><td>模型托管推理</td><td>⭐⭐⭐⭐⭐ 大量免费</td></tr><tr><td><strong>模型部署</strong></td><td>Modal</td><td>GPU推理部署</td><td>⭐⭐⭐⭐⭐ $30/月额度</td></tr><tr><td><strong>本地运行</strong></td><td>Ollama</td><td>本地LLM运行</td><td>⭐⭐⭐⭐⭐ 完全免费</td></tr><tr><td><strong>编排框架</strong></td><td>LangChain</td><td>LLM应用框架</td><td>⭐⭐⭐⭐⭐ 开源免费</td></tr><tr><td><strong>编排框架</strong></td><td>LlamaIndex</td><td>RAG框架</td><td>⭐⭐⭐⭐⭐ 开源免费</td></tr><tr><td><strong>生产力</strong></td><td>Cursor</td><td>AI原生IDE</td><td>⭐⭐⭐⭐⭐ 个人免费</td></tr><tr><td><strong>生产力</strong></td><td>Warp</td><td>AI终端</td><td>⭐⭐⭐⭐ 个人免费</td></tr></tbody></table><hr><h2 id=十一生产环境推荐架构>十一、生产环境推荐架构</h2><pre tabindex=0><code>┌─────────────────────────────────────────────┐
+<strong>官网</strong>：<a href="https://warp.dev">warp.dev</a></p>
+<hr>
+<h2 id="十工具全景速查表">十、工具全景速查表</h2>
+<table>
+	<thead>
+			<tr>
+					<th>类别</th>
+					<th>工具</th>
+					<th>核心作用</th>
+					<th>免费层</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td><strong>AI Gateway</strong></td>
+					<td>LiteLLM</td>
+					<td>100+模型统一接口</td>
+					<td>⭐⭐⭐⭐⭐ 开源免费</td>
+			</tr>
+			<tr>
+					<td><strong>AI Gateway</strong></td>
+					<td>Helicone</td>
+					<td>LLM 可观测性</td>
+					<td>⭐⭐⭐⭐ 10万请求/月</td>
+			</tr>
+			<tr>
+					<td><strong>AI Gateway</strong></td>
+					<td>Cloudflare AI</td>
+					<td>边缘推理网关</td>
+					<td>⭐⭐⭐⭐⭐ Workers免费额</td>
+			</tr>
+			<tr>
+					<td><strong>AI Gateway</strong></td>
+					<td>Portkey</td>
+					<td>生产化网关</td>
+					<td>⭐⭐⭐⭐ 1万请求/月</td>
+			</tr>
+			<tr>
+					<td><strong>模型路由</strong></td>
+					<td>OpenRouter</td>
+					<td>200+模型自动路由</td>
+					<td>⭐⭐⭐⭐⭐ 有免费层</td>
+			</tr>
+			<tr>
+					<td><strong>模型路由</strong></td>
+					<td>One API</td>
+					<td>国产模型统一</td>
+					<td>⭐⭐⭐⭐⭐ 开源免费</td>
+			</tr>
+			<tr>
+					<td><strong>前端套件</strong></td>
+					<td>Vercel AI SDK</td>
+					<td>流式UI开发</td>
+					<td>⭐⭐⭐⭐⭐ 开源免费</td>
+			</tr>
+			<tr>
+					<td><strong>可观测性</strong></td>
+					<td>Langfuse</td>
+					<td>Trace追踪/评估</td>
+					<td>⭐⭐⭐⭐⭐ 开源免费</td>
+			</tr>
+			<tr>
+					<td><strong>可观测性</strong></td>
+					<td>LangSmith</td>
+					<td>LangChain追踪</td>
+					<td>⭐⭐⭐⭐ 10万trace</td>
+			</tr>
+			<tr>
+					<td><strong>可观测性</strong></td>
+					<td>Braintrust</td>
+					<td>AI质量评估</td>
+					<td>⭐⭐⭐⭐ 有免费层</td>
+			</tr>
+			<tr>
+					<td><strong>向量DB</strong></td>
+					<td>Pinecone</td>
+					<td>托管向量检索</td>
+					<td>⭐⭐⭐⭐ 10万操作/月</td>
+			</tr>
+			<tr>
+					<td><strong>向量DB</strong></td>
+					<td>Weaviate</td>
+					<td>开源向量引擎</td>
+					<td>⭐⭐⭐⭐⭐ 开源免费</td>
+			</tr>
+			<tr>
+					<td><strong>向量DB</strong></td>
+					<td>Chroma</td>
+					<td>轻量本地向量</td>
+					<td>⭐⭐⭐⭐⭐ 开源免费</td>
+			</tr>
+			<tr>
+					<td><strong>模型部署</strong></td>
+					<td>Hugging Face</td>
+					<td>模型托管推理</td>
+					<td>⭐⭐⭐⭐⭐ 大量免费</td>
+			</tr>
+			<tr>
+					<td><strong>模型部署</strong></td>
+					<td>Modal</td>
+					<td>GPU推理部署</td>
+					<td>⭐⭐⭐⭐⭐ $30/月额度</td>
+			</tr>
+			<tr>
+					<td><strong>本地运行</strong></td>
+					<td>Ollama</td>
+					<td>本地LLM运行</td>
+					<td>⭐⭐⭐⭐⭐ 完全免费</td>
+			</tr>
+			<tr>
+					<td><strong>编排框架</strong></td>
+					<td>LangChain</td>
+					<td>LLM应用框架</td>
+					<td>⭐⭐⭐⭐⭐ 开源免费</td>
+			</tr>
+			<tr>
+					<td><strong>编排框架</strong></td>
+					<td>LlamaIndex</td>
+					<td>RAG框架</td>
+					<td>⭐⭐⭐⭐⭐ 开源免费</td>
+			</tr>
+			<tr>
+					<td><strong>生产力</strong></td>
+					<td>Cursor</td>
+					<td>AI原生IDE</td>
+					<td>⭐⭐⭐⭐⭐ 个人免费</td>
+			</tr>
+			<tr>
+					<td><strong>生产力</strong></td>
+					<td>Warp</td>
+					<td>AI终端</td>
+					<td>⭐⭐⭐⭐ 个人免费</td>
+			</tr>
+	</tbody>
+</table>
+<hr>
+<h2 id="十一生产环境推荐架构">十一、生产环境推荐架构</h2>
+<pre tabindex="0"><code>┌─────────────────────────────────────────────┐
 │  前端层：Next.js + Vercel AI SDK (useChat)   │
 │  部署：Vercel                                │
 └──────────────────┬──────────────────────────┘
@@ -104,10 +494,162 @@
 │  │ GPT-4o │ │ Claude  │ │ Ollama │ │ 通义   ││
 │  └────────┘ └─────────┘ └────────┘ └────────┘│
 └───────────────────────────────────────────────┘
-</code></pre><hr><h2 id=十二选型终极建议>十二、选型终极建议</h2><p><strong>快速启动（MVP）</strong>：</p><ul><li>Gateway：LiteLLM（开源免费）</li><li>前端：Vercel AI SDK</li><li>部署：Vercel</li><li>模型：OpenRouter 或 Hugging Face</li></ul><p><strong>生产环境（Production）</strong>：</p><ul><li>Gateway：Cloudflare AI Gateway + Helicone</li><li>可观测性：Langfuse（自托管）</li><li>向量检索：Pinecone / Weaviate</li><li>模型部署：Modal（GPU）+ Hugging Face（CPU）</li></ul><p><strong>成本敏感（Side Project）</strong>：</p><ul><li>推理：Ollama（本地）+ Hugging Face（远程免费模型）</li><li>部署：Vercel Hobby + Supabase 免费层</li><li>一切能免费就免费，验证想法优先</li></ul><hr><blockquote><p><em>&ldquo;2026 年的 AI 开发者，手上已经有了比 2010 年代整个互联网更强大的免费工具集。区别只在于：你有没有把这些工具连接起来，解决真实的问题。&rdquo;</em></p></blockquote></section><div class=share-buttons style="margin:20px 0;padding:15px 0;border-top:1px solid #eee;border-bottom:1px solid #eee"><span style=margin-right:10px>分享：</span>
-<a href="https://twitter.com/intent/tweet?url=https%3a%2f%2fblog.ning.indevs.in%2fposts%2fai-era-infrastructure-tools-2026%2f&text=2020%20%e5%b9%b4%e4%bb%a3%20AI%20%e5%bc%80%e5%8f%91%e8%80%85%e5%bf%85%e5%a4%87%ef%bc%9a20%20%e6%ac%be%e5%85%8d%e8%b4%b9%e5%9f%ba%e7%a1%80%e8%ae%be%e6%96%bd%e5%b7%a5%e5%85%b7%e5%85%a8%e6%99%af%e5%9b%be%e8%b0%b1" target=_blank rel=noopener style=margin-right:12px>X</a>
-<a href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fblog.ning.indevs.in%2fposts%2fai-era-infrastructure-tools-2026%2f" target=_blank rel=noopener style=margin-right:12px>Facebook</a>
-<a href="https://www.linkedin.com/sharing/share-offsite/?url=https%3a%2f%2fblog.ning.indevs.in%2fposts%2fai-era-infrastructure-tools-2026%2f" target=_blank rel=noopener style=margin-right:12px>LinkedIn</a>
-<a href="https://t.me/share/url?url=https%3a%2f%2fblog.ning.indevs.in%2fposts%2fai-era-infrastructure-tools-2026%2f&text=2020%20%e5%b9%b4%e4%bb%a3%20AI%20%e5%bc%80%e5%8f%91%e8%80%85%e5%bf%85%e5%a4%87%ef%bc%9a20%20%e6%ac%be%e5%85%8d%e8%b4%b9%e5%9f%ba%e7%a1%80%e8%ae%be%e6%96%bd%e5%b7%a5%e5%85%b7%e5%85%a8%e6%99%af%e5%9b%be%e8%b0%b1" target=_blank rel=noopener>Telegram</a></div><div style="margin-top:3rem;padding-top:2rem;border-top:1px solid var(--dim-color)"><h2 style=margin-bottom:1.5rem>评论</h2><script src=https://giscus.app/client.js data-repo=ningfeiyu/blog-comments data-repo-id=R_kgDOR_QPZw data-category=General data-category-id=DIC_kwDOR_QPZ84C6i9W data-mapping=pathname data-strict=0 data-reactions-enabled=1 data-emit-metadata=0 data-input-position=bottom data-theme=preferred_color_scheme data-lang=zh-CN crossorigin=anonymous async></script></div><script>document.addEventListener("DOMContentLoaded",function(){document.querySelectorAll("pre > code").forEach(function(e){var t,n=e.parentElement;if(n.querySelector(".copy-btn"))return;t=document.createElement("button"),t.className="copy-btn",t.textContent="复制",t.style.cssText="position:absolute;top:8px;right:8px;padding:4px 10px;font-size:12px;cursor:pointer;opacity:0.6;border:1px solid #ccc;border-radius:4px;background:#fff;",n.style.position="relative",t.addEventListener("click",function(){navigator.clipboard.writeText(e.innerText).then(function(){t.textContent="已复制",setTimeout(function(){t.textContent="复制"},1500)})}),n.appendChild(t)})})</script><button id=back-to-top style="display:none;position:fixed;bottom:30px;right:30px;width:44px;height:44px;border-radius:50%;border:1px solid #ccc;background:#fff;cursor:pointer;font-size:20px;z-index:999" title=回顶部>↑</button>
-<script>(function(){var e=document.getElementById("back-to-top");window.addEventListener("scroll",function(){e.style.display=window.scrollY>300?"block":"none"}),e.addEventListener("click",function(){window.scrollTo({top:0,behavior:"smooth"})})})()</script></main><footer id=main-footer><div class=footer><a href=#>回到顶部</a><div class=footer-copyright><div class=dim>© 2026 老宁</div><div></div></div></div></footer></div><aside id=side-pane class=side-sticky><div class=side-details><span>666 字</span>
-<span>11 - 14 分钟阅读</span></div><h3>目录</h3><nav id=TableOfContents><ul><li><a href=#一为什么-ai-gateway-是-2026-年的必选项>一、为什么 AI Gateway 是 2026 年的必选项</a></li><li><a href=#二ai-gateway-四大金刚>二、AI Gateway 四大金刚</a><ul><li><a href=#1-litellm--推荐指数>1. <strong>LiteLLM</strong> | 推荐指数：🌟🌟🌟🌟🌟</a></li><li><a href=#2-helicone--推荐指数>2. <strong>Helicone</strong> | 推荐指数：🌟🌟🌟🌟</a></li><li><a href=#3-cloudflare-ai-gateway--推荐指数>3. <strong>Cloudflare AI Gateway</strong> | 推荐指数：🌟🌟🌟🌟🌟</a></li><li><a href=#4-portkey-ai--推荐指数>4. <strong>Portkey AI</strong> | 推荐指数：🌟🌟🌟🌟</a></li></ul></li><li><a href=#三模型路由与聚合>三、模型路由与聚合</a><ul><li><a href=#5-openrouter--推荐指数>5. <strong>OpenRouter</strong> | 推荐指数：🌟🌟🌟🌟🌟</a></li><li><a href=#6-one-api--推荐指数>6. <strong>One API</strong> | 推荐指数：🌟🌟🌟🌟</a></li></ul></li><li><a href=#四前端-ai-开发套件>四、前端 AI 开发套件</a><ul><li><a href=#7-vercel-ai-sdk--推荐指数>7. <strong>Vercel AI SDK</strong> | 推荐指数：🌟🌟🌟🌟🌟</a></li></ul></li><li><a href=#五可观测性与追踪>五、可观测性与追踪</a><ul><li><a href=#8-langfuse--推荐指数>8. <strong>Langfuse</strong> | 推荐指数：🌟🌟🌟🌟🌟</a></li><li><a href=#9-langsmith--推荐指数>9. <strong>LangSmith</strong> | 推荐指数：🌟🌟🌟🌟</a></li><li><a href=#10-braintrust--推荐指数>10. <strong>Braintrust</strong> | 推荐指数：🌟🌟🌟🌟</a></li></ul></li><li><a href=#六向量数据库与检索>六、向量数据库与检索</a><ul><li><a href=#11-pinecone--推荐指数>11. <strong>Pinecone</strong> | 推荐指数：🌟🌟🌟🌟</a></li><li><a href=#12-weaviate--推荐指数>12. <strong>Weaviate</strong> | 推荐指数：🌟🌟🌟🌟🌟</a></li><li><a href=#13-chroma--推荐指数>13. <strong>Chroma</strong> | 推荐指数：🌟🌟🌟🌟</a></li></ul></li><li><a href=#七模型部署与推理>七、模型部署与推理</a><ul><li><a href=#14-hugging-face--推荐指数>14. <strong>Hugging Face</strong> | 推荐指数：🌟🌟🌟🌟🌟</a></li><li><a href=#15-modal--推荐指数>15. <strong>Modal</strong> | 推荐指数：🌟🌟🌟🌟🌟</a></li><li><a href=#16-ollama--推荐指数>16. <strong>Ollama</strong> | 推荐指数：🌟🌟🌟🌟🌟</a></li></ul></li><li><a href=#八ai-编排与框架>八、AI 编排与框架</a><ul><li><a href=#17-langchain--推荐指数>17. <strong>LangChain</strong> | 推荐指数：🌟🌟🌟🌟</a></li><li><a href=#18-llamaindex--推荐指数>18. <strong>LlamaIndex</strong> | 推荐指数：🌟🌟🌟🌟</a></li></ul></li><li><a href=#九生产力工具>九、生产力工具</a><ul><li><a href=#19-cursor--推荐指数>19. <strong>Cursor</strong> | 推荐指数：🌟🌟🌟🌟🌟</a></li><li><a href=#20-warp--推荐指数>20. <strong>Warp</strong> | 推荐指数：🌟🌟🌟🌟</a></li></ul></li><li><a href=#十工具全景速查表>十、工具全景速查表</a></li><li><a href=#十一生产环境推荐架构>十一、生产环境推荐架构</a></li><li><a href=#十二选型终极建议>十二、选型终极建议</a></li></ul></nav><h3>相关文章</h3><ul><li><a href=/posts/ai-gateway-free-tools-2020s/>AI 基础设施免费工具全图谱：从 AI Gateway 到模型路由的 20 款核心服务</a></li><li><a href=/posts/ai-era-free-dev-tools-2020s/>AI 时代免费开发工具大全：2020 年代最具价值的 15 款服务</a></li><li><a href=/posts/llm-top5-comparison-2026/>2026年五大主流大模型深度对比：GPT-5、Claude 4、Gemini 2.0、Llama 4、DeepSeek V3</a></li><li><a href=/posts/2025-06-12-ai-model-update-cycle/>顶级AI模型更新周期与迭代速度全景对比</a></li></ul></aside></div></div></body></html>
+</code></pre><hr>
+<h2 id="十二选型终极建议">十二、选型终极建议</h2>
+<p><strong>快速启动（MVP）</strong>：</p>
+<ul>
+<li>Gateway：LiteLLM（开源免费）</li>
+<li>前端：Vercel AI SDK</li>
+<li>部署：Vercel</li>
+<li>模型：OpenRouter 或 Hugging Face</li>
+</ul>
+<p><strong>生产环境（Production）</strong>：</p>
+<ul>
+<li>Gateway：Cloudflare AI Gateway + Helicone</li>
+<li>可观测性：Langfuse（自托管）</li>
+<li>向量检索：Pinecone / Weaviate</li>
+<li>模型部署：Modal（GPU）+ Hugging Face（CPU）</li>
+</ul>
+<p><strong>成本敏感（Side Project）</strong>：</p>
+<ul>
+<li>推理：Ollama（本地）+ Hugging Face（远程免费模型）</li>
+<li>部署：Vercel Hobby + Supabase 免费层</li>
+<li>一切能免费就免费，验证想法优先</li>
+</ul>
+<hr>
+<blockquote>
+<p><em>&ldquo;2026 年的 AI 开发者，手上已经有了比 2010 年代整个互联网更强大的免费工具集。区别只在于：你有没有把这些工具连接起来，解决真实的问题。&rdquo;</em></p>
+</blockquote>
+</section><div class="share-buttons" style="margin:20px 0;padding:15px 0;border-top:1px solid #eee;border-bottom:1px solid #eee;">
+  <span style="margin-right:10px;">分享：</span>
+  <a href="https://twitter.com/intent/tweet?url=https%3a%2f%2fblog.ning.indevs.in%2fposts%2fai-era-infrastructure-tools-2026%2f&text=2020%20%e5%b9%b4%e4%bb%a3%20AI%20%e5%bc%80%e5%8f%91%e8%80%85%e5%bf%85%e5%a4%87%ef%bc%9a20%20%e6%ac%be%e5%85%8d%e8%b4%b9%e5%9f%ba%e7%a1%80%e8%ae%be%e6%96%bd%e5%b7%a5%e5%85%b7%e5%85%a8%e6%99%af%e5%9b%be%e8%b0%b1" target="_blank" rel="noopener" style="margin-right:12px;">X</a>
+  <a href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fblog.ning.indevs.in%2fposts%2fai-era-infrastructure-tools-2026%2f" target="_blank" rel="noopener" style="margin-right:12px;">Facebook</a>
+  <a href="https://www.linkedin.com/sharing/share-offsite/?url=https%3a%2f%2fblog.ning.indevs.in%2fposts%2fai-era-infrastructure-tools-2026%2f" target="_blank" rel="noopener" style="margin-right:12px;">LinkedIn</a>
+  <a href="https://t.me/share/url?url=https%3a%2f%2fblog.ning.indevs.in%2fposts%2fai-era-infrastructure-tools-2026%2f&text=2020%20%e5%b9%b4%e4%bb%a3%20AI%20%e5%bc%80%e5%8f%91%e8%80%85%e5%bf%85%e5%a4%87%ef%bc%9a20%20%e6%ac%be%e5%85%8d%e8%b4%b9%e5%9f%ba%e7%a1%80%e8%ae%be%e6%96%bd%e5%b7%a5%e5%85%b7%e5%85%a8%e6%99%af%e5%9b%be%e8%b0%b1" target="_blank" rel="noopener">Telegram</a>
+</div>
+<div style="margin-top:3rem;padding-top:2rem;border-top:1px solid var(--dim-color);">
+  <h2 style="margin-bottom:1.5rem;">评论</h2>
+  <script src="https://giscus.app/client.js"
+      data-repo="ningfeiyu/blog-comments"
+      data-repo-id="R_kgDOR_QPZw"
+      data-category="General"
+      data-category-id="DIC_kwDOR_QPZ84C6i9W"
+      data-mapping="pathname"
+      data-strict="0"
+      data-reactions-enabled="1"
+      data-emit-metadata="0"
+      data-input-position="bottom"
+      data-theme="preferred_color_scheme"
+      data-lang="zh-CN"
+      crossorigin="anonymous"
+      async>
+  </script>
+</div>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  document.querySelectorAll('pre > code').forEach(function(code) {
+    var pre = code.parentElement;
+    if (pre.querySelector('.copy-btn')) return;
+    var btn = document.createElement('button');
+    btn.className = 'copy-btn';
+    btn.textContent = '复制';
+    btn.style.cssText = 'position:absolute;top:8px;right:8px;padding:4px 10px;font-size:12px;cursor:pointer;opacity:0.6;border:1px solid #ccc;border-radius:4px;background:#fff;';
+    pre.style.position = 'relative';
+    btn.addEventListener('click', function() {
+      navigator.clipboard.writeText(code.innerText).then(function() {
+        btn.textContent = '已复制';
+        setTimeout(function(){ btn.textContent = '复制'; }, 1500);
+      });
+    });
+    pre.appendChild(btn);
+  });
+});
+</script>
+<button id="back-to-top" style="display:none;position:fixed;bottom:30px;right:30px;width:44px;height:44px;border-radius:50%;border:1px solid #ccc;background:#fff;cursor:pointer;font-size:20px;z-index:999;" title="回顶部">↑</button>
+<script>
+(function() {
+  var btn = document.getElementById('back-to-top');
+  window.addEventListener('scroll', function() {
+    btn.style.display = window.scrollY > 300 ? 'block' : 'none';
+  });
+  btn.addEventListener('click', function() {
+    window.scrollTo({top: 0, behavior: 'smooth'});
+  });
+})();
+</script>
+</main>
+        <footer id="main-footer"><div class="footer">
+  <a href="#">回到顶部</a>
+  <div class="footer-copyright">
+    <div class="dim">© 2026 老宁</div>
+    <div></div>
+  </div>
+</div>
+</footer>
+      </div><aside id="side-pane" class="side-sticky">
+<div class="side-details">
+    <span>666 字</span>
+    <span>11 - 14 分钟阅读</span></div><h3>目录</h3><nav id="TableOfContents">
+  <ul>
+    <li><a href="#一为什么-ai-gateway-是-2026-年的必选项">一、为什么 AI Gateway 是 2026 年的必选项</a></li>
+    <li><a href="#二ai-gateway-四大金刚">二、AI Gateway 四大金刚</a>
+      <ul>
+        <li><a href="#1-litellm--推荐指数">1. <strong>LiteLLM</strong> | 推荐指数：🌟🌟🌟🌟🌟</a></li>
+        <li><a href="#2-helicone--推荐指数">2. <strong>Helicone</strong> | 推荐指数：🌟🌟🌟🌟</a></li>
+        <li><a href="#3-cloudflare-ai-gateway--推荐指数">3. <strong>Cloudflare AI Gateway</strong> | 推荐指数：🌟🌟🌟🌟🌟</a></li>
+        <li><a href="#4-portkey-ai--推荐指数">4. <strong>Portkey AI</strong> | 推荐指数：🌟🌟🌟🌟</a></li>
+      </ul>
+    </li>
+    <li><a href="#三模型路由与聚合">三、模型路由与聚合</a>
+      <ul>
+        <li><a href="#5-openrouter--推荐指数">5. <strong>OpenRouter</strong> | 推荐指数：🌟🌟🌟🌟🌟</a></li>
+        <li><a href="#6-one-api--推荐指数">6. <strong>One API</strong> | 推荐指数：🌟🌟🌟🌟</a></li>
+      </ul>
+    </li>
+    <li><a href="#四前端-ai-开发套件">四、前端 AI 开发套件</a>
+      <ul>
+        <li><a href="#7-vercel-ai-sdk--推荐指数">7. <strong>Vercel AI SDK</strong> | 推荐指数：🌟🌟🌟🌟🌟</a></li>
+      </ul>
+    </li>
+    <li><a href="#五可观测性与追踪">五、可观测性与追踪</a>
+      <ul>
+        <li><a href="#8-langfuse--推荐指数">8. <strong>Langfuse</strong> | 推荐指数：🌟🌟🌟🌟🌟</a></li>
+        <li><a href="#9-langsmith--推荐指数">9. <strong>LangSmith</strong> | 推荐指数：🌟🌟🌟🌟</a></li>
+        <li><a href="#10-braintrust--推荐指数">10. <strong>Braintrust</strong> | 推荐指数：🌟🌟🌟🌟</a></li>
+      </ul>
+    </li>
+    <li><a href="#六向量数据库与检索">六、向量数据库与检索</a>
+      <ul>
+        <li><a href="#11-pinecone--推荐指数">11. <strong>Pinecone</strong> | 推荐指数：🌟🌟🌟🌟</a></li>
+        <li><a href="#12-weaviate--推荐指数">12. <strong>Weaviate</strong> | 推荐指数：🌟🌟🌟🌟🌟</a></li>
+        <li><a href="#13-chroma--推荐指数">13. <strong>Chroma</strong> | 推荐指数：🌟🌟🌟🌟</a></li>
+      </ul>
+    </li>
+    <li><a href="#七模型部署与推理">七、模型部署与推理</a>
+      <ul>
+        <li><a href="#14-hugging-face--推荐指数">14. <strong>Hugging Face</strong> | 推荐指数：🌟🌟🌟🌟🌟</a></li>
+        <li><a href="#15-modal--推荐指数">15. <strong>Modal</strong> | 推荐指数：🌟🌟🌟🌟🌟</a></li>
+        <li><a href="#16-ollama--推荐指数">16. <strong>Ollama</strong> | 推荐指数：🌟🌟🌟🌟🌟</a></li>
+      </ul>
+    </li>
+    <li><a href="#八ai-编排与框架">八、AI 编排与框架</a>
+      <ul>
+        <li><a href="#17-langchain--推荐指数">17. <strong>LangChain</strong> | 推荐指数：🌟🌟🌟🌟</a></li>
+        <li><a href="#18-llamaindex--推荐指数">18. <strong>LlamaIndex</strong> | 推荐指数：🌟🌟🌟🌟</a></li>
+      </ul>
+    </li>
+    <li><a href="#九生产力工具">九、生产力工具</a>
+      <ul>
+        <li><a href="#19-cursor--推荐指数">19. <strong>Cursor</strong> | 推荐指数：🌟🌟🌟🌟🌟</a></li>
+        <li><a href="#20-warp--推荐指数">20. <strong>Warp</strong> | 推荐指数：🌟🌟🌟🌟</a></li>
+      </ul>
+    </li>
+    <li><a href="#十工具全景速查表">十、工具全景速查表</a></li>
+    <li><a href="#十一生产环境推荐架构">十一、生产环境推荐架构</a></li>
+    <li><a href="#十二选型终极建议">十二、选型终极建议</a></li>
+  </ul>
+</nav><h3>相关文章</h3>
+    <ul><li><a href="/posts/ai-gateway-free-tools-2020s/">AI 基础设施免费工具全图谱：从 AI Gateway 到模型路由的 20 款核心服务</a></li><li><a href="/posts/ai-era-free-dev-tools-2020s/">AI 时代免费开发工具大全：2020 年代最具价值的 15 款服务</a></li><li><a href="/posts/llm-top5-comparison-2026/">2026年五大主流大模型深度对比：GPT-5、Claude 4、Gemini 2.0、Llama 4、DeepSeek V3</a></li><li><a href="/posts/2025-06-12-ai-model-update-cycle/">顶级AI模型更新周期与迭代速度全景对比</a></li></ul></aside></div>
+  </div>
+</body>
+</html>

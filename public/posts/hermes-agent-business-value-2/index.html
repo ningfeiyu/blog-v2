@@ -1,11 +1,392 @@
-<!doctype html><html lang=zh-CN dir=ltr><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><title>Hermes Agent 商业价值三部曲（中）：从能跑到规模化复用 | 老宁的试验田</title><link rel=icon href=/favicon.svg sizes=any type=image/svg+xml><meta property="og:url" content="https://blog.ning.indevs.in/posts/hermes-agent-business-value-2/"><meta property="og:site_name" content="老宁的试验田"><meta property="og:title" content="Hermes Agent 商业价值三部曲（中）：从能跑到规模化复用"><meta property="og:description" content="第一篇讨论的 5 个场景如果你有在实践，这篇将告诉你如何把它们从'能用'升级到'规模化'——5 个可复制的放大路径。"><meta property="og:locale" content="zh_CN"><meta property="og:type" content="article"><meta property="article:section" content="posts"><meta property="article:published_time" content="2026-06-08T09:00:00+08:00"><meta property="article:modified_time" content="2026-06-08T09:00:00+08:00"><meta property="article:tag" content="AI"><meta property="article:tag" content="商业"><meta property="article:tag" content="自动化工貝"><meta property="article:tag" content="规模化"><meta property="article:tag" content="创业"><meta property="og:see_also" content="https://blog.ning.indevs.in/posts/hermes-agent-business-value-3/"><meta property="og:see_also" content="https://blog.ning.indevs.in/posts/hermes-agent-business-value/"><meta name=twitter:card content="summary"><meta name=twitter:title content="Hermes Agent 商业价值三部曲（中）：从能跑到规模化复用"><meta name=twitter:description content="第一篇讨论的 5 个场景如果你有在实践，这篇将告诉你如何把它们从'能用'升级到'规模化'——5 个可复制的放大路径。"><link rel=stylesheet href=/css/root.min.1052d5860b4442ccd33071bf3543c78d47509a7acb2c13edb1288611a2ebd6a8.css integrity="sha256-EFLVhgtEQszTMHG/NUPHjUdQmnrLLBPtsSiGEaLr1qg=" crossorigin=anonymous><link rel=stylesheet href=/css/bundle.min.e735cd1c41e6b7ba15433438fa484f2804322027ee8348fcff2adbf14976ce28.css integrity="sha256-5zXNHEHmt7oVQzQ4+khPKAQyICfug0j8/yrb8Ul2zig=" crossorigin=anonymous><script src=/js/bundle.cc8ae9952dbfb731affafabdf26e5c60a6910047ff59ccdeaf1daebaa26c8830.js integrity="sha256-zIrplS2/tzGv+vq98m5cYKaRAEf/Wczerx2uuqJsiDA=" crossorigin=anonymous></script><script defer src=/js/search/flexsearch.compact.3928d3d2172bc0b5f75d9458fb9255f0befce1c7239ba6e5d2c58ed4b82c2073.js integrity="sha256-OSjT0hcrwLX3XZRY+5JV8L784ccjm6bl0sWO1LgsIHM="></script><script defer src=/js/search/search.1d980f84df11f3eb7c8c5f17f541d49a0611608df179dd74fa7f06225eb56ace.js integrity="sha256-HZgPhN8R8+t8jF8X9UHUmgYRYI3xed10+n8GIl61as4="></script><link rel=preconnect href=https://fonts.googleapis.com><link rel=preconnect href=https://fonts.gstatic.com crossorigin><link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,200;1,300;1,400;1,500;1,600;1,700;1,800&display=swap" rel=stylesheet><link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200..800&family=Spectral:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,200;1,300;1,400;1,500;1,600;1,700;1,800&display=swap" rel=stylesheet><link rel=preconnect href=https://cdn.jsdelivr.net crossorigin><link href=https://cdn.jsdelivr.net/npm/lxgw-wenkai-webfont@1.7.0/lxgwwenkai-regular.css rel=stylesheet><link href=https://cdn.jsdelivr.net/npm/lxgw-wenkai-webfont@1.7.0/lxgwwenkai-bold.css rel=stylesheet><script defer src=https://events.vercount.one/js></script></head><body class=notransition><div id=container><header id=main-header><div role=navigation aria-label=Main><div class=nav-left><a href=https://blog.ning.indevs.in/ style=color:inherit>老宁的试验田</a></div><div class=nav-right><div style=position:absolute;width:0;height:0><div id=nav-dropdown-menu class=hidden href=#><div class=nav-item><a href=/>首页</a></div><div class=nav-item><a aria-current=true class=ancestor href=/posts/>文章</a></div><div class=nav-item><a href=/tags/>标签</a></div><div class=nav-item><a href=/archives/>归档</a></div><div class=nav-item><a href=/about/>关于</a></div></div></div><a id=nav-dropdown-button href=#><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M4 6H20M4 12H20M4 18H20" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a><div id=nav-menu><div class=nav-item><a href=/>首页</a></div><div class=nav-item><a aria-current=true class=ancestor href=/posts/>文章</a></div><div class=nav-item><a href=/tags/>标签</a></div><div class=nav-item><a href=/archives/>归档</a></div><div class=nav-item><a href=/about/>关于</a></div></div><a id=theme-switcher href=#><svg class="light-icon" viewBox="0 0 24 24" fill="none"><path d="M12 3V4m0 16v1M4 12H3M6.31412 6.31412 5.5 5.5m12.1859.81412L18.5 5.5M6.31412 17.69 5.5 18.5001M17.6859 17.69 18.5 18.5001M21 12H20m-4 0c0 2.2091-1.7909 4-4 4-2.20914.0-4-1.7909-4-4 0-2.20914 1.79086-4 4-4 2.2091.0 4 1.79086 4 4z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-<svg class="dark-icon" viewBox="0 0 24 24" fill="none"><path d="M3.32031 11.6835c0 4.9706 4.02944 9 8.99999 9 3.7872.0 7.028-2.3392 8.3565-5.6515C19.6402 15.4486 18.5059 15.6834 17.3203 15.6834c-4.9706.0-8.99999-4.0294-8.99999-8.99998C8.32031 5.50338 8.55165 4.36259 8.96453 3.32996 5.65605 4.66028 3.32031 7.89912 3.32031 11.6835z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a></div></div></header><div class="flex grow"><div id=main-pane><main id=main-content><div class=single-header><ol class=breadcrumbs itemscope itemtype=https://schema.org/BreadcrumbList><li itemprop=itemListElement itemscope itemtype=https://schema.org/ListItem><a itemprop=item href=https://blog.ning.indevs.in/><span itemprop=name>首页</span>
-</a><meta itemprop=position content='1'></li><span>&nbsp»&nbsp</span><li itemprop=itemListElement itemscope itemtype=https://schema.org/ListItem><a itemprop=item href=https://blog.ning.indevs.in/posts/><span itemprop=name>文章</span>
-</a><meta itemprop=position content='2'></li><span>&nbsp»&nbsp</span></ol><h1>Hermes Agent 商业价值三部曲（中）：从能跑到规模化复用</h1><time class=dim datetime=2026-06-08T09:00:00+08:00>2026年6月8日</time><div class=term-container><div class=tag><a href=https://blog.ning.indevs.in/tags/ai/>#AI</a></div><div class=tag><a href=https://blog.ning.indevs.in/tags/%E5%95%86%E4%B8%9A/>#商业</a></div><div class=tag><a href=https://blog.ning.indevs.in/tags/%E8%87%AA%E5%8A%A8%E5%8C%96%E5%B7%A5%E8%B2%9D/>#自动化工貝</a></div><div class=tag><a href=https://blog.ning.indevs.in/tags/%E8%A7%84%E6%A8%A1%E5%8C%96/>#规模化</a></div><div class=tag><a href=https://blog.ning.indevs.in/tags/%E5%88%9B%E4%B8%9A/>#创业</a></div></ol></div><section class=page-section><p><img src=/images/remote/ext-2c9198c7a5fe.jpg alt=featured></p><blockquote><p>上一篇讲了 5 个 Hermes Agent 的落地场景。这一篇解决一个新问题：<strong>怎么把这 5 件事从"能跑"变成"规模化可复用"？</strong></p></blockquote><hr><h2 id=续篇不要让好点子停留在单次项目>续篇：不要让好点子停留在"单次项目"</h2><p>上一篇的 5 个场景，如果是单次运行，只能叫「做个了试验」。真正创造价值的是<strong>把运行过一次的流程变成随时可启动的引擎</strong>。</p><p>这篇延续同样的主题，但聚焦在<strong>放大路径</strong>上。</p><hr><h2 id=一从单次潜客挖掘到自动化线索管道>一、从单次潜客挖掘到自动化线索管道</h2><h3 id=问题定位>问题定位</h3><p>第一篇里你花了 2 小时，让 Hermes 筛了 50 家公司、写了 20 封邮件。很棒，但下周呢？</p><h3 id=规模化做法>规模化做法</h3><ol><li><strong>把筛选条件参数化</strong>：把 ICP 定义写成配置项（JSON/YML），每次只改参数不改流程。</li><li><strong>建立评分漏斗</strong>：不是每个潜客都平等。让 AI 按「匹配度 × 活跃度 × 触达难度」打分，优先跟进高分。</li><li><strong>集成 CRM</strong>：将筛选结果自动写入 Notion / HubSpot / Airtable，而不是输出到聊天窗口。</li><li>** Nobel Prize 固定节奏**：设为每周一自动运行，生成当周潜客周报推送到飞书/钉钉。</li></ol><blockquote><p>🛠️ <strong>工具链示例</strong>：Hermes Agent（搜索+撰写）→ Airtable API（录入）→ 飞书/钉钉 Webhook（推送通知）</p></blockquote><h3 id=价值放大点>价值放大点</h3><p>一个月前你手动做可能要 2 天，现在每周只需 15 分钟审阅、调整规则，其余交给机器。</p><hr><h2 id=二从内容研究到选题情报系统>二、从内容研究到「选题情报系统」</h2><h3 id=问题定位-1>问题定位</h3><p>第一次用 AI 跑竞品分析，很兴奋。第五次呢？很可能已经忘了当初那条指令是怎么写的。</p><h3 id=规模化做法-1>规模化做法</h3><ol><li><strong>Prompt 模板化</strong>：把成功的分析指令存成模板，下次一键复用。Hermes 的 Skill 系统正是为此设计的。</li><li><strong>建立内容信号库</strong>：让 AI 把每次发现的爆款结构（标题、钩子、结尾）归档到一个知识库中，积累越久越值钱。</li><li><strong>设置多源交叉验证</strong>：单一平台趋势可能失真。让 AI 同时对比 X（话题热度）、Google Trend（搜索量）、YouTube（观看增速），三者一致时才推送。</li><li><strong>联动创作环节</strong>：发现选题后，让 AI 立刻生成 3 个标题草稿 + 文章大纲 + 关键金句，直接丢给人工写手开写。</li></ol><h3 id=关键心态>关键心态</h3><p>不要只把 AI 当「研究员」，把它变成你的<strong>内容情报部门主管</strong>。</p><hr><h2 id=三从趋势接受到热点响应-sop>三、从趋势接受到「热点响应 SOP」</h2><h3 id=问题定位-2>问题定位</h3><p>第一篇提到的趋势侦察很好，但热点窗口期就那么几小时。人的反应速度是瓶颈。</p><h3 id=规模化做法-2>规模化做法</h3><ol><li><strong>分级响应策略</strong>：<ul><li>🔴 一级热点（行业颠覆性事件）→ 25 分钟内发短评</li><li>🟡 二级热点（平台政策变化）→ 4 小时内出解读</li><li>🟢 三级热点（常规趋势）→ 次日早上简报汇总</li></ul></li><li><strong>素材自动预定位</strong>：平时就让 AI 写好 5-10 篇「通用框架文」，热点发生时只需填入具体事件细节，即可快速发布。</li><li><strong>多平台自动分发</strong>：文章完成后通过 API 同步到公众号、X、即刻、知乎专栏。</li></ol><h3 id=生死关键>生死关键</h3><p>SOP 只有一次建立成本，以后热点的<strong>响应时间窗</strong>就能从「小时」压缩到「分钟」。</p><hr><h2 id=四从单点预警到多资产监控系统>四、从单点预警到「多资产监控系统」</h2><h3 id=问题定位-3>问题定位</h3><p>第一篇你只是监控了 1-2 个标的。现实中你可能持有数十个仓位，还需关注关联资产、宏观数据。</p><h3 id=规模化做法-3>规模化做法</h3><ol><li><strong>资产组合画像</strong>：把所有关注标的按类别（股票、ETF、币、债）打标签，让 AI 分层监控。</li><li><strong>告警降噪机制</strong>：不是所有波动都值得通知。设置「连续 N 分钟突破阈值 + 成交量放大」才触发，避免信息过载。</li><li><strong>场景化自动化对比</strong>：<ul><li>大盘暴跌 → 自动列出持仓中跌幅最大的，附建议</li><li>个股异动 → 自动检索关联新闻，生成异动原因简报</li><li>宏观数据发布 → 自动对比市场预期与实际值，生成超预期/低于预期摘要</li></ul></li></ol><h3 id=最终形态>最终形态</h3><p>一个早上，你收到 AI 简报：<strong>昨夜 3 个预警命中，2 个已审阅，1 个需要你关注</strong>——这就是决策效率的质变。</p><hr><h2 id=五从客户运营到客户健康度仪表盘>五、从客户运营到「客户健康度仪表盘」</h2><h3 id=问题定位-4>问题定位</h3><p>第一篇讲了怎么用 AI 做会议记录和跟进提醒。但当客户多了之后，问题变成：<strong>谁快流失了？谁这个月该主动触达了？</strong></p><h3 id=规模化做法-4>规模化做法</h3><ol><li><strong>构建客户健康度评分体系</strong>：<ul><li>最后一次沟通距今天数</li><li>待办事项逾期数量</li><li>最近一次会议中客户情绪（正面/中立/负面）</li><li>历史合作频率变化趋势</li></ul></li><li><strong>自动触发关怀动作</strong>：当客户健康度低于阈值，自动生成「关怀方案」——约饭建议、送个小礼品、安排一次非业务闲聊等。</li><li><strong>季度复盘报告自动生成</strong>：每季度自动输出每个客户的「合作回顾 + 下一步计划」，客户主动来问你怎么写的这么用心。</li></ol><h3 id=最被低估的价值>最被低估的价值</h3><p>这套系统最大的好处不是「省时间」，而是<strong>没有客户在你忙的时候被遗忘</strong>。在存量竞争时代，不流失比新获客便宜 5-10 倍。</p><hr><h2 id=写在最后怎么判断你的-ai-落地走到了哪一步>写在最后：怎么判断你的 AI 落地走到了哪一步</h2><table><thead><tr><th>阶段</th><th>特征</th><th>下一步方向</th></tr></thead><tbody><tr><td>单次试验</td><td>手动输入指令，结果挺不错</td><td>把流程标准化、模板化</td></tr><tr><td>固定流程</td><td>有固定频率，能稳定产出</td><td>接入 API，打通上下游工具</td></tr><tr><td>自动运转</td><td>大部分时间不需要人工干预</td><td>建立质量监控和异常处理机制</td></tr><tr><td>规模消化</td><td>可管理几十上百个并行任务</td><td>持续优化 ROI，淘汰低价值流程</td></tr></tbody></table><p>太多人卡在「单次试验」就停下来了。上一篇帮你开了个头，这篇帮你走出那一步。</p><p>如果你已经在用 Hermes Agent 做其中某些事，<strong>今天的行动建议就是选一个场景，把它从单次运行变成自动化流程</strong>。</p><hr><p><em>这是「从工具到引擎」系列的第二篇，后续将继续探讨如何把多个场景串联成完整的业务自动化 pipeline。</em></p></section><div class=share-buttons style="margin:20px 0;padding:15px 0;border-top:1px solid #eee;border-bottom:1px solid #eee"><span style=margin-right:10px>分享：</span>
-<a href="https://twitter.com/intent/tweet?url=https%3a%2f%2fblog.ning.indevs.in%2fposts%2fhermes-agent-business-value-2%2f&text=Hermes%20Agent%20%e5%95%86%e4%b8%9a%e4%bb%b7%e5%80%bc%e4%b8%89%e9%83%a8%e6%9b%b2%ef%bc%88%e4%b8%ad%ef%bc%89%ef%bc%9a%e4%bb%8e%e8%83%bd%e8%b7%91%e5%88%b0%e8%a7%84%e6%a8%a1%e5%8c%96%e5%a4%8d%e7%94%a8" target=_blank rel=noopener style=margin-right:12px>X</a>
-<a href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fblog.ning.indevs.in%2fposts%2fhermes-agent-business-value-2%2f" target=_blank rel=noopener style=margin-right:12px>Facebook</a>
-<a href="https://www.linkedin.com/sharing/share-offsite/?url=https%3a%2f%2fblog.ning.indevs.in%2fposts%2fhermes-agent-business-value-2%2f" target=_blank rel=noopener style=margin-right:12px>LinkedIn</a>
-<a href="https://t.me/share/url?url=https%3a%2f%2fblog.ning.indevs.in%2fposts%2fhermes-agent-business-value-2%2f&text=Hermes%20Agent%20%e5%95%86%e4%b8%9a%e4%bb%b7%e5%80%bc%e4%b8%89%e9%83%a8%e6%9b%b2%ef%bc%88%e4%b8%ad%ef%bc%89%ef%bc%9a%e4%bb%8e%e8%83%bd%e8%b7%91%e5%88%b0%e8%a7%84%e6%a8%a1%e5%8c%96%e5%a4%8d%e7%94%a8" target=_blank rel=noopener>Telegram</a></div><div style="margin-top:3rem;padding-top:2rem;border-top:1px solid var(--dim-color)"><h2 style=margin-bottom:1.5rem>评论</h2><script src=https://giscus.app/client.js data-repo=ningfeiyu/blog-comments data-repo-id=R_kgDOR_QPZw data-category=General data-category-id=DIC_kwDOR_QPZ84C6i9W data-mapping=pathname data-strict=0 data-reactions-enabled=1 data-emit-metadata=0 data-input-position=bottom data-theme=preferred_color_scheme data-lang=zh-CN crossorigin=anonymous async></script></div><script>document.addEventListener("DOMContentLoaded",function(){document.querySelectorAll("pre > code").forEach(function(e){var t,n=e.parentElement;if(n.querySelector(".copy-btn"))return;t=document.createElement("button"),t.className="copy-btn",t.textContent="复制",t.style.cssText="position:absolute;top:8px;right:8px;padding:4px 10px;font-size:12px;cursor:pointer;opacity:0.6;border:1px solid #ccc;border-radius:4px;background:#fff;",n.style.position="relative",t.addEventListener("click",function(){navigator.clipboard.writeText(e.innerText).then(function(){t.textContent="已复制",setTimeout(function(){t.textContent="复制"},1500)})}),n.appendChild(t)})})</script><button id=back-to-top style="display:none;position:fixed;bottom:30px;right:30px;width:44px;height:44px;border-radius:50%;border:1px solid #ccc;background:#fff;cursor:pointer;font-size:20px;z-index:999" title=回顶部>↑</button>
-<script>(function(){var e=document.getElementById("back-to-top");window.addEventListener("scroll",function(){e.style.display=window.scrollY>300?"block":"none"}),e.addEventListener("click",function(){window.scrollTo({top:0,behavior:"smooth"})})})()</script></main><footer id=main-footer><div class=footer><a href=#>回到顶部</a><div class=footer-copyright><div class=dim>© 2026 老宁</div><div></div></div></div></footer></div><aside id=side-pane class=side-sticky><div class=side-details><span>197 字</span>
-<span>5 - 7 分钟阅读</span><div class=side-details-taxonomy><small>series:
-<span class=details-taxonomy><a href=https://blog.ning.indevs.in/series/hermes-%E5%95%86%E4%B8%9A%E4%BB%B7%E5%80%BC%E4%B8%89%E9%83%A8%E6%9B%B2>Hermes 商业价值三部曲</a></span></small></div></div><h3>目录</h3><nav id=TableOfContents><ul><li><a href=#续篇不要让好点子停留在单次项目>续篇：不要让好点子停留在"单次项目"</a></li><li><a href=#一从单次潜客挖掘到自动化线索管道>一、从单次潜客挖掘到自动化线索管道</a><ul><li><a href=#问题定位>问题定位</a></li><li><a href=#规模化做法>规模化做法</a></li><li><a href=#价值放大点>价值放大点</a></li></ul></li><li><a href=#二从内容研究到选题情报系统>二、从内容研究到「选题情报系统」</a><ul><li><a href=#问题定位-1>问题定位</a></li><li><a href=#规模化做法-1>规模化做法</a></li><li><a href=#关键心态>关键心态</a></li></ul></li><li><a href=#三从趋势接受到热点响应-sop>三、从趋势接受到「热点响应 SOP」</a><ul><li><a href=#问题定位-2>问题定位</a></li><li><a href=#规模化做法-2>规模化做法</a></li><li><a href=#生死关键>生死关键</a></li></ul></li><li><a href=#四从单点预警到多资产监控系统>四、从单点预警到「多资产监控系统」</a><ul><li><a href=#问题定位-3>问题定位</a></li><li><a href=#规模化做法-3>规模化做法</a></li><li><a href=#最终形态>最终形态</a></li></ul></li><li><a href=#五从客户运营到客户健康度仪表盘>五、从客户运营到「客户健康度仪表盘」</a><ul><li><a href=#问题定位-4>问题定位</a></li><li><a href=#规模化做法-4>规模化做法</a></li><li><a href=#最被低估的价值>最被低估的价值</a></li></ul></li><li><a href=#写在最后怎么判断你的-ai-落地走到了哪一步>写在最后：怎么判断你的 AI 落地走到了哪一步</a></li></ul></nav><h3>相关文章</h3><ul><li><a href=/posts/hermes-agent-business-value/>Hermes Agent 商业价值三部曲（上）：5 条落地实践路径</a></li><li><a href=/posts/ai-era-free-dev-tools-2020s/>AI 时代免费开发工具大全：2020 年代最具价值的 15 款服务</a></li><li><a href=/posts/modal-com-deploy-guide/>AI 应用部署实战：Modal.com 与主流平台选型指南</a></li><li><a href=/posts/llm-top5-comparison-2026/>2026年五大主流大模型深度对比：GPT-5、Claude 4、Gemini 2.0、Llama 4、DeepSeek V3</a></li><li><a href=/posts/middle-aged-moat-ai-era/>在这个加速坍塌的时代，中年个体的护城河到底是什么</a></li></ul></aside></div></div></body></html>
+<!DOCTYPE html>
+<html lang="zh-CN" dir="ltr">
+<head>
+  <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Hermes Agent 商业价值三部曲（中）：从能跑到规模化复用 | 老宁的试验田</title>
+<link rel="icon" href="/favicon.svg" sizes="any" type="image/svg+xml" /><meta property="og:url" content="https://blog.ning.indevs.in/posts/hermes-agent-business-value-2/">
+	<meta property="og:site_name" content="老宁的试验田">
+	<meta property="og:title" content="Hermes Agent 商业价值三部曲（中）：从能跑到规模化复用">
+	<meta property="og:description" content="第一篇讨论的 5 个场景如果你有在实践，这篇将告诉你如何把它们从&#39;能用&#39;升级到&#39;规模化&#39;——5 个可复制的放大路径。">
+	<meta property="og:locale" content="zh_CN">
+	<meta property="og:type" content="article">
+		<meta property="article:section" content="posts">
+		<meta property="article:published_time" content="2026-06-08T09:00:00+08:00">
+		<meta property="article:modified_time" content="2026-06-08T09:00:00+08:00">
+		<meta property="article:tag" content="AI">
+		<meta property="article:tag" content="商业">
+		<meta property="article:tag" content="自动化工貝">
+		<meta property="article:tag" content="规模化">
+		<meta property="article:tag" content="创业">
+			<meta property="og:see_also" content="https://blog.ning.indevs.in/posts/hermes-agent-business-value-3/">
+			<meta property="og:see_also" content="https://blog.ning.indevs.in/posts/hermes-agent-business-value/">
+
+	<meta name="twitter:card" content="summary">
+	<meta name="twitter:title" content="Hermes Agent 商业价值三部曲（中）：从能跑到规模化复用">
+	<meta name="twitter:description" content="第一篇讨论的 5 个场景如果你有在实践，这篇将告诉你如何把它们从&#39;能用&#39;升级到&#39;规模化&#39;——5 个可复制的放大路径。">
+
+      <link rel="stylesheet" href="/css/root.min.1052d5860b4442ccd33071bf3543c78d47509a7acb2c13edb1288611a2ebd6a8.css" integrity="sha256-EFLVhgtEQszTMHG/NUPHjUdQmnrLLBPtsSiGEaLr1qg=" crossorigin="anonymous">
+      <link rel="stylesheet" href="/css/bundle.min.e735cd1c41e6b7ba15433438fa484f2804322027ee8348fcff2adbf14976ce28.css" integrity="sha256-5zXNHEHmt7oVQzQ4&#43;khPKAQyICfug0j8/yrb8Ul2zig=" crossorigin="anonymous">
+
+      <script src="/js/bundle.cc8ae9952dbfb731affafabdf26e5c60a6910047ff59ccdeaf1daebaa26c8830.js" integrity="sha256-zIrplS2/tzGv&#43;vq98m5cYKaRAEf/Wczerx2uuqJsiDA=" crossorigin="anonymous"></script><script defer src="/js/search/flexsearch.compact.3928d3d2172bc0b5f75d9458fb9255f0befce1c7239ba6e5d2c58ed4b82c2073.js" integrity="sha256-OSjT0hcrwLX3XZRY&#43;5JV8L784ccjm6bl0sWO1LgsIHM="></script>
+<script defer src="/js/search/search.1d980f84df11f3eb7c8c5f17f541d49a0611608df179dd74fa7f06225eb56ace.js" integrity="sha256-HZgPhN8R8&#43;t8jF8X9UHUmgYRYI3xed10&#43;n8GIl61as4="></script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,200;1,300;1,400;1,500;1,600;1,700;1,800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200..800&family=Spectral:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,200;1,300;1,400;1,500;1,600;1,700;1,800&display=swap" rel="stylesheet">
+
+
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+<link href="https://cdn.jsdelivr.net/npm/lxgw-wenkai-webfont@1.7.0/lxgwwenkai-regular.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/lxgw-wenkai-webfont@1.7.0/lxgwwenkai-bold.css" rel="stylesheet">
+
+<script defer src="https://events.vercount.one/js"></script>
+</head>
+<body class="notransition">
+  <div id="container">
+    <header id="main-header"><div role="navigation" aria-label="Main">
+  <div class="nav-left">
+    <a href="https://blog.ning.indevs.in/" style="color: inherit;">老宁的试验田</a>
+  </div>
+  <div class="nav-right">
+    <div style="position:absolute;width:0px;height:0px;">
+      <div id="nav-dropdown-menu" class="hidden" href="#">
+    <div class="nav-item">
+      <a href="/"
+      >首页</a>
+    </div>
+    <div class="nav-item">
+      <a aria-current="true" class="ancestor" href="/posts/"
+      >文章</a>
+    </div>
+    <div class="nav-item">
+      <a href="/tags/"
+      >标签</a>
+    </div>
+    <div class="nav-item">
+      <a href="/archives/"
+      >归档</a>
+    </div>
+    <div class="nav-item">
+      <a href="/about/"
+      >关于</a>
+    </div>
+</div>
+    </div>
+    <a id="nav-dropdown-button" href="#"><svg width="20px" height="20px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M4 6H20M4 12H20M4 18H20" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
+</a>
+    <div id="nav-menu">
+    <div class="nav-item">
+      <a href="/"
+      >首页</a>
+    </div>
+    <div class="nav-item">
+      <a aria-current="true" class="ancestor" href="/posts/"
+      >文章</a>
+    </div>
+    <div class="nav-item">
+      <a href="/tags/"
+      >标签</a>
+    </div>
+    <div class="nav-item">
+      <a href="/archives/"
+      >归档</a>
+    </div>
+    <div class="nav-item">
+      <a href="/about/"
+      >关于</a>
+    </div>
+</div>
+    <a id="theme-switcher" href="#">
+<svg class="light-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M12 3V4M12 20V21M4 12H3M6.31412 6.31412L5.5 5.5M17.6859 6.31412L18.5 5.5M6.31412 17.69L5.5 18.5001M17.6859 17.69L18.5 18.5001M21 12H20M16 12C16 14.2091 14.2091 16 12 16C9.79086 16 8 14.2091 8 12C8 9.79086 9.79086 8 12 8C14.2091 8 16 9.79086 16 12Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
+
+<svg class="dark-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M3.32031 11.6835C3.32031 16.6541 7.34975 20.6835 12.3203 20.6835C16.1075 20.6835 19.3483 18.3443 20.6768 15.032C19.6402 15.4486 18.5059 15.6834 17.3203 15.6834C12.3497 15.6834 8.32031 11.654 8.32031 6.68342C8.32031 5.50338 8.55165 4.36259 8.96453 3.32996C5.65605 4.66028 3.32031 7.89912 3.32031 11.6835Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
+</a>
+  </div>
+</div>
+</header>
+    <div class="flex grow">
+      <div id="main-pane">
+        <main id="main-content"><div class="single-header">
+<ol class="breadcrumbs" itemscope itemtype="https://schema.org/BreadcrumbList">
+    <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+      <a itemprop="item" href="https://blog.ning.indevs.in/">
+        <span itemprop="name">首页</span>
+      </a>
+      <meta itemprop="position" content='1' />
+    </li>
+    <span>&nbsp»&nbsp</span>
+    <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+      <a itemprop="item" href="https://blog.ning.indevs.in/posts/">
+        <span itemprop="name">文章</span>
+      </a>
+      <meta itemprop="position" content='2' />
+    </li>
+    <span>&nbsp»&nbsp</span>
+</ol>
+<h1>Hermes Agent 商业价值三部曲（中）：从能跑到规模化复用</h1><time class="dim" datetime="2026-06-08T09:00:00&#43;08:00">2026年6月8日</time><div class="term-container"><div class="tag">
+        <a href="https://blog.ning.indevs.in/tags/ai/">#AI</a>
+      </div><div class="tag">
+        <a href="https://blog.ning.indevs.in/tags/%E5%95%86%E4%B8%9A/">#商业</a>
+      </div><div class="tag">
+        <a href="https://blog.ning.indevs.in/tags/%E8%87%AA%E5%8A%A8%E5%8C%96%E5%B7%A5%E8%B2%9D/">#自动化工貝</a>
+      </div><div class="tag">
+        <a href="https://blog.ning.indevs.in/tags/%E8%A7%84%E6%A8%A1%E5%8C%96/">#规模化</a>
+      </div><div class="tag">
+        <a href="https://blog.ning.indevs.in/tags/%E5%88%9B%E4%B8%9A/">#创业</a>
+      </div></ol></div>
+  <section class="page-section"><p><img src="/images/remote/ext-2c9198c7a5fe.jpg" alt="featured"></p>
+<blockquote>
+<p>上一篇讲了 5 个 Hermes Agent 的落地场景。这一篇解决一个新问题：<strong>怎么把这 5 件事从&quot;能跑&quot;变成&quot;规模化可复用&quot;？</strong></p>
+</blockquote>
+<hr>
+<h2 id="续篇不要让好点子停留在单次项目">续篇：不要让好点子停留在&quot;单次项目&quot;</h2>
+<p>上一篇的 5 个场景，如果是单次运行，只能叫「做个了试验」。真正创造价值的是<strong>把运行过一次的流程变成随时可启动的引擎</strong>。</p>
+<p>这篇延续同样的主题，但聚焦在<strong>放大路径</strong>上。</p>
+<hr>
+<h2 id="一从单次潜客挖掘到自动化线索管道">一、从单次潜客挖掘到自动化线索管道</h2>
+<h3 id="问题定位">问题定位</h3>
+<p>第一篇里你花了 2 小时，让 Hermes 筛了 50 家公司、写了 20 封邮件。很棒，但下周呢？</p>
+<h3 id="规模化做法">规模化做法</h3>
+<ol>
+<li><strong>把筛选条件参数化</strong>：把 ICP 定义写成配置项（JSON/YML），每次只改参数不改流程。</li>
+<li><strong>建立评分漏斗</strong>：不是每个潜客都平等。让 AI 按「匹配度 × 活跃度 × 触达难度」打分，优先跟进高分。</li>
+<li><strong>集成 CRM</strong>：将筛选结果自动写入 Notion / HubSpot / Airtable，而不是输出到聊天窗口。</li>
+<li>** Nobel Prize 固定节奏**：设为每周一自动运行，生成当周潜客周报推送到飞书/钉钉。</li>
+</ol>
+<blockquote>
+<p>🛠️ <strong>工具链示例</strong>：Hermes Agent（搜索+撰写）→ Airtable API（录入）→ 飞书/钉钉 Webhook（推送通知）</p>
+</blockquote>
+<h3 id="价值放大点">价值放大点</h3>
+<p>一个月前你手动做可能要 2 天，现在每周只需 15 分钟审阅、调整规则，其余交给机器。</p>
+<hr>
+<h2 id="二从内容研究到选题情报系统">二、从内容研究到「选题情报系统」</h2>
+<h3 id="问题定位-1">问题定位</h3>
+<p>第一次用 AI 跑竞品分析，很兴奋。第五次呢？很可能已经忘了当初那条指令是怎么写的。</p>
+<h3 id="规模化做法-1">规模化做法</h3>
+<ol>
+<li><strong>Prompt 模板化</strong>：把成功的分析指令存成模板，下次一键复用。Hermes 的 Skill 系统正是为此设计的。</li>
+<li><strong>建立内容信号库</strong>：让 AI 把每次发现的爆款结构（标题、钩子、结尾）归档到一个知识库中，积累越久越值钱。</li>
+<li><strong>设置多源交叉验证</strong>：单一平台趋势可能失真。让 AI 同时对比 X（话题热度）、Google Trend（搜索量）、YouTube（观看增速），三者一致时才推送。</li>
+<li><strong>联动创作环节</strong>：发现选题后，让 AI 立刻生成 3 个标题草稿 + 文章大纲 + 关键金句，直接丢给人工写手开写。</li>
+</ol>
+<h3 id="关键心态">关键心态</h3>
+<p>不要只把 AI 当「研究员」，把它变成你的<strong>内容情报部门主管</strong>。</p>
+<hr>
+<h2 id="三从趋势接受到热点响应-sop">三、从趋势接受到「热点响应 SOP」</h2>
+<h3 id="问题定位-2">问题定位</h3>
+<p>第一篇提到的趋势侦察很好，但热点窗口期就那么几小时。人的反应速度是瓶颈。</p>
+<h3 id="规模化做法-2">规模化做法</h3>
+<ol>
+<li><strong>分级响应策略</strong>：
+<ul>
+<li>🔴 一级热点（行业颠覆性事件）→ 25 分钟内发短评</li>
+<li>🟡 二级热点（平台政策变化）→ 4 小时内出解读</li>
+<li>🟢 三级热点（常规趋势）→ 次日早上简报汇总</li>
+</ul>
+</li>
+<li><strong>素材自动预定位</strong>：平时就让 AI 写好 5-10 篇「通用框架文」，热点发生时只需填入具体事件细节，即可快速发布。</li>
+<li><strong>多平台自动分发</strong>：文章完成后通过 API 同步到公众号、X、即刻、知乎专栏。</li>
+</ol>
+<h3 id="生死关键">生死关键</h3>
+<p>SOP 只有一次建立成本，以后热点的<strong>响应时间窗</strong>就能从「小时」压缩到「分钟」。</p>
+<hr>
+<h2 id="四从单点预警到多资产监控系统">四、从单点预警到「多资产监控系统」</h2>
+<h3 id="问题定位-3">问题定位</h3>
+<p>第一篇你只是监控了 1-2 个标的。现实中你可能持有数十个仓位，还需关注关联资产、宏观数据。</p>
+<h3 id="规模化做法-3">规模化做法</h3>
+<ol>
+<li><strong>资产组合画像</strong>：把所有关注标的按类别（股票、ETF、币、债）打标签，让 AI 分层监控。</li>
+<li><strong>告警降噪机制</strong>：不是所有波动都值得通知。设置「连续 N 分钟突破阈值 + 成交量放大」才触发，避免信息过载。</li>
+<li><strong>场景化自动化对比</strong>：
+<ul>
+<li>大盘暴跌 → 自动列出持仓中跌幅最大的，附建议</li>
+<li>个股异动 → 自动检索关联新闻，生成异动原因简报</li>
+<li>宏观数据发布 → 自动对比市场预期与实际值，生成超预期/低于预期摘要</li>
+</ul>
+</li>
+</ol>
+<h3 id="最终形态">最终形态</h3>
+<p>一个早上，你收到 AI 简报：<strong>昨夜 3 个预警命中，2 个已审阅，1 个需要你关注</strong>——这就是决策效率的质变。</p>
+<hr>
+<h2 id="五从客户运营到客户健康度仪表盘">五、从客户运营到「客户健康度仪表盘」</h2>
+<h3 id="问题定位-4">问题定位</h3>
+<p>第一篇讲了怎么用 AI 做会议记录和跟进提醒。但当客户多了之后，问题变成：<strong>谁快流失了？谁这个月该主动触达了？</strong></p>
+<h3 id="规模化做法-4">规模化做法</h3>
+<ol>
+<li><strong>构建客户健康度评分体系</strong>：
+<ul>
+<li>最后一次沟通距今天数</li>
+<li>待办事项逾期数量</li>
+<li>最近一次会议中客户情绪（正面/中立/负面）</li>
+<li>历史合作频率变化趋势</li>
+</ul>
+</li>
+<li><strong>自动触发关怀动作</strong>：当客户健康度低于阈值，自动生成「关怀方案」——约饭建议、送个小礼品、安排一次非业务闲聊等。</li>
+<li><strong>季度复盘报告自动生成</strong>：每季度自动输出每个客户的「合作回顾 + 下一步计划」，客户主动来问你怎么写的这么用心。</li>
+</ol>
+<h3 id="最被低估的价值">最被低估的价值</h3>
+<p>这套系统最大的好处不是「省时间」，而是<strong>没有客户在你忙的时候被遗忘</strong>。在存量竞争时代，不流失比新获客便宜 5-10 倍。</p>
+<hr>
+<h2 id="写在最后怎么判断你的-ai-落地走到了哪一步">写在最后：怎么判断你的 AI 落地走到了哪一步</h2>
+<table>
+	<thead>
+			<tr>
+					<th>阶段</th>
+					<th>特征</th>
+					<th>下一步方向</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>单次试验</td>
+					<td>手动输入指令，结果挺不错</td>
+					<td>把流程标准化、模板化</td>
+			</tr>
+			<tr>
+					<td>固定流程</td>
+					<td>有固定频率，能稳定产出</td>
+					<td>接入 API，打通上下游工具</td>
+			</tr>
+			<tr>
+					<td>自动运转</td>
+					<td>大部分时间不需要人工干预</td>
+					<td>建立质量监控和异常处理机制</td>
+			</tr>
+			<tr>
+					<td>规模消化</td>
+					<td>可管理几十上百个并行任务</td>
+					<td>持续优化 ROI，淘汰低价值流程</td>
+			</tr>
+	</tbody>
+</table>
+<p>太多人卡在「单次试验」就停下来了。上一篇帮你开了个头，这篇帮你走出那一步。</p>
+<p>如果你已经在用 Hermes Agent 做其中某些事，<strong>今天的行动建议就是选一个场景，把它从单次运行变成自动化流程</strong>。</p>
+<hr>
+<p><em>这是「从工具到引擎」系列的第二篇，后续将继续探讨如何把多个场景串联成完整的业务自动化 pipeline。</em></p>
+</section><div class="share-buttons" style="margin:20px 0;padding:15px 0;border-top:1px solid #eee;border-bottom:1px solid #eee;">
+  <span style="margin-right:10px;">分享：</span>
+  <a href="https://twitter.com/intent/tweet?url=https%3a%2f%2fblog.ning.indevs.in%2fposts%2fhermes-agent-business-value-2%2f&text=Hermes%20Agent%20%e5%95%86%e4%b8%9a%e4%bb%b7%e5%80%bc%e4%b8%89%e9%83%a8%e6%9b%b2%ef%bc%88%e4%b8%ad%ef%bc%89%ef%bc%9a%e4%bb%8e%e8%83%bd%e8%b7%91%e5%88%b0%e8%a7%84%e6%a8%a1%e5%8c%96%e5%a4%8d%e7%94%a8" target="_blank" rel="noopener" style="margin-right:12px;">X</a>
+  <a href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fblog.ning.indevs.in%2fposts%2fhermes-agent-business-value-2%2f" target="_blank" rel="noopener" style="margin-right:12px;">Facebook</a>
+  <a href="https://www.linkedin.com/sharing/share-offsite/?url=https%3a%2f%2fblog.ning.indevs.in%2fposts%2fhermes-agent-business-value-2%2f" target="_blank" rel="noopener" style="margin-right:12px;">LinkedIn</a>
+  <a href="https://t.me/share/url?url=https%3a%2f%2fblog.ning.indevs.in%2fposts%2fhermes-agent-business-value-2%2f&text=Hermes%20Agent%20%e5%95%86%e4%b8%9a%e4%bb%b7%e5%80%bc%e4%b8%89%e9%83%a8%e6%9b%b2%ef%bc%88%e4%b8%ad%ef%bc%89%ef%bc%9a%e4%bb%8e%e8%83%bd%e8%b7%91%e5%88%b0%e8%a7%84%e6%a8%a1%e5%8c%96%e5%a4%8d%e7%94%a8" target="_blank" rel="noopener">Telegram</a>
+</div>
+<div style="margin-top:3rem;padding-top:2rem;border-top:1px solid var(--dim-color);">
+  <h2 style="margin-bottom:1.5rem;">评论</h2>
+  <script src="https://giscus.app/client.js"
+      data-repo="ningfeiyu/blog-comments"
+      data-repo-id="R_kgDOR_QPZw"
+      data-category="General"
+      data-category-id="DIC_kwDOR_QPZ84C6i9W"
+      data-mapping="pathname"
+      data-strict="0"
+      data-reactions-enabled="1"
+      data-emit-metadata="0"
+      data-input-position="bottom"
+      data-theme="preferred_color_scheme"
+      data-lang="zh-CN"
+      crossorigin="anonymous"
+      async>
+  </script>
+</div>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  document.querySelectorAll('pre > code').forEach(function(code) {
+    var pre = code.parentElement;
+    if (pre.querySelector('.copy-btn')) return;
+    var btn = document.createElement('button');
+    btn.className = 'copy-btn';
+    btn.textContent = '复制';
+    btn.style.cssText = 'position:absolute;top:8px;right:8px;padding:4px 10px;font-size:12px;cursor:pointer;opacity:0.6;border:1px solid #ccc;border-radius:4px;background:#fff;';
+    pre.style.position = 'relative';
+    btn.addEventListener('click', function() {
+      navigator.clipboard.writeText(code.innerText).then(function() {
+        btn.textContent = '已复制';
+        setTimeout(function(){ btn.textContent = '复制'; }, 1500);
+      });
+    });
+    pre.appendChild(btn);
+  });
+});
+</script>
+<button id="back-to-top" style="display:none;position:fixed;bottom:30px;right:30px;width:44px;height:44px;border-radius:50%;border:1px solid #ccc;background:#fff;cursor:pointer;font-size:20px;z-index:999;" title="回顶部">↑</button>
+<script>
+(function() {
+  var btn = document.getElementById('back-to-top');
+  window.addEventListener('scroll', function() {
+    btn.style.display = window.scrollY > 300 ? 'block' : 'none';
+  });
+  btn.addEventListener('click', function() {
+    window.scrollTo({top: 0, behavior: 'smooth'});
+  });
+})();
+</script>
+</main>
+        <footer id="main-footer"><div class="footer">
+  <a href="#">回到顶部</a>
+  <div class="footer-copyright">
+    <div class="dim">© 2026 老宁</div>
+    <div></div>
+  </div>
+</div>
+</footer>
+      </div><aside id="side-pane" class="side-sticky">
+<div class="side-details">
+    <span>197 字</span>
+    <span>5 - 7 分钟阅读</span><div class="side-details-taxonomy">
+        <small>
+          series:
+          <span class="details-taxonomy"><a href="https://blog.ning.indevs.in/series/hermes-%E5%95%86%E4%B8%9A%E4%BB%B7%E5%80%BC%E4%B8%89%E9%83%A8%E6%9B%B2">Hermes 商业价值三部曲</a></span></small>
+      </div></div><h3>目录</h3><nav id="TableOfContents">
+  <ul>
+    <li><a href="#续篇不要让好点子停留在单次项目">续篇：不要让好点子停留在&quot;单次项目&quot;</a></li>
+    <li><a href="#一从单次潜客挖掘到自动化线索管道">一、从单次潜客挖掘到自动化线索管道</a>
+      <ul>
+        <li><a href="#问题定位">问题定位</a></li>
+        <li><a href="#规模化做法">规模化做法</a></li>
+        <li><a href="#价值放大点">价值放大点</a></li>
+      </ul>
+    </li>
+    <li><a href="#二从内容研究到选题情报系统">二、从内容研究到「选题情报系统」</a>
+      <ul>
+        <li><a href="#问题定位-1">问题定位</a></li>
+        <li><a href="#规模化做法-1">规模化做法</a></li>
+        <li><a href="#关键心态">关键心态</a></li>
+      </ul>
+    </li>
+    <li><a href="#三从趋势接受到热点响应-sop">三、从趋势接受到「热点响应 SOP」</a>
+      <ul>
+        <li><a href="#问题定位-2">问题定位</a></li>
+        <li><a href="#规模化做法-2">规模化做法</a></li>
+        <li><a href="#生死关键">生死关键</a></li>
+      </ul>
+    </li>
+    <li><a href="#四从单点预警到多资产监控系统">四、从单点预警到「多资产监控系统」</a>
+      <ul>
+        <li><a href="#问题定位-3">问题定位</a></li>
+        <li><a href="#规模化做法-3">规模化做法</a></li>
+        <li><a href="#最终形态">最终形态</a></li>
+      </ul>
+    </li>
+    <li><a href="#五从客户运营到客户健康度仪表盘">五、从客户运营到「客户健康度仪表盘」</a>
+      <ul>
+        <li><a href="#问题定位-4">问题定位</a></li>
+        <li><a href="#规模化做法-4">规模化做法</a></li>
+        <li><a href="#最被低估的价值">最被低估的价值</a></li>
+      </ul>
+    </li>
+    <li><a href="#写在最后怎么判断你的-ai-落地走到了哪一步">写在最后：怎么判断你的 AI 落地走到了哪一步</a></li>
+  </ul>
+</nav><h3>相关文章</h3>
+    <ul><li><a href="/posts/hermes-agent-business-value/">Hermes Agent 商业价值三部曲（上）：5 条落地实践路径</a></li><li><a href="/posts/ai-era-free-dev-tools-2020s/">AI 时代免费开发工具大全：2020 年代最具价值的 15 款服务</a></li><li><a href="/posts/modal-com-deploy-guide/">AI 应用部署实战：Modal.com 与主流平台选型指南</a></li><li><a href="/posts/llm-top5-comparison-2026/">2026年五大主流大模型深度对比：GPT-5、Claude 4、Gemini 2.0、Llama 4、DeepSeek V3</a></li><li><a href="/posts/middle-aged-moat-ai-era/">在这个加速坍塌的时代，中年个体的护城河到底是什么</a></li></ul></aside></div>
+  </div>
+</body>
+</html>

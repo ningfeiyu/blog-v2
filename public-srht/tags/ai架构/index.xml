@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+	<channel>
+		<title>AI架构 on 老宁的试验田</title>
+		<link>https://ninq.srht.site/tags/ai%E6%9E%B6%E6%9E%84/</link>
+		<description>Recent content in AI架构 on 老宁的试验田</description>
+		<generator>Hugo</generator>
+		<language>zh-CN</language>
+		
+		
+		
+		
+			<lastBuildDate>Mon, 03 Aug 2026 20:55:00 +0800</lastBuildDate>
+		
+			<atom:link href="https://ninq.srht.site/tags/ai%E6%9E%B6%E6%9E%84/index.xml" rel="self" type="application/rss+xml" />
+			<item>
+				<title>个人 Agent OS 设计反思：从过度架构到五层精简</title>
+				<link>https://ninq.srht.site/posts/agent-os-design-reflection/</link>
+				<pubDate>Mon, 03 Aug 2026 20:55:00 +0800</pubDate>
+				<guid>https://ninq.srht.site/posts/agent-os-design-reflection/</guid>
+				<description>&lt;p&gt;&lt;img src=&#34;https://ninq.srht.site/images/posts/agent-os-design-reflection.jpg&#34; alt=&#34;featured&#34;&gt;&lt;/p&gt;&#xA;&lt;hr&gt;&#xA;&lt;h2 id=&#34;一起因一份漂亮的规范和它的三个陷阱&#34;&gt;一、起因：一份漂亮的规范和它的三个陷阱&lt;/h2&gt;&#xA;&lt;p&gt;前几天，一份《Agent OS v1.0 — 完整系统规范》在圈子里流传。它设计了一个七层目录的 Personal AI Operating System：Identity、Knowledge、Working Memory、Episodic Memory、Decisions、Governance、Reflection，配合完整的写入 Pipeline（重要性评分→去重→冲突检测→Schema 验证→写入）和 Token 预算分配。&lt;/p&gt;&#xA;&lt;p&gt;这份规范非常漂亮——如果对象是企业级 AI 团队。但对于个人使用大模型+Agent 的创作者来说，它踩中了三个经典陷阱。&lt;/p&gt;&#xA;&lt;hr&gt;&#xA;&lt;h2 id=&#34;二陷阱一过度架构化&#34;&gt;二、陷阱一：过度架构化&lt;/h2&gt;&#xA;&lt;p&gt;规范设计了 9 层目录：Identity、Knowledge、Working、Episodic、Decision、Scratch、Archive、Reflection、Governance。&lt;/p&gt;&#xA;&lt;p&gt;每一层都有对应的文件、模板、Pipeline。看起来很完整。但问题在于——&lt;strong&gt;Agent 会花越来越多时间管理知识，而不是使用知识。&lt;/strong&gt;&lt;/p&gt;&#xA;&lt;h3 id=&#34;症状&#34;&gt;症状&lt;/h3&gt;&#xA;&lt;p&gt;你创建了一个 &lt;code&gt;reflection/daily/&lt;/code&gt; 目录，写了日反思模板。第一周你认真填了 7 天。第二周填了 3 天。第三周，Agent 开始提醒你「日反思已过期 4 天，是否补填？」你开始回避打开 Agent。&lt;/p&gt;&#xA;&lt;p&gt;这不是 Agent 的问题，是架构的问题。&lt;strong&gt;反思作为一种能力，不应该是一个需要维护的目录，而应该是 Pipeline 中的一个环节。&lt;/strong&gt;&lt;/p&gt;&#xA;&lt;h3 id=&#34;修正方案逻辑分层物理精简&#34;&gt;修正方案：逻辑分层，物理精简&lt;/h3&gt;&#xA;&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;之前（9个物理目录）          之后（5个逻辑层）&#xA;&#xA;identity/                    Identity&#xA;knowledge/                   Knowledge&#xA;working/                     Workspace（Working + Projects）&#xA;episodic/                    History（Episodic + Decisions）&#xA;decisions/                   Archive&#xA;projects/&#xA;scratch/&#xA;archive/&#xA;reflection/    → Pipeline 能力，不设目录&#xA;governance/    → Pipeline 能力，不设目录&#xA;&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Reflection、Validation、Governance 不是存储层，它们是&lt;strong&gt;贯穿整个系统的规则&lt;/strong&gt;。就像你不需要一个叫「质检」的房间——质检是生产线上的一道工序，不是一个仓库。&lt;/p&gt;</description>
+			</item>
+	</channel>
+</rss>

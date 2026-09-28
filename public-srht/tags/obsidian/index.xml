@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+	<channel>
+		<title>Obsidian on 老宁的试验田</title>
+		<link>https://ninq.srht.site/tags/obsidian/</link>
+		<description>Recent content in Obsidian on 老宁的试验田</description>
+		<generator>Hugo</generator>
+		<language>zh-CN</language>
+		
+		
+		
+		
+			<lastBuildDate>Mon, 08 Jun 2026 10:00:00 +0800</lastBuildDate>
+		
+			<atom:link href="https://ninq.srht.site/tags/obsidian/index.xml" rel="self" type="application/rss+xml" />
+			<item>
+				<title>Notion MCP 主流玩法与 Obsidian 深度对比</title>
+				<link>https://ninq.srht.site/posts/notion-mcp-vs-obsidian/</link>
+				<pubDate>Mon, 08 Jun 2026 10:00:00 +0800</pubDate>
+				<guid>https://ninq.srht.site/posts/notion-mcp-vs-obsidian/</guid>
+				<description>&lt;p&gt;&lt;img src=&#34;https://ninq.srht.site/images/remote/ext-42a39d4e8863.jpg&#34; alt=&#34;Notion vs Obsidian&#34;&gt;&lt;/p&gt;&#xA;&lt;h2 id=&#34;一notion-mcp从协作平台到ai-智能中枢&#34;&gt;一、Notion MCP：从「协作平台」到「AI 智能中枢」&lt;/h2&gt;&#xA;&lt;h3 id=&#34;11-什么是-mcp&#34;&gt;1.1 什么是 MCP？&lt;/h3&gt;&#xA;&lt;p&gt;&lt;strong&gt;MCP（Model Context Protocol）&lt;/strong&gt; 是 Anthropic 推出的开放标准协议，旨在让 AI 大模型安全、标准化地访问外部数据与工具生态。&lt;/p&gt;&#xA;&lt;p&gt;简单来说，MCP 是 AI 的「万能转接头」—— 让 Claude 等 AI 工具能直接读写你的 Notion 数据库、操作文件、调用 API，而无需你手动复制粘贴。&lt;/p&gt;&#xA;&lt;h3 id=&#34;12-notion-mcp-的-6-大主流玩法&#34;&gt;1.2 Notion MCP 的 6 大主流玩法&lt;/h3&gt;&#xA;&lt;h4 id=&#34;-玩法一自动化知识库管理&#34;&gt;🔹 玩法一：自动化知识库管理&lt;/h4&gt;&#xA;&lt;p&gt;&lt;strong&gt;场景&lt;/strong&gt;：大量笔记、文档需要自动分类、打标签、建立索引&lt;/p&gt;&#xA;&lt;p&gt;&lt;strong&gt;实现方式&lt;/strong&gt;：&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;让 AI 读取 Notion 数据库结构&lt;/li&gt;&#xA;&lt;li&gt;自动为新页面分类归档&lt;/li&gt;&#xA;&lt;li&gt;生成「知识地图」索引页&lt;/li&gt;&#xA;&lt;li&gt;定期清理过期内容&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;&lt;strong&gt;典型应用&lt;/strong&gt;：研究团队月度报告自动归档、产品文档版本管理&lt;/p&gt;&#xA;&lt;h4 id=&#34;-玩法二智能化数据工作流&#34;&gt;🔹 玩法二：智能化数据工作流&lt;/h4&gt;&#xA;&lt;p&gt;&lt;strong&gt;场景&lt;/strong&gt;：从多个数据源聚合信息到 Notion&lt;/p&gt;&#xA;&lt;p&gt;&lt;strong&gt;实现方式&lt;/strong&gt;：&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;连接外部 API（如 GitHub、Jira、Salesforce）&lt;/li&gt;&#xA;&lt;li&gt;自动将数据写入 Notion 数据库&lt;/li&gt;&#xA;&lt;li&gt;创建自动化看板（Kanban/日历/表格视图）&lt;/li&gt;&#xA;&lt;li&gt;设置触发条件和通知&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;&lt;strong&gt;典型应用&lt;/strong&gt;：项目管理看板自动更新、客户信息自动同步、Bug 追踪自动生成&lt;/p&gt;&#xA;&lt;h4 id=&#34;-玩法三ai-辅助创作与编辑&#34;&gt;🔹 玩法三：AI 辅助创作与编辑&lt;/h4&gt;&#xA;&lt;p&gt;&lt;strong&gt;场景&lt;/strong&gt;：批量生成内容、自动润色、多语言翻译&lt;/p&gt;&#xA;&lt;p&gt;&lt;strong&gt;实现方式&lt;/strong&gt;：&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;读取 Notion 文章进行 AI 续写&lt;/li&gt;&#xA;&lt;li&gt;批量翻译文档到多语言版本&lt;/li&gt;&#xA;&lt;li&gt;自动提取关键信息生成摘要&lt;/li&gt;&#xA;&lt;li&gt;基于模板批量创建结构化文档&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;&lt;strong&gt;典型应用&lt;/strong&gt;：多语言产品文档、定期行业报告自动生成&lt;/p&gt;</description>
+			</item>
+	</channel>
+</rss>

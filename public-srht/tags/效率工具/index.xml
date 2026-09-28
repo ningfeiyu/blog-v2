@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+	<channel>
+		<title>效率工具 on 老宁的试验田</title>
+		<link>https://ninq.srht.site/tags/%E6%95%88%E7%8E%87%E5%B7%A5%E5%85%B7/</link>
+		<description>Recent content in 效率工具 on 老宁的试验田</description>
+		<generator>Hugo</generator>
+		<language>zh-CN</language>
+		
+		
+		
+		
+			<lastBuildDate>Tue, 09 Jun 2026 06:00:00 +0800</lastBuildDate>
+		
+			<atom:link href="https://ninq.srht.site/tags/%E6%95%88%E7%8E%87%E5%B7%A5%E5%85%B7/index.xml" rel="self" type="application/rss+xml" />
+			<item>
+				<title>为什么 AI 助手总是记不住你的博客流程？</title>
+				<link>https://ninq.srht.site/posts/hermes-memory-workflow-fix/</link>
+				<pubDate>Tue, 09 Jun 2026 06:00:00 +0800</pubDate>
+				<guid>https://ninq.srht.site/posts/hermes-memory-workflow-fix/</guid>
+				<description>&lt;p&gt;&lt;img src=&#34;https://ninq.srht.site/images/remote/ext-dedc0a8d649b.jpg&#34; alt=&#34;AI Memory Workflow&#34;&gt;&lt;/p&gt;&#xA;&lt;blockquote&gt;&#xA;&lt;p&gt;如果你已经第三次教 AI 同样的事情，问题可能不在 AI，而在工作流本身。&lt;/p&gt;&#xA;&lt;/blockquote&gt;&#xA;&lt;h2 id=&#34;一那些反复出现的低级错误&#34;&gt;一、那些反复出现的「低级错误」&lt;/h2&gt;&#xA;&lt;p&gt;和 AI 助手协作写博客一段时间后，我开始注意到一个规律：&lt;strong&gt;同样的 bug 会以不同的面貌反复出现&lt;/strong&gt;。&lt;/p&gt;&#xA;&lt;p&gt;第一次是 &lt;code&gt;+++&lt;/code&gt; 残留在 YAML frontmatter 之后，导致 Hugo 解析失败，文章虽然能访问但首页根本看不到它。第二次是配图位置放错——AI 把 &lt;code&gt;![featured]&lt;/code&gt; 放在了二级标题下面，而不是文章开头。第三次是日期设成了未来，Hugo 直接跳过不生成。&lt;/p&gt;&#xA;&lt;p&gt;每次修复完，我都以为「这次总该记住了」。但下一次，类似的问题又以新的形式出现。&lt;/p&gt;&#xA;&lt;p&gt;这不是 AI 变笨了。这是&lt;strong&gt;流程的脆弱性&lt;/strong&gt;在反复暴露。&lt;/p&gt;&#xA;&lt;h2 id=&#34;二7-个反复踩坑的具体场景&#34;&gt;二、7 个反复踩坑的具体场景&lt;/h2&gt;&#xA;&lt;h3 id=&#34;1-frontmatter-格式混乱yaml-与-toml-混用&#34;&gt;1. Frontmatter 格式混乱：YAML 与 TOML 混用&lt;/h3&gt;&#xA;&lt;p&gt;Hugo 支持 YAML (&lt;code&gt;---&lt;/code&gt;)、TOML (&lt;code&gt;+++&lt;/code&gt;) 和 JSON 三种 frontmatter。但如果一个项目里大部分文章用 YAML，突然插入一篇 TOML，PaperMod 的列表逻辑可能会跳过它——不是报错，就是&lt;strong&gt;安静地不显示&lt;/strong&gt;。&lt;/p&gt;&#xA;&lt;h3 id=&#34;2--残留最隐蔽的错误&#34;&gt;2. &lt;code&gt;+++&lt;/code&gt; 残留：最隐蔽的错误&lt;/h3&gt;&#xA;&lt;p&gt;把 TOML 转成 YAML 时，如果前面的 &lt;code&gt;---&lt;/code&gt; 忘记删掉，或者后面跟着一串 &lt;code&gt;+++&lt;/code&gt;，Hugo 不会报错。文章能 build，URL 能访问，但首页和分类列表里&lt;strong&gt;永远找不到它&lt;/strong&gt;。&lt;code&gt;hugo list all&lt;/code&gt; 显示正常，但 &lt;code&gt;index.html&lt;/code&gt; 的 post-entry 列表里没有。&lt;/p&gt;</description>
+			</item>
+			<item>
+				<title>Hermes 快速上手：CLI 终端的高效对话模式</title>
+				<link>https://ninq.srht.site/posts/hermes-tips-01-cli/</link>
+				<pubDate>Mon, 01 Jun 2026 11:20:00 +0800</pubDate>
+				<guid>https://ninq.srht.site/posts/hermes-tips-01-cli/</guid>
+				<description>&lt;img src=&#34;https://ninq.srht.site/images/posts/4Mw7nkQDByk.jpg&#34; alt=&#34;Hermes命令式交互指南：避免低效提问，用具体命令直接触发执行，提高AI助手响应效率。&#34; loading=&#34;lazy&#34; style=&#34;max-width:100%;height:auto;&#34;&gt;&#xA;&lt;h2 id=&#34;核心原则命令式交互&#34;&gt;核心原则：命令式交互&lt;/h2&gt;&#xA;&lt;p&gt;Hermes 是为&lt;strong&gt;行动&lt;/strong&gt;设计的，而非解释或规划。模糊的指令会触发不必要的明确化请求（如&amp;quot;你是想让我部署博客吗？&amp;quot;），而命令式语句则直接触发执行。&lt;/p&gt;&#xA;&lt;p&gt;&lt;strong&gt;低效示例&lt;/strong&gt;（会被打断）：&lt;/p&gt;&#xA;&lt;blockquote&gt;&#xA;&lt;p&gt;&amp;ldquo;如何部署 Hugo 博客到 Vercel？&amp;rdquo;&lt;/p&gt;&#xA;&lt;/blockquote&gt;&#xA;&lt;p&gt;&lt;strong&gt;高效示例&lt;/strong&gt;（直接执行）：&lt;/p&gt;&#xA;&lt;blockquote&gt;&#xA;&lt;p&gt;&amp;ldquo;部署 Hugo 博客到 Vercel，使用默认配置&amp;rdquo;&lt;/p&gt;&#xA;&lt;/blockquote&gt;&#xA;&lt;h3 id=&#34;11-直击要害&#34;&gt;1.1 直击要害&lt;/h3&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;strong&gt;部署&lt;/strong&gt;：直接说 &lt;code&gt;部署 Hugo 博客&lt;/code&gt;，Hermes 会自动调用 &lt;code&gt;npx vercel deploy --prod --yes&lt;/code&gt;。&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;调试&lt;/strong&gt;：&lt;code&gt;检查 Vercel 构建日志&lt;/code&gt; 会触发 &lt;code&gt;npx vercel logs --prod&lt;/code&gt;。&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;修改文件&lt;/strong&gt;：&lt;code&gt;在 hugo.toml 添加 Umami 配置&lt;/code&gt; 会调用 &lt;code&gt;patch&lt;/code&gt; 工具。&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h2 id=&#34;2-避免的坑&#34;&gt;2 避免的坑&lt;/h2&gt;&#xA;&lt;h3 id=&#34;21-工具明确性&#34;&gt;2.1 工具明确性&lt;/h3&gt;&#xA;&lt;p&gt;Hermes 会优先选择最合适的工具执行任务，但有时可能猜错（如误用 &lt;code&gt;web_search&lt;/code&gt; 查找本地文件）。在复杂任务中明确指定工具：&lt;/p&gt;&#xA;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;&#34;&gt;&lt;code class=&#34;language-plaintext&#34; data-lang=&#34;plaintext&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;# ❌ 低效&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&amp;#34;给博客加个 RSS&amp;#34;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;# ✅ 高效&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&amp;#34;修改 hugo.toml 启用 RSS，使用 patch 工具&amp;#34;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;22-文件路径&#34;&gt;2.2 文件路径&lt;/h3&gt;&#xA;&lt;p&gt;始终使用&lt;strong&gt;绝对路径&lt;/strong&gt;（如 &lt;code&gt;/root/hugo-blog/hugo.toml&lt;/code&gt;），避免相对路径的歧义。Hermes 默认以用户的 home 目录（&lt;code&gt;/root&lt;/code&gt;）为起点，但不会假设项目路径。&lt;/p&gt;</description>
+			</item>
+	</channel>
+</rss>

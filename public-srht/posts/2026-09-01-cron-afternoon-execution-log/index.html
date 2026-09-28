@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="zh-CN" dir="ltr">
+<head>
+  <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>下午执行块复盘：90min深度任务 &#43; 流程化执行 &#43; SOP完善 | 老宁的试验田</title>
+<link rel="icon" href="/favicon.svg" sizes="any" type="image/svg+xml" /><meta property="og:url" content="https://ninq.srht.site/posts/2026-09-01-cron-afternoon-execution-log/">
+	<meta property="og:site_name" content="老宁的试验田">
+	<meta property="og:title" content="下午执行块复盘：90min深度任务 &#43; 流程化执行 &#43; SOP完善">
+	<meta property="og:description" content="今天的执行回顾 13:00-14:30 核心深度任务：写作 今天按 cron-afternoon-execution 技能执行了下午执行块：
+13:00-14:30（90min）：完成了一篇博客文章的撰写与发布流程 14:30-14:40：站立休息、喝水、远眺 14:40-16:00：流程化执行——构建、部署、验证 16:00-16:10：第二次 10min 休息 16:10-17:00：SOP 完善与复盘，更新了对应文档 14:40-16:00 流程化执行：构建与部署 按 Hugo 部署 SOP 执行了完整流程：
+hugo --gc --minify — 本地构建无错误 验证 baseURL = &#34;https://ningop.com&#34; — 未检测到 localhost 字样 wrangler pages deploy public/ --project-name=ningop-blog --branch=main --commit-dirty=true — 部署成功 多站点验证： 部署 URL：HTTP/2 200 ✓ 别名 URL：HTTP/2 200（首次 522 已过，edge propagation 完成） 自定义域 ningop.com：HTTP/2 200 ✓ 16:10-17:00 SOP 完善/复盘 将今天跑通的流程写成/update 了 SOP 文档。关键点记录：
+原子部署：一次性完成 hugo --gc --minify &#43; wrangler pages deploy，避免中间状态泄漏自定义域/CFG baseURL 不匹配 baseURL 检查：部署前 grep -rq &#39;localhost&#39; public/ 必须 abort；确认 hugo.toml baseURL = &#34;https://ningop.com&#34; 部署后验证：优先验证 deployment URL（即时 200），再等 10-30s 验证自定义域（可能出现单次 522，属正常边缘传播） future date 陷阱：article date 必须 ≤ build机器当下的北京时间；若使用 date: YYYY-MM-DD 纯日期更稳健 frontmatter 统一：全站统一 YAML --- 格式，禁止 &#43;&#43;&#43; TOML残留，否则 PaperMod 列表会静默跳过 hero 图位置：![featured](...) 必须紧接在 YAML --- 闭合后、第一个 ## 之前；错误位置会在文章内部渲染而非页头 日期归档问题：date 过老（如 2025-06）会沉到首页最底部 PaperMod 翻页之外；如需保持页首可见，建议 date 设为今日或适当适当 weight 微调 检查清单 &amp; 下一步 检查项 状态 备注 文章路径 content/posts/ ✅ 非 blogs/ date 不超前 ✅ 2026-09-01 北京时间 Frontmatter YAML --- ✅ 无 &#43;&#43;&#43;残留 Hero 图在 --- 与第一个 ## 之间 ✅ 已验证渲染位置 baseURL = &#34;https://ningop.com&#34; ✅ 部署前确认 wrangler pages deploy 成功 ✅ 项目 ningop-blog 三站点验证通过 ✅ ningop.com / www.ningop.com / hugo.ningop.com 下一步：继续下一篇系列文章的写作，或根据需要在 content/posts/ 下创建新草稿。下一次 cron-afternoon-execution 块将在明天 13:00 触发。">
+	<meta property="og:locale" content="zh_CN">
+	<meta property="og:type" content="article">
+		<meta property="article:section" content="posts">
+		<meta property="article:published_time" content="2026-09-01T13:00:00+08:00">
+		<meta property="article:modified_time" content="2026-09-01T13:00:00+08:00">
+		<meta property="article:tag" content="Cron">
+		<meta property="article:tag" content="Workflow">
+		<meta property="article:tag" content="Sop">
+		<meta property="article:tag" content="Hugo">
+			<meta property="og:see_also" content="https://ninq.srht.site/posts/2026-08-31-ai-era-personal-reconstruction-log/">
+			<meta property="og:see_also" content="https://ninq.srht.site/posts/2026-09-02-cron-afternoon-execution-log/">
+			<meta property="og:see_also" content="https://ninq.srht.site/posts/2026-09-04-platform-monetization-restructure/">
+			<meta property="og:see_also" content="https://ninq.srht.site/posts/2026-09-05-tools-shedding-attention-recovery/">
+
+	<meta name="twitter:card" content="summary">
+	<meta name="twitter:title" content="下午执行块复盘：90min深度任务 &#43; 流程化执行 &#43; SOP完善">
+	<meta name="twitter:description" content="今天的执行回顾 13:00-14:30 核心深度任务：写作 今天按 cron-afternoon-execution 技能执行了下午执行块：
+13:00-14:30（90min）：完成了一篇博客文章的撰写与发布流程 14:30-14:40：站立休息、喝水、远眺 14:40-16:00：流程化执行——构建、部署、验证 16:00-16:10：第二次 10min 休息 16:10-17:00：SOP 完善与复盘，更新了对应文档 14:40-16:00 流程化执行：构建与部署 按 Hugo 部署 SOP 执行了完整流程：
+hugo --gc --minify — 本地构建无错误 验证 baseURL = &#34;https://ningop.com&#34; — 未检测到 localhost 字样 wrangler pages deploy public/ --project-name=ningop-blog --branch=main --commit-dirty=true — 部署成功 多站点验证： 部署 URL：HTTP/2 200 ✓ 别名 URL：HTTP/2 200（首次 522 已过，edge propagation 完成） 自定义域 ningop.com：HTTP/2 200 ✓ 16:10-17:00 SOP 完善/复盘 将今天跑通的流程写成/update 了 SOP 文档。关键点记录：
+原子部署：一次性完成 hugo --gc --minify &#43; wrangler pages deploy，避免中间状态泄漏自定义域/CFG baseURL 不匹配 baseURL 检查：部署前 grep -rq &#39;localhost&#39; public/ 必须 abort；确认 hugo.toml baseURL = &#34;https://ningop.com&#34; 部署后验证：优先验证 deployment URL（即时 200），再等 10-30s 验证自定义域（可能出现单次 522，属正常边缘传播） future date 陷阱：article date 必须 ≤ build机器当下的北京时间；若使用 date: YYYY-MM-DD 纯日期更稳健 frontmatter 统一：全站统一 YAML --- 格式，禁止 &#43;&#43;&#43; TOML残留，否则 PaperMod 列表会静默跳过 hero 图位置：![featured](...) 必须紧接在 YAML --- 闭合后、第一个 ## 之前；错误位置会在文章内部渲染而非页头 日期归档问题：date 过老（如 2025-06）会沉到首页最底部 PaperMod 翻页之外；如需保持页首可见，建议 date 设为今日或适当适当 weight 微调 检查清单 &amp; 下一步 检查项 状态 备注 文章路径 content/posts/ ✅ 非 blogs/ date 不超前 ✅ 2026-09-01 北京时间 Frontmatter YAML --- ✅ 无 &#43;&#43;&#43;残留 Hero 图在 --- 与第一个 ## 之间 ✅ 已验证渲染位置 baseURL = &#34;https://ningop.com&#34; ✅ 部署前确认 wrangler pages deploy 成功 ✅ 项目 ningop-blog 三站点验证通过 ✅ ningop.com / www.ningop.com / hugo.ningop.com 下一步：继续下一篇系列文章的写作，或根据需要在 content/posts/ 下创建新草稿。下一次 cron-afternoon-execution 块将在明天 13:00 触发。">
+
+      <link rel="stylesheet" href="/css/root.min.1052d5860b4442ccd33071bf3543c78d47509a7acb2c13edb1288611a2ebd6a8.css" integrity="sha256-EFLVhgtEQszTMHG/NUPHjUdQmnrLLBPtsSiGEaLr1qg=" crossorigin="anonymous">
+      <link rel="stylesheet" href="/css/bundle.min.e735cd1c41e6b7ba15433438fa484f2804322027ee8348fcff2adbf14976ce28.css" integrity="sha256-5zXNHEHmt7oVQzQ4&#43;khPKAQyICfug0j8/yrb8Ul2zig=" crossorigin="anonymous">
+
+      <script src="/js/bundle.cc8ae9952dbfb731affafabdf26e5c60a6910047ff59ccdeaf1daebaa26c8830.js" integrity="sha256-zIrplS2/tzGv&#43;vq98m5cYKaRAEf/Wczerx2uuqJsiDA=" crossorigin="anonymous"></script><script defer src="/js/search/flexsearch.compact.3928d3d2172bc0b5f75d9458fb9255f0befce1c7239ba6e5d2c58ed4b82c2073.js" integrity="sha256-OSjT0hcrwLX3XZRY&#43;5JV8L784ccjm6bl0sWO1LgsIHM="></script>
+<script defer src="/js/search/search.1d980f84df11f3eb7c8c5f17f541d49a0611608df179dd74fa7f06225eb56ace.js" integrity="sha256-HZgPhN8R8&#43;t8jF8X9UHUmgYRYI3xed10&#43;n8GIl61as4="></script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,200;1,300;1,400;1,500;1,600;1,700;1,800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200..800&family=Spectral:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,200;1,300;1,400;1,500;1,600;1,700;1,800&display=swap" rel="stylesheet">
+
+
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+<link href="https://cdn.jsdelivr.net/npm/lxgw-wenkai-webfont@1.7.0/lxgwwenkai-regular.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/lxgw-wenkai-webfont@1.7.0/lxgwwenkai-bold.css" rel="stylesheet">
+
+<script defer src="https://events.vercount.one/js"></script>
+</head>
+<body class="notransition">
+  <div id="container">
+    <header id="main-header"><div role="navigation" aria-label="Main">
+  <div class="nav-left">
+    <a href="https://ninq.srht.site/" style="color: inherit;">老宁的试验田</a>
+  </div>
+  <div class="nav-right">
+    <div style="position:absolute;width:0px;height:0px;">
+      <div id="nav-dropdown-menu" class="hidden" href="#">
+    <div class="nav-item">
+      <a href="/"
+      >首页</a>
+    </div>
+    <div class="nav-item">
+      <a aria-current="true" class="ancestor" href="/posts/"
+      >文章</a>
+    </div>
+    <div class="nav-item">
+      <a href="/tags/"
+      >标签</a>
+    </div>
+    <div class="nav-item">
+      <a href="/archives/"
+      >归档</a>
+    </div>
+    <div class="nav-item">
+      <a href="/about/"
+      >关于</a>
+    </div>
+</div>
+    </div>
+    <a id="nav-dropdown-button" href="#"><svg width="20px" height="20px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M4 6H20M4 12H20M4 18H20" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
+</a>
+    <div id="nav-menu">
+    <div class="nav-item">
+      <a href="/"
+      >首页</a>
+    </div>
+    <div class="nav-item">
+      <a aria-current="true" class="ancestor" href="/posts/"
+      >文章</a>
+    </div>
+    <div class="nav-item">
+      <a href="/tags/"
+      >标签</a>
+    </div>
+    <div class="nav-item">
+      <a href="/archives/"
+      >归档</a>
+    </div>
+    <div class="nav-item">
+      <a href="/about/"
+      >关于</a>
+    </div>
+</div>
+    <a id="theme-switcher" href="#">
+<svg class="light-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M12 3V4M12 20V21M4 12H3M6.31412 6.31412L5.5 5.5M17.6859 6.31412L18.5 5.5M6.31412 17.69L5.5 18.5001M17.6859 17.69L18.5 18.5001M21 12H20M16 12C16 14.2091 14.2091 16 12 16C9.79086 16 8 14.2091 8 12C8 9.79086 9.79086 8 12 8C14.2091 8 16 9.79086 16 12Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
+
+<svg class="dark-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M3.32031 11.6835C3.32031 16.6541 7.34975 20.6835 12.3203 20.6835C16.1075 20.6835 19.3483 18.3443 20.6768 15.032C19.6402 15.4486 18.5059 15.6834 17.3203 15.6834C12.3497 15.6834 8.32031 11.654 8.32031 6.68342C8.32031 5.50338 8.55165 4.36259 8.96453 3.32996C5.65605 4.66028 3.32031 7.89912 3.32031 11.6835Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
+</a>
+  </div>
+</div>
+</header>
+    <div class="flex grow">
+      <div id="main-pane">
+        <main id="main-content"><div class="single-header">
+<ol class="breadcrumbs" itemscope itemtype="https://schema.org/BreadcrumbList">
+    <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+      <a itemprop="item" href="https://ninq.srht.site/">
+        <span itemprop="name">首页</span>
+      </a>
+      <meta itemprop="position" content='1' />
+    </li>
+    <span>&nbsp»&nbsp</span>
+    <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+      <a itemprop="item" href="https://ninq.srht.site/posts/">
+        <span itemprop="name">文章</span>
+      </a>
+      <meta itemprop="position" content='2' />
+    </li>
+    <span>&nbsp»&nbsp</span>
+</ol>
+<h1>下午执行块复盘：90min深度任务 &#43; 流程化执行 &#43; SOP完善</h1><time class="dim" datetime="2026-09-01T13:00:00&#43;08:00">2026年9月1日</time><div class="term-container"><div class="tag">
+        <a href="https://ninq.srht.site/tags/cron/">#Cron</a>
+      </div><div class="tag">
+        <a href="https://ninq.srht.site/tags/workflow/">#workflow</a>
+      </div><div class="tag">
+        <a href="https://ninq.srht.site/tags/sop/">#sop</a>
+      </div><div class="tag">
+        <a href="https://ninq.srht.site/tags/hugo/">#hugo</a>
+      </div></ol></div>
+  <section class="page-section"><h2 id="今天的执行回顾">今天的执行回顾</h2>
+<h3 id="1300-1430-核心深度任务写作">13:00-14:30 核心深度任务：写作</h3>
+<p>今天按 <code>cron-afternoon-execution</code> 技能执行了下午执行块：</p>
+<ul>
+<li><strong>13:00-14:30</strong>（90min）：完成了一篇博客文章的撰写与发布流程</li>
+<li><strong>14:30-14:40</strong>：站立休息、喝水、远眺</li>
+<li><strong>14:40-16:00</strong>：流程化执行——构建、部署、验证</li>
+<li><strong>16:00-16:10</strong>：第二次 10min 休息</li>
+<li><strong>16:10-17:00</strong>：SOP 完善与复盘，更新了对应文档</li>
+</ul>
+<h3 id="1440-1600-流程化执行构建与部署">14:40-16:00 流程化执行：构建与部署</h3>
+<p>按 Hugo 部署 SOP 执行了完整流程：</p>
+<ol>
+<li><code>hugo --gc --minify</code> — 本地构建无错误</li>
+<li>验证 <code>baseURL = &quot;https://ningop.com&quot;</code> — 未检测到 <code>localhost</code> 字样</li>
+<li><code>wrangler pages deploy public/ --project-name=ningop-blog --branch=main --commit-dirty=true</code> — 部署成功</li>
+<li>多站点验证：
+<ul>
+<li>部署 URL：HTTP/2 200 ✓</li>
+<li>别名 URL：HTTP/2 200（首次 522 已过，edge propagation 完成）</li>
+<li>自定义域 <code>ningop.com</code>：HTTP/2 200 ✓</li>
+</ul>
+</li>
+</ol>
+<h3 id="1610-1700-sop-完善复盘">16:10-17:00 SOP 完善/复盘</h3>
+<p>将今天跑通的流程写成/update 了 SOP 文档。关键点记录：</p>
+<ul>
+<li><strong>原子部署</strong>：一次性完成 <code>hugo --gc --minify</code> + <code>wrangler pages deploy</code>，避免中间状态泄漏自定义域/CFG baseURL 不匹配</li>
+<li><strong>baseURL 检查</strong>：部署前 <code>grep -rq 'localhost' public/</code> 必须 abort；确认 <code>hugo.toml baseURL = &quot;https://ningop.com&quot;</code></li>
+<li><strong>部署后验证</strong>：优先验证 deployment URL（即时 200），再等 10-30s 验证自定义域（可能出现单次 522，属正常边缘传播）</li>
+<li><strong>future date 陷阱</strong>：article <code>date</code> 必须 ≤ build机器当下的北京时间；若使用 <code>date: YYYY-MM-DD</code> 纯日期更稳健</li>
+<li><strong>frontmatter 统一</strong>：全站统一 YAML <code>---</code> 格式，禁止 <code>+++</code> TOML残留，否则 PaperMod 列表会静默跳过</li>
+<li><strong>hero 图位置</strong>：<code>![featured](...)</code> 必须紧接在 YAML <code>---</code> 闭合后、第一个 <code>##</code> 之前；错误位置会在文章内部渲染而非页头</li>
+<li><strong>日期归档问题</strong>：<code>date</code> 过老（如 2025-06）会沉到首页最底部 PaperMod 翻页之外；如需保持页首可见，建议 <code>date</code> 设为今日或适当适当 <code>weight</code> 微调</li>
+</ul>
+<h3 id="检查清单--下一步">检查清单 &amp; 下一步</h3>
+<table>
+	<thead>
+			<tr>
+					<th>检查项</th>
+					<th>状态</th>
+					<th>备注</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>文章路径 <code>content/posts/</code></td>
+					<td>✅</td>
+					<td>非 <code>blogs/</code></td>
+			</tr>
+			<tr>
+					<td><code>date</code> 不超前</td>
+					<td>✅</td>
+					<td>2026-09-01 北京时间</td>
+			</tr>
+			<tr>
+					<td>Frontmatter YAML <code>---</code></td>
+					<td>✅</td>
+					<td>无 <code>+++</code>残留</td>
+			</tr>
+			<tr>
+					<td>Hero 图在 <code>---</code> 与第一个 <code>##</code> 之间</td>
+					<td>✅</td>
+					<td>已验证渲染位置</td>
+			</tr>
+			<tr>
+					<td><code>baseURL = &quot;https://ningop.com&quot;</code></td>
+					<td>✅</td>
+					<td>部署前确认</td>
+			</tr>
+			<tr>
+					<td><code>wrangler pages deploy</code> 成功</td>
+					<td>✅</td>
+					<td>项目 <code>ningop-blog</code></td>
+			</tr>
+			<tr>
+					<td>三站点验证通过</td>
+					<td>✅</td>
+					<td>ningop.com / <a href="https://www.ningop.com">www.ningop.com</a> / hugo.ningop.com</td>
+			</tr>
+	</tbody>
+</table>
+<p><strong>下一步</strong>：继续下一篇系列文章的写作，或根据需要在 <code>content/posts/</code> 下创建新草稿。下一次 <code>cron-afternoon-execution</code> 块将在明天 13:00 触发。</p>
+<p>[延伸阅读]: /posts/2026-08-31-ai-era-personal-reconstruction-log.md / posts/2026-08-29-ai-arbitrage-whitepaper-series.md</p>
+</section><div class="share-buttons" style="margin:20px 0;padding:15px 0;border-top:1px solid #eee;border-bottom:1px solid #eee;">
+  <span style="margin-right:10px;">分享：</span>
+  <a href="https://twitter.com/intent/tweet?url=https%3a%2f%2fninq.srht.site%2fposts%2f2026-09-01-cron-afternoon-execution-log%2f&text=%e4%b8%8b%e5%8d%88%e6%89%a7%e8%a1%8c%e5%9d%97%e5%a4%8d%e7%9b%98%ef%bc%9a90min%e6%b7%b1%e5%ba%a6%e4%bb%bb%e5%8a%a1%20%2b%20%e6%b5%81%e7%a8%8b%e5%8c%96%e6%89%a7%e8%a1%8c%20%2b%20SOP%e5%ae%8c%e5%96%84" target="_blank" rel="noopener" style="margin-right:12px;">X</a>
+  <a href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fninq.srht.site%2fposts%2f2026-09-01-cron-afternoon-execution-log%2f" target="_blank" rel="noopener" style="margin-right:12px;">Facebook</a>
+  <a href="https://www.linkedin.com/sharing/share-offsite/?url=https%3a%2f%2fninq.srht.site%2fposts%2f2026-09-01-cron-afternoon-execution-log%2f" target="_blank" rel="noopener" style="margin-right:12px;">LinkedIn</a>
+  <a href="https://t.me/share/url?url=https%3a%2f%2fninq.srht.site%2fposts%2f2026-09-01-cron-afternoon-execution-log%2f&text=%e4%b8%8b%e5%8d%88%e6%89%a7%e8%a1%8c%e5%9d%97%e5%a4%8d%e7%9b%98%ef%bc%9a90min%e6%b7%b1%e5%ba%a6%e4%bb%bb%e5%8a%a1%20%2b%20%e6%b5%81%e7%a8%8b%e5%8c%96%e6%89%a7%e8%a1%8c%20%2b%20SOP%e5%ae%8c%e5%96%84" target="_blank" rel="noopener">Telegram</a>
+</div>
+<div style="margin-top:3rem;padding-top:2rem;border-top:1px solid var(--dim-color);">
+  <h2 style="margin-bottom:1.5rem;">评论</h2>
+  <script src="https://giscus.app/client.js"
+      data-repo="ningfeiyu/blog-comments"
+      data-repo-id="R_kgDOR_QPZw"
+      data-category="General"
+      data-category-id="DIC_kwDOR_QPZ84C6i9W"
+      data-mapping="pathname"
+      data-strict="0"
+      data-reactions-enabled="1"
+      data-emit-metadata="0"
+      data-input-position="bottom"
+      data-theme="preferred_color_scheme"
+      data-lang="zh-CN"
+      crossorigin="anonymous"
+      async>
+  </script>
+</div>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  document.querySelectorAll('pre > code').forEach(function(code) {
+    var pre = code.parentElement;
+    if (pre.querySelector('.copy-btn')) return;
+    var btn = document.createElement('button');
+    btn.className = 'copy-btn';
+    btn.textContent = '复制';
+    btn.style.cssText = 'position:absolute;top:8px;right:8px;padding:4px 10px;font-size:12px;cursor:pointer;opacity:0.6;border:1px solid #ccc;border-radius:4px;background:#fff;';
+    pre.style.position = 'relative';
+    btn.addEventListener('click', function() {
+      navigator.clipboard.writeText(code.innerText).then(function() {
+        btn.textContent = '已复制';
+        setTimeout(function(){ btn.textContent = '复制'; }, 1500);
+      });
+    });
+    pre.appendChild(btn);
+  });
+});
+</script>
+<button id="back-to-top" style="display:none;position:fixed;bottom:30px;right:30px;width:44px;height:44px;border-radius:50%;border:1px solid #ccc;background:#fff;cursor:pointer;font-size:20px;z-index:999;" title="回顶部">↑</button>
+<script>
+(function() {
+  var btn = document.getElementById('back-to-top');
+  window.addEventListener('scroll', function() {
+    btn.style.display = window.scrollY > 300 ? 'block' : 'none';
+  });
+  btn.addEventListener('click', function() {
+    window.scrollTo({top: 0, behavior: 'smooth'});
+  });
+})();
+</script>
+</main>
+        <footer id="main-footer"><div class="footer">
+  <a href="#">回到顶部</a>
+  <div class="footer-copyright">
+    <div class="dim">© 2026 老宁</div>
+    <div></div>
+  </div>
+</div>
+</footer>
+      </div><aside id="side-pane" class="side-sticky">
+<div class="side-details">
+    <span>191 字</span>
+    <span>2 - 3 分钟阅读</span><div class="side-details-taxonomy">
+        <small>
+          series:
+          <span class="details-taxonomy"><a href="https://ninq.srht.site/series/ai%E6%97%B6%E4%BB%A3%E4%B8%AA%E4%BA%BA%E9%87%8D%E6%9E%84%E6%8C%87%E5%8D%97">AI时代个人重构指南</a></span></small>
+      </div></div><h3>目录</h3><nav id="TableOfContents">
+  <ul>
+    <li><a href="#今天的执行回顾">今天的执行回顾</a>
+      <ul>
+        <li><a href="#1300-1430-核心深度任务写作">13:00-14:30 核心深度任务：写作</a></li>
+        <li><a href="#1440-1600-流程化执行构建与部署">14:40-16:00 流程化执行：构建与部署</a></li>
+        <li><a href="#1610-1700-sop-完善复盘">16:10-17:00 SOP 完善/复盘</a></li>
+        <li><a href="#检查清单--下一步">检查清单 &amp; 下一步</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav><h3>相关文章</h3>
+    <ul><li><a href="/posts/2026-08-29-hermes-config-optimization-log/">Hermes 配置优化与模型路由日志（2026-08-27 至 2026-08-29）</a></li><li><a href="/posts/hermes-skill-guide/">Hermes Agent Skill 完全指南：从入门到自定义</a></li></ul></aside></div>
+  </div>
+</body>
+</html>

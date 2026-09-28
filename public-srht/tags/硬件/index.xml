@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+	<channel>
+		<title>硬件 on 老宁的试验田</title>
+		<link>https://ninq.srht.site/tags/%E7%A1%AC%E4%BB%B6/</link>
+		<description>Recent content in 硬件 on 老宁的试验田</description>
+		<generator>Hugo</generator>
+		<language>zh-CN</language>
+		
+		
+		
+		
+			<lastBuildDate>Thu, 04 Jun 2026 12:00:00 +0800</lastBuildDate>
+		
+			<atom:link href="https://ninq.srht.site/tags/%E7%A1%AC%E4%BB%B6/index.xml" rel="self" type="application/rss+xml" />
+			<item>
+				<title>AI时代的硬件通胀：泡沫何时歇，危机到哪儿了</title>
+				<link>https://ninq.srht.site/posts/ai-hardware-inflation-bubble-progress/</link>
+				<pubDate>Thu, 04 Jun 2026 12:00:00 +0800</pubDate>
+				<guid>https://ninq.srht.site/posts/ai-hardware-inflation-bubble-progress/</guid>
+				<description>&lt;img src=&#34;https://ninq.srht.site/images/posts/gCGzOgzGMkQ.jpg&#34; alt=&#34;GPU一卡难求、算力租赁价格暴涨、AI硬件全面高端化。这场由算力驱动的硬件通胀究竟走到哪一步了？泡沫破裂的信号与可能的拐点分析。&#34; loading=&#34;lazy&#34; style=&#34;max-width:100%;height:auto;&#34;&gt;&#xA;&lt;p&gt;2021年，一块RTX 3090还能以建议零售价买到手。2023年，同样的卡价格翻倍且长期缺货。2025年，NVIDIA的H100单卡价格飙到三万美元以上，中小企业连租都租不起。这不是普通通胀，是一场由AI算力焦虑驱动的硬件大跃升——从云端数据中心到个人终端，凡是沾点AI边的产品都在蹭蹭涨价。&lt;/p&gt;&#xA;&lt;p&gt;这轮涨价的底层逻辑很清晰：训练大模型需要海量算力，推理部署也需要算力，AI应用越多算力越紧张。供不应求，价格自然上蹿。但更关键的是&amp;quot;认知溢价&amp;quot;——没有人会质疑&amp;quot;AI是未来&amp;quot;，就像2000年不会有人质疑&amp;quot;互联网是未来&amp;quot;。当年买服务器的钱烧完了可以接着融，只要还在牌桌上，估值就能撑住。这种认知溢价推高了所有AI相关硬件的估值天花板，远超出它们实际能带来的回报。&lt;/p&gt;&#xA;&lt;p&gt;但这轮泡沫和当年互联网泡沫有一个关键不同。2000年的泡沫在基础设施层——光纤、服务器、带宽——铺完后发现没有足够多的应用来消化。今天的泡沫在算力层——GPU、TPU、ASIC——但应用层（ChatGPT、Midjourney、各种垂直场景AI）已经在产生真实收入和用户。也就是说，泡沫不是虚的，是真实的算力需求被资本市场放大了很多倍，导致资源配置严重错配。&lt;/p&gt;&#xA;&lt;p&gt;硬件通胀何时能结束？看三个信号。&lt;/p&gt;&#xA;&lt;p&gt;第一，供给端突破。NVIDIA的垄断不可能永远持续。AMD正在追赶MI系列，Google的TPU生态在扩大，Amazon有Trainium，连OpenAI和微软都在自研芯片。国产替代方面，华为昇腾、寒武纪、壁仞科技的产品虽然在高端算力上还有差距，但在推理侧和中低端市场已经在抢份额。一旦供给端出现2-3个有力挑战者，NVIDIA的定价权就会松动。预计2027到2028年，AI芯片市场将不再是&amp;quot;一超多强&amp;quot;，而是真正的多极竞争。&lt;/p&gt;&#xA;&lt;p&gt;第二，需求端降温。当前大量算力被浪费在重复训练上——每个大厂都要做自己的大模型，而不是用现成的。这种资源浪费类似于当年互联网泡沫时每个城市修多条光纤。当行业意识到&amp;quot;不是所有任务都需要千亿参数模型&amp;quot;，当模型蒸馏、量化、边缘部署技术足够成熟时，同样的AI效果只需要今天十分之一的算力就能实现。需求侧降温可能比预期的更快，因为企业的试错成本已经越来越高，ROI（投资回报率）的拷问将越来越频繁。&lt;/p&gt;&#xA;&lt;p&gt;第三，宏观经济收缩。AI硬件涨价的大背景是过去十几年全球大放水，资本充裕到可以无限期地为&amp;quot;未来&amp;quot;买单。但随着主要经济体进入紧缩周期，利率走高、风险资本收缩，那些靠融资续命的AI公司将面临&amp;quot;要么盈利、要么死亡&amp;quot;的选择。硬件厂商也会被传导——客户没钱了，订单就会减少，库存就会积压，价格战就会爆发。2001年互联网泡沫破裂后，思科的股票跌掉80%， SUN Microsystems再也没缓过来。这次AI硬件的调整幅度可能没那么剧烈，但逻辑相同。&lt;/p&gt;&#xA;&lt;p&gt;那么，危机现在走到哪一步了？&lt;/p&gt;&#xA;&lt;p&gt;如果用温度计来打比方，当前AI硬件泡沫的热度大概在75度左右——还没到沸点，但已经开始冒泡。最热的区域是云端训练集群（GPU采购和算力租赁），其次是AI PC和端侧芯片（高通骁龙X Elite、苹果M系列），相对冷静的是终端消费类产品（AI眼镜、AI耳机这些还在找场景的阶段）。&lt;/p&gt;&#xA;&lt;p&gt;最危险的信号已经浮现：NVIDIA的增长率开始放缓（虽然基数已经很大）、主要云厂商的AI capex增速见顶、部分AI初创公司开始批量倒闭。这些不是泡沫破裂的直接证据，但都是温度还在上升、压力在累积的征兆。&lt;/p&gt;&#xA;&lt;p&gt;历史不会精确重演但会押韵。2001年的互联网泡沫留给今天的教训是：泡沫破裂不等于技术革命失败。泡沫只是让资源配置回到合理轨道，让真正能创造价值的企业存活下来，让投机者和跟风者出局。AI硬件的通胀终将结束，但它结束的方式——是软着陆还是硬着陆——取决于供给突破的速度、需求收敛的进程，以及宏观环境是否进一步恶化。&lt;/p&gt;&#xA;&lt;p&gt;对于普通人而言，现在不是追高买AI硬件股票的时候。等寒流过去、幸存者浮出水面、价格回归合理区间，才是上车的机会。而对于身处AI行业的人，与其焦虑泡沫何时破，不如专注做一件事：让你的AI应用在不依赖无限算力的情况下也能跑得起来。因为泡沫破裂的那一天，恰恰是&amp;quot;花小钱办大事&amp;quot;者的春天。&lt;/p&gt;</description>
+			</item>
+			<item>
+				<title>AI的诺基亚时刻与iPhone时刻：何时到来？</title>
+				<link>https://ninq.srht.site/posts/ai-nokia-iphone-moment/</link>
+				<pubDate>Thu, 04 Jun 2026 11:00:00 +0800</pubDate>
+				<guid>https://ninq.srht.site/posts/ai-nokia-iphone-moment/</guid>
+				<description>&lt;img src=&#34;https://ninq.srht.site/images/posts/QvVI6vAqtg8.jpg&#34; alt=&#34;AI产业正处于诺基亚时代，它的iPhone时刻会在何时降临？从硬件、交互、生态三个维度推演。&#34; loading=&#34;lazy&#34; style=&#34;max-width:100%;height:auto;&#34;&gt;&#xA;&lt;p&gt;2007年之前，手机行业的王者是诺基亚和摩托罗拉。它们的逻辑很简单：把通信功能做到极致，再往里塞一些娱乐模块。翻盖、滑盖、直板，形态百花齐放，但本质都是&amp;quot;能打电话的设备&amp;quot;。然后乔布斯拿出了iPhone——它不是&amp;quot;更好的手机&amp;quot;，而是一台&amp;quot;装在口袋里的电脑&amp;quot;。这个区分是根本性的：诺基亚在优化通信，苹果在重新定义&amp;quot;个人计算终端&amp;quot;。&lt;/p&gt;&#xA;&lt;p&gt;今天的AI产业，恰好处于2006年那个位置。&lt;/p&gt;&#xA;&lt;p&gt;现在的AI产品是什么形态？ChatGPT是一个网页聊天框，Claude是一个网页聊天框，Kimi是一个网页聊天框。偶尔有手机App，本质还是对话框套了个壳。硬件端更是混沌：AI Pin死了，Rabbit R1哑火了，AI眼镜雷声大雨点小，AI耳机尚在摸索。整个行业像极了2005年的手机市场——厂商们在疯狂堆料：参数越来越大、速度越来越快，但没有人定义&amp;quot;AI到底应该是一种什么样的体验&amp;quot;。&lt;/p&gt;&#xA;&lt;p&gt;AI的iPhone时刻需要同时满足三个条件，缺一不可。&lt;/p&gt;&#xA;&lt;p&gt;第一，硬件载体必须找到。不是手机，不是眼镜，不是耳机——至少目前这些都不是最终答案。手机的问题是交互方式已经定型（触屏+App），AI如果要住进去只能做&amp;quot;助手&amp;quot;而非&amp;quot;主人&amp;quot;，地位上从属于现有生态。眼镜的问题是显示能力和电池续航之间的矛盾还远未解决，MicroLED量产至少还要两年，而消费者不会为续航三小时的产品买单。耳机的问题是没有屏幕，纯语音交互的信息密度太低，处理复杂任务时效率远不如图文。最可能的路径是一个尚未出现的新品类——某种轻便的、始终在线的、融合语音和微投影的个人终端。它不需要取代手机，但需要在足够多场景下让用户&amp;quot;想不起来拿起手机&amp;quot;。就像iPhone没有取代笔记本，但它让人们在很多场景下不再打开笔记本。&lt;/p&gt;&#xA;&lt;p&gt;第二，交互范式必须突破。当前的AI交互本质上还是&amp;quot;你问它答&amp;quot;——无论包装成什么花哨的界面，底层逻辑和1995年的搜索引擎没有本质区别。iPhone的突破在于&amp;quot;多点触控&amp;quot;这个全新交互语言：滑动、捏合、点击，直觉到不需要说明书。AI的iPhone时刻同样需要一种新的交互语言——不是打字、不是语音指令，而是更自然的人机协作方式。可能的方向包括：基于持续上下文理解的&amp;quot;主动建议&amp;quot;（AI观察你的行为模式，在合适的时机推送恰到好处的信息），或者基于空间感知的&amp;quot;环境交互&amp;quot;（你指一下桌上的一份文件，AI就知道你想讨论什么）。这种交互必须做到&amp;quot;零学习成本&amp;quot;——用户不需要思考&amp;quot;怎么用&amp;quot;，就像你拿起iPhone第一次就知道怎么滑动解锁。&lt;/p&gt;&#xA;&lt;p&gt;第三，开发者生态必须成形。iPhone之所以是iPhone，不只是因为硬件和交互，更因为App Store。当数十万开发者为iOS开发原生应用时，iPhone就从一部手机变成了一个平台。当前AI的生态问题在于：大模型公司自己既是平台又是开发者，API调用是主要商业模式，第三方开发者很难在这个模式下赚到钱。没有利润就没有生态，没有生态就没有网络效应，没有网络效应就谈不上&amp;quot;iPhone时刻&amp;quot;。破局的关键可能在于&amp;quot;AI原生的应用商店&amp;quot;——一个让开发者能用自己的AI智能体服务用户、并从中获得稳定收入分发的平台。目前还没有任何一家公司做到这一点。&lt;/p&gt;&#xA;&lt;p&gt;那这个时刻什么时候会来？粗略推演：硬件载体可能在2027到2028年初步成形（Apple的穿戴设备迭代+中国硬件厂商的激进尝试），交互范式可能更早一些在现有设备上局部实现（比如iOS和Android的系统级AI助手变得更&amp;quot;主动&amp;quot;），而生态成形可能要等到2029到2030年——前提是大模型价格继续下降到开发者可以忽略不计的程度，同时出现一个真正开放的分发平台。&lt;/p&gt;&#xA;&lt;p&gt;这意味着AI的&amp;quot;iPhone时刻&amp;quot;大概率不会像2007年那样一夜降临——不会有一个人在台上举起一台设备然后世界改变。它更可能是一系列渐进突破的叠加：先是AI在某几个高频场景下证明自己比手机App好用，然后硬件载体慢慢找到最佳形态，最后生态在一个临界点上爆发。整个过程可能横跨三到五年。&lt;/p&gt;&#xA;&lt;p&gt;最后说一个反直觉的判断：AI的诺基亚时刻已经发生了——它就是当前的ChatGPT/大模型行业本身。当一家公司（OpenAI）用一种新范式（大语言模型）定义了整个赛道，而所有竞争者都在做&amp;quot;更好的ChatGPT&amp;quot;而非重新思考问题的时候，诺基亚剧本就已经在写了。AI行业的Moto Razr们（那些试图用设计而非体验突围的产品）也已经出现了——AI Pin就是最典型的例子。&lt;/p&gt;&#xA;&lt;p&gt;真正的问题是：谁是那个正在车库里的乔布斯？他手里的原型机长什么样？恐怕连他自己都还没完全想清楚。但历史告诉我们，当所有人都觉得&amp;quot;行业格局已定&amp;quot;的时候，颠覆往往已经上路了。&lt;/p&gt;</description>
+			</item>
+	</channel>
+</rss>

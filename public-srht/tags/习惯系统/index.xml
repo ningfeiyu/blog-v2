@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+	<channel>
+		<title>习惯系统 on 老宁的试验田</title>
+		<link>https://ninq.srht.site/tags/%E4%B9%A0%E6%83%AF%E7%B3%BB%E7%BB%9F/</link>
+		<description>Recent content in 习惯系统 on 老宁的试验田</description>
+		<generator>Hugo</generator>
+		<language>zh-CN</language>
+		
+		
+		
+		
+			<lastBuildDate>Mon, 31 Aug 2026 06:00:00 +0800</lastBuildDate>
+		
+			<atom:link href="https://ninq.srht.site/tags/%E4%B9%A0%E6%83%AF%E7%B3%BB%E7%BB%9F/index.xml" rel="self" type="application/rss+xml" />
+			<item>
+				<title>AI时代个人重构日志：从被动接受到主动重塑的30天实验</title>
+				<link>https://ninq.srht.site/posts/2026-08-31-ai-era-personal-reconstruction-log/</link>
+				<pubDate>Mon, 31 Aug 2026 06:00:00 +0800</pubDate>
+				<guid>https://ninq.srht.site/posts/2026-08-31-ai-era-personal-reconstruction-log/</guid>
+				<description>&lt;p&gt;&lt;img src=&#34;https://ninq.srht.site/images/covers/2026-08-31-ai-era-personal-reconstruction-log.jpg&#34; alt=&#34;AI时代个人重构日志：从被动接受到主动重塑的30天实验&#34;&gt;&lt;/p&gt;&#xA;&lt;h2 id=&#34;前言一个月的实验&#34;&gt;前言：一个月的实验&lt;/h2&gt;&#xA;&lt;p&gt;从今天起，我正式开始为期30天的AI时代个人重构实验。目标不是学习更多AI工具，而是重塑我的注意力经济、重构我的习惯生态，以及重新定义在AI时代中作为一个个体的生存法则。&lt;/p&gt;&#xA;&lt;h2 id=&#34;实验背景&#34;&gt;实验背景&lt;/h2&gt;&#xA;&lt;p&gt;过去六个月，我使用了近20个不同的AI模型和工具。从DeepSeek到Claude，从GPT-4到本地部署的Llama系列。表面上，生产力提升显著；然而，内里我感到注意力被碎片化，创造力受到模型边界的无意收缩，甚至在某些时刻产生了对自身思考能力的依赖。&lt;/p&gt;&#xA;&lt;p&gt;这个实验的核心规则非常简单且严苛：&lt;/p&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;&lt;strong&gt;每日必须手写至少300字的非AI内容&lt;/strong&gt;——无论是日志、思考、还是创作。键盘输入不计入这300字。&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;每天断开AI工具至少2小时&lt;/strong&gt;——午后的核心深度时间（正如此刻所处的时段）。&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;每周进行一次完全的工具断舍离&lt;/strong&gt;——不使用任何AI代码辅助、不调优Prompt、不进行模型对比。&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;h2 id=&#34;核心观察第一周&#34;&gt;核心观察：第一周&lt;/h2&gt;&#xA;&lt;h3 id=&#34;1-注意力的重新夺回&#34;&gt;1. 注意力的重新夺回&lt;/h3&gt;&#xA;&lt;p&gt;戒断AI工具的第一天，我原本预期会感到焦虑、效率下降。实际情况是，前2天最难受，像是戒断症状。但到了第3天，一种奇怪的清凉感袭来——思绪不再被推送进特定的轨道，我开始自行构建逻辑框架。&lt;/p&gt;&#xA;&lt;p&gt;最大的变化出现在写作环节。以前我会想：“Claude会怎么写这个？”或者“这个Prompt该怎么优化？”现在，直接动笔。文字的节奏感变了——不再是为了配合大模型的擅长领域而调整语言，而是纯粹为了人类阅读体验。&lt;/p&gt;&#xA;&lt;h3 id=&#34;2-认知的自主权&#34;&gt;2. 认知的自主权&lt;/h3&gt;&#xA;&lt;p&gt;最意外的发现是，没有AI的辅助下，我对自己的认知边界有了更清晰的认识。以前遇到不熟悉的主题，立刻会“找模型问”。现在，我会先自己思考、查阅资料、构建理解。这虽然慢，但建立的知识结构更扎实，且更属于我自己。&lt;/p&gt;&#xA;&lt;h3 id=&#34;3-创造力的新来源&#34;&gt;3. 创造力的新来源&lt;/h3&gt;&#xA;&lt;p&gt;原本担心创造力会枯竭，结果恰恰相反。限制反而激发了创造力。我开始关注那些不需要AI介入的主题——中世纪历史、城市规划、甚至烹饪技艺。这些领域的深度探索，让我产生了跨域联想，这些联想在AI辅助下可能会被过滤或标准化。&lt;/p&gt;&#xA;&lt;h2 id=&#34;实验进行时关键原则&#34;&gt;实验进行时：关键原则&lt;/h2&gt;&#xA;&lt;table&gt;&#xA;&#x9;&lt;thead&gt;&#xA;&#x9;&#x9;&#x9;&lt;tr&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;th&gt;原则&lt;/th&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;th&gt;细节&lt;/th&gt;&#xA;&#x9;&#x9;&#x9;&lt;/tr&gt;&#xA;&#x9;&lt;/thead&gt;&#xA;&#x9;&lt;tbody&gt;&#xA;&#x9;&#x9;&#x9;&lt;tr&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;&lt;strong&gt;产出优于工具&lt;/strong&gt;&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;所有发布的内容必须是我原创思考的产物，不得使用AI生成主要文本&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&lt;/tr&gt;&#xA;&#x9;&#x9;&#x9;&lt;tr&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;&lt;strong&gt;时间边界&lt;/strong&gt;&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;每天固定的「无AI区间」，今天正处于13:00-17:00的下午执行块&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&lt;/tr&gt;&#xA;&#x9;&#x9;&#x9;&lt;tr&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;&lt;strong&gt;知识蒸馏&lt;/strong&gt;&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;每周日必须将当周的思考转化为可发布的内容，无论质量如何&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&lt;/tr&gt;&#xA;&#x9;&lt;/tbody&gt;&#xA;&lt;/table&gt;&#xA;&lt;h2 id=&#34;今天的重点&#34;&gt;今天的重点&lt;/h2&gt;&#xA;&lt;p&gt;今天的核心任务是完成这篇日志的手写（键盘输入除外，实验规则自洽），并思考明天的实验方向。我设定了一个小而确定的目标：在下午的90分钟深度工作块内，只专注于这篇内容的产出，不查阅任何AI相关资料，不开启任何模型。&lt;/p&gt;&#xA;&lt;h2 id=&#34;结语&#34;&gt;结语&lt;/h2&gt;&#xA;&lt;p&gt;这个实验不在于「对抗AI」，而在于重夺对自己认知和时间的主导权。AI是工具，而不是命运。在这个工具日益无处不在的时代，真正的自由在于：无论拥有何种工具，我都能决定何时使用、如何使用、使用后归属何处。&lt;/p&gt;&#xA;&lt;hr&gt;&#xA;&lt;p&gt;&lt;em&gt;本日志为实验第一天的产出。明天将继续记录，并开始第一周的总结与调整。&lt;/em&gt;&lt;/p&gt;</description>
+			</item>
+	</channel>
+</rss>

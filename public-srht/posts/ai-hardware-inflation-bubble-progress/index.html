@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="zh-CN" dir="ltr">
+<head>
+  <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>AI时代的硬件通胀：泡沫何时歇，危机到哪儿了 | 老宁的试验田</title>
+<link rel="icon" href="/favicon.svg" sizes="any" type="image/svg+xml" /><meta property="og:url" content="https://ninq.srht.site/posts/ai-hardware-inflation-bubble-progress/">
+	<meta property="og:site_name" content="老宁的试验田">
+	<meta property="og:title" content="AI时代的硬件通胀：泡沫何时歇，危机到哪儿了">
+	<meta property="og:description" content="GPU一卡难求、算力租赁价格暴涨、AI硬件全面高端化。这场由算力驱动的硬件通胀究竟走到哪一步了？泡沫破裂的信号与可能的拐点分析。">
+	<meta property="og:locale" content="zh_CN">
+	<meta property="og:type" content="article">
+		<meta property="article:section" content="posts">
+		<meta property="article:published_time" content="2026-06-04T12:00:00+08:00">
+		<meta property="article:modified_time" content="2026-06-04T12:00:00+08:00">
+		<meta property="article:tag" content="AI">
+		<meta property="article:tag" content="硬件">
+		<meta property="article:tag" content="GPU">
+		<meta property="article:tag" content="泡沫">
+		<meta property="article:tag" content="算力">
+		<meta property="article:tag" content="通胀">
+
+	<meta name="twitter:card" content="summary">
+	<meta name="twitter:title" content="AI时代的硬件通胀：泡沫何时歇，危机到哪儿了">
+	<meta name="twitter:description" content="GPU一卡难求、算力租赁价格暴涨、AI硬件全面高端化。这场由算力驱动的硬件通胀究竟走到哪一步了？泡沫破裂的信号与可能的拐点分析。">
+
+      <link rel="stylesheet" href="/css/root.min.1052d5860b4442ccd33071bf3543c78d47509a7acb2c13edb1288611a2ebd6a8.css" integrity="sha256-EFLVhgtEQszTMHG/NUPHjUdQmnrLLBPtsSiGEaLr1qg=" crossorigin="anonymous">
+      <link rel="stylesheet" href="/css/bundle.min.e735cd1c41e6b7ba15433438fa484f2804322027ee8348fcff2adbf14976ce28.css" integrity="sha256-5zXNHEHmt7oVQzQ4&#43;khPKAQyICfug0j8/yrb8Ul2zig=" crossorigin="anonymous">
+
+      <script src="/js/bundle.cc8ae9952dbfb731affafabdf26e5c60a6910047ff59ccdeaf1daebaa26c8830.js" integrity="sha256-zIrplS2/tzGv&#43;vq98m5cYKaRAEf/Wczerx2uuqJsiDA=" crossorigin="anonymous"></script><script defer src="/js/search/flexsearch.compact.3928d3d2172bc0b5f75d9458fb9255f0befce1c7239ba6e5d2c58ed4b82c2073.js" integrity="sha256-OSjT0hcrwLX3XZRY&#43;5JV8L784ccjm6bl0sWO1LgsIHM="></script>
+<script defer src="/js/search/search.1d980f84df11f3eb7c8c5f17f541d49a0611608df179dd74fa7f06225eb56ace.js" integrity="sha256-HZgPhN8R8&#43;t8jF8X9UHUmgYRYI3xed10&#43;n8GIl61as4="></script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,200;1,300;1,400;1,500;1,600;1,700;1,800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200..800&family=Spectral:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,200;1,300;1,400;1,500;1,600;1,700;1,800&display=swap" rel="stylesheet">
+
+
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+<link href="https://cdn.jsdelivr.net/npm/lxgw-wenkai-webfont@1.7.0/lxgwwenkai-regular.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/lxgw-wenkai-webfont@1.7.0/lxgwwenkai-bold.css" rel="stylesheet">
+
+<script defer src="https://events.vercount.one/js"></script>
+</head>
+<body class="notransition">
+  <div id="container">
+    <header id="main-header"><div role="navigation" aria-label="Main">
+  <div class="nav-left">
+    <a href="https://ninq.srht.site/" style="color: inherit;">老宁的试验田</a>
+  </div>
+  <div class="nav-right">
+    <div style="position:absolute;width:0px;height:0px;">
+      <div id="nav-dropdown-menu" class="hidden" href="#">
+    <div class="nav-item">
+      <a href="/"
+      >首页</a>
+    </div>
+    <div class="nav-item">
+      <a aria-current="true" class="ancestor" href="/posts/"
+      >文章</a>
+    </div>
+    <div class="nav-item">
+      <a href="/tags/"
+      >标签</a>
+    </div>
+    <div class="nav-item">
+      <a href="/archives/"
+      >归档</a>
+    </div>
+    <div class="nav-item">
+      <a href="/about/"
+      >关于</a>
+    </div>
+</div>
+    </div>
+    <a id="nav-dropdown-button" href="#"><svg width="20px" height="20px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M4 6H20M4 12H20M4 18H20" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
+</a>
+    <div id="nav-menu">
+    <div class="nav-item">
+      <a href="/"
+      >首页</a>
+    </div>
+    <div class="nav-item">
+      <a aria-current="true" class="ancestor" href="/posts/"
+      >文章</a>
+    </div>
+    <div class="nav-item">
+      <a href="/tags/"
+      >标签</a>
+    </div>
+    <div class="nav-item">
+      <a href="/archives/"
+      >归档</a>
+    </div>
+    <div class="nav-item">
+      <a href="/about/"
+      >关于</a>
+    </div>
+</div>
+    <a id="theme-switcher" href="#">
+<svg class="light-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M12 3V4M12 20V21M4 12H3M6.31412 6.31412L5.5 5.5M17.6859 6.31412L18.5 5.5M6.31412 17.69L5.5 18.5001M17.6859 17.69L18.5 18.5001M21 12H20M16 12C16 14.2091 14.2091 16 12 16C9.79086 16 8 14.2091 8 12C8 9.79086 9.79086 8 12 8C14.2091 8 16 9.79086 16 12Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
+
+<svg class="dark-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M3.32031 11.6835C3.32031 16.6541 7.34975 20.6835 12.3203 20.6835C16.1075 20.6835 19.3483 18.3443 20.6768 15.032C19.6402 15.4486 18.5059 15.6834 17.3203 15.6834C12.3497 15.6834 8.32031 11.654 8.32031 6.68342C8.32031 5.50338 8.55165 4.36259 8.96453 3.32996C5.65605 4.66028 3.32031 7.89912 3.32031 11.6835Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
+</a>
+  </div>
+</div>
+</header>
+    <div class="flex grow">
+      <div id="main-pane">
+        <main id="main-content"><div class="single-header">
+<ol class="breadcrumbs" itemscope itemtype="https://schema.org/BreadcrumbList">
+    <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+      <a itemprop="item" href="https://ninq.srht.site/">
+        <span itemprop="name">首页</span>
+      </a>
+      <meta itemprop="position" content='1' />
+    </li>
+    <span>&nbsp»&nbsp</span>
+    <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+      <a itemprop="item" href="https://ninq.srht.site/posts/">
+        <span itemprop="name">文章</span>
+      </a>
+      <meta itemprop="position" content='2' />
+    </li>
+    <span>&nbsp»&nbsp</span>
+</ol>
+<h1>AI时代的硬件通胀：泡沫何时歇，危机到哪儿了</h1><time class="dim" datetime="2026-06-04T12:00:00&#43;08:00">2026年6月4日</time><div class="term-container"><div class="tag">
+        <a href="https://ninq.srht.site/tags/ai/">#AI</a>
+      </div><div class="tag">
+        <a href="https://ninq.srht.site/tags/%E7%A1%AC%E4%BB%B6/">#硬件</a>
+      </div><div class="tag">
+        <a href="https://ninq.srht.site/tags/gpu/">#GPU</a>
+      </div><div class="tag">
+        <a href="https://ninq.srht.site/tags/%E6%B3%A1%E6%B2%AB/">#泡沫</a>
+      </div><div class="tag">
+        <a href="https://ninq.srht.site/tags/%E7%AE%97%E5%8A%9B/">#算力</a>
+      </div><div class="tag">
+        <a href="https://ninq.srht.site/tags/%E9%80%9A%E8%83%80/">#通胀</a>
+      </div></ol></div>
+  <section class="page-section"><img src="/images/posts/gCGzOgzGMkQ.jpg" alt="GPU一卡难求、算力租赁价格暴涨、AI硬件全面高端化。这场由算力驱动的硬件通胀究竟走到哪一步了？泡沫破裂的信号与可能的拐点分析。" loading="lazy" style="max-width:100%;height:auto;">
+<p>2021年，一块RTX 3090还能以建议零售价买到手。2023年，同样的卡价格翻倍且长期缺货。2025年，NVIDIA的H100单卡价格飙到三万美元以上，中小企业连租都租不起。这不是普通通胀，是一场由AI算力焦虑驱动的硬件大跃升——从云端数据中心到个人终端，凡是沾点AI边的产品都在蹭蹭涨价。</p>
+<p>这轮涨价的底层逻辑很清晰：训练大模型需要海量算力，推理部署也需要算力，AI应用越多算力越紧张。供不应求，价格自然上蹿。但更关键的是&quot;认知溢价&quot;——没有人会质疑&quot;AI是未来&quot;，就像2000年不会有人质疑&quot;互联网是未来&quot;。当年买服务器的钱烧完了可以接着融，只要还在牌桌上，估值就能撑住。这种认知溢价推高了所有AI相关硬件的估值天花板，远超出它们实际能带来的回报。</p>
+<p>但这轮泡沫和当年互联网泡沫有一个关键不同。2000年的泡沫在基础设施层——光纤、服务器、带宽——铺完后发现没有足够多的应用来消化。今天的泡沫在算力层——GPU、TPU、ASIC——但应用层（ChatGPT、Midjourney、各种垂直场景AI）已经在产生真实收入和用户。也就是说，泡沫不是虚的，是真实的算力需求被资本市场放大了很多倍，导致资源配置严重错配。</p>
+<p>硬件通胀何时能结束？看三个信号。</p>
+<p>第一，供给端突破。NVIDIA的垄断不可能永远持续。AMD正在追赶MI系列，Google的TPU生态在扩大，Amazon有Trainium，连OpenAI和微软都在自研芯片。国产替代方面，华为昇腾、寒武纪、壁仞科技的产品虽然在高端算力上还有差距，但在推理侧和中低端市场已经在抢份额。一旦供给端出现2-3个有力挑战者，NVIDIA的定价权就会松动。预计2027到2028年，AI芯片市场将不再是&quot;一超多强&quot;，而是真正的多极竞争。</p>
+<p>第二，需求端降温。当前大量算力被浪费在重复训练上——每个大厂都要做自己的大模型，而不是用现成的。这种资源浪费类似于当年互联网泡沫时每个城市修多条光纤。当行业意识到&quot;不是所有任务都需要千亿参数模型&quot;，当模型蒸馏、量化、边缘部署技术足够成熟时，同样的AI效果只需要今天十分之一的算力就能实现。需求侧降温可能比预期的更快，因为企业的试错成本已经越来越高，ROI（投资回报率）的拷问将越来越频繁。</p>
+<p>第三，宏观经济收缩。AI硬件涨价的大背景是过去十几年全球大放水，资本充裕到可以无限期地为&quot;未来&quot;买单。但随着主要经济体进入紧缩周期，利率走高、风险资本收缩，那些靠融资续命的AI公司将面临&quot;要么盈利、要么死亡&quot;的选择。硬件厂商也会被传导——客户没钱了，订单就会减少，库存就会积压，价格战就会爆发。2001年互联网泡沫破裂后，思科的股票跌掉80%， SUN Microsystems再也没缓过来。这次AI硬件的调整幅度可能没那么剧烈，但逻辑相同。</p>
+<p>那么，危机现在走到哪一步了？</p>
+<p>如果用温度计来打比方，当前AI硬件泡沫的热度大概在75度左右——还没到沸点，但已经开始冒泡。最热的区域是云端训练集群（GPU采购和算力租赁），其次是AI PC和端侧芯片（高通骁龙X Elite、苹果M系列），相对冷静的是终端消费类产品（AI眼镜、AI耳机这些还在找场景的阶段）。</p>
+<p>最危险的信号已经浮现：NVIDIA的增长率开始放缓（虽然基数已经很大）、主要云厂商的AI capex增速见顶、部分AI初创公司开始批量倒闭。这些不是泡沫破裂的直接证据，但都是温度还在上升、压力在累积的征兆。</p>
+<p>历史不会精确重演但会押韵。2001年的互联网泡沫留给今天的教训是：泡沫破裂不等于技术革命失败。泡沫只是让资源配置回到合理轨道，让真正能创造价值的企业存活下来，让投机者和跟风者出局。AI硬件的通胀终将结束，但它结束的方式——是软着陆还是硬着陆——取决于供给突破的速度、需求收敛的进程，以及宏观环境是否进一步恶化。</p>
+<p>对于普通人而言，现在不是追高买AI硬件股票的时候。等寒流过去、幸存者浮出水面、价格回归合理区间，才是上车的机会。而对于身处AI行业的人，与其焦虑泡沫何时破，不如专注做一件事：让你的AI应用在不依赖无限算力的情况下也能跑得起来。因为泡沫破裂的那一天，恰恰是&quot;花小钱办大事&quot;者的春天。</p>
+</section><div class="share-buttons" style="margin:20px 0;padding:15px 0;border-top:1px solid #eee;border-bottom:1px solid #eee;">
+  <span style="margin-right:10px;">分享：</span>
+  <a href="https://twitter.com/intent/tweet?url=https%3a%2f%2fninq.srht.site%2fposts%2fai-hardware-inflation-bubble-progress%2f&text=AI%e6%97%b6%e4%bb%a3%e7%9a%84%e7%a1%ac%e4%bb%b6%e9%80%9a%e8%83%80%ef%bc%9a%e6%b3%a1%e6%b2%ab%e4%bd%95%e6%97%b6%e6%ad%87%ef%bc%8c%e5%8d%b1%e6%9c%ba%e5%88%b0%e5%93%aa%e5%84%bf%e4%ba%86" target="_blank" rel="noopener" style="margin-right:12px;">X</a>
+  <a href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fninq.srht.site%2fposts%2fai-hardware-inflation-bubble-progress%2f" target="_blank" rel="noopener" style="margin-right:12px;">Facebook</a>
+  <a href="https://www.linkedin.com/sharing/share-offsite/?url=https%3a%2f%2fninq.srht.site%2fposts%2fai-hardware-inflation-bubble-progress%2f" target="_blank" rel="noopener" style="margin-right:12px;">LinkedIn</a>
+  <a href="https://t.me/share/url?url=https%3a%2f%2fninq.srht.site%2fposts%2fai-hardware-inflation-bubble-progress%2f&text=AI%e6%97%b6%e4%bb%a3%e7%9a%84%e7%a1%ac%e4%bb%b6%e9%80%9a%e8%83%80%ef%bc%9a%e6%b3%a1%e6%b2%ab%e4%bd%95%e6%97%b6%e6%ad%87%ef%bc%8c%e5%8d%b1%e6%9c%ba%e5%88%b0%e5%93%aa%e5%84%bf%e4%ba%86" target="_blank" rel="noopener">Telegram</a>
+</div>
+<div style="margin-top:3rem;padding-top:2rem;border-top:1px solid var(--dim-color);">
+  <h2 style="margin-bottom:1.5rem;">评论</h2>
+  <script src="https://giscus.app/client.js"
+      data-repo="ningfeiyu/blog-comments"
+      data-repo-id="R_kgDOR_QPZw"
+      data-category="General"
+      data-category-id="DIC_kwDOR_QPZ84C6i9W"
+      data-mapping="pathname"
+      data-strict="0"
+      data-reactions-enabled="1"
+      data-emit-metadata="0"
+      data-input-position="bottom"
+      data-theme="preferred_color_scheme"
+      data-lang="zh-CN"
+      crossorigin="anonymous"
+      async>
+  </script>
+</div>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  document.querySelectorAll('pre > code').forEach(function(code) {
+    var pre = code.parentElement;
+    if (pre.querySelector('.copy-btn')) return;
+    var btn = document.createElement('button');
+    btn.className = 'copy-btn';
+    btn.textContent = '复制';
+    btn.style.cssText = 'position:absolute;top:8px;right:8px;padding:4px 10px;font-size:12px;cursor:pointer;opacity:0.6;border:1px solid #ccc;border-radius:4px;background:#fff;';
+    pre.style.position = 'relative';
+    btn.addEventListener('click', function() {
+      navigator.clipboard.writeText(code.innerText).then(function() {
+        btn.textContent = '已复制';
+        setTimeout(function(){ btn.textContent = '复制'; }, 1500);
+      });
+    });
+    pre.appendChild(btn);
+  });
+});
+</script>
+<button id="back-to-top" style="display:none;position:fixed;bottom:30px;right:30px;width:44px;height:44px;border-radius:50%;border:1px solid #ccc;background:#fff;cursor:pointer;font-size:20px;z-index:999;" title="回顶部">↑</button>
+<script>
+(function() {
+  var btn = document.getElementById('back-to-top');
+  window.addEventListener('scroll', function() {
+    btn.style.display = window.scrollY > 300 ? 'block' : 'none';
+  });
+  btn.addEventListener('click', function() {
+    window.scrollTo({top: 0, behavior: 'smooth'});
+  });
+})();
+</script>
+</main>
+        <footer id="main-footer"><div class="footer">
+  <a href="#">回到顶部</a>
+  <div class="footer-copyright">
+    <div class="dim">© 2026 老宁</div>
+    <div></div>
+  </div>
+</div>
+</footer>
+      </div><aside id="side-pane" class="side-sticky">
+<div class="side-details">
+    <span>18 字</span>
+    <span>4 - 5 分钟阅读</span></div><h3>相关文章</h3>
+    <ul><li><a href="/posts/ai-internet-wave-fate-02/">AI 浪潮的算力基础与互联网的协议基础</a></li><li><a href="/posts/ai-nokia-iphone-moment/">AI的诺基亚时刻与iPhone时刻：何时到来？</a></li><li><a href="/posts/ai-internet-wave-fate-05/">命运的相似与不同：老光棍与下岗职工的生存策略</a></li><li><a href="/posts/ai-internet-wave-fate-04/">社会结构的重塑：岗位替代与新机会</a></li><li><a href="/posts/ai-internet-wave-fate-03/">从信息获取到知识生成：两次浪潮的功能演进</a></li></ul></aside></div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="zh-CN" dir="ltr">
+<head>
+  <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Hermes Agent Skill 完全指南：从入门到自定义 | 老宁的试验田</title>
+<link rel="icon" href="/favicon.svg" sizes="any" type="image/svg+xml" /><meta property="og:url" content="https://ninq.srht.site/posts/hermes-skill-guide/">
+	<meta property="og:site_name" content="老宁的试验田">
+	<meta property="og:title" content="Hermes Agent Skill 完全指南：从入门到自定义">
+	<meta property="og:description" content="深入解析 Hermes Agent 的 Skill 系统，涵盖内置技能使用、自定义技能创建和最佳实践。">
+	<meta property="og:locale" content="zh_CN">
+	<meta property="og:type" content="article">
+		<meta property="article:section" content="posts">
+		<meta property="article:published_time" content="2026-06-18T12:00:00+08:00">
+		<meta property="article:modified_time" content="2026-06-18T12:00:00+08:00">
+		<meta property="article:tag" content="Hermes">
+		<meta property="article:tag" content="Skill">
+		<meta property="article:tag" content="Workflow">
+		<meta property="article:tag" content="教程">
+
+	<meta name="twitter:card" content="summary">
+	<meta name="twitter:title" content="Hermes Agent Skill 完全指南：从入门到自定义">
+	<meta name="twitter:description" content="深入解析 Hermes Agent 的 Skill 系统，涵盖内置技能使用、自定义技能创建和最佳实践。">
+
+      <link rel="stylesheet" href="/css/root.min.1052d5860b4442ccd33071bf3543c78d47509a7acb2c13edb1288611a2ebd6a8.css" integrity="sha256-EFLVhgtEQszTMHG/NUPHjUdQmnrLLBPtsSiGEaLr1qg=" crossorigin="anonymous">
+      <link rel="stylesheet" href="/css/bundle.min.e735cd1c41e6b7ba15433438fa484f2804322027ee8348fcff2adbf14976ce28.css" integrity="sha256-5zXNHEHmt7oVQzQ4&#43;khPKAQyICfug0j8/yrb8Ul2zig=" crossorigin="anonymous">
+
+      <script src="/js/bundle.cc8ae9952dbfb731affafabdf26e5c60a6910047ff59ccdeaf1daebaa26c8830.js" integrity="sha256-zIrplS2/tzGv&#43;vq98m5cYKaRAEf/Wczerx2uuqJsiDA=" crossorigin="anonymous"></script><script defer src="/js/search/flexsearch.compact.3928d3d2172bc0b5f75d9458fb9255f0befce1c7239ba6e5d2c58ed4b82c2073.js" integrity="sha256-OSjT0hcrwLX3XZRY&#43;5JV8L784ccjm6bl0sWO1LgsIHM="></script>
+<script defer src="/js/search/search.1d980f84df11f3eb7c8c5f17f541d49a0611608df179dd74fa7f06225eb56ace.js" integrity="sha256-HZgPhN8R8&#43;t8jF8X9UHUmgYRYI3xed10&#43;n8GIl61as4="></script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,200;1,300;1,400;1,500;1,600;1,700;1,800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200..800&family=Spectral:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,200;1,300;1,400;1,500;1,600;1,700;1,800&display=swap" rel="stylesheet">
+
+
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+<link href="https://cdn.jsdelivr.net/npm/lxgw-wenkai-webfont@1.7.0/lxgwwenkai-regular.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/lxgw-wenkai-webfont@1.7.0/lxgwwenkai-bold.css" rel="stylesheet">
+
+<script defer src="https://events.vercount.one/js"></script>
+</head>
+<body class="notransition">
+  <div id="container">
+    <header id="main-header"><div role="navigation" aria-label="Main">
+  <div class="nav-left">
+    <a href="https://ninq.srht.site/" style="color: inherit;">老宁的试验田</a>
+  </div>
+  <div class="nav-right">
+    <div style="position:absolute;width:0px;height:0px;">
+      <div id="nav-dropdown-menu" class="hidden" href="#">
+    <div class="nav-item">
+      <a href="/"
+      >首页</a>
+    </div>
+    <div class="nav-item">
+      <a aria-current="true" class="ancestor" href="/posts/"
+      >文章</a>
+    </div>
+    <div class="nav-item">
+      <a href="/tags/"
+      >标签</a>
+    </div>
+    <div class="nav-item">
+      <a href="/archives/"
+      >归档</a>
+    </div>
+    <div class="nav-item">
+      <a href="/about/"
+      >关于</a>
+    </div>
+</div>
+    </div>
+    <a id="nav-dropdown-button" href="#"><svg width="20px" height="20px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M4 6H20M4 12H20M4 18H20" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
+</a>
+    <div id="nav-menu">
+    <div class="nav-item">
+      <a href="/"
+      >首页</a>
+    </div>
+    <div class="nav-item">
+      <a aria-current="true" class="ancestor" href="/posts/"
+      >文章</a>
+    </div>
+    <div class="nav-item">
+      <a href="/tags/"
+      >标签</a>
+    </div>
+    <div class="nav-item">
+      <a href="/archives/"
+      >归档</a>
+    </div>
+    <div class="nav-item">
+      <a href="/about/"
+      >关于</a>
+    </div>
+</div>
+    <a id="theme-switcher" href="#">
+<svg class="light-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M12 3V4M12 20V21M4 12H3M6.31412 6.31412L5.5 5.5M17.6859 6.31412L18.5 5.5M6.31412 17.69L5.5 18.5001M17.6859 17.69L18.5 18.5001M21 12H20M16 12C16 14.2091 14.2091 16 12 16C9.79086 16 8 14.2091 8 12C8 9.79086 9.79086 8 12 8C14.2091 8 16 9.79086 16 12Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
+
+<svg class="dark-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M3.32031 11.6835C3.32031 16.6541 7.34975 20.6835 12.3203 20.6835C16.1075 20.6835 19.3483 18.3443 20.6768 15.032C19.6402 15.4486 18.5059 15.6834 17.3203 15.6834C12.3497 15.6834 8.32031 11.654 8.32031 6.68342C8.32031 5.50338 8.55165 4.36259 8.96453 3.32996C5.65605 4.66028 3.32031 7.89912 3.32031 11.6835Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
+</a>
+  </div>
+</div>
+</header>
+    <div class="flex grow">
+      <div id="main-pane">
+        <main id="main-content"><div class="single-header">
+<ol class="breadcrumbs" itemscope itemtype="https://schema.org/BreadcrumbList">
+    <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+      <a itemprop="item" href="https://ninq.srht.site/">
+        <span itemprop="name">首页</span>
+      </a>
+      <meta itemprop="position" content='1' />
+    </li>
+    <span>&nbsp»&nbsp</span>
+    <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+      <a itemprop="item" href="https://ninq.srht.site/posts/">
+        <span itemprop="name">文章</span>
+      </a>
+      <meta itemprop="position" content='2' />
+    </li>
+    <span>&nbsp»&nbsp</span>
+</ol>
+<h1>Hermes Agent Skill 完全指南：从入门到自定义</h1><time class="dim" datetime="2026-06-18T12:00:00&#43;08:00">2026年6月18日</time><div class="term-container"><div class="tag">
+        <a href="https://ninq.srht.site/tags/hermes/">#Hermes</a>
+      </div><div class="tag">
+        <a href="https://ninq.srht.site/tags/skill/">#skill</a>
+      </div><div class="tag">
+        <a href="https://ninq.srht.site/tags/workflow/">#workflow</a>
+      </div><div class="tag">
+        <a href="https://ninq.srht.site/tags/%E6%95%99%E7%A8%8B/">#教程</a>
+      </div></ol></div>
+  <section class="page-section"><p><img src="/images/remote/ext-40d8d0c348e6.jpg" alt="风帆"></p>
+<blockquote>
+<p>Skill 不是魔法，它是经验的复用。</p>
+</blockquote>
+<p>如果你用过 Hermes Agent，一定见过 <code>skill_view(&quot;hugo-blog&quot;)</code> 这样的调用。这就是 <strong>Skill</strong>——Hermes 的核心扩展机制。本文将带你从使用者变成创造者。</p>
+<hr>
+<h2 id="一skill-是什么">一、Skill 是什么？</h2>
+<p>简单说：<strong>Skill 是可复用的工作流模板。</strong></p>
+<p>想象你每次写博客都要重复：</p>
+<ol>
+<li>创建 <code>content/posts/xxx.md</code></li>
+<li>填写 frontmatter</li>
+<li>找配图</li>
+<li><code>hugo --minify</code></li>
+<li>部署</li>
+</ol>
+<p>这些步骤完全可以固化成一个 skill，以后只需要说&quot;发篇文章&quot;，Agent 自动走完流程。</p>
+<hr>
+<h2 id="二skill-的三种来源">二、Skill 的三种来源</h2>
+<h3 id="1-内置-skill官方维护">1. 内置 Skill（官方维护）</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># 查看所有可用 skill</span>
+</span></span><span style="display:flex;"><span>skills_list<span style="color:#f92672">()</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 查看特定分类</span>
+</span></span><span style="display:flex;"><span>skills_list<span style="color:#f92672">(</span>category<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;devops&#34;</span><span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 加载具体 skill 内容</span>
+</span></span><span style="display:flex;"><span>skill_view<span style="color:#f92672">(</span><span style="color:#e6db74">&#34;hugo-blog&#34;</span><span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>skill_view<span style="color:#f92672">(</span><span style="color:#e6db74">&#34;hugo-blog&#34;</span>, file_path<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;references/deploy.md&#34;</span><span style="color:#f92672">)</span>
+</span></span></code></pre></div><p>内置 skill 存放在 <code>~/.hermes/skills/</code> 目录，按分类组织：</p>
+<pre tabindex="0"><code>~/.hermes/skills/
+├── devops/
+│   ├── hugo-blog/
+│   │   ├── SKILL.md
+│   │   ├── references/
+│   │   │   └── sensitive-topic-writing-guide.md
+│   │   └── templates/
+│   │       └── post-template.md
+│   └── astro-vercel-deployment/
+├── github/
+│   └── codebase-inspection/
+│       ├── SKILL.md
+│       └── scripts/
+│           └── count-lines.py
+└── ...
+</code></pre><h3 id="2-插件-skill第三方扩展">2. 插件 Skill（第三方扩展）</h3>
+<p>插件的 skill 用 <code>插件名:skill名</code> 格式引用：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>skill_view(<span style="color:#e6db74">&#34;superpowers:writing-plans&#34;</span>)
+</span></span></code></pre></div><h3 id="3-自定义-skill你自己创建">3. 自定义 Skill（你自己创建）</h3>
+<p>这是本文的重点。</p>
+<hr>
+<h2 id="三创建你的第一个-skill">三、创建你的第一个 Skill</h2>
+<h3 id="31-最简结构">3.1 最简结构</h3>
+<p>一个最小 skill 只需要 <code>SKILL.md</code>：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-markdown" data-lang="markdown"><span style="display:flex;"><span>---
+</span></span><span style="display:flex;"><span><span style="color:#f92672">title</span>: <span style="color:#e6db74">&#34;My First Skill&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">name</span>: <span style="color:#e6db74">&#34;my-skill&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">description</span>: <span style="color:#e6db74">&#34;Does something useful.&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">category</span>: <span style="color:#e6db74">&#34;productivity&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">tags</span>: [<span style="color:#e6db74">&#34;automation&#34;</span>]
+</span></span><span style="display:flex;"><span><span style="color:#f92672">version</span>: <span style="color:#ae81ff">1.0</span>
+</span></span><span style="display:flex;"><span>---
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span># My First Skill
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## When to Use
+</span></span></span><span style="display:flex;"><span>When the user asks for X.
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## Steps
+</span></span></span><span style="display:flex;"><span><span style="color:#66d9ef">1.</span> Do A
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">2.</span> Do B
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">3.</span> Done
+</span></span></code></pre></div><h3 id="32-实战创建一个写周报的-skill">3.2 实战：创建一个&quot;写周报&quot;的 Skill</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>mkdir -p ~/.hermes/skills/productivity/weekly-report
+</span></span></code></pre></div><p>写入 <code>SKILL.md</code>：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-markdown" data-lang="markdown"><span style="display:flex;"><span>---
+</span></span><span style="display:flex;"><span><span style="color:#f92672">title</span>: <span style="color:#e6db74">&#34;Weekly Report Generator&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">name</span>: <span style="color:#e6db74">&#34;weekly-report&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">description</span>: <span style="color:#e6db74">&#34;Generate professional weekly work reports from bullet points.&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">category</span>: <span style="color:#e6db74">&#34;productivity&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">tags</span>: [<span style="color:#e6db74">&#34;report&#34;</span>, <span style="color:#e6db74">&#34;automation&#34;</span>]
+</span></span><span style="display:flex;"><span><span style="color:#f92672">version</span>: <span style="color:#ae81ff">1.0</span>
+</span></span><span style="display:flex;"><span>---
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span># Weekly Report Generator
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## When to Use
+</span></span></span><span style="display:flex;"><span>When the user provides a list of work items and wants a formatted weekly report.
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## Input Format
+</span></span></span><span style="display:flex;"><span><span style="color:#66d9ef">-</span> Bullet points of completed tasks
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">-</span> Optional: blockers / next week&#39;s plan
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## Output Format
+</span></span></span><span style="display:flex;"><span><span style="color:#66d9ef">1.</span> <span style="font-weight:bold">**本周完成**</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">2.</span> <span style="font-weight:bold">**遇到的问题**</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">3.</span> <span style="font-weight:bold">**下周计划**</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## Example
+</span></span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Input:
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">-</span> 完成了 API 重构
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">-</span> 修复了登录 Bug
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Output:
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">&gt; </span><span style="font-style:italic">### 本周完成
+</span></span></span><span style="display:flex;"><span><span style="color:#66d9ef">&gt; </span><span style="font-style:italic">- 完成 API 重构，提升响应速度 30%
+</span></span></span><span style="display:flex;"><span><span style="color:#66d9ef">&gt; </span><span style="font-style:italic">- 修复登录 Bug，解决用户反馈问题
+</span></span></span><span style="display:flex;"><span><span style="color:#66d9ef">&gt;
+</span></span></span><span style="display:flex;"><span><span style="font-style:italic">&gt; ### 下周计划
+</span></span></span><span style="display:flex;"><span><span style="color:#66d9ef">&gt; </span><span style="font-style:italic">- 优化数据库查询
+</span></span></span></code></pre></div><p>创建：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>skill_manage(action<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;create&#34;</span>, name<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;weekly-report&#34;</span>, category<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;productivity&#34;</span>, content<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;...&#34;</span>)
+</span></span></code></pre></div><hr>
+<h2 id="四skill-的高级用法">四、Skill 的高级用法</h2>
+<h3 id="41-关联文件">4.1 关联文件</h3>
+<p>Skill 可以附带模板、脚本、参考资料：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># 添加参考文档</span>
+</span></span><span style="display:flex;"><span>skill_manage(
+</span></span><span style="display:flex;"><span>    action<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;write_file&#34;</span>,
+</span></span><span style="display:flex;"><span>    name<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;my-skill&#34;</span>,
+</span></span><span style="display:flex;"><span>    file_path<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;references/api-reference.md&#34;</span>,
+</span></span><span style="display:flex;"><span>    file_content<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;...&#34;</span>
+</span></span><span style="display:flex;"><span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 添加脚本</span>
+</span></span><span style="display:flex;"><span>skill_manage(
+</span></span><span style="display:flex;"><span>    action<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;write_file&#34;</span>,
+</span></span><span style="display:flex;"><span>    name<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;my-skill&#34;</span>,
+</span></span><span style="display:flex;"><span>    file_path<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;scripts/deploy.sh&#34;</span>,
+</span></span><span style="display:flex;"><span>    file_content<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;...&#34;</span>
+</span></span><span style="display:flex;"><span>)
+</span></span></code></pre></div><p>加载时指定：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>skill_view(<span style="color:#e6db74">&#34;my-skill&#34;</span>)  <span style="color:#75715e"># 加载 SKILL.md</span>
+</span></span><span style="display:flex;"><span>skill_view(<span style="color:#e6db74">&#34;my-skill&#34;</span>, file_path<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;scripts/deploy.sh&#34;</span>)  <span style="color:#75715e"># 加载脚本</span>
+</span></span></code></pre></div><h3 id="42-更新-skill">4.2 更新 Skill</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># 打补丁</span>
+</span></span><span style="display:flex;"><span>skill_manage(
+</span></span><span style="display:flex;"><span>    action<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;patch&#34;</span>,
+</span></span><span style="display:flex;"><span>    name<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;my-skill&#34;</span>,
+</span></span><span style="display:flex;"><span>    old_string<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;version: 1.0&#34;</span>,
+</span></span><span style="display:flex;"><span>    new_string<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;version: 1.1&#34;</span>
+</span></span><span style="display:flex;"><span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 或完整重写</span>
+</span></span><span style="display:flex;"><span>skill_manage(
+</span></span><span style="display:flex;"><span>    action<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;edit&#34;</span>,
+</span></span><span style="display:flex;"><span>    name<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;my-skill&#34;</span>,
+</span></span><span style="display:flex;"><span>    content<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;...&#34;</span>
+</span></span><span style="display:flex;"><span>)
+</span></span></code></pre></div><h3 id="43-删除-skill">4.3 删除 Skill</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>skill_manage(action<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;delete&#34;</span>, name<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;my-skill&#34;</span>)
+</span></span></code></pre></div><hr>
+<h2 id="五最佳实践">五、最佳实践</h2>
+<table>
+	<thead>
+			<tr>
+					<th>原则</th>
+					<th>说明</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td><strong>单一职责</strong></td>
+					<td>一个 skill 只做一件事</td>
+			</tr>
+			<tr>
+					<td><strong>自包含</strong></td>
+					<td>不依赖外部状态，所有参数通过 frontmatter 或输入提供</td>
+			</tr>
+			<tr>
+					<td><strong>可验证</strong></td>
+					<td>包含明确的&quot;成功/失败&quot;判断标准</td>
+			</tr>
+			<tr>
+					<td><strong>版本管理</strong></td>
+					<td>重大更新时递增 version</td>
+			</tr>
+	</tbody>
+</table>
+<hr>
+<h2 id="六案例分析context-management">六、案例分析：context-management</h2>
+<p>这是我在实际工作中创建的 skill，用于解决 <strong>长任务上下文耗尽</strong> 问题。</p>
+<p><strong>核心设计</strong>：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-markdown" data-lang="markdown"><span style="display:flex;"><span><span style="color:#75715e">## Execution Protocol
+</span></span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">### Step 1: Before Any Action
+</span></span></span><span style="display:flex;"><span><span style="color:#66d9ef">1.</span> Analyze the request
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">2.</span> Plan the minimal viable path
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">3.</span> Decompose into smallest independent subtasks
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">### Step 2: Single-Step Execution
+</span></span></span><span style="display:flex;"><span><span style="color:#66d9ef">-</span> Only ONE subtask at a time
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">-</span> After every tool call, STOP and summarize
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">### Step 3: Post-Step Summary
+</span></span></span><span style="display:flex;"><span><span style="color:#66d9ef">-</span> Success: &lt; 300 token summary, discard raw output
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">-</span> Failure: error + next attempt plan
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">### Step 4: Context Pruning
+</span></span></span><span style="display:flex;"><span>If context &gt; 30k tokens:
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">1.</span> Pause
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">2.</span> Summarize current state (&lt; 200 tokens)
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">3.</span> Prune history
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">4.</span> Resume
+</span></span></code></pre></div><p><strong>使用时的效果</strong>：</p>
+<ul>
+<li>写一篇文章，原本可能占用 15k tokens</li>
+<li>使用这个 skill 后，每步只保留 300 token 总结，总占用 &lt; 5k</li>
+<li>剩余空间可用于更深度的内容创作</li>
+</ul>
+<hr>
+<h2 id="七快速参考">七、快速参考</h2>
+<table>
+	<thead>
+			<tr>
+					<th>操作</th>
+					<th>命令</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>列出 skill</td>
+					<td><code>skills_list()</code></td>
+			</tr>
+			<tr>
+					<td>查看 skill</td>
+					<td><code>skill_view(&quot;name&quot;)</code></td>
+			</tr>
+			<tr>
+					<td>创建 skill</td>
+					<td><code>skill_manage(action=&quot;create&quot;, ...)</code></td>
+			</tr>
+			<tr>
+					<td>更新 skill</td>
+					<td><code>skill_manage(action=&quot;patch&quot;, ...)</code></td>
+			</tr>
+			<tr>
+					<td>删除 skill</td>
+					<td><code>skill_manage(action=&quot;delete&quot;, ...)</code></td>
+			</tr>
+			<tr>
+					<td>添加文件</td>
+					<td><code>skill_manage(action=&quot;write_file&quot;, file_path=&quot;...&quot;, ...)</code></td>
+			</tr>
+	</tbody>
+</table>
+<hr>
+<h2 id="结语">结语</h2>
+<p>Skill 是 Hermes Agent 的&quot;肌肉记忆&quot;。</p>
+<p>当你第一次做某件事时，一步步来；当你第十次做时，把它变成 skill；当你第一百次做时，让 skill 自动运行。</p>
+<p>从今天开始，把你重复的工作流固化成 skill 吧。</p>
+</section><div class="share-buttons" style="margin:20px 0;padding:15px 0;border-top:1px solid #eee;border-bottom:1px solid #eee;">
+  <span style="margin-right:10px;">分享：</span>
+  <a href="https://twitter.com/intent/tweet?url=https%3a%2f%2fninq.srht.site%2fposts%2fhermes-skill-guide%2f&text=Hermes%20Agent%20Skill%20%e5%ae%8c%e5%85%a8%e6%8c%87%e5%8d%97%ef%bc%9a%e4%bb%8e%e5%85%a5%e9%97%a8%e5%88%b0%e8%87%aa%e5%ae%9a%e4%b9%89" target="_blank" rel="noopener" style="margin-right:12px;">X</a>
+  <a href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fninq.srht.site%2fposts%2fhermes-skill-guide%2f" target="_blank" rel="noopener" style="margin-right:12px;">Facebook</a>
+  <a href="https://www.linkedin.com/sharing/share-offsite/?url=https%3a%2f%2fninq.srht.site%2fposts%2fhermes-skill-guide%2f" target="_blank" rel="noopener" style="margin-right:12px;">LinkedIn</a>
+  <a href="https://t.me/share/url?url=https%3a%2f%2fninq.srht.site%2fposts%2fhermes-skill-guide%2f&text=Hermes%20Agent%20Skill%20%e5%ae%8c%e5%85%a8%e6%8c%87%e5%8d%97%ef%bc%9a%e4%bb%8e%e5%85%a5%e9%97%a8%e5%88%b0%e8%87%aa%e5%ae%9a%e4%b9%89" target="_blank" rel="noopener">Telegram</a>
+</div>
+<div style="margin-top:3rem;padding-top:2rem;border-top:1px solid var(--dim-color);">
+  <h2 style="margin-bottom:1.5rem;">评论</h2>
+  <script src="https://giscus.app/client.js"
+      data-repo="ningfeiyu/blog-comments"
+      data-repo-id="R_kgDOR_QPZw"
+      data-category="General"
+      data-category-id="DIC_kwDOR_QPZ84C6i9W"
+      data-mapping="pathname"
+      data-strict="0"
+      data-reactions-enabled="1"
+      data-emit-metadata="0"
+      data-input-position="bottom"
+      data-theme="preferred_color_scheme"
+      data-lang="zh-CN"
+      crossorigin="anonymous"
+      async>
+  </script>
+</div>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  document.querySelectorAll('pre > code').forEach(function(code) {
+    var pre = code.parentElement;
+    if (pre.querySelector('.copy-btn')) return;
+    var btn = document.createElement('button');
+    btn.className = 'copy-btn';
+    btn.textContent = '复制';
+    btn.style.cssText = 'position:absolute;top:8px;right:8px;padding:4px 10px;font-size:12px;cursor:pointer;opacity:0.6;border:1px solid #ccc;border-radius:4px;background:#fff;';
+    pre.style.position = 'relative';
+    btn.addEventListener('click', function() {
+      navigator.clipboard.writeText(code.innerText).then(function() {
+        btn.textContent = '已复制';
+        setTimeout(function(){ btn.textContent = '复制'; }, 1500);
+      });
+    });
+    pre.appendChild(btn);
+  });
+});
+</script>
+<button id="back-to-top" style="display:none;position:fixed;bottom:30px;right:30px;width:44px;height:44px;border-radius:50%;border:1px solid #ccc;background:#fff;cursor:pointer;font-size:20px;z-index:999;" title="回顶部">↑</button>
+<script>
+(function() {
+  var btn = document.getElementById('back-to-top');
+  window.addEventListener('scroll', function() {
+    btn.style.display = window.scrollY > 300 ? 'block' : 'none';
+  });
+  btn.addEventListener('click', function() {
+    window.scrollTo({top: 0, behavior: 'smooth'});
+  });
+})();
+</script>
+</main>
+        <footer id="main-footer"><div class="footer">
+  <a href="#">回到顶部</a>
+  <div class="footer-copyright">
+    <div class="dim">© 2026 老宁</div>
+    <div></div>
+  </div>
+</div>
+</footer>
+      </div><aside id="side-pane" class="side-sticky">
+<div class="side-details">
+    <span>493 字</span>
+    <span>5 - 6 分钟阅读</span></div><h3>目录</h3><nav id="TableOfContents">
+  <ul>
+    <li><a href="#一skill-是什么">一、Skill 是什么？</a></li>
+    <li><a href="#二skill-的三种来源">二、Skill 的三种来源</a>
+      <ul>
+        <li><a href="#1-内置-skill官方维护">1. 内置 Skill（官方维护）</a></li>
+        <li><a href="#2-插件-skill第三方扩展">2. 插件 Skill（第三方扩展）</a></li>
+        <li><a href="#3-自定义-skill你自己创建">3. 自定义 Skill（你自己创建）</a></li>
+      </ul>
+    </li>
+    <li><a href="#三创建你的第一个-skill">三、创建你的第一个 Skill</a>
+      <ul>
+        <li><a href="#31-最简结构">3.1 最简结构</a></li>
+        <li><a href="#32-实战创建一个写周报的-skill">3.2 实战：创建一个&quot;写周报&quot;的 Skill</a></li>
+      </ul>
+    </li>
+    <li><a href="#四skill-的高级用法">四、Skill 的高级用法</a>
+      <ul>
+        <li><a href="#41-关联文件">4.1 关联文件</a></li>
+        <li><a href="#42-更新-skill">4.2 更新 Skill</a></li>
+        <li><a href="#43-删除-skill">4.3 删除 Skill</a></li>
+      </ul>
+    </li>
+    <li><a href="#五最佳实践">五、最佳实践</a></li>
+    <li><a href="#六案例分析context-management">六、案例分析：context-management</a></li>
+    <li><a href="#七快速参考">七、快速参考</a></li>
+    <li><a href="#结语">结语</a></li>
+  </ul>
+</nav></aside></div>
+  </div>
+</body>
+</html>

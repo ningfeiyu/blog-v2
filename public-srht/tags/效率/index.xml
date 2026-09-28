@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+	<channel>
+		<title>效率 on 老宁的试验田</title>
+		<link>https://ninq.srht.site/tags/%E6%95%88%E7%8E%87/</link>
+		<description>Recent content in 效率 on 老宁的试验田</description>
+		<generator>Hugo</generator>
+		<language>zh-CN</language>
+		
+		
+		
+		
+			<lastBuildDate>Tue, 25 Aug 2026 00:00:00 +0000</lastBuildDate>
+		
+			<atom:link href="https://ninq.srht.site/tags/%E6%95%88%E7%8E%87/index.xml" rel="self" type="application/rss+xml" />
+			<item>
+				<title>把「第二大脑」还给普通人：别搬家，建索引；别全存，学蒸馏</title>
+				<link>https://ninq.srht.site/posts/second-brain-guide-for-everyone/</link>
+				<pubDate>Tue, 25 Aug 2026 00:00:00 +0000</pubDate>
+				<guid>https://ninq.srht.site/posts/second-brain-guide-for-everyone/</guid>
+				<description>&lt;p&gt;&lt;img src=&#34;https://ninq.srht.site/images/posts/second-brain-guide.jpg&#34; alt=&#34;第二大脑&#34;&gt;&lt;/p&gt;&#xA;&lt;p&gt;凌晨两点，手机屏幕亮着，你在微信收藏、手机备忘录、电脑桌面、Notion、印象笔记、甚至几年前的 QQ 邮箱里轮番翻找——半年前那个「明明很棒、一定要用上」的灵感，到底记在哪儿了？&lt;/p&gt;&#xA;&lt;p&gt;这不是记性不好。是方法错了。&lt;/p&gt;&#xA;&lt;p&gt;我们总以为「建立第二大脑」就是把看到的、听到的、想到的&lt;strong&gt;全收进一个 App&lt;/strong&gt;，像搬家一样把碎片整齐码放。结果呢？搬完家第一周很整齐，第二周新收的没来得及归类，第三周你连自己建的文件夹叫什么名字都记不住。最后那个 App 成了「数字坟场」：东西全在里面，但你找不着，也不用。&lt;/p&gt;&#xA;&lt;p&gt;真正有用的「第二大脑」，不是「存得多」，而是&lt;strong&gt;找得快&lt;/strong&gt;。&lt;/p&gt;&#xA;&lt;hr&gt;&#xA;&lt;h2 id=&#34;一-破个誓第二大脑--记更多&#34;&gt;一、 破个誓：第二大脑 ≠ 记更多&lt;/h2&gt;&#xA;&lt;p&gt;Cerebras（一家做 AI 芯片的公司）内部有套系统，每天处理 1.5 万次查询。工程师们不把所有聊天记录、代码、文档原封不动塞进去。他们的铁律是：&lt;strong&gt;绝不直接存原始聊天&lt;/strong&gt;。&lt;/p&gt;&#xA;&lt;p&gt;对普通人也是一样。&lt;/p&gt;&#xA;&lt;p&gt;你以为「记下来」就是「记住了」？不对。&lt;strong&gt;「记下来」只是「先不丢」；「能用上」才叫「记住了」。&lt;/strong&gt;&lt;/p&gt;&#xA;&lt;p&gt;我见过太多人把微信里「好的谢谢」「收到」「嗯嗯」全转发给文件传输助手，把读书时划线的整段原文不加思考地复制进笔记，把会议录音全文转写存进云盘。这些东西占了空间，稀释了信号，&lt;strong&gt;下次你真正需要「那个解决方案」时，它被淹没在垃圾堆里。&lt;/strong&gt;&lt;/p&gt;&#xA;&lt;p&gt;第二大脑的核心任务不是「收纳」，是**「检索」**——&lt;strong&gt;在你需要的那一刻，用最小的力气，把最关键的那条调出来。&lt;/strong&gt;&lt;/p&gt;&#xA;&lt;hr&gt;&#xA;&lt;h2 id=&#34;二-心法一别搬家在习惯的地方记建一张索引清单&#34;&gt;二、 心法一：别搬家，在习惯的地方记；建一张「索引清单」&lt;/h2&gt;&#xA;&lt;p&gt;你生活在很多地方：微信聊天、手机备忘录、电脑文件夹、Kindle 划线、浏览器收藏夹、纸质笔记本、甚至洗澡时蹦出来的念头。&lt;/p&gt;&#xA;&lt;p&gt;&lt;strong&gt;别强迫自己「把所有东西收进一个 App」。&lt;/strong&gt; 这叫「迁移思维」，累人、不持久、违背本能。&lt;/p&gt;&#xA;&lt;p&gt;Cerebras 的做法叫「联邦」：数据留在原地，只在一处建「目录」。&lt;/p&gt;&#xA;&lt;p&gt;普通人版：你不需要把书全搬到书桌上，你只需要一张&lt;strong&gt;书名一览表&lt;/strong&gt;——&lt;strong&gt;「这本书在哪个架子、讲什么、我想用它干什么」&lt;/strong&gt;。&lt;/p&gt;&#xA;&lt;p&gt;&lt;strong&gt;动作：建一个「索引清单」。&lt;/strong&gt;&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;一个文档、一张表格、甚至一张纸都行。&lt;/li&gt;&#xA;&lt;li&gt;每行只记三样东西：&lt;strong&gt;「是什么」「在哪」「一句话提醒我为什么存它」&lt;/strong&gt;。&lt;/li&gt;&#xA;&lt;li&gt;例：&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;code&gt;「客户反馈整理」 | 微信收藏-2024.03 | 核心痛点：导出功能太慢，需优化&lt;/code&gt;&lt;/li&gt;&#xA;&lt;li&gt;&lt;code&gt;「品牌定位灵感」 | 手机备忘录-「咖啡店随想」 | 定位切入点：不卖咖啡，卖「确定性的下午」&lt;/code&gt;&lt;/li&gt;&#xA;&lt;li&gt;&lt;code&gt;「税务申报流程」 | 电脑-Documents/税务/2024.pdf | 关键节点：3月前完成预缴&lt;/code&gt;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;&lt;strong&gt;你搜索时，只去这一处找。&lt;/strong&gt; 找到条目，顺藤摸瓜回原地。完事。&lt;/p&gt;&#xA;&lt;p&gt;这就像图书馆：书留在书架，你查目录。&lt;strong&gt;目录薄、书厚，这才对。&lt;/strong&gt;&lt;/p&gt;&#xA;&lt;hr&gt;&#xA;&lt;h2 id=&#34;三-心法二蒸馏--全存这一招最救命&#34;&gt;三、 心法二：蒸馏 &amp;gt; 全存（这一招最救命）&lt;/h2&gt;&#xA;&lt;p&gt;这是 Cerebras 的黄金法则，也是普通人最容易踩的坑。&lt;/p&gt;&#xA;&lt;p&gt;&lt;strong&gt;误区：&lt;/strong&gt;「万一以后用得上呢？」「原文最准确，我不敢改。」&lt;/p&gt;&#xA;&lt;p&gt;&lt;strong&gt;真相：&lt;/strong&gt; 你的未来自我&lt;strong&gt;不想读一万字原文&lt;/strong&gt;，ta 只想要&lt;strong&gt;结论&lt;/strong&gt;。&lt;/p&gt;&#xA;&lt;p&gt;把「蒸馏」刻进肌肉记忆：&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;看到一篇好文章，别全文收藏。&lt;strong&gt;写下：「核心观点是 X，对我有用的启发是 Y，下一步我要做 Z。」&lt;/strong&gt; 三行搞定。&lt;/li&gt;&#xA;&lt;li&gt;开完会，别存录音全文。&lt;strong&gt;写下：「决策：做 A 不做 B；争议点：预算；行动项：我周三前出方案。」&lt;/strong&gt;&lt;/li&gt;&#xA;&lt;li&gt;读完一本书，别存五十条划线。&lt;strong&gt;写下：「这本书解决了我关于「定价」的困惑：采用价值定价而非成本加成；可直接套用在下周的报价单上。」&lt;/strong&gt;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;&lt;strong&gt;存「问题 / 答案 / 下一步」，别存「原文」。&lt;/strong&gt;&lt;/p&gt;</description>
+			</item>
+	</channel>
+</rss>

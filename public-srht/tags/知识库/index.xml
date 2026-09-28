@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+	<channel>
+		<title>知识库 on 老宁的试验田</title>
+		<link>https://ninq.srht.site/tags/%E7%9F%A5%E8%AF%86%E5%BA%93/</link>
+		<description>Recent content in 知识库 on 老宁的试验田</description>
+		<generator>Hugo</generator>
+		<language>zh-CN</language>
+		
+		
+		
+		
+			<lastBuildDate>Tue, 25 Aug 2026 00:00:00 +0000</lastBuildDate>
+		
+			<atom:link href="https://ninq.srht.site/tags/%E7%9F%A5%E8%AF%86%E5%BA%93/index.xml" rel="self" type="application/rss+xml" />
+			<item>
+				<title>从深夜的 #incidents 频道看 Cerebras 如何把 1.5 万次日查询变成工程师的「第二大脑」</title>
+				<link>https://ninq.srht.site/posts/cerebras-internal-knowledge-base/</link>
+				<pubDate>Tue, 25 Aug 2026 00:00:00 +0000</pubDate>
+				<guid>https://ninq.srht.site/posts/cerebras-internal-knowledge-base/</guid>
+				<description>&lt;p&gt;&lt;img src=&#34;https://ninq.srht.site/images/posts/cerebras-knowledge-base.jpg&#34; alt=&#34;Cerebras 内部知识库&#34;&gt;&lt;/p&gt;&#xA;&lt;h2 id=&#34;深夜三点nfs-报错单还在滚&#34;&gt;深夜三点，NFS 报错单还在滚&lt;/h2&gt;&#xA;&lt;p&gt;凌晨 3 点 17 分，#incidents-wafer-fab 频道里的红色告警还在刷。某座晶圆厂的 NFS 挂载点突然吐出 &lt;code&gt;stale file handle&lt;/code&gt;，编译器团队的工程师盯着屏幕，手指悬在键盘上——要不要把这串报错贴到搜索框？要不要先在 Slack 里翻半小时历史？要不要直接 @ 某个大神？&lt;/p&gt;&#xA;&lt;p&gt;三个月前，这三个选项都是「赌运气」。现在，他在 Cerebras Knowledge 里敲下一行模糊查询：&lt;code&gt;NFS stale handle wafer fab mount&lt;/code&gt;。两秒后，答案落地：一条 14 天前的 Slack 线程（已蒸馏为结构化问答）、一篇 Confluence runbook（自动展开相邻章节）、三个相关 PR（按合并时间倒序）、以及一行 &lt;code&gt;who_knows&lt;/code&gt; 路由——「找 @marc，他是存储基建 owner」。&lt;/p&gt;&#xA;&lt;p&gt;这不是演示，也不是 PPT 里的架构图。这是 Cerebras 内部上线三个月、日均 1.5 万次查询、覆盖芯片设计、编译器、数据中心运维、训练/推理框架、云服务全栈语料的 RAG 平台 &lt;strong&gt;Cerebras Knowledge&lt;/strong&gt; 的日常。它没有把所有数据搬进一个向量库，而是选择了更难、也更务实的路：&lt;strong&gt;联邦而非迁移，数据留在原地，只在检索层做「窄腰带」融合。&lt;/strong&gt;&lt;/p&gt;&#xA;&lt;hr&gt;&#xA;&lt;h2 id=&#34;一-设计哲学为什么赌联邦而不搞大迁移&#34;&gt;一、 设计哲学：为什么赌「联邦」而不搞「大迁移」？&lt;/h2&gt;&#xA;&lt;p&gt;大多数团队做内部知识库的第一反应是：把 Confluence、Slack、GitHub、Jira、Google Docs 全部倒进一个向量数据库，建统一索引，再套一层 RAG。听起来顺理成章，做起来却是噩梦——权限同步滞后、数据新鲜度失控、上游 Schema 变更连锁崩溃、摄入管道一堵塞全站不可用。&lt;/p&gt;&#xA;&lt;p&gt;Cerebras 赌的是另一条路：&lt;strong&gt;federate（联邦）≠ migrate（迁移），meet data where it lives（在数据原地与它会面）。&lt;/strong&gt;&lt;/p&gt;&#xA;&lt;p&gt;具体落地为三层分离：&lt;/p&gt;&#xA;&lt;table&gt;&#xA;&#x9;&lt;thead&gt;&#xA;&#x9;&#x9;&#x9;&lt;tr&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;th&gt;层&lt;/th&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;th&gt;职责&lt;/th&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;th&gt;关键决策&lt;/th&gt;&#xA;&#x9;&#x9;&#x9;&lt;/tr&gt;&#xA;&#x9;&lt;/thead&gt;&#xA;&#x9;&lt;tbody&gt;&#xA;&#x9;&#x9;&#x9;&lt;tr&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;&lt;strong&gt;Collection（采集层）&lt;/strong&gt;&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;每个源系统一个 Connector，只负责「拉增量、推标准行」&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;Connector 只写同一张 Postgres &lt;code&gt;embeddings&lt;/code&gt; 表，Schema 固定：&lt;code&gt;vector(3072) + metadata(jsonb) + source_id + acl&lt;/code&gt;&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&lt;/tr&gt;&#xA;&#x9;&#x9;&#x9;&lt;tr&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;&lt;strong&gt;Querying（检索层）&lt;/strong&gt;&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;六大工具并行、RRF 融合、Cross-encoder 重排、上下文扩展、带引文综合&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;不关心数据从哪来，只认「证据行」统一契约&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&lt;/tr&gt;&#xA;&#x9;&#x9;&#x9;&lt;tr&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;&lt;strong&gt;Auth &amp;amp; Audit（鉴权审计层）&lt;/strong&gt;&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;源码级 ACL、项目范围过滤、查询审计日志、合成必带引文、冲突证据生成 caveat&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;横切所有层，查询前过滤、查询后留痕&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&lt;/tr&gt;&#xA;&#x9;&lt;/tbody&gt;&#xA;&lt;/table&gt;&#xA;&lt;p&gt;这张「唯一的 embeddings 表」就是全平台的 &lt;strong&gt;窄腰带&lt;/strong&gt;。Connector 可以是 Slack Socket Mode 推流、Confluence Webhook、GitHub Webhook、CocoIndex 增量 re-embed、甚至是某团队自建 PostgreSQL 的 &lt;code&gt;SELECT ...&lt;/code&gt; 小脚本——只要吐出同结构的行，立刻被 &lt;code&gt;search&lt;/code&gt;、&lt;code&gt;planner&lt;/code&gt;、&lt;code&gt;who_knows&lt;/code&gt; 全系工具感知，自动继承平台鉴权审计。&lt;strong&gt;不迁移数据，尊重作者在 Slack/Docs/Git 的原生写作习惯，才是让 15k 日查询跑稳的前提。&lt;/strong&gt;&lt;/p&gt;</description>
+			</item>
+	</channel>
+</rss>

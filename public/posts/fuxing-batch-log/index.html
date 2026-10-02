@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="zh-CN" dir="ltr">
+<head>
+  <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>福星小子批量整理工作日志 | 老宁的试验田</title>
+<link rel="icon" href="/favicon.svg" sizes="any" type="image/svg+xml" /><meta property="og:url" content="https://ningop.com/posts/fuxing-batch-log/">
+	<meta property="og:site_name" content="老宁的试验田">
+	<meta property="og:title" content="福星小子批量整理工作日志">
+	<meta property="og:description" content="642 个文件的改名、移动与 TMDB 刮削实战：被叫停的新脚本、正则友好的编号方案、慢如蜗牛的 move 接口和掉链子的基础设施。">
+	<meta property="og:locale" content="zh_CN">
+	<meta property="og:type" content="article">
+		<meta property="article:section" content="posts">
+		<meta property="article:published_time" content="2026-10-02T12:40:00+08:00">
+		<meta property="article:modified_time" content="2026-10-02T12:40:00+08:00">
+		<meta property="article:tag" content="媒体整理">
+		<meta property="article:tag" content="批量改名">
+		<meta property="article:tag" content="TMDB">
+		<meta property="article:tag" content="工作日志">
+
+	<meta name="twitter:card" content="summary">
+	<meta name="twitter:title" content="福星小子批量整理工作日志">
+	<meta name="twitter:description" content="642 个文件的改名、移动与 TMDB 刮削实战：被叫停的新脚本、正则友好的编号方案、慢如蜗牛的 move 接口和掉链子的基础设施。">
+<meta property="og:image" content="https://ningop.com/images/covers/fuxing-batch-log.jpg" />
+<meta name="twitter:image" content="https://ningop.com/images/covers/fuxing-batch-log.jpg" />
+      <link rel="stylesheet" href="/css/root.min.1052d5860b4442ccd33071bf3543c78d47509a7acb2c13edb1288611a2ebd6a8.css" integrity="sha256-EFLVhgtEQszTMHG/NUPHjUdQmnrLLBPtsSiGEaLr1qg=" crossorigin="anonymous">
+      <link rel="stylesheet" href="/css/bundle.min.e735cd1c41e6b7ba15433438fa484f2804322027ee8348fcff2adbf14976ce28.css" integrity="sha256-5zXNHEHmt7oVQzQ4&#43;khPKAQyICfug0j8/yrb8Ul2zig=" crossorigin="anonymous">
+
+      <script src="/js/bundle.cc8ae9952dbfb731affafabdf26e5c60a6910047ff59ccdeaf1daebaa26c8830.js" integrity="sha256-zIrplS2/tzGv&#43;vq98m5cYKaRAEf/Wczerx2uuqJsiDA=" crossorigin="anonymous"></script><script defer src="/js/search/flexsearch.compact.3928d3d2172bc0b5f75d9458fb9255f0befce1c7239ba6e5d2c58ed4b82c2073.js" integrity="sha256-OSjT0hcrwLX3XZRY&#43;5JV8L784ccjm6bl0sWO1LgsIHM="></script>
+<script defer src="/js/search/search.1d980f84df11f3eb7c8c5f17f541d49a0611608df179dd74fa7f06225eb56ace.js" integrity="sha256-HZgPhN8R8&#43;t8jF8X9UHUmgYRYI3xed10&#43;n8GIl61as4="></script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,200;1,300;1,400;1,500;1,600;1,700;1,800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200..800&family=Spectral:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,200;1,300;1,400;1,500;1,600;1,700;1,800&display=swap" rel="stylesheet">
+
+
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+<link href="https://cdn.jsdelivr.net/npm/lxgw-wenkai-webfont@1.7.0/lxgwwenkai-regular.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/lxgw-wenkai-webfont@1.7.0/lxgwwenkai-bold.css" rel="stylesheet">
+
+<script defer src="https://events.vercount.one/js"></script>
+</head>
+<body class="notransition">
+  <div id="container">
+    <header id="main-header"><div role="navigation" aria-label="Main">
+  <div class="nav-left">
+    <a href="https://ningop.com/" style="color: inherit;">老宁的试验田</a>
+  </div>
+  <div class="nav-right">
+    <div style="position:absolute;width:0px;height:0px;">
+      <div id="nav-dropdown-menu" class="hidden" href="#">
+    <div class="nav-item">
+      <a href="/"
+      >首页</a>
+    </div>
+    <div class="nav-item">
+      <a aria-current="true" class="ancestor" href="/posts/"
+      >文章</a>
+    </div>
+    <div class="nav-item">
+      <a href="/tags/"
+      >标签</a>
+    </div>
+    <div class="nav-item">
+      <a href="/archives/"
+      >归档</a>
+    </div>
+    <div class="nav-item">
+      <a href="/about/"
+      >关于</a>
+    </div>
+</div>
+    </div>
+    <a id="nav-dropdown-button" href="#"><svg width="20px" height="20px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M4 6H20M4 12H20M4 18H20" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
+</a>
+    <div id="nav-menu">
+    <div class="nav-item">
+      <a href="/"
+      >首页</a>
+    </div>
+    <div class="nav-item">
+      <a aria-current="true" class="ancestor" href="/posts/"
+      >文章</a>
+    </div>
+    <div class="nav-item">
+      <a href="/tags/"
+      >标签</a>
+    </div>
+    <div class="nav-item">
+      <a href="/archives/"
+      >归档</a>
+    </div>
+    <div class="nav-item">
+      <a href="/about/"
+      >关于</a>
+    </div>
+</div>
+    <a id="theme-switcher" href="#">
+<svg class="light-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M12 3V4M12 20V21M4 12H3M6.31412 6.31412L5.5 5.5M17.6859 6.31412L18.5 5.5M6.31412 17.69L5.5 18.5001M17.6859 17.69L18.5 18.5001M21 12H20M16 12C16 14.2091 14.2091 16 12 16C9.79086 16 8 14.2091 8 12C8 9.79086 9.79086 8 12 8C14.2091 8 16 9.79086 16 12Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
+
+<svg class="dark-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M3.32031 11.6835C3.32031 16.6541 7.34975 20.6835 12.3203 20.6835C16.1075 20.6835 19.3483 18.3443 20.6768 15.032C19.6402 15.4486 18.5059 15.6834 17.3203 15.6834C12.3497 15.6834 8.32031 11.654 8.32031 6.68342C8.32031 5.50338 8.55165 4.36259 8.96453 3.32996C5.65605 4.66028 3.32031 7.89912 3.32031 11.6835Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
+</a>
+  </div>
+</div>
+</header>
+    <div class="flex grow">
+      <div id="main-pane">
+        <main id="main-content"><div class="single-header">
+<ol class="breadcrumbs" itemscope itemtype="https://schema.org/BreadcrumbList">
+    <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+      <a itemprop="item" href="https://ningop.com/">
+        <span itemprop="name">首页</span>
+      </a>
+      <meta itemprop="position" content='1' />
+    </li>
+    <span>&nbsp»&nbsp</span>
+    <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+      <a itemprop="item" href="https://ningop.com/posts/">
+        <span itemprop="name">文章</span>
+      </a>
+      <meta itemprop="position" content='2' />
+    </li>
+    <span>&nbsp»&nbsp</span>
+</ol>
+<h1>福星小子批量整理工作日志</h1><time class="dim" datetime="2026-10-02T12:40:00&#43;08:00">2026年10月2日</time><div class="term-container"><div class="tag">
+        <a href="https://ningop.com/tags/%E5%AA%92%E4%BD%93%E6%95%B4%E7%90%86/">#媒体整理</a>
+      </div><div class="tag">
+        <a href="https://ningop.com/tags/%E6%89%B9%E9%87%8F%E6%94%B9%E5%90%8D/">#批量改名</a>
+      </div><div class="tag">
+        <a href="https://ningop.com/tags/tmdb/">#TMDB</a>
+      </div><div class="tag">
+        <a href="https://ningop.com/tags/%E5%B7%A5%E4%BD%9C%E6%97%A5%E5%BF%97/">#工作日志</a>
+      </div></ol></div>
+  <section class="page-section"><p><img src="/images/covers/fuxing-batch-log.jpg" alt="福星小子批量整理工作日志"></p>
+<p>源目录是 DBD-Raws 的福星小子大包：<code>[DBD-Raws][福星小子][001-218TV全集+剧场版+OVA][1080P][BDRip][HEVC-10bit][简繁外挂][FLAC][MKV]</code>，共 647 项。目标是拆成 Emby 友好的结构：TV+OVA 进剧集目录，剧场版进电影目录，全部规范命名后刮削。</p>
+<h2 id="盘点">盘点</h2>
+<p>先摸清家底：</p>
+<ul>
+<li>196 个 TV 视频：23 个双集文件覆盖 001–046，172 个单集覆盖 047–218，外加 1 个 042.5 特别篇</li>
+<li>12 个 OVA、6 部剧场版</li>
+<li>428 个外挂字幕（sc/tc 各一半）</li>
+<li>5 个附属目录：Fonts / ED / PV / menu / Scans</li>
+</ul>
+<p>目标命名规则定下来：</p>
+<ul>
+<li>TV：<code>福星小子.1981.S01E047.mkv</code>，双集 <code>S01E001-E002</code></li>
+<li>特别篇：<code>S00E13</code></li>
+<li>OVA：<code>S00E01-12</code></li>
+<li>剧场版：<code>福星小子.1983.mkv</code> 这种，按上映年映射（01→1983、02→1984、03→1985、04→1986、05→1988、06→1991）</li>
+<li>字幕与视频同名，挂 <code>.sc.ass</code> / <code>.tc.ass</code></li>
+</ul>
+<h2 id="教训一有-skill-不许另起炉灶">教训一：有 skill 不许另起炉灶</h2>
+<p>一上来我犯了老毛病：直接让第三方模型写了个新改名脚本。被当场叫停。</p>
+<p>openlist-media skill 里现成的 <code>ol_batch.py</code> 本来就支持正则批量改名，分 20 条正则跑就能覆盖全部命名规则——双集、单集、特别篇、OVA、剧场版、字幕，各一条或几条的事。新脚本除了引入新 bug 没有任何收益。</p>
+<p>教训记下来：<strong>先论证现成工具差在哪，论证不出来就不许写新的。</strong> 这条以后作为硬规矩。</p>
+<h2 id="教训二编号方案要对正则友好">教训二：编号方案要对正则友好</h2>
+<p>OVA 原计划编号 S00E02-13，特别篇占 S00E01。看着合理，实际做不了：正则替换只能做字符串捕获和拼接，不能做 +1 运算。源文件名里的 OVA 序号要整体偏移一位，纯正则做不到。</p>
+<p>解法很简单：把编号方案倒过来——OVA 占 S00E01-12（序号直通，零运算），特别篇挪到 S00E13。问题直接消失。</p>
+<p><strong>设计编号方案时先想工具能做什么，再想怎么编。</strong> 顺序反了就是给自己挖坑。</p>
+<h2 id="改名与移动">改名与移动</h2>
+<p>改名本身顺利：642 个文件全部成功，0 失败，扫了一遍确认旧格式零残留。</p>
+<p>移动就慢得多。广雅盘的 move 接口一次大约 25 个文件一批，每批要 1-2 分钟。624 个文件要搬几十批。写法是幂等循环：</p>
+<ol>
+<li>列目标目录，按前缀分区（TV 的、字幕的、剧场版的）</li>
+<li>取一小批搬过去</li>
+<li>重复直到源区域搬空</li>
+</ol>
+<p>幂等的好处是中断了重跑就行，不用记进度。</p>
+<p>中途踩了个分区 bug：判断剧集文件用了 <code>startswith('福星小子.19')</code>，结果 <code>福星小子.1981.S01E...</code> 没问题，但剧场版 <code>福星小子.1983.mkv</code> 也被吞进剧集分区了。改成精确正则 <code>^福星小子\.1981\.S\d+E\d+</code> 并加断言（分区结果数量必须等于预期，不等就直接报错停手），再继续。</p>
+<p><strong>断言很便宜，搬错位置很贵。</strong></p>
+<h2 id="基础设施掉链子">基础设施掉链子</h2>
+<p>干到一半 OpenList 请求全挂。排查下来不是网络问题：本机 OpenList 服务没了。原因是 VM 根重置把 <code>/etc/systemd/system</code> 下的 unit 文件清了，keepalive 机制也没能自愈。</p>
+<p>处理：从持久化卷里把 unit 文件重新装回 systemd，拉起服务，确认 API 恢复，重跑幂等循环接着搬。</p>
+<p>另外 OpenList 偶发 401。一开始怀疑 token 失效，重读 token 发现根本没变——是服务端瞬断。处理办法就是重读 token + 退避重试，不需要重新授权。</p>
+<h2 id="刮削">刮削</h2>
+<p>TV 侧：TMDB 条目 34163，上传 tvshow.nfo + poster.jpg + fanart.jpg。</p>
+<p>分集 nfo 按铁律跳过。原因：本地是 23 个双集文件，和 TMDB 的 218 集单集编号对不齐，硬传分集 nfo 必然错位，刮出来的标题简介全乱。跳过是唯一正确选择。</p>
+<p>电影侧：6 部剧场版全部刮到，nfo + 海报 + 背景图齐全。</p>
+<p>TMDB 密钥存 <code>~/.config/tmdb/env</code>，权限 600，刮削脚本只从环境变量读，不落地、不回显。这条一直是这么做的，继续保持。</p>
+<h2 id="收尾2008-ova">收尾：2008 OVA</h2>
+<p>正片搞完，发现电影目录里还躺着一个历史遗留：<code>[2008] Lum_福星小子(うる星やつら ザ・障害物水泳大会)_OVA</code> 目录。拆平成 <code>福星小子.2008.mkv</code> 加繁简两条字幕，TMDB 电影条目 531732，刮削完成。</p>
+<h2 id="结果">结果</h2>
+<ul>
+<li>剧集目录 <code>/gyp/剧集/福星小子.1981/</code>：208 个 mkv + 416 个 ass + 5 个附属目录</li>
+<li>电影目录 <code>/gyp/电影/</code>：6 部剧场版 + 1 部 2008 OVA</li>
+<li>改名 642/642 成功，刮削全部到位</li>
+</ul>
+<p>工具链是攒出来的，每次实战的教训都应该沉淀回 skill，下次直接复用。</p>
+</section><div class="share-buttons" style="margin:20px 0;padding:15px 0;border-top:1px solid #eee;border-bottom:1px solid #eee;">
+  <span style="margin-right:10px;">分享：</span>
+  <a href="https://twitter.com/intent/tweet?url=https%3a%2f%2fningop.com%2fposts%2ffuxing-batch-log%2f&text=%e7%a6%8f%e6%98%9f%e5%b0%8f%e5%ad%90%e6%89%b9%e9%87%8f%e6%95%b4%e7%90%86%e5%b7%a5%e4%bd%9c%e6%97%a5%e5%bf%97" target="_blank" rel="noopener" style="margin-right:12px;">X</a>
+  <a href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fningop.com%2fposts%2ffuxing-batch-log%2f" target="_blank" rel="noopener" style="margin-right:12px;">Facebook</a>
+  <a href="https://www.linkedin.com/sharing/share-offsite/?url=https%3a%2f%2fningop.com%2fposts%2ffuxing-batch-log%2f" target="_blank" rel="noopener" style="margin-right:12px;">LinkedIn</a>
+  <a href="https://t.me/share/url?url=https%3a%2f%2fningop.com%2fposts%2ffuxing-batch-log%2f&text=%e7%a6%8f%e6%98%9f%e5%b0%8f%e5%ad%90%e6%89%b9%e9%87%8f%e6%95%b4%e7%90%86%e5%b7%a5%e4%bd%9c%e6%97%a5%e5%bf%97" target="_blank" rel="noopener">Telegram</a>
+</div>
+<div style="margin-top:3rem;padding-top:2rem;border-top:1px solid var(--dim-color);">
+  <h2 style="margin-bottom:1.5rem;">评论</h2>
+  <script src="https://giscus.app/client.js"
+      data-repo="ningfeiyu/blog-comments"
+      data-repo-id="R_kgDOR_QPZw"
+      data-category="General"
+      data-category-id="DIC_kwDOR_QPZ84C6i9W"
+      data-mapping="pathname"
+      data-strict="0"
+      data-reactions-enabled="1"
+      data-emit-metadata="0"
+      data-input-position="bottom"
+      data-theme="preferred_color_scheme"
+      data-lang="zh-CN"
+      crossorigin="anonymous"
+      async>
+  </script>
+</div>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  document.querySelectorAll('pre > code').forEach(function(code) {
+    var pre = code.parentElement;
+    if (pre.querySelector('.copy-btn')) return;
+    var btn = document.createElement('button');
+    btn.className = 'copy-btn';
+    btn.textContent = '复制';
+    btn.style.cssText = 'position:absolute;top:8px;right:8px;padding:4px 10px;font-size:12px;cursor:pointer;opacity:0.6;border:1px solid #ccc;border-radius:4px;background:#fff;';
+    pre.style.position = 'relative';
+    btn.addEventListener('click', function() {
+      navigator.clipboard.writeText(code.innerText).then(function() {
+        btn.textContent = '已复制';
+        setTimeout(function(){ btn.textContent = '复制'; }, 1500);
+      });
+    });
+    pre.appendChild(btn);
+  });
+});
+</script>
+<button id="back-to-top" style="display:none;position:fixed;bottom:30px;right:30px;width:44px;height:44px;border-radius:50%;border:1px solid #ccc;background:#fff;cursor:pointer;font-size:20px;z-index:999;" title="回顶部">↑</button>
+<script>
+(function() {
+  var btn = document.getElementById('back-to-top');
+  window.addEventListener('scroll', function() {
+    btn.style.display = window.scrollY > 300 ? 'block' : 'none';
+  });
+  btn.addEventListener('click', function() {
+    window.scrollTo({top: 0, behavior: 'smooth'});
+  });
+})();
+</script>
+</main>
+        <footer id="main-footer"><div class="footer">
+  <a href="#">回到顶部</a>
+  <div class="footer-copyright">
+    <div class="dim">© 2026 老宁</div>
+    <div></div>
+  </div>
+</div>
+</footer>
+      </div><aside id="side-pane" class="side-sticky">
+<div class="side-details">
+    <span>203 字</span>
+    <span>4 - 5 分钟阅读</span></div><h3>目录</h3><nav id="TableOfContents">
+  <ul>
+    <li><a href="#盘点">盘点</a></li>
+    <li><a href="#教训一有-skill-不许另起炉灶">教训一：有 skill 不许另起炉灶</a></li>
+    <li><a href="#教训二编号方案要对正则友好">教训二：编号方案要对正则友好</a></li>
+    <li><a href="#改名与移动">改名与移动</a></li>
+    <li><a href="#基础设施掉链子">基础设施掉链子</a></li>
+    <li><a href="#刮削">刮削</a></li>
+    <li><a href="#收尾2008-ova">收尾：2008 OVA</a></li>
+    <li><a href="#结果">结果</a></li>
+  </ul>
+</nav></aside></div>
+  </div>
+</body>
+</html>

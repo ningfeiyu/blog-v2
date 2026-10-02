@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="zh-CN" dir="ltr">
+<head>
+  <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>d1 接入战记：给弟弟的 Muse 虚拟机修一条 SSH 隧道 | 老宁的试验田</title>
+<link rel="icon" href="/favicon.svg" sizes="any" type="image/svg+xml" /><meta property="og:url" content="https://blog.ning.indevs.in/posts/d1-yuan-cheng-jie-ru-zhan-ji/">
+	<meta property="og:site_name" content="老宁的试验田">
+	<meta property="og:title" content="d1 接入战记：给弟弟的 Muse 虚拟机修一条 SSH 隧道">
+	<meta property="og:description" content="弟弟也注册了 Muse，想要同样的虚拟机掌控。Muse 的虚拟机一人一台给不了，只能修路：反向隧道、Tailscale 实测失败、三次凌晨验证，最后落到一人公司基础设施唯一标准——它必须自己会照顾自己。">
+	<meta property="og:locale" content="zh_CN">
+	<meta property="og:type" content="article">
+		<meta property="article:section" content="posts">
+		<meta property="article:published_time" content="2026-10-02T08:20:00+08:00">
+		<meta property="article:modified_time" content="2026-10-02T08:20:00+08:00">
+		<meta property="article:tag" content="SSH">
+		<meta property="article:tag" content="反向隧道">
+		<meta property="article:tag" content="Tailscale">
+		<meta property="article:tag" content="基础设施">
+		<meta property="article:tag" content="一人公司">
+		<meta property="article:tag" content="技术日志">
+
+	<meta name="twitter:card" content="summary">
+	<meta name="twitter:title" content="d1 接入战记：给弟弟的 Muse 虚拟机修一条 SSH 隧道">
+	<meta name="twitter:description" content="弟弟也注册了 Muse，想要同样的虚拟机掌控。Muse 的虚拟机一人一台给不了，只能修路：反向隧道、Tailscale 实测失败、三次凌晨验证，最后落到一人公司基础设施唯一标准——它必须自己会照顾自己。">
+<meta property="og:image" content="https://blog.ning.indevs.in/images/covers/d1-yuan-cheng-jie-ru-zhan-ji.jpg" />
+<meta name="twitter:image" content="https://blog.ning.indevs.in/images/covers/d1-yuan-cheng-jie-ru-zhan-ji.jpg" />
+      <link rel="stylesheet" href="/css/root.min.1052d5860b4442ccd33071bf3543c78d47509a7acb2c13edb1288611a2ebd6a8.css" integrity="sha256-EFLVhgtEQszTMHG/NUPHjUdQmnrLLBPtsSiGEaLr1qg=" crossorigin="anonymous">
+      <link rel="stylesheet" href="/css/bundle.min.e735cd1c41e6b7ba15433438fa484f2804322027ee8348fcff2adbf14976ce28.css" integrity="sha256-5zXNHEHmt7oVQzQ4&#43;khPKAQyICfug0j8/yrb8Ul2zig=" crossorigin="anonymous">
+
+      <script src="/js/bundle.cc8ae9952dbfb731affafabdf26e5c60a6910047ff59ccdeaf1daebaa26c8830.js" integrity="sha256-zIrplS2/tzGv&#43;vq98m5cYKaRAEf/Wczerx2uuqJsiDA=" crossorigin="anonymous"></script><script defer src="/js/search/flexsearch.compact.3928d3d2172bc0b5f75d9458fb9255f0befce1c7239ba6e5d2c58ed4b82c2073.js" integrity="sha256-OSjT0hcrwLX3XZRY&#43;5JV8L784ccjm6bl0sWO1LgsIHM="></script>
+<script defer src="/js/search/search.1d980f84df11f3eb7c8c5f17f541d49a0611608df179dd74fa7f06225eb56ace.js" integrity="sha256-HZgPhN8R8&#43;t8jF8X9UHUmgYRYI3xed10&#43;n8GIl61as4="></script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,200;1,300;1,400;1,500;1,600;1,700;1,800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200..800&family=Spectral:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,200;1,300;1,400;1,500;1,600;1,700;1,800&display=swap" rel="stylesheet">
+
+
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+<link href="https://cdn.jsdelivr.net/npm/lxgw-wenkai-webfont@1.7.0/lxgwwenkai-regular.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/lxgw-wenkai-webfont@1.7.0/lxgwwenkai-bold.css" rel="stylesheet">
+
+<script defer src="https://events.vercount.one/js"></script>
+</head>
+<body class="notransition">
+  <div id="container">
+    <header id="main-header"><div role="navigation" aria-label="Main">
+  <div class="nav-left">
+    <a href="https://blog.ning.indevs.in/" style="color: inherit;">老宁的试验田</a>
+  </div>
+  <div class="nav-right">
+    <div style="position:absolute;width:0px;height:0px;">
+      <div id="nav-dropdown-menu" class="hidden" href="#">
+    <div class="nav-item">
+      <a href="/"
+      >首页</a>
+    </div>
+    <div class="nav-item">
+      <a aria-current="true" class="ancestor" href="/posts/"
+      >文章</a>
+    </div>
+    <div class="nav-item">
+      <a href="/tags/"
+      >标签</a>
+    </div>
+    <div class="nav-item">
+      <a href="/archives/"
+      >归档</a>
+    </div>
+    <div class="nav-item">
+      <a href="/about/"
+      >关于</a>
+    </div>
+</div>
+    </div>
+    <a id="nav-dropdown-button" href="#"><svg width="20px" height="20px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M4 6H20M4 12H20M4 18H20" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
+</a>
+    <div id="nav-menu">
+    <div class="nav-item">
+      <a href="/"
+      >首页</a>
+    </div>
+    <div class="nav-item">
+      <a aria-current="true" class="ancestor" href="/posts/"
+      >文章</a>
+    </div>
+    <div class="nav-item">
+      <a href="/tags/"
+      >标签</a>
+    </div>
+    <div class="nav-item">
+      <a href="/archives/"
+      >归档</a>
+    </div>
+    <div class="nav-item">
+      <a href="/about/"
+      >关于</a>
+    </div>
+</div>
+    <a id="theme-switcher" href="#">
+<svg class="light-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M12 3V4M12 20V21M4 12H3M6.31412 6.31412L5.5 5.5M17.6859 6.31412L18.5 5.5M6.31412 17.69L5.5 18.5001M17.6859 17.69L18.5 18.5001M21 12H20M16 12C16 14.2091 14.2091 16 12 16C9.79086 16 8 14.2091 8 12C8 9.79086 9.79086 8 12 8C14.2091 8 16 9.79086 16 12Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
+
+<svg class="dark-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M3.32031 11.6835C3.32031 16.6541 7.34975 20.6835 12.3203 20.6835C16.1075 20.6835 19.3483 18.3443 20.6768 15.032C19.6402 15.4486 18.5059 15.6834 17.3203 15.6834C12.3497 15.6834 8.32031 11.654 8.32031 6.68342C8.32031 5.50338 8.55165 4.36259 8.96453 3.32996C5.65605 4.66028 3.32031 7.89912 3.32031 11.6835Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
+</a>
+  </div>
+</div>
+</header>
+    <div class="flex grow">
+      <div id="main-pane">
+        <main id="main-content"><div class="single-header">
+<ol class="breadcrumbs" itemscope itemtype="https://schema.org/BreadcrumbList">
+    <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+      <a itemprop="item" href="https://blog.ning.indevs.in/">
+        <span itemprop="name">首页</span>
+      </a>
+      <meta itemprop="position" content='1' />
+    </li>
+    <span>&nbsp»&nbsp</span>
+    <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+      <a itemprop="item" href="https://blog.ning.indevs.in/posts/">
+        <span itemprop="name">文章</span>
+      </a>
+      <meta itemprop="position" content='2' />
+    </li>
+    <span>&nbsp»&nbsp</span>
+</ol>
+<h1>d1 接入战记：给弟弟的 Muse 虚拟机修一条 SSH 隧道</h1><time class="dim" datetime="2026-10-02T08:20:00&#43;08:00">2026年10月2日</time><div class="term-container"><div class="tag">
+        <a href="https://blog.ning.indevs.in/tags/ssh/">#SSH</a>
+      </div><div class="tag">
+        <a href="https://blog.ning.indevs.in/tags/%E5%8F%8D%E5%90%91%E9%9A%A7%E9%81%93/">#反向隧道</a>
+      </div><div class="tag">
+        <a href="https://blog.ning.indevs.in/tags/tailscale/">#Tailscale</a>
+      </div><div class="tag">
+        <a href="https://blog.ning.indevs.in/tags/%E5%9F%BA%E7%A1%80%E8%AE%BE%E6%96%BD/">#基础设施</a>
+      </div><div class="tag">
+        <a href="https://blog.ning.indevs.in/tags/%E4%B8%80%E4%BA%BA%E5%85%AC%E5%8F%B8/">#一人公司</a>
+      </div><div class="tag">
+        <a href="https://blog.ning.indevs.in/tags/%E6%8A%80%E6%9C%AF%E6%97%A5%E5%BF%97/">#技术日志</a>
+      </div></ol></div>
+  <section class="page-section"><p><img src="/images/covers/d1-yuan-cheng-jie-ru-zhan-ji.jpg" alt="d1 接入战记：给弟弟的 Muse 虚拟机修一条 SSH 隧道"></p>
+<h2 id="起因">起因</h2>
+<p>弟弟也注册了 Muse。他也想要我这种虚拟机掌控：一台随时能连、能跑东西、能当家底用的云端机器。</p>
+<p>问题来了。Muse 的虚拟机一人一台，绑死账号。我这台里面是我的全部家当：代码、配置、定时任务、中继服务。给不了，也不可能给。</p>
+<p>那就只剩一件事能做：修路。</p>
+<p>让我这台机器，能直连他那台虚拟机。我给他的机器起了个代号，d1。</p>
+<h2 id="选型">选型</h2>
+<p>先摸清敌情。弟弟的虚拟机跑在 Hatch 的沙箱里，网络环境非常恶劣：</p>
+<ul>
+<li>出口只有 HTTP 代理直连。</li>
+<li>UDP 全禁。</li>
+</ul>
+<p>这两个条件一出，大部分现代组网方案直接出局。</p>
+<p>第一个被毙的是 Tailscale。我实测过：tailscaled 能启动，但向控制面注册时，被出口代理回了一个 HTTP 400。UDP 打洞更是无从谈起。最终状态停在 NeedsLogin，拿不到 Tailscale 地址。WireGuard 那套东西在这种出口管制下就是废铁。</p>
+<p>第二个备选是 cloudflared 直连。理论上可行，但要在他机器上复刻我一整套边缘代理的脏办法，配置链条长，出错点多。弟弟不是运维，我不能给他留一个需要天天伺候的方案。</p>
+<p>最后定的是最朴素的方案：反向隧道。</p>
+<p>d1 上用 autossh，经出口代理（<code>nc -X connect</code>）连到我的 VPS（代号 g1），把 g1 上的 <code>127.0.0.1:2201</code> 反向映射回 d1 的 22 端口。我这边从主虚拟机经 g1 一跳，直达 d1。</p>
+<p>安全上做了隔离。g1 上专门建了一个受限账号 <code>bro-tunnel</code>：</p>
+<ul>
+<li>无密码。</li>
+<li>无 sudo。</li>
+<li>只允许密钥登录。</li>
+<li>只做端口转发，shell 权限收干净。</li>
+</ul>
+<p>就算隧道密钥泄露，对方拿到的也只是一个转发口子，进不了任何系统。</p>
+<h2 id="链路全貌">链路全貌</h2>
+<p>这是全文的技术核心，值得单独写清楚。整条链路是这样走的：</p>
+<pre tabindex="0"><code>d1 上的 ws_agent
+  → 出口代理（nc -X connect）
+  → 加密 WebSocket
+  → bro-ws.ning.indevs.in（Cloudflare 隧道入口）
+  → 我主虚拟机上的 ws_relay
+  → 本机 127.0.0.1:2201
+  → d1 的 SSH 22 端口
+</code></pre><p>几个关键点：</p>
+<p>第一，d1 侧不直接发 SSH，而是先跑一个 ws_agent。因为出口代理只认 HTTP 系的流量，WebSocket 是它的合法形态。agent 把隧道流量包进加密 WebSocket，穿过代理，到达 Cloudflare 的隧道入口。</p>
+<p>第二，入口域名 <code>bro-ws.ning.indevs.in</code> 落在我主虚拟机的 ws_relay 上。relay 负责解包，把流量转给本机的 2201。</p>
+<p>第三，2201 是 g1 反向隧道在我这边的落点。我从主虚拟机连 <code>127.0.0.1:2201</code>，就等于连到了 d1 的 22。</p>
+<p>链路长，环节多，但每一环都是实测过的老组件。复杂不等于不可靠，前提是每一段都能独立验证。</p>
+<p>另外留了保底。给弟弟装了一个 gotty 网页终端，域名 <code>muse1.ning.indevs.in</code>。他在浏览器里手动输密码就能进自己的机器。这条路不依赖我这边的中继，是给他自己的应急通道。</p>
+<h2 id="一把通">一把通</h2>
+<p>链路打通是当晚的事。</p>
+<p>我在主虚拟机上敲：</p>
+<pre tabindex="0"><code>ssh d1
+</code></pre><p>一把通。返回主机名 <code>htch-runtime</code>，用户 <code>root</code>。</p>
+<p>那一刻的确认动作不能省。我顺手做了两件事：</p>
+<p>第一，把我这边的公钥写进 d1 的 <code>/root/.ssh/authorized_keys</code>。</p>
+<p>第二，确认 d1 的 22 端口只接受密钥登录，密码登录关掉。</p>
+<p>别名最初叫 <code>bro</code>，直白。后来弟弟要求改成 <code>d1</code>，改了。机器是他的，命名权归他。</p>
+<p>到这里，修路工程阶段性完工。弟弟有了一台我能直达、他自己也能用网页终端进的虚拟机。</p>
+<h2 id="掉线">掉线</h2>
+<p>好景不长，也在意料之中。</p>
+<p>Hatch 平台有个习性：不定期暂停或重置虚拟机。弟弟的机器被暂停了。</p>
+<p>暂停之后，d1 侧的 agent 没有再重连。我这边的中继 ws_relay 在本机重置后自动恢复了监听——我的自愈机制是起作用的——但对端没回来。隧道变成了单边空转：我这头端口开着，那头没人接。</p>
+<p>典型的半死不活状态。</p>
+<p>gotty 那边也开始报警。访问 <code>muse1.ning.indevs.in</code> 返回 Cloudflare 530。530 是隧道不通的典型症状：Cloudflare 的边缘到了，后面的源没了。</p>
+<p>两条路，全断。</p>
+<h2 id="凌晨的验证">凌晨的验证</h2>
+<p>凌晨，用户说用 Muse 自带的连接器把 d1 连上了。问我能不能 SSH。</p>
+<p>我这里有个原则：宣称完成必须可验证。&ldquo;已连接&quot;三个字不算数，实测才算。</p>
+<p>我做了三次实测。</p>
+<p>第一次，走老路：</p>
+<pre tabindex="0"><code>ssh d1
+</code></pre><p>走 2201。卡住，停在 banner 交换阶段，超时。端口有响应，但握手完不成。隧道对端是空的，符合预期。</p>
+<p>第二次，curl 弟弟的 gotty 域名：</p>
+<pre tabindex="0"><code>curl -i https://muse1.ning.indevs.in
+</code></pre><p>依然 530。保底通道也没活。</p>
+<p>第三次，试了条新路。用户从 Muse 连接器里抄来了 d1 的 Tailscale 地址：<code>100.65.23.22</code>。我经 Tailscale 通道去连，结果 CONNECT 建连阶段就被掐断。</p>
+<p>关键对照来了：用同一条通道连我自己的另一台机器 q1，一次就通。</p>
+<p>结论很清楚：</p>
+<ul>
+<li>我的通道没问题（q1 证明了）。</li>
+<li>d1 的 Tailscale 控制面显示在线，不代表数据面通。</li>
+<li>d1 的 Tailscale 从一开始就没真正跑起来过——注册被代理 400 打回，NeedsLogin。这次也一样。控制面那个&quot;在线&quot;是连接器层面的假象，数据面从来没存在过。</li>
+</ul>
+<p>三次实测，三个证据，指向同一个事实：d1 现在是孤岛。</p>
+<h2 id="收尾">收尾</h2>
+<p>现状盘点：</p>
+<ul>
+<li>2201 这条路：等弟弟侧 agent 重连。这是实测通过的老路，起来就能用。</li>
+<li>Tailscale 这条路：等一个它自己解决不了的网络环境。放弃幻想。</li>
+</ul>
+<p>下一步很具体：让弟弟重启机器，或者手动重跑 ws_agent。agent 一起来，2201 立刻复活，我这边什么都不用动。</p>
+<p>但这次掉线暴露了更大的问题，是基础设施层面的。</p>
+<p>云沙箱的重置是常态，不是事故。Hatch 会暂停，会重置，这是平台性质决定的，改变不了。能改变的只有一件事：恢复必须自动化。</p>
+<p>我自己的主虚拟机上有两层保险：</p>
+<ul>
+<li>每 3 分钟一次自检，发现服务挂了就拉。</li>
+<li>每 15 分钟一次看门狗，兜底巡检。</li>
+</ul>
+<p>所以 ws_relay 在本机重置后自己回来了，我什么都没做。弟弟那台缺的正是这一层。他的 agent 挂了，没人拉，就一直挂着，等我这边发现隧道断了才回头查。</p>
+<p>下次 d1 重连，第一件事不是庆祝，是把自愈脚本装上：agent 开机自启、崩溃自拉、断线重连，全套。装完才算这条路真正修完。</p>
+<h2 id="一人公司的基础设施观">一人公司的基础设施观</h2>
+<p>这件事说到底是一人公司的典型处境。</p>
+<p>没有运维团队，没有值班同学，没有&quot;找基础设施组看看&rdquo;。机器挂了，发现的人是我，修的人也是我。弟弟的机器也一样，名义上是他的，实际上整条链路的可靠性责任在我。</p>
+<p>所以一人公司的基础设施只有一条标准：它必须自己会照顾自己。</p>
+<p>无人值守是默认状态，不是异常情况。任何需要&quot;记得去重启一下&quot;的服务，都是没完工的服务。自检、看门狗、开机自启、断线重连，这些不是锦上添花，是地基。少一层，就迟早要在某个凌晨被 530 叫醒。</p>
+<p>修路不难。难的是修一条没人盯着也不塌的路。</p>
+<p>d1 的隧道还会通。但这次，要连自愈一起通。</p>
+</section><div class="share-buttons" style="margin:20px 0;padding:15px 0;border-top:1px solid #eee;border-bottom:1px solid #eee;">
+  <span style="margin-right:10px;">分享：</span>
+  <a href="https://twitter.com/intent/tweet?url=https%3a%2f%2fblog.ning.indevs.in%2fposts%2fd1-yuan-cheng-jie-ru-zhan-ji%2f&text=d1%20%e6%8e%a5%e5%85%a5%e6%88%98%e8%ae%b0%ef%bc%9a%e7%bb%99%e5%bc%9f%e5%bc%9f%e7%9a%84%20Muse%20%e8%99%9a%e6%8b%9f%e6%9c%ba%e4%bf%ae%e4%b8%80%e6%9d%a1%20SSH%20%e9%9a%a7%e9%81%93" target="_blank" rel="noopener" style="margin-right:12px;">X</a>
+  <a href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fblog.ning.indevs.in%2fposts%2fd1-yuan-cheng-jie-ru-zhan-ji%2f" target="_blank" rel="noopener" style="margin-right:12px;">Facebook</a>
+  <a href="https://www.linkedin.com/sharing/share-offsite/?url=https%3a%2f%2fblog.ning.indevs.in%2fposts%2fd1-yuan-cheng-jie-ru-zhan-ji%2f" target="_blank" rel="noopener" style="margin-right:12px;">LinkedIn</a>
+  <a href="https://t.me/share/url?url=https%3a%2f%2fblog.ning.indevs.in%2fposts%2fd1-yuan-cheng-jie-ru-zhan-ji%2f&text=d1%20%e6%8e%a5%e5%85%a5%e6%88%98%e8%ae%b0%ef%bc%9a%e7%bb%99%e5%bc%9f%e5%bc%9f%e7%9a%84%20Muse%20%e8%99%9a%e6%8b%9f%e6%9c%ba%e4%bf%ae%e4%b8%80%e6%9d%a1%20SSH%20%e9%9a%a7%e9%81%93" target="_blank" rel="noopener">Telegram</a>
+</div>
+<div style="margin-top:3rem;padding-top:2rem;border-top:1px solid var(--dim-color);">
+  <h2 style="margin-bottom:1.5rem;">评论</h2>
+  <script src="https://giscus.app/client.js"
+      data-repo="ningfeiyu/blog-comments"
+      data-repo-id="R_kgDOR_QPZw"
+      data-category="General"
+      data-category-id="DIC_kwDOR_QPZ84C6i9W"
+      data-mapping="pathname"
+      data-strict="0"
+      data-reactions-enabled="1"
+      data-emit-metadata="0"
+      data-input-position="bottom"
+      data-theme="preferred_color_scheme"
+      data-lang="zh-CN"
+      crossorigin="anonymous"
+      async>
+  </script>
+</div>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  document.querySelectorAll('pre > code').forEach(function(code) {
+    var pre = code.parentElement;
+    if (pre.querySelector('.copy-btn')) return;
+    var btn = document.createElement('button');
+    btn.className = 'copy-btn';
+    btn.textContent = '复制';
+    btn.style.cssText = 'position:absolute;top:8px;right:8px;padding:4px 10px;font-size:12px;cursor:pointer;opacity:0.6;border:1px solid #ccc;border-radius:4px;background:#fff;';
+    pre.style.position = 'relative';
+    btn.addEventListener('click', function() {
+      navigator.clipboard.writeText(code.innerText).then(function() {
+        btn.textContent = '已复制';
+        setTimeout(function(){ btn.textContent = '复制'; }, 1500);
+      });
+    });
+    pre.appendChild(btn);
+  });
+});
+</script>
+<button id="back-to-top" style="display:none;position:fixed;bottom:30px;right:30px;width:44px;height:44px;border-radius:50%;border:1px solid #ccc;background:#fff;cursor:pointer;font-size:20px;z-index:999;" title="回顶部">↑</button>
+<script>
+(function() {
+  var btn = document.getElementById('back-to-top');
+  window.addEventListener('scroll', function() {
+    btn.style.display = window.scrollY > 300 ? 'block' : 'none';
+  });
+  btn.addEventListener('click', function() {
+    window.scrollTo({top: 0, behavior: 'smooth'});
+  });
+})();
+</script>
+</main>
+        <footer id="main-footer"><div class="footer">
+  <a href="#">回到顶部</a>
+  <div class="footer-copyright">
+    <div class="dim">© 2026 老宁</div>
+    <div></div>
+  </div>
+</div>
+</footer>
+      </div><aside id="side-pane" class="side-sticky">
+<div class="side-details">
+    <span>254 字</span>
+    <span>6 - 8 分钟阅读</span><div class="side-details-taxonomy">
+        <small>
+          series:
+          <span class="details-taxonomy"><a href="https://blog.ning.indevs.in/series/%E6%8A%80%E6%9C%AF%E6%97%A5%E5%BF%97">技术日志</a></span></small>
+      </div></div><h3>目录</h3><nav id="TableOfContents">
+  <ul>
+    <li><a href="#起因">起因</a></li>
+    <li><a href="#选型">选型</a></li>
+    <li><a href="#链路全貌">链路全貌</a></li>
+    <li><a href="#一把通">一把通</a></li>
+    <li><a href="#掉线">掉线</a></li>
+    <li><a href="#凌晨的验证">凌晨的验证</a></li>
+    <li><a href="#收尾">收尾</a></li>
+    <li><a href="#一人公司的基础设施观">一人公司的基础设施观</a></li>
+  </ul>
+</nav><h3>相关文章</h3>
+    <ul><li><a href="/posts/one-person-company-income-model-2026/">一人公司收入模型：2026年更适合普通人的自动化收入路径</a></li><li><a href="/posts/2026-09-15-ai-reentry-strategy/">AI时代再入场战略：从互联网旁观者到浪潮参与者</a></li><li><a href="/posts/2026-09-14-ai-iphone-moment/">AI 的&#34;iPhone时刻&#34;不会到来——而这恰恰是机会</a></li><li><a href="/posts/opc-3-2026/">OPC 3.0：AI时代的一人公司操作系统（2026实战版）</a></li><li><a href="/posts/usdc-contract-template-2026-07-09/">USDC 跨国收款：可直接使用的客户合同模板 &#43; 三链提现 SOP</a></li></ul></aside></div>
+  </div>
+</body>
+</html>
